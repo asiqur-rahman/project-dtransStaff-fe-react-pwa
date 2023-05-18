@@ -1,0 +1,53 @@
+name: Website panel Deploy
+on:
+  push:
+    branches:
+      - production
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Website
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+        
+      - name: Use Node.js 18
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      
+      - name: 🔨 Build Project
+        run: |
+          yarn cache clean
+          yarn
+          yarn run build
+        
+      # Deploy to cPanel
+      # - name: 📂 Sync files 1
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER_BTS }}
+      #     username: bim-adminpanel@braintechsolution.com
+      #     password: ${{ secrets.FTP_PASS_BTS }}
+      #     exclude: |
+      #       **/.git*
+      #       **/.git*/**
+      #       **/node_modules/**
+      #       fileToExclude.txt
+          
+      # - name: 📂 Sync files 2
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      #   with:
+      #     server: sustainability.com.bd
+      #     username: website@sustainability.com.bd
+      #     password: ${{ secrets.FTP_PASS_BTS }}
+      #     dangerous-clean-slate: true
+      #     exclude: |
+      #       **/.git*
+      #       **/.git*/**
+      #       **/node_modules/**
+      #       **/public/**
+      #       **/src/**
+      #       package.json
+      #       vite.config.js
+      #       yarn.lock
