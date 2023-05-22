@@ -16,7 +16,7 @@ function HomePage() {
   return (
     <>
     <ThemeSettings/>
-    <Home/>
+    <Profile/>
     </>
   )
 }
