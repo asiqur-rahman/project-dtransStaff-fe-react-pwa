@@ -1,6 +1,6 @@
 /* JavaScript Document */
 jQuery(document).ready(function() {
-    'use strict';
+    
 	
     // Get Started
     if(jQuery('.get-started').length > 0){

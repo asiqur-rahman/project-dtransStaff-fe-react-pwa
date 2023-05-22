@@ -64,7 +64,7 @@ jQuery(document).ready(function() {
 
 /* Window Load START */
 jQuery(window).on('load',function () {
-	'use strict'; 
+	 
 	dzTreeView.load();
 	
 });
@@ -72,7 +72,7 @@ jQuery(window).on('load',function () {
 
 /* Window Resize START */
 jQuery(window).on('resize',function () {
-	'use strict'; 
+	 
 	dzTreeView.resize();
 	
 });

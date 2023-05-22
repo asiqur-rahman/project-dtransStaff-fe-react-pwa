@@ -18,7 +18,7 @@
 
 }(function(){
 
-	'use strict';
+	
 
 var FormatOptions = [
 	'decimals',

@@ -9,7 +9,6 @@ const body = $('body');
 const html = $('html');
 
 (function ($) {
-    "use strict"
     dzThemeSettings();
 
     //get the DOM elements from right sidebar

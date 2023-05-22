@@ -1,6 +1,5 @@
 var FoodiaUiSlider = function(){
 	
-	"use strict"
 
 	// Basic Slider ============ 
 	var handleBasicSlide = function() {
@@ -228,21 +227,21 @@ var FoodiaUiSlider = function(){
 
 /* Document.ready Start */	
 jQuery(document).ready(function() {
-	'use strict';
+	
 	FoodiaUiSlider.init();
 });
 /* Document.ready END */
 
 /* Window Load START */
 jQuery(window).on('load',function () {
-	'use strict'; 
+	 
 	FoodiaUiSlider.load();
 });
 /*  Window Load END */
 
 /* Window Resize START */
 jQuery(window).on('resize',function () {
-	'use strict'; 
+	 
 	FoodiaUiSlider.resize();
 });
 /*  Window Resize END */

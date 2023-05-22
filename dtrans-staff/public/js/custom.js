@@ -1,6 +1,5 @@
 var Foodia = function(){
 	
-	"use strict"
 	/* Search Bar ============ */
 	var screenWidth = $( window ).width();
 	var screenHeight = $( window ).height();
@@ -89,7 +88,7 @@ var Foodia = function(){
 	
 	// Scroll Top
 	var handleScrollTop = function (){
-		'use strict';
+		
 		jQuery(window).bind("scroll", function() {
 			var scroll = jQuery(window).scrollTop();
 			if (scroll > 100) { 
@@ -376,7 +375,7 @@ var Foodia = function(){
 /* Document.ready Start */	
 jQuery(document).ready(function() {
 	$('[data-bs-toggle="popover"]').popover();
-    'use strict';
+    
 	Foodia.init();
     
     $('.theme-dark .custom-switch input').prop('checked', true);
@@ -386,7 +385,7 @@ jQuery(document).ready(function() {
 
 /* Window Load START */
 jQuery(window).on('load',function () {
-	'use strict'; 
+	 
 	Foodia.load();
     setTimeout(function(){
 		jQuery('#splashscreen').addClass('active');
@@ -401,7 +400,7 @@ jQuery(window).on('load',function () {
 
 /* Window Resize START */
 jQuery(window).on('resize',function () {
-	'use strict'; 
+	 
 	Foodia.resize();
 	
 });

@@ -152,7 +152,7 @@ var dzSparkLine = function(){
 
 /* Document.ready Start */	
 jQuery(document).ready(function() {
-    'use strict';
+    
 	//dzSparkLine.init();
     
 });
@@ -160,7 +160,7 @@ jQuery(document).ready(function() {
 
 /* Window Load START */
 jQuery(window).on('load',function () {
-	'use strict'; 
+	 
 	dzSparkLine.load();
 	
 });
@@ -168,7 +168,7 @@ jQuery(window).on('load',function () {
 
 /* Window Resize START */
 jQuery(window).on('resize',function () {
-	'use strict'; 
+	 
 	//dzSparkLine.resize();
     
 });
