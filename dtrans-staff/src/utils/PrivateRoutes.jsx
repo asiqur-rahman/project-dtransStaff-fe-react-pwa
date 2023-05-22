@@ -5,7 +5,7 @@ const PrivateRoutes = () => {
     const [checked, setChecked] = useState(false);
     const [isLogedIn, setIsLogedIn]= useState(false);
     useEffect(()=>{
-        setIsLogedIn(true);
+        setIsLogedIn(localStorage.getItem("username")!=null);
         setChecked(true);
     },[])
     return(

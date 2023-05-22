@@ -5,6 +5,10 @@ import ThemeSettings from '../settings/ThemeSettings'
 
 function HomePage() {
 
+  const login = () =>{
+    localStorage.setItem("username","asiq")
+  }
+
   useEffect(() => {
     // window.SpinnerHide();
   }, []);
@@ -23,22 +27,22 @@ function HomePage() {
           <div className="banner-wrapper">
             <div className="circle-1"></div>
             <div className="container inner-wrapper">
-              <h1 className="dz-title">DTrans Staff</h1>
-              {/* <p className="mb-0">Staff App</p> */}
+              <h1 className="dz-title">DTrans</h1>
+              <p className="mb-0">Staff App</p>
             </div>
           </div>
           <div className="account-box">
             <div className="container">
               <div className="account-area">
-                <h3 className="title">Login with your PHONE number</h3>
-                {/* <p>Login with your phone number</p> */}
+                <h3 className="title">Welcome Back</h3>
+                <p>Login with your phone number</p>
                 <form>
                   <div className="input-group input-mini mb-3 mt-3">
                     <span className="input-group-text"><i className="fa fa-user"></i></span>
-                    <input type="text" className="form-control" placeholder="Name" autoComplete="username" />
+                    <input type="text" className="form-control" placeholder="Phone Number" autoComplete="username" />
                   </div>
                   <div className="input-group">
-                    <a href="index.html" className="btn mt-2 btn-primary w-100 btn-rounded">SIGN IN</a>
+                    <button type='button' onClick={login} className="btn mt-2 btn-primary w-100 btn-rounded">Next</button>
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="form-check">
@@ -47,11 +51,11 @@ function HomePage() {
                         Keep Sign In
                       </label>
                     </div>
-                    <a href="forgot-password.html" className="btn-link">Forgot password?</a>
+                    <a href="#" className="btn-link">Forgot password?</a>
                   </div>
                 </form>
                 <div className="text-center mb-auto p-tb20">
-                  <a href="signup.html" className="saprate">Don’t have an account?</a>
+                  <a href="#" className="saprate">Login with email</a>
                 </div>
               </div>
             </div>

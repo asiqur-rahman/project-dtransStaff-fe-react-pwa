@@ -65,7 +65,6 @@ function All() {
           </a></li>
         </ul>
         <div className="sidebar-bottom">
-          <h6 className="name">Foodia - Food Restaurant</h6>
           <p>App Version 1.0</p>
         </div>
       </div>
