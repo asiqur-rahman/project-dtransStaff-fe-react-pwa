@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import All from '../components/All'
+import Home from '../components/Home'
+import Categiory from '../components/Categiory'
 import ThemeSettings from '../settings/ThemeSettings'
 // import Spinner from '../components/Spinner'
 
@@ -12,7 +13,8 @@ function HomePage() {
   return (
     <>
     <ThemeSettings/>
-    <All/>
+    <Home/>
+    {/* <Categiory/> */}
     </>
   )
 }
