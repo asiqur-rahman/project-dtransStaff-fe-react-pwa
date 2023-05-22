@@ -1,22 +1,13 @@
 import React, { useEffect } from 'react';
-import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.min.css';
-SwiperCore.use([Autoplay]);
 
 function All() {
   const preventDefault = (event) => {
     // event.preventDefault(); // Prevents the default behavior of the anchor tag
     // Additional functionality can be added here if needed
   };
-  
+
   useEffect(() => {
-    new SwiperCore('.categorie-swiper', {
-      slidesPerView: 'auto',
-      centeredSlides: false,
-      spaceBetween:10,
-    
-    });
+
   }, []);
 
   return (
@@ -166,10 +157,10 @@ function All() {
               {/* <!-- Dashboard Area --> */}
               <div className="dashboard-area pt-4">
                 {/* <!-- Categorie --> */}
-                <div className="swiper-btn-center-lr">
+                <div className="swiper-btn-center-lr" style={{ marginBottom: "10px" }}>
                   <div className="swiper-container mt-4 categorie-swiper">
                     <div className="swiper-wrapper">
-                      <div className="swiper-slide">
+                      <div className="swiper-slide" style={{ paddingBottom: "2px" }}>
                         <a href="product.html" className="categore-box style-1">
                           <div className="icon-bx bg-primary">
                             <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,7 +176,7 @@ function All() {
                           <span className="title">Foods</span>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide" style={{ paddingBottom: "2px" }}>
                         <a href="product.html" className="categore-box style-1">
                           <div className="icon-bx bg-secondary">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -199,7 +190,7 @@ function All() {
                           <span className="title">Drink</span>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide" style={{ paddingBottom: "2px" }}>
                         <a href="product.html" className="categore-box style-1">
                           <div className="icon-bx bg-green">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -213,7 +204,7 @@ function All() {
                           <span className="title">Snack</span>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide" style={{ paddingBottom: "2px" }}>
                         <a href="product.html" className="categore-box style-1">
                           <div className="icon-bx bg-info">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -227,7 +218,7 @@ function All() {
                           <span className="title">Dissert</span>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide" style={{ paddingBottom: "2px" }}>
                         <a href="product.html" className="categore-box style-1">
                           <div className="icon-bx bg-red">
                             <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -243,7 +234,7 @@ function All() {
                           <span className="title">Foods</span>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide" style={{ paddingBottom: "2px" }}>
                         <a href="product.html" className="categore-box style-1">
                           <div className="icon-bx bg-pink">
                             <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -259,7 +250,7 @@ function All() {
                           <span className="title">Foods</span>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide" style={{ paddingBottom: "2px" }}>
                         <a href="product.html" className="categore-box style-1">
                           <div className="icon-bx bg-primary">
                             <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -280,216 +271,185 @@ function All() {
                 </div>
                 {/* <!-- Categorie End --> */}
 
-                {/* <!-- Recent --> */}
-                <div className="m-b10">
-                  <div className="swiper-btn-center-lr">
-                    <div className="swiper-container tag-group mt-4 recomand-swiper">
-                      <Swiper
-                        className="swiper-wrapper"
-                        autoplay={{ delay: 3000 }}
-                        slidesPerView={1}
-                        spaceBetween={20}
-                        loop
-                      >
-                        <SwiperSlide>
-                          <div className="card add-banner bg-secondary">
-                            <div className="circle-1"></div>
-                            <div className="circle-2"></div>
-                            <div className="card-body">
-                              <div className="card-info">
-                                <span>Happy Weekend</span>
-                                <h2 data-text="60% OFF" className="title m-t10">
-                                  60% OFF
-                                </h2>
-                                <small>*for All Menus</small>
-                              </div>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                          <div className="card add-banner bg-primary">
-                            <div className="circle-1"></div>
-                            <div className="circle-2"></div>
-                            <div className="card-body">
-                              <div className="card-info">
-                                <span>Happy Weekend</span>
-                                <h2 data-text="60% OFF" className="title m-t10">
-                                  60% OFF
-                                </h2>
-                                <small>*for All Menus</small>
-                              </div>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                          <div className="card add-banner bg-success">
-                            <div className="circle-1"></div>
-                            <div className="circle-2"></div>
-                            <div className="card-body">
-                              <div className="card-info">
-                                <span>Happy Weekend</span>
-                                <h2 data-text="60% OFF" className="title m-t10">
-                                  60% OFF
-                                </h2>
-                                <small>*for All Menus</small>
-                              </div>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-                      </Swiper>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- Recent --> */}
-
-                {/* <!-- Recomended Start --> */}
-                <div className="title-bar">
-                  <h5 className="title">Recomended 👌</h5>
-                  <a className="btn-link" href="product.html">View more</a>
-                </div>
-
-                <div className="swiper-btn-center-lr">
-                  <div className="swiper-container tag-group mt-4 recomanded-swiper">
-                    <div className="swiper-wrapper">
-                      <div className="swiper-slide">
-                        <div className="recomended-list">
-                          <div className="image-box">
-                            <img src="/images/food/food1.png" alt="image" />
-                            <div className="form-check bookmark">
-                              <input className="form-check-input" type="checkbox" id="flexCheckDefault1" />
-                              <label className="form-check-label" htmlFor="flexCheckDefault1">
-                                <svg width="20" height="20   " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M18.1776 17.8443C16.6362 17.8428 15.3854 19.0912 15.3839 20.6326C15.3824 22.1739 16.6308 23.4247 18.1722 23.4262C19.7136 23.4277 20.9643 22.1794 20.9658 20.638C20.9658 20.6371 20.9658 20.6362 20.9658 20.6353C20.9644 19.0955 19.7173 17.8473 18.1776 17.8443Z" fill="#fff" />
-                                  <path d="M23.1278 4.47973C23.061 4.4668 22.9932 4.46023 22.9251 4.46012H5.93181L5.66267 2.65958C5.49499 1.46381 4.47216 0.574129 3.26466 0.573761H1.07655C0.481978 0.573761 0 1.05574 0 1.65031C0 2.24489 0.481978 2.72686 1.07655 2.72686H3.26734C3.40423 2.72586 3.52008 2.82779 3.53648 2.96373L5.19436 14.3267C5.42166 15.7706 6.66363 16.8358 8.12528 16.8405H19.3241C20.7313 16.8423 21.9454 15.8533 22.2281 14.4747L23.9802 5.74121C24.0931 5.15746 23.7115 4.59269 23.1278 4.47973Z" fill="#fff" />
-                                  <path d="M11.3404 20.5158C11.2749 19.0196 10.0401 17.8418 8.54244 17.847C7.0023 17.9092 5.80422 19.2082 5.86645 20.7484C5.92617 22.2262 7.1283 23.4008 8.60704 23.4262H8.67432C10.2142 23.3587 11.4079 22.0557 11.3404 20.5158Z" fill="#fff" />
-                                </svg>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="text-content">
-                            <h6 className="title">Deluxe Burger with Extra Beef & Eggs</h6>
-                            <div className="d-flex justify-content-between align-items-center m-t10">
-                              <div className="d-flex justify-content-between align-items-center">
-                                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19.3899 9.60002C19.6646 9.31922 19.8559 8.96762 19.9424 8.58445C20.029 8.20128 20.0073 7.80161 19.8799 7.43002C19.7604 7.05733 19.5386 6.72569 19.2398 6.47288C18.941 6.22006 18.5773 6.05622 18.1899 6.00002L13.8999 5.34002C13.8799 5.33422 13.8615 5.32403 13.8459 5.31019C13.8303 5.29635 13.818 5.27921 13.8099 5.26002L11.9299 1.26002C11.7651 0.885457 11.4949 0.56692 11.1522 0.343206C10.8095 0.119491 10.4092 0.000254073 9.99994 1.79599e-05C9.59544 -0.00165464 9.19906 0.113532 8.85846 0.331732C8.51785 0.549932 8.24751 0.861859 8.07994 1.23002L6.19994 5.23002C6.18968 5.24952 6.1755 5.26669 6.15829 5.28046C6.14108 5.29423 6.12122 5.30429 6.09994 5.31002L1.81994 6.00002C1.43203 6.05781 1.06776 6.22206 0.767637 6.47452C0.467513 6.72698 0.243301 7.05774 0.119936 7.43002C-0.00276581 7.8029 -0.0210372 8.20226 0.0671036 8.58479C0.155244 8.96733 0.346433 9.31843 0.619936 9.60002L3.77994 12.85C3.78903 12.8705 3.79373 12.8926 3.79373 12.915C3.79373 12.9374 3.78903 12.9596 3.77994 12.98L3.03994 17.52C2.97114 17.9154 3.01599 18.3222 3.16926 18.6931C3.32253 19.064 3.57794 19.3838 3.90577 19.6152C4.23361 19.8467 4.62042 19.9804 5.02122 20.0007C5.42203 20.021 5.82037 19.9272 6.16994 19.73L9.89994 17.66C9.91847 17.6504 9.93905 17.6453 9.95994 17.6453C9.98082 17.6453 10.0014 17.6504 10.0199 17.66L13.7499 19.73C14.1 19.9229 14.4972 20.0134 14.8963 19.9913C15.2953 19.9691 15.6801 19.835 16.0065 19.6045C16.333 19.374 16.5881 19.0563 16.7425 18.6877C16.897 18.319 16.9446 17.9144 16.8799 17.52L16.1899 13C16.1794 12.9818 16.1739 12.9611 16.1739 12.94C16.1739 12.919 16.1794 12.8983 16.1899 12.88L19.3899 9.60002Z" fill="#FFA902" />
-                                </svg>
-                                <h5 className="mb-0 ms-2 number">4.6</h5>
-                              </div>
-                              <div>
-                                <h5 className="mb-0 ms-2 text-primary">$ 10.9</h5>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="swiper-slide">
-                        <div className="recomended-list">
-                          <div className="image-box">
-                            <img src="/images/food/food1.png" alt="image" />
-                            <div className="form-check bookmark">
-                              <input className="form-check-input" type="checkbox" id="flexCheckDefault2" />
-                              <label className="form-check-label" htmlFor="flexCheckDefault2">
-                                <svg width="20" height="20   " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M18.1776 17.8443C16.6362 17.8428 15.3854 19.0912 15.3839 20.6326C15.3824 22.1739 16.6308 23.4247 18.1722 23.4262C19.7136 23.4277 20.9643 22.1794 20.9658 20.638C20.9658 20.6371 20.9658 20.6362 20.9658 20.6353C20.9644 19.0955 19.7173 17.8473 18.1776 17.8443Z" fill="#fff" />
-                                  <path d="M23.1278 4.47973C23.061 4.4668 22.9932 4.46023 22.9251 4.46012H5.93181L5.66267 2.65958C5.49499 1.46381 4.47216 0.574129 3.26466 0.573761H1.07655C0.481978 0.573761 0 1.05574 0 1.65031C0 2.24489 0.481978 2.72686 1.07655 2.72686H3.26734C3.40423 2.72586 3.52008 2.82779 3.53648 2.96373L5.19436 14.3267C5.42166 15.7706 6.66363 16.8358 8.12528 16.8405H19.3241C20.7313 16.8423 21.9454 15.8533 22.2281 14.4747L23.9802 5.74121C24.0931 5.15746 23.7115 4.59269 23.1278 4.47973Z" fill="#fff" />
-                                  <path d="M11.3404 20.5158C11.2749 19.0196 10.0401 17.8418 8.54244 17.847C7.0023 17.9092 5.80422 19.2082 5.86645 20.7484C5.92617 22.2262 7.1283 23.4008 8.60704 23.4262H8.67432C10.2142 23.3587 11.4079 22.0557 11.3404 20.5158Z" fill="#fff" />
-                                </svg>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="text-content">
-                            <h6 className="title">Deluxe Burger with Extra Beef & Eggs</h6>
-                            <div className="d-flex justify-content-between align-items-center m-t10">
-                              <div className="d-flex justify-content-between align-items-center">
-                                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19.3899 9.60002C19.6646 9.31922 19.8559 8.96762 19.9424 8.58445C20.029 8.20128 20.0073 7.80161 19.8799 7.43002C19.7604 7.05733 19.5386 6.72569 19.2398 6.47288C18.941 6.22006 18.5773 6.05622 18.1899 6.00002L13.8999 5.34002C13.8799 5.33422 13.8615 5.32403 13.8459 5.31019C13.8303 5.29635 13.818 5.27921 13.8099 5.26002L11.9299 1.26002C11.7651 0.885457 11.4949 0.56692 11.1522 0.343206C10.8095 0.119491 10.4092 0.000254073 9.99994 1.79599e-05C9.59544 -0.00165464 9.19906 0.113532 8.85846 0.331732C8.51785 0.549932 8.24751 0.861859 8.07994 1.23002L6.19994 5.23002C6.18968 5.24952 6.1755 5.26669 6.15829 5.28046C6.14108 5.29423 6.12122 5.30429 6.09994 5.31002L1.81994 6.00002C1.43203 6.05781 1.06776 6.22206 0.767637 6.47452C0.467513 6.72698 0.243301 7.05774 0.119936 7.43002C-0.00276581 7.8029 -0.0210372 8.20226 0.0671036 8.58479C0.155244 8.96733 0.346433 9.31843 0.619936 9.60002L3.77994 12.85C3.78903 12.8705 3.79373 12.8926 3.79373 12.915C3.79373 12.9374 3.78903 12.9596 3.77994 12.98L3.03994 17.52C2.97114 17.9154 3.01599 18.3222 3.16926 18.6931C3.32253 19.064 3.57794 19.3838 3.90577 19.6152C4.23361 19.8467 4.62042 19.9804 5.02122 20.0007C5.42203 20.021 5.82037 19.9272 6.16994 19.73L9.89994 17.66C9.91847 17.6504 9.93905 17.6453 9.95994 17.6453C9.98082 17.6453 10.0014 17.6504 10.0199 17.66L13.7499 19.73C14.1 19.9229 14.4972 20.0134 14.8963 19.9913C15.2953 19.9691 15.6801 19.835 16.0065 19.6045C16.333 19.374 16.5881 19.0563 16.7425 18.6877C16.897 18.319 16.9446 17.9144 16.8799 17.52L16.1899 13C16.1794 12.9818 16.1739 12.9611 16.1739 12.94C16.1739 12.919 16.1794 12.8983 16.1899 12.88L19.3899 9.60002Z" fill="#FFA902" />
-                                </svg>
-                                <h5 className="mb-0 ms-2 number">4.6</h5>
-                              </div>
-                              <div>
-                                <h5 className="mb-0 ms-2 text-primary">$ 10.9</h5>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="swiper-slide">
-                        <div className="recomended-list">
-                          <div className="image-box">
-                            <img src="/images/food/food1.png" alt="image" />
-                            <div className="form-check bookmark">
-                              <input className="form-check-input" type="checkbox" id="flexCheckDefault3" />
-                              <label className="form-check-label" htmlFor="flexCheckDefault3">
-                                <svg width="20" height="20   " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M18.1776 17.8443C16.6362 17.8428 15.3854 19.0912 15.3839 20.6326C15.3824 22.1739 16.6308 23.4247 18.1722 23.4262C19.7136 23.4277 20.9643 22.1794 20.9658 20.638C20.9658 20.6371 20.9658 20.6362 20.9658 20.6353C20.9644 19.0955 19.7173 17.8473 18.1776 17.8443Z" fill="#fff" />
-                                  <path d="M23.1278 4.47973C23.061 4.4668 22.9932 4.46023 22.9251 4.46012H5.93181L5.66267 2.65958C5.49499 1.46381 4.47216 0.574129 3.26466 0.573761H1.07655C0.481978 0.573761 0 1.05574 0 1.65031C0 2.24489 0.481978 2.72686 1.07655 2.72686H3.26734C3.40423 2.72586 3.52008 2.82779 3.53648 2.96373L5.19436 14.3267C5.42166 15.7706 6.66363 16.8358 8.12528 16.8405H19.3241C20.7313 16.8423 21.9454 15.8533 22.2281 14.4747L23.9802 5.74121C24.0931 5.15746 23.7115 4.59269 23.1278 4.47973Z" fill="#fff" />
-                                  <path d="M11.3404 20.5158C11.2749 19.0196 10.0401 17.8418 8.54244 17.847C7.0023 17.9092 5.80422 19.2082 5.86645 20.7484C5.92617 22.2262 7.1283 23.4008 8.60704 23.4262H8.67432C10.2142 23.3587 11.4079 22.0557 11.3404 20.5158Z" fill="#fff" />
-                                </svg>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="text-content">
-                            <h6 className="title">Deluxe Burger with Extra Beef & Eggs</h6>
-                            <div className="d-flex justify-content-between align-items-center m-t10">
-                              <div className="d-flex justify-content-between align-items-center">
-                                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19.3899 9.60002C19.6646 9.31922 19.8559 8.96762 19.9424 8.58445C20.029 8.20128 20.0073 7.80161 19.8799 7.43002C19.7604 7.05733 19.5386 6.72569 19.2398 6.47288C18.941 6.22006 18.5773 6.05622 18.1899 6.00002L13.8999 5.34002C13.8799 5.33422 13.8615 5.32403 13.8459 5.31019C13.8303 5.29635 13.818 5.27921 13.8099 5.26002L11.9299 1.26002C11.7651 0.885457 11.4949 0.56692 11.1522 0.343206C10.8095 0.119491 10.4092 0.000254073 9.99994 1.79599e-05C9.59544 -0.00165464 9.19906 0.113532 8.85846 0.331732C8.51785 0.549932 8.24751 0.861859 8.07994 1.23002L6.19994 5.23002C6.18968 5.24952 6.1755 5.26669 6.15829 5.28046C6.14108 5.29423 6.12122 5.30429 6.09994 5.31002L1.81994 6.00002C1.43203 6.05781 1.06776 6.22206 0.767637 6.47452C0.467513 6.72698 0.243301 7.05774 0.119936 7.43002C-0.00276581 7.8029 -0.0210372 8.20226 0.0671036 8.58479C0.155244 8.96733 0.346433 9.31843 0.619936 9.60002L3.77994 12.85C3.78903 12.8705 3.79373 12.8926 3.79373 12.915C3.79373 12.9374 3.78903 12.9596 3.77994 12.98L3.03994 17.52C2.97114 17.9154 3.01599 18.3222 3.16926 18.6931C3.32253 19.064 3.57794 19.3838 3.90577 19.6152C4.23361 19.8467 4.62042 19.9804 5.02122 20.0007C5.42203 20.021 5.82037 19.9272 6.16994 19.73L9.89994 17.66C9.91847 17.6504 9.93905 17.6453 9.95994 17.6453C9.98082 17.6453 10.0014 17.6504 10.0199 17.66L13.7499 19.73C14.1 19.9229 14.4972 20.0134 14.8963 19.9913C15.2953 19.9691 15.6801 19.835 16.0065 19.6045C16.333 19.374 16.5881 19.0563 16.7425 18.6877C16.897 18.319 16.9446 17.9144 16.8799 17.52L16.1899 13C16.1794 12.9818 16.1739 12.9611 16.1739 12.94C16.1739 12.919 16.1794 12.8983 16.1899 12.88L19.3899 9.60002Z" fill="#FFA902" />
-                                </svg>
-                                <h5 className="mb-0 ms-2 number">4.6</h5>
-                              </div>
-                              <div>
-                                <h5 className="mb-0 ms-2 text-primary">$ 10.9</h5>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- Recomended Start --> */}
-
                 {/* <!-- Item box Start --> */}
-                <div className="title-bar">
-                  <h5 className="title">Trending this week &#128293;</h5>
-                </div>
-                <div className="item-box">
-                  <div className="item-media">
-                    <img src="/images/food/food2.png" alt="food" />
-                  </div>
-                  <div className="item-content">
-                    <a href="product.html"><h6 className="mb-0">Nasi Goreng Kampung Buk Minah</h6></a>
-                    <div className="item-footer">
-                      <h6>$ 5.0</h6>
-                      <a href="#" onClick={preventDefault} className="item-bookmark">
-                        <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.7843 2.04749H16.785H16.8064C17.8714 2.05009 18.9118 2.36816 19.7963 2.96157C20.681 3.55518 21.37 4.39768 21.7762 5.38265C22.1823 6.36762 22.2875 7.45087 22.0783 8.49557C21.8692 9.54028 21.3551 10.4996 20.6011 11.2522L20.6004 11.2529L12.0015 19.8519L3.43855 11.2543L3.41711 11.2328L3.39439 11.2126C2.84628 10.7254 2.40336 10.1314 2.09273 9.46713C1.7821 8.80281 1.61031 8.0821 1.58785 7.3491C1.5654 6.61609 1.69276 5.88622 1.96215 5.20414C2.23153 4.52206 2.63727 3.90213 3.15453 3.38228C3.67179 2.86243 4.28969 2.45361 4.97042 2.18082C5.65115 1.90804 6.38038 1.77704 7.11349 1.79584C7.84659 1.81464 8.56815 1.98284 9.23401 2.29015C9.89986 2.59745 10.496 3.03741 10.9859 3.58308L11.0039 3.60309L11.0229 3.6221L11.2929 3.8921L11.9812 4.58036L12.6878 3.91095L12.9728 3.64095L12.9833 3.63096L12.9936 3.62067C13.4906 3.12161 14.0814 2.72571 14.7319 2.45573C15.3825 2.18575 16.08 2.04701 16.7843 2.04749Z" stroke="#BFC9DA" strokeWidth="2" />
-                        </svg>
-                      </a>
+                <div className="item-list style-2 recent-jobs-list" style={{ display: "flex" }}>
+                  <div className="item-content" style={{ width: "50%", height: "50px", marginRight: "3px", borderRadius: "10px", backgroundColor: "#ffd427" }}>
+                    <div className="item-media media media-50">
+                      <img src="/images/food/pic3.png" alt="logo" />
+                    </div>
+                    <div className="item-inner pt-2">
+                      <div className="item-title-row">
+                        <h6 className="item-title"><a href="order-list.html">Job Confirmed</a></h6>
+                      </div>
+                      <div className="item-footer">
+                        <div className="d-flex align-items-center">
+                          <h4 className="me-3">5</h4>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="item-box">
-                  <div className="item-media">
-                    <img src="/images/food/food3.png" alt="food" />
-                  </div>
-                  <div className="item-content">
-                    <a href="product.html"><h6 className="mb-0">Mie Kuah Becek Spesial Telur + Sosis</h6></a>
-                    <div className="item-footer">
-                      <div className="d-flex align-items-center">
-                        <h6 className="me-3">$ 5.0</h6>
-                        <del><h6>$ 8.9</h6></del>
+                  <div className="item-content" style={{ width: "50%", height: "50px", marginLeft: "3px", borderRadius: "10px", backgroundColor: "#ffd427" }}>
+                    <div className="item-media media media-50">
+                      <img src="/images/food/pic6.png" alt="logo" />
+                    </div>
+                    <div className="item-inner pt-2">
+                      <div className="item-title-row">
+                        <h6 className="item-title"><a href="order-list.html">Job Pending</a></h6>
                       </div>
-                      <a href="#" onClick={preventDefault} className="item-bookmark">
-                        <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.7843 2.04749H16.785H16.8064C17.8714 2.05009 18.9118 2.36816 19.7963 2.96157C20.681 3.55518 21.37 4.39768 21.7762 5.38265C22.1823 6.36762 22.2875 7.45087 22.0783 8.49557C21.8692 9.54028 21.3551 10.4996 20.6011 11.2522L20.6004 11.2529L12.0015 19.8519L3.43855 11.2543L3.41711 11.2328L3.39439 11.2126C2.84628 10.7254 2.40336 10.1314 2.09273 9.46713C1.7821 8.80281 1.61031 8.0821 1.58785 7.3491C1.5654 6.61609 1.69276 5.88622 1.96215 5.20414C2.23153 4.52206 2.63727 3.90213 3.15453 3.38228C3.67179 2.86243 4.28969 2.45361 4.97042 2.18082C5.65115 1.90804 6.38038 1.77704 7.11349 1.79584C7.84659 1.81464 8.56815 1.98284 9.23401 2.29015C9.89986 2.59745 10.496 3.03741 10.9859 3.58308L11.0039 3.60309L11.0229 3.6221L11.2929 3.8921L11.9812 4.58036L12.6878 3.91095L12.9728 3.64095L12.9833 3.63096L12.9936 3.62067C13.4906 3.12161 14.0814 2.72571 14.7319 2.45573C15.3825 2.18575 16.08 2.04701 16.7843 2.04749Z" stroke="#BFC9DA" strokeWidth="2" />
-                        </svg>
-                      </a>
+                      <div className="item-footer">
+                        <div className="d-flex align-items-center">
+                          <h4 className="me-3">2</h4>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 {/* <!-- Item box Start --> */}
-                <a href="product.html" className="btn btn-outline-primary btn-rounded btn-block">VIEW MORE</a>
+
+                <div className="item-list recent-jobs-list">
+                  <ul>
+                    <li>
+                      <div className="item-content">
+                        <div className="item-inner">
+                          <div className="item-title-row">
+                            <h6 className="item-title"><a href="product-detail.html">Cappucino Latte Creamy Milk Italiano</a></h6>
+                            <div className="item-subtitle">Coffe, Milk</div>
+                          </div>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">$ 5.0</h6>
+                              <del className="off-text"><h6>$ 8.9</h6></del>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <i className="fa-solid fa-star"></i>
+                              <h6>4.5</h6>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="item-media media media-90"><img src="/images/food/pic1.png" alt="logo" />
+                          <a href="javascript:void(0);" className="item-bookmark icon-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M16.785 2.04751C15.9489 2.04694 15.1209 2.21163 14.3486 2.53212C13.5764 2.85261 12.8751 3.32258 12.285 3.91501L12 4.18501L11.73 3.91501C11.1492 3.2681 10.4424 2.74652 9.65306 2.3822C8.86367 2.01787 8.00824 1.81847 7.13912 1.79618C6.27 1.7739 5.40547 1.9292 4.59845 2.25259C3.79143 2.57599 3.05889 3.06066 2.44566 3.67695C1.83243 4.29325 1.35142 5.02819 1.03206 5.83682C0.712696 6.64544 0.561704 7.51073 0.588323 8.37973C0.614942 9.24873 0.818613 10.1032 1.18687 10.8907C1.55513 11.6783 2.08022 12.3824 2.73002 12.96L12 22.2675L21.3075 12.96C22.2015 12.0677 22.8109 10.9304 23.0589 9.6919C23.3068 8.45338 23.1822 7.16915 22.7006 6.00144C22.2191 4.83373 21.4023 3.83492 20.3534 3.13118C19.3045 2.42744 18.0706 2.05034 16.8075 2.04751H16.785Z" fill="white" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="item-content">
+                        <div className="item-inner">
+                          <div className="item-title-row">
+                            <h6 className="item-title"><a href="product-detail.html">Hot Mochacinno Coffee Grande</a></h6>
+                            <div className="item-subtitle">Coffe</div>
+                          </div>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">$ 7.5</h6>
+                              <del className="off-text"><h6>$ 8.9</h6></del>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <i className="fa-solid fa-star"></i>
+                              <h6>4.0</h6>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="item-media media media-90"><img src="/images/food/pic2.png" alt="logo" />
+                          <a href="javascript:void(0);" className="item-bookmark icon-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M16.785 2.04751C15.9489 2.04694 15.1209 2.21163 14.3486 2.53212C13.5764 2.85261 12.8751 3.32258 12.285 3.91501L12 4.18501L11.73 3.91501C11.1492 3.2681 10.4424 2.74652 9.65306 2.3822C8.86367 2.01787 8.00824 1.81847 7.13912 1.79618C6.27 1.7739 5.40547 1.9292 4.59845 2.25259C3.79143 2.57599 3.05889 3.06066 2.44566 3.67695C1.83243 4.29325 1.35142 5.02819 1.03206 5.83682C0.712696 6.64544 0.561704 7.51073 0.588323 8.37973C0.614942 9.24873 0.818613 10.1032 1.18687 10.8907C1.55513 11.6783 2.08022 12.3824 2.73002 12.96L12 22.2675L21.3075 12.96C22.2015 12.0677 22.8109 10.9304 23.0589 9.6919C23.3068 8.45338 23.1822 7.16915 22.7006 6.00144C22.2191 4.83373 21.4023 3.83492 20.3534 3.13118C19.3045 2.42744 18.0706 2.05034 16.8075 2.04751H16.785Z" fill="white" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="item-content">
+                        <div className="item-inner">
+                          <div className="item-title-row">
+                            <h6 className="item-title"><a href="product-detail.html">Coffee Mocha / White Mocha</a></h6>
+                            <div className="item-subtitle">Coffe, Milk</div>
+                          </div>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">$ 5.0</h6>
+                              <del className="off-text"><h6>$ 8.9</h6></del>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <i className="fa-solid fa-star"></i>
+                              <h6>4.3</h6>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="item-media media media-90"><img src="/images/food/pic3.png" alt="logo" />
+                          <a href="javascript:void(0);" className="item-bookmark icon-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M16.785 2.04751C15.9489 2.04694 15.1209 2.21163 14.3486 2.53212C13.5764 2.85261 12.8751 3.32258 12.285 3.91501L12 4.18501L11.73 3.91501C11.1492 3.2681 10.4424 2.74652 9.65306 2.3822C8.86367 2.01787 8.00824 1.81847 7.13912 1.79618C6.27 1.7739 5.40547 1.9292 4.59845 2.25259C3.79143 2.57599 3.05889 3.06066 2.44566 3.67695C1.83243 4.29325 1.35142 5.02819 1.03206 5.83682C0.712696 6.64544 0.561704 7.51073 0.588323 8.37973C0.614942 9.24873 0.818613 10.1032 1.18687 10.8907C1.55513 11.6783 2.08022 12.3824 2.73002 12.96L12 22.2675L21.3075 12.96C22.2015 12.0677 22.8109 10.9304 23.0589 9.6919C23.3068 8.45338 23.1822 7.16915 22.7006 6.00144C22.2191 4.83373 21.4023 3.83492 20.3534 3.13118C19.3045 2.42744 18.0706 2.05034 16.8075 2.04751H16.785Z" fill="white" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div className="saprater"></div>
+                  <h4 className="title my-4">Cold Brew</h4>
+
+                  <ul>
+                    <li>
+                      <div className="item-content">
+                        <div className="item-inner">
+                          <div className="item-title-row">
+                            <h6 className="item-title"><a href="product-detail.html">Vanilla Sweet Cream Cold Brew</a></h6>
+                            <div className="item-subtitle">Coffe, Milk</div>
+                          </div>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">$ 5.0</h6>
+                              <del className="off-text"><h6>$ 8.9</h6></del>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <i className="fa-solid fa-star"></i>
+                              <h6>4.5</h6>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="item-media media media-90"><img src="/images/food/pic4.png" alt="logo" />
+                          <a href="javascript:void(0);" className="item-bookmark icon-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M16.785 2.04751C15.9489 2.04694 15.1209 2.21163 14.3486 2.53212C13.5764 2.85261 12.8751 3.32258 12.285 3.91501L12 4.18501L11.73 3.91501C11.1492 3.2681 10.4424 2.74652 9.65306 2.3822C8.86367 2.01787 8.00824 1.81847 7.13912 1.79618C6.27 1.7739 5.40547 1.9292 4.59845 2.25259C3.79143 2.57599 3.05889 3.06066 2.44566 3.67695C1.83243 4.29325 1.35142 5.02819 1.03206 5.83682C0.712696 6.64544 0.561704 7.51073 0.588323 8.37973C0.614942 9.24873 0.818613 10.1032 1.18687 10.8907C1.55513 11.6783 2.08022 12.3824 2.73002 12.96L12 22.2675L21.3075 12.96C22.2015 12.0677 22.8109 10.9304 23.0589 9.6919C23.3068 8.45338 23.1822 7.16915 22.7006 6.00144C22.2191 4.83373 21.4023 3.83492 20.3534 3.13118C19.3045 2.42744 18.0706 2.05034 16.8075 2.04751H16.785Z" fill="white" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="item-content">
+                        <div className="item-inner">
+                          <div className="item-title-row">
+                            <h6 className="item-title"><a href="product-detail.html">Citrus Cold Brew with Extra Cream</a></h6>
+                            <div className="item-subtitle">Coffe, Milk</div>
+                          </div>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">$ 5.0</h6>
+                              <del className="off-text"><h6>$ 8.9</h6></del>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <i className="fa-solid fa-star"></i>
+                              <h6>4.5</h6>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="item-media media media-90"><img src="/images/food/pic5.png" alt="logo" />
+                          <a href="javascript:void(0);" className="item-bookmark icon-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M16.785 2.04751C15.9489 2.04694 15.1209 2.21163 14.3486 2.53212C13.5764 2.85261 12.8751 3.32258 12.285 3.91501L12 4.18501L11.73 3.91501C11.1492 3.2681 10.4424 2.74652 9.65306 2.3822C8.86367 2.01787 8.00824 1.81847 7.13912 1.79618C6.27 1.7739 5.40547 1.9292 4.59845 2.25259C3.79143 2.57599 3.05889 3.06066 2.44566 3.67695C1.83243 4.29325 1.35142 5.02819 1.03206 5.83682C0.712696 6.64544 0.561704 7.51073 0.588323 8.37973C0.614942 9.24873 0.818613 10.1032 1.18687 10.8907C1.55513 11.6783 2.08022 12.3824 2.73002 12.96L12 22.2675L21.3075 12.96C22.2015 12.0677 22.8109 10.9304 23.0589 9.6919C23.3068 8.45338 23.1822 7.16915 22.7006 6.00144C22.2191 4.83373 21.4023 3.83492 20.3534 3.13118C19.3045 2.42744 18.0706 2.05034 16.8075 2.04751H16.785Z" fill="white" />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
