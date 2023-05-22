@@ -8,7 +8,8 @@ export const themeOption = ['themeColor', 'themeVersion'];
 
 function ThemeSettings() {
   useEffect(() => {
-    dzThemeSettings();
+    try {
+      dzThemeSettings();
 
     //get the DOM elements from right sidebar
     const versionSelect = document.querySelector('#theme_version');
@@ -42,6 +43,10 @@ function ThemeSettings() {
 
     // Set Theme By Cookie
     setThemePanel();
+    } catch (error) {
+      
+    }
+    
   }, []);
 
   // Cookies Function

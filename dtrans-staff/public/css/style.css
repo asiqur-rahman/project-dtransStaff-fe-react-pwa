@@ -13842,7 +13842,12 @@ button {
       fill: #fff; }
 
 .categorie-swiper .swiper-slide {
-  width: auto; }
+  width: auto; 
+}
+
+.categorie-swiper-custom .swiper-slide {
+  width: 50px !important; 
+}
 
 .add-banner {
   box-shadow: none;
