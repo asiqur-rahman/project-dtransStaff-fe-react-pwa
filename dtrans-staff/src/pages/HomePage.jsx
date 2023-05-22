@@ -13,8 +13,8 @@ function HomePage() {
   return (
     <>
     <ThemeSettings/>
-    <Home/>
-    {/* <Categiory/> */}
+    {/* <Home/> */}
+    <Categiory/>
     </>
   )
 }
