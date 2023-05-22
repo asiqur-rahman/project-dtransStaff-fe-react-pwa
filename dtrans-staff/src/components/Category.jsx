@@ -307,47 +307,61 @@ function All() {
                 {/* <!-- Item box Start --> */}
 
                 <div className="item-list recent-jobs-list">
-                  <h4 className="title my-4">Details</h4>
+                  <h4 className="title my-4">Job Details</h4>
 
                   <ul>
                     <li>
                       <div className="item-content">
-                        <div className="item-inner">
-                          <div className="item-title-row">
-                            <h6 className="item-title"><a href="product-detail.html">Vanilla Sweet Cream Cold Brew</a></h6>
-                            <div className="item-subtitle">Coffe, Milk</div>
+                        <div className="item-inner" style={{marginBottom:"0"}}>
+                          <div className="item-title-row"  style={{marginBottom:"0"}}>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">Steve Bowen</h6>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">Type : Collection</h6>
+                            </div>
+                          </div>
+                            <div className="item-subtitle">2023-05-07 13:45 PM</div>
                           </div>
                           <div className="item-footer">
                             <div className="d-flex align-items-center">
-                              <h6 className="me-3">$ 5.0</h6>
-                              <del className="off-text"><h6>$ 8.9</h6></del>
+                              <h6 className="me-3">Job No : 123456</h6>
+                              <h6>$ 8.9</h6>
                             </div>
                             <div className="d-flex align-items-center">
-                              <i className="fa-solid fa-star"></i>
-                              <h6>4.5</h6>
+                              <button className="btn btn-sm success" style={{backgroundColor:"red", color:"black", padding:"5px 4px"}}>Transfer another</button>
                             </div>
                           </div>
+                            <div className="item-subtitle">From : ABC Supplier, 21 Taglore Lane #10 Singapore 4557869</div>
                         </div>
                         <div className="item-media media media-60"><img src="/images/food/pic4.png" alt="logo" /></div>
                       </div>
                     </li>
                     <li>
-                      <div className="item-content">
-                        <div className="item-inner">
-                          <div className="item-title-row">
-                            <h6 className="item-title"><a href="product-detail.html">Citrus Cold Brew with Extra Cream</a></h6>
-                            <div className="item-subtitle">Coffe, Milk</div>
+                    <div className="item-content">
+                        <div className="item-inner" style={{marginBottom:"0"}}>
+                          <div className="item-title-row"  style={{marginBottom:"0"}}>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">Steve Bowen</h6>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3">Type : Collection</h6>
+                            </div>
+                          </div>
+                            <div className="item-subtitle">2023-05-07 13:45 PM</div>
                           </div>
                           <div className="item-footer">
                             <div className="d-flex align-items-center">
-                              <h6 className="me-3">$ 5.0</h6>
-                              <del className="off-text"><h6>$ 8.9</h6></del>
+                              <h6 className="me-3">Job No : 123456</h6>
+                              <h6>$ 8.9</h6>
                             </div>
                             <div className="d-flex align-items-center">
-                              <i className="fa-solid fa-star"></i>
-                              <h6><button></button></h6>
+                              <button className="btn btn-sm success" style={{backgroundColor:"green", color:"black", padding:"5px 4px"}}>Confirmed</button>
                             </div>
                           </div>
+                            <div className="item-subtitle">From : ABC Supplier, 21 Taglore Lane #10 Singapore 4557869</div>
                         </div>
                         <div className="item-media media media-60"><img src="/images/food/pic4.png" alt="logo" /></div>
                       </div>
