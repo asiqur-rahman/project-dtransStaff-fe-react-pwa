@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import axios from '../utils/axios.utils'
 import * as common from '../utils/common.utils'
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function HomePage() {
+  const navigate = useNavigate();
   const [username,setUsername] = useState();
   const [password,setPassword] = useState();
 
@@ -16,7 +18,7 @@ function HomePage() {
     await axios.post('authenticate',body)
     .then((result)=>{
       localStorage.setItem("username","asiq")
-      window.location.href = '/';
+      navigate('/')
       if(result){
 
       }
