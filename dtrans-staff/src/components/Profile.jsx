@@ -102,7 +102,7 @@ function All() {
               </div>
               <ul>
               <li>
-                  <a href="messages.html">
+                  <a href="#">
                     <div className="icon-box">
                       <i className="fa-solid fa-user"></i>
                     </div>
@@ -113,7 +113,7 @@ function All() {
                   </a>
                 </li>
                 <li>
-                  <a href="messages.html">
+                  <a href="#">
                     <div className="icon-box">
                       <i className="fa-solid fa-phone"></i>
                     </div>
@@ -124,7 +124,7 @@ function All() {
                   </a>
                 </li>
                 <li>
-                  <a href="messages.html">
+                  <a href="#">
                     <div className="icon-box">
                       <i className="fa-solid fa-envelope"></i>
                     </div>
@@ -135,7 +135,7 @@ function All() {
                   </a>
                 </li>
                 <li>
-                  <a href="messages.html">
+                  <a href="#">
                     <div className="icon-box">
                       <i className="fa-solid fa-location-dot"></i>
                     </div>
