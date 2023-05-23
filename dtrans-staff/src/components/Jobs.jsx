@@ -123,58 +123,118 @@ function All() {
                   {/* <h4 className="title my-4">Job Details</h4> */}
 
                   <ul>
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px" }}>
+                  <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin:"5px 0" }}>
                       <div className="item-content">
                         <div className="item-inner" style={{ margin: "10px 0" }}>
-                          <div className="item-title-row" style={{ marginBottom: "0" }}>
-                            <div className="item-footer">
+                          <div className="d-flex align-items-center">
+                            <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                              <img src="/images/food/pic4.png" alt="logo" />
+                            </div>
+                            <div className="item-title-row" >
+                              <div className="item-footer" style={{ marginBottom: "0" }}>
+                                <div className="d-flex align-items-center">
+                                  <h6 className="me-3">Steve Bowen</h6>
+                                </div>
+                              </div>
+                              <div className="item-subtitle">2023-05-07 13:45 PM</div>
+                            </div>
+                          </div>
+
+                          <div className="item-title-row">
+                            <div className="item-footer" style={{ marginBottom: "0" }}>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3">Steve Bowen</h6>
+                                <h6 className="me-3">Job No : 123456</h6>
                               </div>
                               <div className="d-flex align-items-center">
                                 <h6 className="me-3">Type : Collection</h6>
                               </div>
                             </div>
-                            <div className="item-subtitle">2023-05-07 13:45 PM</div>
                           </div>
                           <div className="item-footer">
                             <div className="d-flex align-items-center">
-                              <h6 className="me-3">Job No : 123456</h6>
-                            </div>
-                            <div className="d-flex align-items-center">
-                              <button className="btn btn-sm success" style={{ backgroundColor: "red", color: "var(--bg-white)", padding: "5px 4px" }}>Transfer another</button>
-                            </div>
-                          </div>
-                          <div className="item-subtitle">From : ABC Supplier, 21 Taglore Lane #10 Singapore 4557869</div>
-                        </div>
-                        <div className="item-media media media-60"><img src="/images/food/pic4.png" alt="logo" /></div>
-                      </div>
-                    </li>
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px" }}>
-                      <div className="item-content">
-                        <div className="item-inner" style={{ margin: "10px 0" }}>
-                          <div className="item-title-row" style={{ marginBottom: "0" }}>
-                            <div className="item-footer">
-                              <div className="d-flex align-items-center">
-                                <h6 className="me-3">Steve Bowen</h6>
-                              </div>
-                              <div className="d-flex align-items-center">
-                                <h6 className="me-3">Type : Collection</h6>
-                              </div>
-                            </div>
-                            <div className="item-subtitle">2023-05-07 13:45 PM</div>
-                          </div>
-                          <div className="item-footer">
-                            <div className="d-flex align-items-center">
-                              <h6 className="me-3">Job No : 123456</h6>
+                              <div className="item-subtitle">From : ABC Supplier, 21 Taglore Lane #10 Singapore 4557869</div>
                             </div>
                             <div className="d-flex align-items-center">
                               <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }}>Confirmed</button>
                             </div>
                           </div>
-                          <div className="item-subtitle">From : ABC Supplier, 21 Taglore Lane #10 Singapore 4557869</div>
                         </div>
-                        <div className="item-media media media-60"><img src="/images/food/pic4.png" alt="logo" /></div>
+                      </div>
+                    </li>
+                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin:"5px 0" }}>
+                      <div className="item-content">
+                        <div className="item-inner" style={{ margin: "10px 0" }}>
+                          <div className="d-flex align-items-center">
+                            <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                              <img src="/images/food/pic4.png" alt="logo" />
+                            </div>
+                            <div className="item-title-row" >
+                              <div className="item-footer" style={{ marginBottom: "0" }}>
+                                <div className="d-flex align-items-center">
+                                  <h6 className="me-3">Steve Bowen</h6>
+                                </div>
+                              </div>
+                              <div className="item-subtitle">2023-05-07 13:45 PM</div>
+                            </div>
+                          </div>
+
+                          <div className="item-title-row">
+                            <div className="item-footer" style={{ marginBottom: "0" }}>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3">Job No : 123456</h6>
+                              </div>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3">Type : Collection</h6>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <div className="item-subtitle">From : ABC Supplier, 21 Taglore Lane #10 Singapore 4557869</div>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <button className="btn btn-sm success" style={{ backgroundColor: "red", color: "var(--bg-white)", padding: "5px 4px" }}>Transfer another</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin:"5px 0" }}>
+                      <div className="item-content">
+                        <div className="item-inner" style={{ margin: "10px 0" }}>
+                          <div className="d-flex align-items-center">
+                            <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                              <img src="/images/food/pic4.png" alt="logo" />
+                            </div>
+                            <div className="item-title-row" >
+                              <div className="item-footer" style={{ marginBottom: "0" }}>
+                                <div className="d-flex align-items-center">
+                                  <h6 className="me-3">Steve Bowen</h6>
+                                </div>
+                              </div>
+                              <div className="item-subtitle">2023-05-07 13:45 PM</div>
+                            </div>
+                          </div>
+
+                          <div className="item-title-row">
+                            <div className="item-footer" style={{ marginBottom: "0" }}>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3">Job No : 123456</h6>
+                              </div>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3">Type : Collection</h6>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <div className="item-subtitle">From : ABC Supplier, 21 Taglore Lane #10 Singapore 4557869</div>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <button className="btn btn-sm success" style={{ backgroundColor: "red", color: "var(--bg-white)", padding: "5px 4px" }}>Transfer another</button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </li>
                   </ul>
@@ -188,117 +248,6 @@ function All() {
 
         <MenuBar />
 
-
-        {/* <!-- CART --> */}
-        <div className="offcanvas offcanvas-bottom rounded-0" tabIndex="-1" id="offcanvasBottom2">
-          <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-            <i className="fa-solid fa-xmark"></i>
-          </button>
-          <div className="offcanvas-body container fixed">
-            <div className="item-list style-2">
-              <ul>
-                <li>
-                  <div className="item-content">
-                    <div className="item-media media media-60">
-                      <img src="/images/food/pic6.png" alt="logo" />
-                    </div>
-                    <div className="item-inner">
-                      <div className="item-title-row">
-                        <h6 className="item-title"><a href="order-list.html">Chicken Briyani Haji Mahmud</a></h6>
-                        <div className="item-subtitle">Coffe, Milk</div>
-                      </div>
-                      <div className="item-footer">
-                        <div className="d-flex align-items-center">
-                          <h6 className="me-3">$ 4.0</h6>
-                          <del className="off-text"><h6>$ 8.9</h6></del>
-                        </div>
-                        <div className="d-flex align-items-center">
-                          <div className="dz-stepper border-1 ">
-                            <input className="stepper" type="text" defaultValue="3" name="demo3" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="item-content">
-                    <div className="item-media media media-60">
-                      <img src="/images/food/food1.png" alt="logo" />
-                    </div>
-                    <div className="item-inner">
-                      <div className="item-title-row">
-                        <h6 className="item-title"><a href="order-list.html">Deluxe Super Burger Spicy</a></h6>
-                        <div className="item-subtitle">Coffe, Milk</div>
-                      </div>
-                      <div className="item-footer">
-                        <div className="d-flex align-items-center">
-                          <h6 className="me-3">$ 7.2</h6>
-                          <del className="off-text"><h6>$ 8.9</h6></del>
-                        </div>
-                        <div className="d-flex align-items-center">
-                          <div className="dz-stepper border-1 ">
-                            <input className="stepper" type="text" defaultValue="3" name="demo3" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="item-content">
-                    <div className="item-media media media-60">
-                      <img src="/images/food/pic3.png" alt="logo" />
-                    </div>
-                    <div className="item-inner">
-                      <div className="item-title-row">
-                        <h6 className="item-title"><a href="order-list.html">Coffee Mocha / White Mocha</a></h6>
-                        <div className="item-subtitle">Coffe, Milk</div>
-                      </div>
-                      <div className="item-footer">
-                        <div className="d-flex align-items-center">
-                          <h6 className="me-3">$ 12.0</h6>
-                          <del className="off-text"><h6>$ 8.9</h6></del>
-                        </div>
-                        <div className="d-flex align-items-center">
-                          <div className="dz-stepper border-1 ">
-                            <input className="stepper" type="text" defaultValue="3" name="demo3" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="view-title">
-              <div className="container">
-                <ul>
-                  <li>
-                    <a href="#" onClick={preventDefault} className="promo-bx">
-                      Apply Promotion Code
-                      <span>2 Promos</span>
-                    </a>
-                  </li>
-                  <li>
-                    <span>Subtotal</span>
-                    <span>$54.76</span>
-                  </li>
-                  <li>
-                    <span>TAX (2%)</span>
-                    <span>-$1.08</span>
-                  </li>
-                  <li>
-                    <h5>Total</h5>
-                    <h5>$53.68</h5>
-                  </li>
-                </ul>
-                <a href="payment.html" className="btn btn-primary btn-rounded btn-block flex-1 ms-2">CONFIRM</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- CART --> */}
       </div>
     </>
   )
