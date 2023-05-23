@@ -52,56 +52,56 @@ function All() {
                 <h6 className="detail">GOLD MEMBER</h6>
               </div>
             </div>
-                {/* <div className="d-flex justify-content-between align-item-center">
+            {/* <div className="d-flex justify-content-between align-item-center">
                     <h5 className="title">Your Reward 🏆</h5>
                     <a href="javascript:void(0);" className="btn-link">History</a>
                 </div> */}
-                <div className="swiper-btn-center-lr">
-                    <div className="swiper-container mt-4 offer-swiper">
-                        <div className="swiper-wrapper">
-                            <div className="swiper-slide" style={{width:"28%"}}>
-                                <div className="offer-bx">
-                                    <div className="offer-content" style={{maxWidth:"53%"}}>
-                                        <h6>Today</h6>
-                                        <small>Jobs</small>
-                                    </div>
-                                    <div className="point">
-                                        <h5 className="title">5</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="swiper-slide" style={{width:"28%"}}>
-                                <div className="offer-bx">
-                                <div className="offer-content" style={{maxWidth:"53%"}}>
-                                        <h6>Pending</h6>
-                                        <small>Jobs</small>
-                                    </div>
-                                    <div className="point">
-                                        <h5 className="title">5</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="swiper-slide" style={{width:"28%"}}>
-                                <div className="offer-bx">
-                                <div className="offer-content" style={{maxWidth:"53%"}}>
-                                        <h6>Completed</h6>
-                                        <small>Jobs</small>
-                                    </div>
-                                    <div className="point">
-                                        <h5 className="title">5</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div className="swiper-btn-center-lr">
+              <div className="swiper-container mt-4 offer-swiper">
+                <div className="swiper-wrapper">
+                  <div className="swiper-slide" style={{ width: "28%" }}>
+                    <div className="offer-bx">
+                      <div className="offer-content" style={{ maxWidth: "53%" }}>
+                        <h6>Today</h6>
+                        <small>Jobs</small>
+                      </div>
+                      <div className="point">
+                        <h5 className="title">5</h5>
+                      </div>
                     </div>
+                  </div>
+                  <div className="swiper-slide" style={{ width: "28%" }}>
+                    <div className="offer-bx">
+                      <div className="offer-content" style={{ maxWidth: "53%" }}>
+                        <h6>Pending</h6>
+                        <small>Jobs</small>
+                      </div>
+                      <div className="point">
+                        <h5 className="title">5</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="swiper-slide" style={{ width: "28%" }}>
+                    <div className="offer-bx">
+                      <div className="offer-content" style={{ maxWidth: "53%" }}>
+                        <h6>Completed</h6>
+                        <small>Jobs</small>
+                      </div>
+                      <div className="point">
+                        <h5 className="title">5</h5>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
             <div className="contact-section">
               <div className="d-flex justify-content-between align-item-center">
                 <h5 className="title">Informations</h5>
                 <a href="#" className="btn-link">Edit</a>
               </div>
               <ul>
-              <li>
+                <li>
                   <a href="#">
                     <div className="icon-box">
                       <i className="fa-solid fa-user"></i>
@@ -150,7 +150,7 @@ function All() {
           </div>
         </div>
 
-        <MenuBar/>
+        <MenuBar />
 
       </div>
     </>
