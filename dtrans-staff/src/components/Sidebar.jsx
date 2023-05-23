@@ -52,7 +52,7 @@ function All() {
           </div>
           <div className="dz-info">
             <span>Good Morning</span>
-            <h5 className="name">Henry Decosta</h5>
+            <h5 className="name">James Hawkins</h5>
           </div>
         </div>
         <div className="author-box" onClick={()=>window.menuToggler()} style={{position:"absolute", top:"0", right:"0px", backgroundColor:"none"}}>
