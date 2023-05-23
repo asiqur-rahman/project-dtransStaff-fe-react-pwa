@@ -1,26 +1,32 @@
-import { useEffect } from 'react'
-import All from '../components/Home'
-import ThemeSettings from '../settings/ThemeSettings'
-// import Spinner from '../components/Spinner'
+import { useState } from 'react'
+import axios from '../utils/axios.utils'
 
 function HomePage() {
+  const [username,setUsername] = useState();
+  const [password,setPassword] = useState();
 
   const login = () =>{
-    localStorage.setItem("username","asiq")
+    let body ={
+      username:username,   
+      password: password,
   }
-
-  useEffect(() => {
-    // window.SpinnerHide();
-  }, []);
+    axios.post('',body)
+    .then((result)=>{
+      if(result){
+        
+      }
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+    localStorage.setItem("username","asiq")
+    window.location.href = '/';
+  }
 
   return (
     <>
       {/* <ThemeSettings/> */}
       <div className="page-wraper">
-
-        <div id="preloader">
-          <div className="spinner"></div>
-        </div>
 
         <div className="page-content">
 
@@ -37,10 +43,18 @@ function HomePage() {
                 <h3 className="title">Welcome Back</h3>
                 <p>Login with your phone number</p>
                 <form>
-                  <div className="input-group input-mini mb-3 mt-3">
-                    <span className="input-group-text"><i className="fa fa-user"></i></span>
-                    <input type="text" className="form-control" placeholder="Phone Number" autoComplete="username" />
-                  </div>
+                <div className="input-group input-mini mb-3">
+                  <span className="input-group-text"><i className="fa fa-user"></i></span>
+                  <input type="text" className="form-control" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder="Username"/>
+                </div>
+                <div className="mb-3 input-group input-mini">
+                  <span className="input-group-text"><i className="fa fa-lock"></i></span>
+                  <input type="password" className="form-control dz-password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
+                  <span className="input-group-text show-pass"> 
+                    <i className="fa fa-eye-slash"></i>
+                    <i className="fa fa-eye"></i>
+                  </span>
+						    </div>
                   <div className="input-group">
                     <button type='button' onClick={login} className="btn mt-2 btn-primary w-100 btn-rounded">Next</button>
                   </div>

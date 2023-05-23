@@ -10,7 +10,7 @@ import Profile from '../components/Profile'
 function HomePage() {
 
   useEffect(() => {
-    // window.SpinnerHide();
+
   }, []);
 
   return (

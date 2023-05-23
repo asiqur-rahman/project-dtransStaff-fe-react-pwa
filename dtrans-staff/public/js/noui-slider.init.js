@@ -1,4 +1,4 @@
-var FoodiaUiSlider = function(){
+var DTransUiSlider = function(){
 	
 
 	// Basic Slider ============ 
@@ -228,20 +228,20 @@ var FoodiaUiSlider = function(){
 /* Document.ready Start */	
 jQuery(document).ready(function() {
 	
-	FoodiaUiSlider.init();
+	DTransUiSlider.init();
 });
 /* Document.ready END */
 
 /* Window Load START */
 jQuery(window).on('load',function () {
 	 
-	FoodiaUiSlider.load();
+	DTransUiSlider.load();
 });
 /*  Window Load END */
 
 /* Window Resize START */
 jQuery(window).on('resize',function () {
 	 
-	FoodiaUiSlider.resize();
+	DTransUiSlider.resize();
 });
 /*  Window Resize END */

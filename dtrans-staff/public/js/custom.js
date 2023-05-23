@@ -1,4 +1,4 @@
-var Foodia = function(){
+var DTrans = function(){
 	
 	/* Search Bar ============ */
 	var screenWidth = $( window ).width();
@@ -376,7 +376,7 @@ var Foodia = function(){
 jQuery(document).ready(function() {
 	$('[data-bs-toggle="popover"]').popover();
     
-	Foodia.init();
+	DTrans.init();
     
     $('.theme-dark .custom-switch input').prop('checked', true);
 	
@@ -385,8 +385,7 @@ jQuery(document).ready(function() {
 
 /* Window Load START */
 jQuery(window).on('load',function () {
-	 
-	Foodia.load();
+	DTrans.load();
     setTimeout(function(){
 		jQuery('#splashscreen').addClass('active');
 		jQuery('#splashscreen').fadeOut(2000);
@@ -401,7 +400,7 @@ jQuery(window).on('load',function () {
 /* Window Resize START */
 jQuery(window).on('resize',function () {
 	 
-	Foodia.resize();
+	DTrans.resize();
 	
 });
 /*  Window Resize END */	
