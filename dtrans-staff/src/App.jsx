@@ -6,12 +6,15 @@ import JobDetailsPage  from './pages/JobDetailsPage'
 import ProfilePage  from './pages/ProfilePage'
 import NotificationPage  from './pages/NotificationPage'
 import PrivateRoutes from './utils/PrivateRoutes'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
   return (
     <div>
       <div className="App">
+        <ToastContainer position="bottom-center"/>
         <Router>
           <Routes>
             <Route element={<PrivateRoutes />}>

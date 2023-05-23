@@ -7991,10 +7991,10 @@ h4, .h4 {
   font-size: 2rem; }
 
 h5, .h5 {
-  font-size: 1.75rem; }
+  font-size: 1.5rem; }
 
 h6, .h6 {
-  font-size: 1.5rem; }
+  font-size: 1rem; }
 
 p {
   font-size: 1.2rem;
@@ -10193,7 +10193,7 @@ section {
     .menubar-area .toolbar-inner .menu-toggler {
       color: var(--title);
       text-align: center;
-      width: 25%;
+      width: 33%;
       padding: 0 0;
       font-size: 18px; }
       .menubar-area .toolbar-inner .nav-link i,
@@ -14951,12 +14951,12 @@ ul.list-check {
     margin-right: 15px; }
 
 .offer-bx {
-  width: 265px;
+  /* width: 143px; */
   background-color: var(--primary);
-  height: 100px;
+  height: 70px;
   border-radius: var(--border-radius-base);
   overflow: hidden;
-  padding: 0px 20px;
+  padding: 0px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between; }
@@ -14965,9 +14965,9 @@ ul.list-check {
   .offer-bx .offer-content small, .offer-bx .offer-content .small {
     color: white; }
   .offer-bx .point {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -15031,7 +15031,7 @@ ul.list-check {
   min-height: calc(100vh - 190px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex: 1;
   padding-top: 10px; }
   .account-area form {

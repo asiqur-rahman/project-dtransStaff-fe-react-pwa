@@ -1,26 +1,30 @@
 import { useState } from 'react'
 import axios from '../utils/axios.utils'
+import * as common from '../utils/common.utils'
+import { toast } from 'react-toastify';
 
 function HomePage() {
   const [username,setUsername] = useState();
   const [password,setPassword] = useState();
 
-  const login = () =>{
+  const login = async (e) =>{
+    e.preventDefault();
     let body ={
       username:username,   
       password: password,
   }
-    axios.post('',body)
+    await axios.post('authenticate',body)
     .then((result)=>{
+      localStorage.setItem("username","asiq")
+      window.location.href = '/';
       if(result){
-        
+
       }
     })
     .catch((error)=>{
       console.log(error)
     })
-    localStorage.setItem("username","asiq")
-    window.location.href = '/';
+    
   }
 
   return (
@@ -42,7 +46,6 @@ function HomePage() {
               <div className="account-area">
                 <h3 className="title">Welcome Back</h3>
                 <p>Login with your phone number</p>
-                <form>
                 <div className="input-group input-mini mb-3">
                   <span className="input-group-text"><i className="fa fa-user"></i></span>
                   <input type="text" className="form-control" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder="Username"/>
@@ -56,7 +59,7 @@ function HomePage() {
                   </span>
 						    </div>
                   <div className="input-group">
-                    <button type='button' onClick={login} className="btn mt-2 btn-primary w-100 btn-rounded">Next</button>
+                    <button type='button' onClick={login} className="btn mt-2 btn-primary w-100 btn-rounded">Login</button>
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="form-check">
@@ -67,10 +70,6 @@ function HomePage() {
                     </div>
                     <a href="#" className="btn-link">Forgot password?</a>
                   </div>
-                </form>
-                <div className="text-center mb-auto p-tb20">
-                  <a href="#" className="saprate">Login with email</a>
-                </div>
               </div>
             </div>
           </div>

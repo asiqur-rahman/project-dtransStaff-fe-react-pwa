@@ -2,6 +2,7 @@
 import axios from 'axios';
 import {getToken} from './common.utils';
 import Config from '../config';
+import { toast } from 'react-toastify';
 import * as Common from './common.utils';
 
 let instance = axios.create({
@@ -33,8 +34,8 @@ instance.interceptors.response.use(
         });
     }
     else if(error.response.status===401){
-        auth_helper.removeSession();
-        window.location='/login';
+        toast.error("Unauthorized Credentials");
+        Common.removeSession();
     }
     else{
         return new Promise((resolve,reject)=>{
