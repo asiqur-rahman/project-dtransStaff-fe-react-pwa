@@ -15,12 +15,13 @@ function HomePage() {
       username:username,   
       password: password,
   }
-    await axios.post('authenticate',body)
+    await axios.post('accounts/authenticate',body)
     .then((result)=>{
-      localStorage.setItem("username","asiq")
-      navigate('/')
-      if(result){
-
+      // localStorage.setItem("username","asiq")
+      // navigate('/')
+      if(result && result.data.success){
+        common.setSession(result.data.data);
+        navigate('/');
       }
     })
     .catch((error)=>{
