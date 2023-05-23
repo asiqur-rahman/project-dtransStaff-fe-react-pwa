@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCar } from '@fortawesome/free-solid-svg-icons';
+import { faCar, faFaceGrin } from '@fortawesome/free-solid-svg-icons';
 import MenuBar from './Menubar'
 import Sidebar from './Sidebar'
 
@@ -89,30 +89,30 @@ function All() {
                   <div className="item-content" style={{ width: "50%", height: "50px", marginRight: "3px", borderRadius: "10px", backgroundColor: "#ffd427" }}>
                     <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <FontAwesomeIcon icon={faCar} size='2x' />
+                        <FontAwesomeIcon icon={faCar} size='2x' color='var(--title)'/>
                       </a>
                     </div>
                     <div className="item-inner pt-2">
-                      <div className="item-title-row" style={{ marginBottom: "0" }}>
+                      <div className="item-title-row" style={{ margin: "5px", textAlign:"center" }}>
                         <h6 className="item-title" style={{ color: "var(--title)" }}><a href="#">Job Confirmed</a></h6>
                       </div>
-                      <div className="item-footer" style={{ textAlign: "center" }}>
-                        <h6 className="me-3">5</h6>
+                      <div className="item-title-row" style={{ marginBottom: "0", textAlign:"center" }}>
+                        <h6 className="item-title" style={{ color: "var(--title)" }}>5</h6>
                       </div>
                     </div>
                   </div>
                   <div className="item-content" style={{ width: "50%", height: "50px", marginLeft: "3px", borderRadius: "10px", backgroundColor: "#ffd427" }}>
                     <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <FontAwesomeIcon icon={faCar} size='2x' />
+                        <FontAwesomeIcon icon={faCar} size='2x' color='var(--title)' />
                       </a>
                     </div>
                     <div className="item-inner pt-2">
-                      <div className="item-title-row" style={{ marginBottom: "0" }}>
-                        <h6 className="item-title"><a href="#">Job Pending</a></h6>
+                      <div className="item-title-row" style={{ margin: "5px", textAlign:"center" }}>
+                        <h6 className="item-title" style={{ color: "var(--title)" }}><a href="#">Job Pending</a></h6>
                       </div>
-                      <div className="item-footer">
-                        <h6 className="me-3">2</h6>
+                      <div className="item-title-row" style={{ marginBottom: "0", textAlign:"center" }}>
+                        <h6 className="item-title" style={{ color: "var(--title)" }}>5</h6>
                       </div>
                     </div>
                   </div>
@@ -128,7 +128,8 @@ function All() {
                         <div className="item-inner" style={{ margin: "10px 0" }}>
                           <div className="d-flex align-items-center">
                             <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                              <img src="/images/food/pic4.png" alt="logo" />
+                              {/* <img src="/images/food/pic4.png" alt="logo" /> */}
+                              <FontAwesomeIcon icon={faFaceGrin} size='2x' color='var(--title)' />
                             </div>
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>
@@ -166,7 +167,7 @@ function All() {
                         <div className="item-inner" style={{ margin: "10px 0" }}>
                           <div className="d-flex align-items-center">
                             <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                              <img src="/images/food/pic4.png" alt="logo" />
+                              <FontAwesomeIcon icon={faFaceGrin} size='2x' color='var(--title)' />
                             </div>
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>
@@ -204,7 +205,7 @@ function All() {
                         <div className="item-inner" style={{ margin: "10px 0" }}>
                           <div className="d-flex align-items-center">
                             <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                              <img src="/images/food/pic4.png" alt="logo" />
+                              <FontAwesomeIcon icon={faFaceGrin} size='2x' color='var(--title)' />
                             </div>
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>

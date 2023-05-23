@@ -45,8 +45,8 @@ function HomePage() {
             <div className="container">
               <div className="account-area">
                 <h3 className="title">Welcome Back</h3>
-                <p>Login with your phone number</p>
-                <div className="input-group input-mini mb-3">
+                <p>Login with your credentials</p>
+                <div className="input-group input-mini mb-3 pt-4">
                   <span className="input-group-text"><i className="fa fa-user"></i></span>
                   <input type="text" className="form-control" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder="Username"/>
                 </div>
