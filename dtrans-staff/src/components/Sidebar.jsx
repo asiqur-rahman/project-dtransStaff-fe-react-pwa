@@ -7,12 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 function All() {
   const navigate = useNavigate();
-  const preventDefault = (event) => {
-    // event.preventDefault(); // Prevents the default behavior of the anchor tag
-    // Additional functionality can be added here if needed
-    window.menuToggler();
-  };
-
   const [userDetails, setUserDetails]= useState(false);
   useEffect(()=>{
     let user = common.getUser();
@@ -20,6 +14,12 @@ function All() {
         setUserDetails(user)
       }
   },[])
+  
+  const preventDefault = (event) => {
+    // event.preventDefault(); // Prevents the default behavior of the anchor tag
+    // Additional functionality can be added here if needed
+    window.menuToggler();
+  };
 
   const logout = () => {
     localStorage.removeItem('username');
