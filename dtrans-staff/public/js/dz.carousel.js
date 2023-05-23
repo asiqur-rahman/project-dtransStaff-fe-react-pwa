@@ -71,15 +71,15 @@ jQuery(document).ready(function() {
 		});
 	}
 	
-    if(jQuery('.offer-swiper').length > 0){
-		var swiperGetStarted = new Swiper('.offer-swiper', {
-			speed: 500,
-			parallax: true,
-			slidesPerView: 'auto',
-			spaceBetween: 20,
-			loop: false,
-		});
-	}
+    // if(jQuery('.offer-swiper').length > 0){
+	// 	var swiperGetStarted = new Swiper('.offer-swiper', {
+	// 		speed: 500,
+	// 		parallax: true,
+	// 		slidesPerView: 'auto',
+	// 		spaceBetween: 20,
+	// 		loop: false,
+	// 	});
+	// }
     
 	// Team Swiper 
 	if(jQuery('.recomand-swiper').length > 0){

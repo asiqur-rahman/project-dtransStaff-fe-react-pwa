@@ -128,8 +128,7 @@ function All() {
                         <div className="item-inner" style={{ margin: "10px 0" }}>
                           <div className="d-flex align-items-center">
                             <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                              {/* <img src="/images/food/pic4.png" alt="logo" /> */}
-                              <FontAwesomeIcon icon={faFaceGrin} size='2x' color='var(--title)' />
+                              <img src="/images/avatar60x60.jpg" alt="logo" />
                             </div>
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>
@@ -167,7 +166,7 @@ function All() {
                         <div className="item-inner" style={{ margin: "10px 0" }}>
                           <div className="d-flex align-items-center">
                             <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                              <FontAwesomeIcon icon={faFaceGrin} size='2x' color='var(--title)' />
+                              <img src="/images/avatar60x60.jpg" alt="logo" />
                             </div>
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>
@@ -205,7 +204,7 @@ function All() {
                         <div className="item-inner" style={{ margin: "10px 0" }}>
                           <div className="d-flex align-items-center">
                             <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                              <FontAwesomeIcon icon={faFaceGrin} size='2x' color='var(--title)' />
+                              <img src="/images/avatar60x60.jpg" alt="logo" />
                             </div>
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>

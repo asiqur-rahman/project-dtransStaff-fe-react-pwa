@@ -48,7 +48,7 @@ function All() {
       <div className="sidebar" style={{overflowY:"initial"}}>
         <div className="author-box">
           <div className="dz-media">
-            <img src="/images/message/pic5.jpg" alt="author-image" />
+            <img src="/images/message/pic6.jpg" alt="author-image" />
           </div>
           <div className="dz-info">
             <span>Good Morning</span>

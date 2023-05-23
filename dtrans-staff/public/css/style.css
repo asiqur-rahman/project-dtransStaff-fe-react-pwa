@@ -14945,6 +14945,9 @@ ul.list-check {
 
 .offer-swiper .swiper-wrapper .swiper-slide {
   width: auto; }
+  .offer-swiper .swiper-wrapper .swiper-slide{
+    margin-left: 15px;
+  }
   .offer-swiper .swiper-wrapper .swiper-slide:first-child {
     margin-left: 15px; }
   .offer-swiper .swiper-wrapper .swiper-slide:last-child {
