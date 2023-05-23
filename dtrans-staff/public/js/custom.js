@@ -301,17 +301,17 @@ var DTrans = function(){
 	} 
     
     var handleSearch = function() {
-      $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $(".recent-jobs-list li").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-        if($(this).val().length > 0){
-            $('.search-input .btn-close').fadeIn(500);
-        }else{
-            $('.search-input .btn-close').fadeOut(500);
-        }
-      });
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$(".recent-jobs-list li").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+			if($(this).val().length > 0){
+				$('.search-input .btn-close').fadeIn(500);
+			}else{
+				$('.search-input .btn-close').fadeOut(500);
+			}
+		});
       
         $('.search-input .btn-close').on('click',function(){
             $(".recent-jobs-list li").filter(function() {
