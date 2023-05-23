@@ -49,7 +49,7 @@
     <script src="/js/dz.carousel.js"></script><!-- Swiper -->
     <script src="/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script><!-- Swiper -->
     <!-- <script src="/js/settings.js"></script> -->
-    <script src="/js/custom.js"></script>
+    <!-- <script src="/js/custom.js"></script> -->
     <!-- <script src="index.js" defer></script> -->
     <script>
         var DTrans = function () {
@@ -66,15 +66,15 @@
             }
 
             // Menubar Toggler
-            var handleMenubar = function () {
+            // var handleMenubar = function () {
                 
-                jQuery('.menu-toggler').on('click', function () {
-                    jQuery('.sidebar').toggleClass('show');
-                });
-                jQuery('.menu-toggler').on('click', function () {
-                    jQuery('.menu-toggler').toggleClass('show');
-                });
-            }
+            //     jQuery('.menu-toggler').on('click', function () {
+            //         jQuery('.sidebar').toggleClass('show');
+            //     });
+            //     jQuery('.menu-toggler').on('click', function () {
+            //         jQuery('.menu-toggler').toggleClass('show');
+            //     });
+            // }
 
             // Show Pass
             var handleShowPass = function () {
@@ -245,11 +245,11 @@
                 });
             }
 
-            var handleRemoveClass = function () {
-                jQuery('.nav-color').on('click', function () {
-                    jQuery('.sidebar, .menu-toggler').removeClass('show');
-                });
-            }
+            // var handleRemoveClass = function () {
+            //     jQuery('.nav-color').on('click', function () {
+            //         jQuery('.sidebar, .menu-toggler').removeClass('show');
+            //     });
+            // }
 
             var handleToggleButton = function () {
                 jQuery('.dz-treeview-item').on('click', function () {
@@ -392,7 +392,7 @@
             return {
                 init: function () {
                     handleMenubar();
-                    handleToggleButton();
+                    // handleToggleButton();
                     handleShowPass();
                     handleChatBox();
                     //handleMenubarNav();
@@ -405,7 +405,7 @@
                     handlePWAModal();
                     handleSearch();
                     //handleThemeVersion();
-                    handleRemoveClass();
+                    // handleRemoveClass();
                     handleActiveStar();
                     handleTabSlide();
                     handleImageSelect();
