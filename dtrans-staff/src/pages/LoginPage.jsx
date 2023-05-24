@@ -46,7 +46,7 @@ function HomePage() {
               {/* <h1 className="dz-title">DTrans</h1>
               <h5 className="mb-0">Staff App</h5> */}
               <div className="dz-media">
-                <img src="/images/logo.jpeg" alt="logo-image" style={{maxHeight:"70px", borderRadius:"20px"}}/>
+                <img src="/images/logo.jpeg" alt="logo-image" style={{maxHeight:"70px", borderRadius:"8px"}}/>
               </div>
             </div>
           </div>
