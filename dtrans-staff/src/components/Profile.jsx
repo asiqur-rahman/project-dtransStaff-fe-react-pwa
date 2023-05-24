@@ -1,16 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from '../utils/axios.utils'
+import * as common from '../utils/common.utils'
 import MenuBar from './Menubar'
 import Sidebar from './Sidebar'
 
 function All() {
-  const preventDefault = (event) => {
-    // event.preventDefault(); // Prevents the default behavior of the anchor tag
-    // Additional functionality can be added here if needed
-  };
-
-  useEffect(() => {
-
-  }, []);
+  const [userDetails, setUserDetails]= useState(false);
+  useEffect(()=>{
+    let user = common.getUser();
+      if(user){
+        axios.get('profile')
+        .then((result)=>{
+          if(result && result.data.success){
+            setUserDetails(result.data.data)
+          }
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+      }
+  },[])
 
   return (
     <>
@@ -48,7 +57,7 @@ function All() {
                 </svg>
               </div>
               <div className="mb-2">
-                <h4>James Hawkins</h4>
+                <h4>{userDetails ? userDetails.empnum : ""}</h4>
                 <h6 className="detail">GOLD MEMBER</h6>
               </div>
             </div>
@@ -66,7 +75,7 @@ function All() {
                         <small>Jobs</small>
                       </div>
                       <div className="point">
-                        <h5 className="title">5</h5>
+                        <h5 className="title">0</h5>
                       </div>
                     </div>
                   </div>
@@ -77,7 +86,7 @@ function All() {
                         <small>Jobs</small>
                       </div>
                       <div className="point">
-                        <h5 className="title">5</h5>
+                        <h5 className="title">0</h5>
                       </div>
                     </div>
                   </div>
@@ -88,7 +97,7 @@ function All() {
                         <small>Jobs</small>
                       </div>
                       <div className="point">
-                        <h5 className="title">5</h5>
+                        <h5 className="title">0</h5>
                       </div>
                     </div>
                   </div>
@@ -101,6 +110,17 @@ function All() {
                 <a href="#" className="btn-link">Edit</a>
               </div>
               <ul>
+              <li>
+                  <a href="#">
+                    <div className="icon-box">
+                      <i className="fa-solid fa-user"></i>
+                    </div>
+                    <div className="ms-3">
+                      <div className="light-text">Full Name</div>
+                      <p className="mb-0">{userDetails ? userDetails.empname : ""}</p>
+                    </div>
+                  </a>
+                </li>
                 <li>
                   <a href="#">
                     <div className="icon-box">
@@ -108,18 +128,29 @@ function All() {
                     </div>
                     <div className="ms-3">
                       <div className="light-text">Username</div>
-                      <p className="mb-0">Asiq</p>
+                      <p className="mb-0">{userDetails ? userDetails.empnum : ""}</p>
                     </div>
                   </a>
                 </li>
                 <li>
                   <a href="#">
                     <div className="icon-box">
-                      <i className="fa-solid fa-phone"></i>
+                      <i className="fa-solid fa-user"></i>
                     </div>
                     <div className="ms-3">
-                      <div className="light-text">Mobile Phone</div>
-                      <p className="mb-0">+12 345 678 92</p>
+                      <div className="light-text">Gender</div>
+                      <p className="mb-0">{userDetails && userDetails.gender == 'M' ? "Male" : "Female"}</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div className="icon-box">
+                      <i className="fa-solid fa-user"></i>
+                    </div>
+                    <div className="ms-3">
+                      <div className="light-text">Date of Birth</div>
+                      <p className="mb-0">{userDetails ? userDetails.birthday : ""}</p>
                     </div>
                   </a>
                 </li>
@@ -130,7 +161,7 @@ function All() {
                     </div>
                     <div className="ms-3">
                       <div className="light-text">Email Address</div>
-                      <p className="mb-0">jameshawkins@mail.com</p>
+                      <p className="mb-0">{userDetails ? userDetails.email : ""}</p>
                     </div>
                   </a>
                 </li>
@@ -140,8 +171,19 @@ function All() {
                       <i className="fa-solid fa-location-dot"></i>
                     </div>
                     <div className="ms-3">
-                      <div className="light-text">Address</div>
-                      <p className="mb-0">Franklin Avenue, Corner St.London, 24125151</p>
+                      <div className="light-text">Address 1</div>
+                      <p className="mb-0">{userDetails ? userDetails.addr1 : ""}</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div className="icon-box">
+                      <i className="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div className="ms-3">
+                      <div className="light-text">Address 2</div>
+                      <p className="mb-0">{userDetails ? userDetails.addr2 : ""}</p>
                     </div>
                   </a>
                 </li>

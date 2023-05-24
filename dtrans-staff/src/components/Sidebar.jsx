@@ -1,19 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import axios from '../utils/axios.utils'
+import * as common from '../utils/common.utils'
 import { useNavigate } from 'react-router-dom';
 
 function All() {
   const navigate = useNavigate();
+  const [userDetails, setUserDetails]= useState(false);
+  useEffect(()=>{
+    let user = common.getUser();
+      if(user){
+        setUserDetails(user)
+      }
+  },[])
+  
   const preventDefault = (event) => {
     // event.preventDefault(); // Prevents the default behavior of the anchor tag
     // Additional functionality can be added here if needed
     window.menuToggler();
   };
-
-  useEffect(() => {
-
-  }, []);
 
   const logout = () => {
     localStorage.removeItem('username');
@@ -52,10 +58,10 @@ function All() {
           </div>
           <div className="dz-info">
             <span>Good Morning</span>
-            <h5 className="name">James Hawkins</h5>
+            <h5 className="name">{userDetails ? userDetails.empnum : ""}</h5>
           </div>
         </div>
-        <div className="author-box" onClick={()=>window.menuToggler()} style={{position:"absolute", top:"0", right:"0px", backgroundColor:"none"}}>
+        <div className="author-box" onClick={()=>window.menuToggler()} style={{position:"absolute", top:"0", right:"0px", backgroundColor:"none", cursor:"pointer"}}>
             <FontAwesomeIcon icon={faClose} size='2x' color='var(--title)' />
         </div>
         <ul className="nav navbar-nav" style={{ padding: "0 30px", fontSize: "small" }}>
