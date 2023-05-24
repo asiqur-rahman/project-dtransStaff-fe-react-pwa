@@ -57,7 +57,7 @@ function All() {
                 </svg>
               </div>
               <div className="mb-2">
-                <h4>{userDetails ? userDetails.empnum : ""}</h4>
+                <h4 style={{textTransform:"uppercase"}}>{userDetails ? userDetails.username : ""}</h4>
                 <h6 className="detail">GOLD MEMBER</h6>
               </div>
             </div>
@@ -128,7 +128,7 @@ function All() {
                     </div>
                     <div className="ms-3">
                       <div className="light-text">Username</div>
-                      <p className="mb-0">{userDetails ? userDetails.empnum : ""}</p>
+                      <p className="mb-0">{userDetails ? userDetails.username : ""}</p>
                     </div>
                   </a>
                 </li>
@@ -161,29 +161,7 @@ function All() {
                     </div>
                     <div className="ms-3">
                       <div className="light-text">Email Address</div>
-                      <p className="mb-0">{userDetails ? userDetails.email : ""}</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div className="icon-box">
-                      <i className="fa-solid fa-location-dot"></i>
-                    </div>
-                    <div className="ms-3">
-                      <div className="light-text">Address 1</div>
-                      <p className="mb-0">{userDetails ? userDetails.addr1 : ""}</p>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div className="icon-box">
-                      <i className="fa-solid fa-location-dot"></i>
-                    </div>
-                    <div className="ms-3">
-                      <div className="light-text">Address 2</div>
-                      <p className="mb-0">{userDetails ? userDetails.addr2 : ""}</p>
+                      <p className="mb-0">{userDetails && userDetails.email.length>0 ? userDetails.email : "n/a"}</p>
                     </div>
                   </a>
                 </li>

@@ -12486,7 +12486,7 @@ body {
 small,
 .small,
 .small {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 300;
   display: block;
 }
@@ -21524,7 +21524,7 @@ svg.text-primary g path {
 
 .light-text {
   color: #7D8FAB;
-  font-size: 0.875rem;
+  font-size: 1.2rem;
   font-weight: 400;
 }
 
@@ -22394,7 +22394,7 @@ ul.list-check li:after {
 
 .contact-section ul li a p {
   color: #293041;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
