@@ -36,11 +36,11 @@ function HomePage() {
 
         <div className="page-content">
 
-          <div className="banner-wrapper">
+          <div className="banner-wrapper div-background">
             <div className="circle-1"></div>
             <div className="container inner-wrapper">
               <h1 className="dz-title">DTrans</h1>
-              <p className="mb-0">Staff App</p>
+              <h5 className="mb-0">Staff App</h5>
             </div>
           </div>
           <div className="account-box">
