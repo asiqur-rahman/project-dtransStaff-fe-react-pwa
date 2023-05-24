@@ -8,8 +8,8 @@ const PrivateRoutes = () => {
     useEffect(()=>{
         if(common.isUserLogedIn()){
             setIsLogedIn(true);
-            setChecked(true);
         }
+        setChecked(true);
     },[])
     return(
         <>{checked && <>{isLogedIn ? <Outlet/> : <Navigate to="/login"/>}</>}</>
