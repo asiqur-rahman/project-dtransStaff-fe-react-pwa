@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faSquareRss } from '@fortawesome/free-solid-svg-icons';
 import axios from '../utils/axios.utils'
 import * as common from '../utils/common.utils'
 import { useNavigate } from 'react-router-dom';
@@ -34,7 +34,7 @@ function All() {
             <div className="header-content">
               <div className="left-content">
                 <a href="#" onClick={preventDefault} className="menu-toggler">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" fill="#000000"><path d="M13 14v6c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1zm-9 7h6c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1zM3 4v6c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1zm12.95-1.6L11.7 6.64c-.39.39-.39 1.02 0 1.41l4.25 4.25c.39.39 1.02.39 1.41 0l4.25-4.25c.39-.39.39-1.02 0-1.41L17.37 2.4c-.39-.39-1.03-.39-1.42 0z" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" ><path d="M13 14v6c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1zm-9 7h6c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1zM3 4v6c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1zm12.95-1.6L11.7 6.64c-.39.39-.39 1.02 0 1.41l4.25 4.25c.39.39 1.02.39 1.41 0l4.25-4.25c.39-.39.39-1.02 0-1.41L17.37 2.4c-.39-.39-1.03-.39-1.42 0z" /></svg>
                 </a>
               </div>
               <div className="mid-content">
@@ -62,7 +62,7 @@ function All() {
           </div>
         </div>
         <div className="author-box" onClick={()=>window.menuToggler()} style={{position:"absolute", top:"0", right:"0px", backgroundColor:"none", cursor:"pointer"}}>
-            <FontAwesomeIcon icon={faClose} size='2x' color='var(--title)' />
+            <FontAwesomeIcon icon={faClose} size='2x' color='white' style={{marginTop:"8px"}}/>
         </div>
         <ul className="nav navbar-nav" style={{ padding: "0 30px", fontSize: "small" }}>
           <li className="nav-label">Main Menu</li>

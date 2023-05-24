@@ -8786,7 +8786,7 @@ fieldset:disabled .btn {
 
 .bg-white {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
+  /* background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important; */
 }
 
 .bg-body {
@@ -14857,7 +14857,8 @@ section {
 }
 
 .header.transparent .left-content .menu-toggler svg path {
-  fill: #bfc9da;
+  /* fill: #bfc9da; */
+  fill: var(--primary);
 }
 
 .header.transparent .main-bar .back-btn {
@@ -14976,7 +14977,8 @@ section {
 
 .header.transparent .right-content .theme-btn svg path,
 .header.transparent .right-content .theme-color svg path {
-  fill: #bfc9da;
+  /* fill: #bfc9da; */
+  fill: var(--primary);
 }
 
 .header.transparent .right-content .theme-btn svg.color-plate path,
@@ -15235,7 +15237,7 @@ section {
 }
 
 .sidebar .author-box {
-  background-color: var(--dark);
+  background-color: var(--primary);
   display: flex;
   align-items: center;
   padding: 20px 15px;
@@ -22414,7 +22416,8 @@ ul.list-check li:after {
 
 .offer-bx {
   /* width: 143px; */
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
+  background: linear-gradient(to right, #007BFF, #00BFFF);
   height: 70px;
   border-radius: var(--border-radius-base);
   overflow: hidden;

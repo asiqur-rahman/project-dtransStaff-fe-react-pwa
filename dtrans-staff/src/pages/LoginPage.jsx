@@ -23,6 +23,9 @@ function HomePage() {
         common.setSession(result.data.data);
         navigate('/');
       }
+      else{
+        toast.error(result.data.message)
+      }
     })
     .catch((error)=>{
       console.log(error)

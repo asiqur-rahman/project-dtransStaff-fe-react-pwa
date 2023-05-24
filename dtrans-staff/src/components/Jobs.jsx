@@ -86,33 +86,33 @@ function All() {
 
                 {/* <!-- Item box Start --> */}
                 <div className="item-list style-2 recent-jobs-list" style={{ display: "flex" }}>
-                  <div className="item-content" style={{ width: "50%", height: "50px", marginRight: "3px", borderRadius: "10px", backgroundColor: "#ffd427" }}>
+                  <div className="item-content" style={{ width: "50%", height: "50px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
                     <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <FontAwesomeIcon icon={faCar} size='2x' color='var(--title)'/>
+                        <FontAwesomeIcon icon={faCar} size='2x' color='white'/>
                       </a>
                     </div>
                     <div className="item-inner pt-2">
                       <div className="item-title-row" style={{ margin: "5px", textAlign:"center" }}>
-                        <h6 className="item-title" style={{ color: "var(--title)" }}><a href="#">Job Confirmed</a></h6>
+                        <h6 className="item-title"><a href="#" style={{ color: "white" }}>Job Confirmed</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign:"center" }}>
-                        <h6 className="item-title" style={{ color: "var(--title)" }}>5</h6>
+                        <h6 className="item-title" style={{ color: "white" }}>5</h6>
                       </div>
                     </div>
                   </div>
-                  <div className="item-content" style={{ width: "50%", height: "50px", marginLeft: "3px", borderRadius: "10px", backgroundColor: "#ffd427" }}>
+                  <div className="item-content" style={{ width: "50%", height: "50px", marginLeft: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
                     <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <FontAwesomeIcon icon={faCar} size='2x' color='var(--title)' />
+                        <FontAwesomeIcon icon={faCar} size='2x' color='white' />
                       </a>
                     </div>
                     <div className="item-inner pt-2">
                       <div className="item-title-row" style={{ margin: "5px", textAlign:"center" }}>
-                        <h6 className="item-title" style={{ color: "var(--title)" }}><a href="#">Job Pending</a></h6>
+                        <h6 className="item-title"><a href="#" style={{ color: "white" }}>Job Pending</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign:"center" }}>
-                        <h6 className="item-title" style={{ color: "var(--title)" }}>5</h6>
+                        <h6 className="item-title" style={{ color: "white" }}>5</h6>
                       </div>
                     </div>
                   </div>

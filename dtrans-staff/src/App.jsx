@@ -18,7 +18,7 @@ function App() {
         <Router>
           <Routes>
             <Route element={<PrivateRoutes />}>
-                <Route element={<HomePage/>} path="/" exact/>
+                <Route element={<JobsPage/>} path="/" exact/>
                 <Route element={<JobsPage/>} path="/jobs"/>
                 <Route element={<JobDetailsPage/>} path="/job-details"/>
                 <Route element={<ProfilePage/>} path="/profile"/>

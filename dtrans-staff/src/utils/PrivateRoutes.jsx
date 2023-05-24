@@ -10,7 +10,6 @@ const PrivateRoutes = () => {
             setIsLogedIn(true);
             setChecked(true);
         }
-        
     },[])
     return(
         <>{checked && <>{isLogedIn ? <Outlet/> : <Navigate to="/login"/>}</>}</>
