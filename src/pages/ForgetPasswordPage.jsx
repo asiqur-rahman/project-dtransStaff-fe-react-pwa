@@ -10,7 +10,6 @@ function HomePage() {
   const [showOtpConfirm, setShowOtpConfirm] = useState(false);
 
   const handleSendOtp = async (e) => {
-    setShowOtpConfirm(true);
     e.preventDefault();
     if (username.length == 0) {
       toast.error("Username cannot be empty !");
@@ -20,9 +19,9 @@ function HomePage() {
       username: username
     };
     try {
-      const result = await axios.post('accounts/authenticate', body);
+      const result = await axios.post('accounts/forgot-password-otp', body);
       if (result && result.data.success) {
-        toast.success("OTP sended successfully !");
+        toast.success(result.data.data.message);
         setShowOtpConfirm(true)
       } else {
         toast.error(result.data.message);
@@ -34,7 +33,7 @@ function HomePage() {
 
   return (
     <>
-      {showOtpConfirm && <OTPPage />}
+      {showOtpConfirm && <OTPPage username={username}/>}
       {!showOtpConfirm &&
         <div className="account-box">
           <div className="container">
