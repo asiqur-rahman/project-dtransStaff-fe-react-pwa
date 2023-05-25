@@ -3,6 +3,8 @@ import HomePage  from './pages/HomePage'
 import LoginPage  from './pages/LoginPage'
 import JobsPage  from './pages/JobsPage'
 import JobDetailsPage  from './pages/JobDetailsPage'
+import ForgetPasswordPage  from './pages/ForgetPasswordPage'
+import OTPPage  from './pages/OTPPage'
 import ProfilePage  from './pages/ProfilePage'
 import NotificationPage  from './pages/NotificationPage'
 import PrivateRoutes from './utils/PrivateRoutes'
@@ -25,6 +27,8 @@ function App() {
                 <Route element={<NotificationPage/>} path="/notification"/>
             </Route>
             <Route element={<LoginPage/>} path="/login"/>
+            <Route element={<ForgetPasswordPage/>} path="/forget-password"/>
+            <Route element={<OTPPage/>} path="/otp-confirm"/>
           </Routes>
       </Router>
     </div>

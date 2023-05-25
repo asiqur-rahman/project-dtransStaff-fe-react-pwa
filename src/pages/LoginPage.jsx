@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import axios from '../utils/axios.utils';
 import * as common from '../utils/common.utils';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import ForgetPasswordPage from './ForgetPasswordPage';
 import { toast } from 'react-toastify';
 
 function HomePage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showForgetPassword, setShowForgetPassword] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
@@ -52,6 +54,8 @@ function HomePage() {
               </div>
             </div>
           </div>
+          {showForgetPassword && <ForgetPasswordPage/>}
+          {!showForgetPassword &&
           <div className="account-box">
             <div className="container">
               <div className="account-area">
@@ -112,13 +116,13 @@ function HomePage() {
                       Keep Sign In
                     </label>
                   </div>
-                  <a href="#" className="btn-link">
+                  <button type="button" onClick={()=>setShowForgetPassword(true)} className="btn-link">
                     Forgot password?
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       </div>
     </>
