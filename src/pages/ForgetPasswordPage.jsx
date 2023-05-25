@@ -10,25 +10,29 @@ function HomePage() {
   const [showOtpConfirm, setShowOtpConfirm] = useState(false);
 
   const handleSendOtp = async (e) => {
+    window.SpinnerShow()
     e.preventDefault();
     if (username.length == 0) {
       toast.error("Username cannot be empty !");
       return;
     }
-    let body = {
-      username: username
-    };
-    try {
-      const result = await axios.post('accounts/forgot-password-otp', body);
-      if (result && result.data.success) {
-        toast.success(result.data.data.message);
-        setShowOtpConfirm(true)
-      } else {
-        toast.error(result.data.message);
+    else{
+      let body = {
+        username: username
+      };
+      try {
+        const result = await axios.post('accounts/forgot-password-otp', body);
+        if (result && result.data.success) {
+          toast.success(result.data.data.message);
+          setShowOtpConfirm(true)
+        } else {
+          toast.error(result.data.message);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
+    window.SpinnerHide()
   };
 
   return (

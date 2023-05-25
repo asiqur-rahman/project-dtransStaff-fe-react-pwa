@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from '../utils/axios.utils';
 import * as common from '../utils/common.utils';
 import { useNavigate, Link } from 'react-router-dom';
@@ -11,7 +11,13 @@ function HomePage() {
   const [password, setPassword] = useState('');
   const [showForgetPassword, setShowForgetPassword] = useState(false);
 
+  useEffect(()=>{
+    // window.SpinnerShow()
+    common.removeSession();
+  },[])
+
   const login = async (e) => {
+    window.SpinnerShow()
     e.preventDefault();
     if(username.length==0){
       toast.error("Username cannot be empty !");
@@ -21,21 +27,24 @@ function HomePage() {
       toast.error("Password cannot be empty !");
       return;
     }
-    let body = {
-      username: username,
-      password: password,
-    };
-    try {
-      const result = await axios.post('accounts/authenticate', body);
-      if (result && result.data.success) {
-        common.setSession(result.data.data);
-        navigate('/');
-      } else {
-        toast.error(result.data.message);
+    else{
+      let body = {
+        username: username,
+        password: password,
+      };
+      try {
+        const result = await axios.post('accounts/authenticate', body);
+        if (result && result.data.success) {
+          common.setSession(result.data.data);
+          navigate('/');
+        } else {
+          toast.error(result.data.message);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
+    window.SpinnerHide()
   };
 
   return (

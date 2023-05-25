@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage  from './pages/HomePage'
 import LoginPage  from './pages/LoginPage'
@@ -8,13 +9,18 @@ import OTPPage  from './pages/OTPPage'
 import ProfilePage  from './pages/ProfilePage'
 import NotificationPage  from './pages/NotificationPage'
 import PrivateRoutes from './utils/PrivateRoutes'
+import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
+  useEffect(()=>{
+    window.SpinnerHide()
+  },[])
   return (
     <div>
+      <Spinner/>
       <div className="App">
         <ToastContainer position="bottom-center"/>
         <Router>

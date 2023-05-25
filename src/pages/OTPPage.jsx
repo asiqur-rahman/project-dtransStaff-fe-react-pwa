@@ -19,26 +19,30 @@ function HomePage(props) {
   },[props])
 
   const otpConfirm = async (e) => {
+    window.SpinnerShow()
     e.preventDefault();
     if (otp1.length == 0 || otp2.length == 0 || otp3.length == 0 || otp4.length == 0) {
       toast.error("Please provide OTP");
       return;
     }
-    let body = {
-      username: username,
-      otp: otp1+otp2+otp3+otp4,
-    };
-    try {
-      const result = await axios.post('accounts/validate-reset-otp', body);
-      if (result && result.data.success) {
-        toast.success("OTP Verified. Please enter your new password.");
-        setShowResetPassword(true);
-      } else {
-        toast.error(result.data.message);
+    else{
+      let body = {
+        username: username,
+        otp: otp1+otp2+otp3+otp4,
+      };
+      try {
+        const result = await axios.post('accounts/validate-reset-otp', body);
+        if (result && result.data.success) {
+          toast.success("OTP Verified. Please enter your new password.");
+          setShowResetPassword(true);
+        } else {
+          toast.error(result.data.message);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
+    window.SpinnerHide()
   };
 
   return (
