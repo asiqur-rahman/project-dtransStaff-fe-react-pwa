@@ -35,19 +35,20 @@ jobs:
       #       **/node_modules/**
       #       fileToExclude.txt
           
-      # - name: 📂 Sync files 2
-      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      #   with:
-      #     server: sustainability.com.bd
-      #     username: website@sustainability.com.bd
-      #     password: ${{ secrets.FTP_PASS_BTS }}
-      #     dangerous-clean-slate: true
-      #     exclude: |
-      #       **/.git*
-      #       **/.git*/**
-      #       **/node_modules/**
-      #       **/public/**
-      #       **/src/**
-      #       package.json
-      #       vite.config.js
-      #       yarn.lock
+      - name: 📂 Sync files 1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: braintechsolution.com
+          username: staff@braintechsolution.com
+          password: staff.braintechsolution.com
+          dangerous-clean-slate: true
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/Template/**
+            **/public/**
+            **/src/**
+            package.json
+            vite.config.js
+            yarn.lock
