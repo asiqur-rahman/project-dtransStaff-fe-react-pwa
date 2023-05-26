@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 
 function All() {
   const [userDetails, setUserDetails]= useState(false);
+  const [jobSummary, setJobSummary]= useState(false);
   useEffect(()=>{
+    // window.SpinnerShow()
     let user = common.getUser();
       if(user){
         axios.get('profile')
@@ -18,7 +20,20 @@ function All() {
         .catch((error)=>{
           console.log(error)
         })
+
+        const todayDate = new Date().toISOString().split('T')[0]
+        axios.get(`job/summary?date=${todayDate}`)
+        .then((result)=>{
+          if(result && result.data.success){
+            setJobSummary(result.data.data)
+          }
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+      
       }
+      // window.SpinnerHide()
   },[])
 
   return (
@@ -71,7 +86,7 @@ function All() {
                         <small>Jobs</small>
                       </div>
                       <div className="point">
-                        <h5 className="title">0</h5>
+                        <h5 className="title">{jobSummary ? jobSummary.total :""}</h5>
                       </div>
                     </div>
                   </div>
@@ -82,7 +97,7 @@ function All() {
                         <small>Jobs</small>
                       </div>
                       <div className="point">
-                        <h5 className="title">0</h5>
+                        <h5 className="title">{jobSummary ? jobSummary.pending :""}</h5>
                       </div>
                     </div>
                   </div>
@@ -93,7 +108,7 @@ function All() {
                         <small>Jobs</small>
                       </div>
                       <div className="point">
-                        <h5 className="title">0</h5>
+                      <h5 className="title">{jobSummary ? jobSummary.completed :""}</h5>
                       </div>
                     </div>
                   </div>
