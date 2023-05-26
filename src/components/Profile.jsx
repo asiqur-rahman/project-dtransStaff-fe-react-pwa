@@ -8,7 +8,7 @@ function All() {
   const [userDetails, setUserDetails]= useState(false);
   const [jobSummary, setJobSummary]= useState(false);
   useEffect(()=>{
-    // window.SpinnerShow()
+    window.SpinnerShow()
     let user = common.getUser();
       if(user){
         axios.get('profile')
@@ -33,7 +33,7 @@ function All() {
         })
       
       }
-      // window.SpinnerHide()
+      window.SpinnerHide()
   },[])
 
   return (
