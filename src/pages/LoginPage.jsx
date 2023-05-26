@@ -72,7 +72,7 @@ function HomePage() {
                 <p>Login with your credentials</p>
                 <div className="input-group input-mini mb-3 pt-4">
                   <span className="input-group-text">
-                    <i className="fa fa-user"></i>
+                    <i className="fa fa-user" style={{fontSize:"16px"}}></i>
                   </span>
                   <input
                     type="text"
@@ -85,7 +85,7 @@ function HomePage() {
                 </div>
                 <div className="mb-3 input-group input-mini">
                   <span className="input-group-text">
-                    <i className="fa fa-lock"></i>
+                    <i className="fa fa-lock" style={{fontSize:"16px"}}></i>
                   </span>
                   <input
                     type="password"
