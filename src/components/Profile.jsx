@@ -71,7 +71,7 @@ function All() {
                   <div className="swiper-slide" style={{ width: "28%" }}>
                     <div className="offer-bx">
                       <div className="offer-content" style={{ maxWidth: "53%" }}>
-                        <h6>Today</h6>
+                        <h6 style={{fontSize:"11px"}}>Today</h6>
                         <small>Jobs</small>
                       </div>
                       <div className="point">
@@ -82,7 +82,7 @@ function All() {
                   <div className="swiper-slide" style={{ width: "28%" }}>
                     <div className="offer-bx">
                       <div className="offer-content" style={{ maxWidth: "53%" }}>
-                        <h6>Pending</h6>
+                        <h6 style={{fontSize:"11px"}}>Pending</h6>
                         <small>Jobs</small>
                       </div>
                       <div className="point">
@@ -93,7 +93,7 @@ function All() {
                   <div className="swiper-slide" style={{ width: "28%" }}>
                     <div className="offer-bx">
                       <div className="offer-content" style={{ maxWidth: "53%" }}>
-                        <h6>Completed</h6>
+                        <h6 style={{fontSize:"11px"}}>Completed</h6>
                         <small>Jobs</small>
                       </div>
                       <div className="point">
