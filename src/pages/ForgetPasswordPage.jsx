@@ -14,7 +14,6 @@ function HomePage() {
     e.preventDefault();
     if (username.length == 0) {
       toast.error("Username cannot be empty !");
-      return;
     }
     else{
       let body = {

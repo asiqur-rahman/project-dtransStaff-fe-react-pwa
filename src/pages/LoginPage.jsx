@@ -21,11 +21,9 @@ function HomePage() {
     e.preventDefault();
     if(username.length==0){
       toast.error("Username cannot be empty !");
-      return;
     }
     else if(password.length==0){
       toast.error("Password cannot be empty !");
-      return;
     }
     else{
       let body = {
