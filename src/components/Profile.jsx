@@ -139,7 +139,7 @@ function All() {
                     </div>
                     <div className="ms-3">
                       <div className="light-text">Gender</div>
-                      <p className="mb-0">{userDetails && userDetails.gender == 'M' ? "Male" : "Female"}</p>
+                      <p className="mb-0">{userDetails && userDetails.gender =='' ? '' :userDetails.gender == 'M' ? "Male" : "Female"}</p>
                     </div>
                   </a>
                 </li>
@@ -161,7 +161,7 @@ function All() {
                     </div>
                     <div className="ms-3">
                       <div className="light-text">Email Address</div>
-                      <p className="mb-0">{userDetails && userDetails.email.length>0 ? userDetails.email : "n/a"}</p>
+                      <p className="mb-0">{userDetails ? userDetails.email : ""}</p>
                     </div>
                   </a>
                 </li>
