@@ -59,11 +59,11 @@ function HomePage(props) {
           <div className="container">
             <div className="account-area">
               <div className="mb-3 input-group input-mini">
-                <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                <span className="input-group-text"><i className="fa-solid fa-lock" style={{fontSize:"16px"}}></i></span>
                 <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} className="form-control" placeholder="Enter Your password" />
               </div>
               <div className="mb-3 input-group input-mini">
-                <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                <span className="input-group-text"><i className="fa-solid fa-lock" style={{fontSize:"16px"}}></i></span>
                 <input type="password" value={cPassword} onChange={(e)=>setCPassword(e.target.value)} className="form-control" placeholder="Confirm Your password" />
               </div>
               <div className="input-group">
