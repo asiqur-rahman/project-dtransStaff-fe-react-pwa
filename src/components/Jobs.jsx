@@ -11,12 +11,16 @@ function All() {
     // event.preventDefault(); // Prevents the default behavior of the anchor tag
     // Additional functionality can be added here if needed
   };
+  const [selectedDate, setSelectedDate] = useState(false);
+  const [dates, setDates] = useState(false);
   const [todayJobs, setTodayJobs] = useState(false);
   useEffect(() => {
     // window.SpinnerShow()
     let user = common.getUser();
+    const todayDate = new Date().toISOString().split('T')[0]
+    setSelectedDate(todayDate);
+
     if (user) {
-      const todayDate = new Date().toISOString().split('T')[0]
       axios.get(`job/active?date=${todayDate}`)
         .then((result) => {
           if (result && result.data.success) {
@@ -27,6 +31,22 @@ function All() {
           console.log(error)
         })
     }
+
+    const today = new Date();  // Get today's date
+    today.setDate(today.getDate() - 2);  // Subtract 2 days
+
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const datesArray = [];
+
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      const value = date.toISOString().split('T')[0];
+      const dayOfWeek = daysOfWeek[date.getDay()];
+      datesArray.push({day:dayOfWeek, date:date.getDate(), value: value});
+    }
+    setDates(datesArray);
+
     // window.SpinnerHide();
   }, [])
 
@@ -49,7 +69,18 @@ function All() {
                 <div className="swiper-btn-center-lr" style={{ marginBottom: "10px" }}>
                   <div className="swiper-container mt-4 categorie-swiper categorie-swiper-custom">
                     <div className="swiper-wrapper">
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
+                      {dates && dates.map((item,i)=>{
+                        return (
+                          <div key={i} className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
+                            <a href="#" className="categore-box style-1" style={{ border:selectedDate==item.value?"2px solid var(--primary)":"none" }}>
+                              <span className="title">{item.day}</span>
+                              <span className="title">{item.date}</span>
+                            </a>
+                          </div>
+                        )
+                      })}
+                      
+                      {/* <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
                         <a href="#" className="categore-box style-1">
                           <span className="title">Fri</span>
                           <span className="title">16</span>
@@ -84,13 +115,7 @@ function All() {
                           <span className="title">Fri</span>
                           <span className="title">16</span>
                         </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                        <a href="#" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
