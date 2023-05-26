@@ -61,10 +61,6 @@ function All() {
                 <h6 className="detail">GOLD MEMBER</h6>
               </div>
             </div>
-            {/* <div className="d-flex justify-content-between align-item-center">
-                    <h5 className="title">Your Reward 🏆</h5>
-                    <a href="javascript:void(0);" className="btn-link">History</a>
-                </div> */}
             <div className="swiper-btn-center-lr">
               <div className="swiper-container mt-4 offer-swiper">
                 <div className="swiper-wrapper">
