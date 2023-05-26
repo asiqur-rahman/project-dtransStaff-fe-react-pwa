@@ -7,14 +7,19 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'prompt',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      registerType: 'auto',
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.ico'],
+      devOptions: {
+        enabled: true
+      },
       manifest: {
         name: 'DTrans',
-        short_name: 'dtrans',
+        short_name: 'DTrans',
         description: 'Dtrans Staff',
         theme_color: '#ffffff',
         start_url: '/',
+        background_color: '#ffffff',
+        display: 'standalone',
         icons: [
           {
             src: 'pwa-192x192.png',
