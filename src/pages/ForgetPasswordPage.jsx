@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from '../utils/axios.utils';
 import * as common from '../utils/common.utils';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import OTPPage from './OTPPage';
 import { toast } from 'react-toastify';
 
@@ -49,6 +49,13 @@ function HomePage() {
               <div className="input-group">
                 <button className="btn mt-2 btn-primary w-100 btn-rounded" onClick={handleSendOtp}>SEND OTP</button>
               </div>
+              <div className="d-flex justify-content-between align-items-center">
+                  <div className="form-check">
+                  <Link to={'/'} type="button" className="btn-link">
+                    Go Back
+                  </Link>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
