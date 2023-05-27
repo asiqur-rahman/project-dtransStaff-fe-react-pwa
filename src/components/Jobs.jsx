@@ -15,7 +15,7 @@ function All() {
   const [dates, setDates] = useState(false);
   const [todayJobs, setTodayJobs] = useState(false);
   useEffect(() => {
-    // window.SpinnerShow()
+    window.SpinnerShow()
     let user = common.getUser();
     const todayDate = new Date().toISOString().split('T')[0]
     setSelectedDate(todayDate);
@@ -47,7 +47,7 @@ function All() {
     }
     setDates(datesArray);
 
-    // window.SpinnerHide();
+    window.SpinnerHide();
   }, [])
 
   return (
