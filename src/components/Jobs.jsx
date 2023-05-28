@@ -14,14 +14,14 @@ function All() {
   const [selectedDate, setSelectedDate] = useState(false);
   const [dates, setDates] = useState(false);
   const [todayJobs, setTodayJobs] = useState(false);
-  useEffect(() => {
-    window.SpinnerShow()
-    let user = common.getUser();
-    const todayDate = new Date().toISOString().split('T')[0]
-    setSelectedDate(todayDate);
 
+  const fetchJobs = (date) =>{
+    window.SpinnerShow();
+    setTodayJobs(false);
+    let user = common.getUser();
     if (user) {
-      axios.get(`job/active?date=${todayDate}`)
+      setSelectedDate(date);
+      axios.get(`job/active?date=${date}`)
         .then((result) => {
           if (result && result.data.success) {
             setTodayJobs(result.data.data)
@@ -31,6 +31,12 @@ function All() {
           console.log(error)
         })
     }
+    window.SpinnerHide();
+  }
+
+  useEffect(() => {
+    const todayDate = new Date().toISOString().split('T')[0]
+    fetchJobs(todayDate);
 
     const today = new Date();  // Get today's date
     today.setDate(today.getDate() - 2);  // Subtract 2 days
@@ -46,8 +52,6 @@ function All() {
       datesArray.push({day:dayOfWeek, date:date.getDate(), value: value});
     }
     setDates(datesArray);
-
-    window.SpinnerHide();
   }, [])
 
   return (
@@ -72,10 +76,10 @@ function All() {
                       {dates && dates.map((item,i)=>{
                         return (
                           <div key={i} className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                            <a href="#" className="categore-box style-1" style={{ border:selectedDate==item.value?"2px solid var(--primary)":"none" }}>
+                            <button onClick={()=>fetchJobs(item.value)} className="categore-box style-1" style={{ border:selectedDate==item.value?"2px solid var(--primary)":"none" }}>
                               <span className="title">{item.day}</span>
                               <span className="title">{item.date}</span>
-                            </a>
+                            </button>
                           </div>
                         )
                       })}
@@ -134,7 +138,7 @@ function All() {
                         <h6 className="item-title"><a href="#" style={{ color: "white",fontSize:"13px" }}>Job Confirmed</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
-                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.completed : ""}</h6>
+                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.completed : "0"}</h6>
                       </div>
                     </div>
                   </div>
@@ -149,7 +153,7 @@ function All() {
                         <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"13px" }}>Job Pending</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
-                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.pending : ""}</h6>
+                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.pending : "0"}</h6>
                       </div>
                     </div>
                   </div>
