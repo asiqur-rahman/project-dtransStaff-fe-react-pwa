@@ -174,20 +174,20 @@ function All() {
                                   <div className="item-title-row" >
                                     <div className="item-footer" style={{ marginBottom: "0" }}>
                                       <div className="d-flex align-items-center">
-                                        <h6 className="me-3">{item.empname}</h6>
+                                        <h5 className="me-3" style={{ marginBottom: "0" }}>{item.empname}</h5>
                                       </div>
                                     </div>
-                                    <div className="item-subtitle">{item.jobschedule}</div>
+                                    <div className="item-subtitle" style={{ fontSize: "11px"}}>{item.jobschedule}</div>
                                   </div>
                                 </div>
 
                                 <div className="item-title-row">
                                   <div className="item-footer" style={{ marginBottom: "0" }}>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3">Job No : {item.jobnum}</h6>
+                                      <h6 className="me-3" style={{ fontSize: "11px"}}>Job No : {item.jobnum}</h6>
                                     </div>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3">Type : {item.jobtype}</h6>
+                                      <h6 className="me-3" style={{ fontSize: "11px"}}>Type : {item.jobtype}</h6>
                                     </div>
                                   </div>
                                 </div>
