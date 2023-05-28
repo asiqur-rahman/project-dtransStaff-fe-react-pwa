@@ -48,93 +48,13 @@ function All() {
                             <img src="/images/author/pic1.png" alt="image"/>
                         </div>
                         <div className="item-inner">
-                            <h6 className="title">Lily MacDonald</h6>
-                            <p className="mb-0">Lorem ipsum dolor sit ameet..</p>
+                            <h5 className="title" style={{fontSize:"14px"}}>Lily MacDonald</h5>
+                            <p className="mb-0" style={{fontSize:"13px"}}>Lorem ipsum dolor sit ameet..</p>
                         </div>
                         <div  className="ms-auto font-10 text-white d-flex align-items-center">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z" stroke="#fff" strokeLinecap="round" strokeLinejoin="round"></path>
                                 <path d="M6 3V6L8 7" stroke="#fff" strokeLinecap="round" strokeLinejoin="round"></path>
-                            </svg>
-                            12 min ago
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a  href="#" className="notification bg-success">
-                <div className="notification-content item-list">
-                    <div className="item-content">
-                        <div className="media media-35">
-                            <img src="/images/avatar/1.jpg" alt="image"/>
-                        </div>
-                        <div className="item-inner">
-                            <h6 className="title">Lily MacDonald</h6>
-                            <p className="mb-0">Lorem ipsum dolor sit ameet..</p>
-                        </div>
-                        <div className="ms-auto font-10 text-white d-flex align-items-center">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z" stroke="#fff" strokeLinecap="round" strokeLinejoin="round"></path>
-                                <path d="M6 3V6L8 7" stroke="#fff" strokeLinecap="round" strokeLinejoin="round"></path>
-                            </svg>
-                            12 min ago
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="#" className="notification">
-                <div className="notification-content item-list">
-                    <div className="item-content">
-                        <div className="media media-35">
-                            <img src="/images/avatar/2.jpg" alt="image"/>
-                        </div>
-                        <div className="item-inner">
-                            <h6 className="title">Lily MacDonald</h6>
-                            <p className="mb-0">Lorem ipsum dolor sit ameet..</p>
-                        </div>
-                        <div className="ms-auto font-10 text-dark d-flex align-items-center">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z" stroke="#787878" strokeLinecap="round" strokeLinejoin="round"></path>
-                                <path d="M6 3V6L8 7" stroke="#787878" strokeLinecap="round" strokeLinejoin="round"></path>
-                            </svg>
-                            12 min ago
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="#" className="notification">
-                <div className="notification-content item-list">
-                    <div className="item-content">
-                        <div className="media media-35">
-                            <img src="/images/avatar/3.jpg" alt="image"/>
-                        </div>
-                        <div className="item-inner">
-                            <h6 className="title">Lily MacDonald</h6>
-                            <p className="mb-0">Lorem ipsum dolor sit ameet..</p>
-                        </div>
-                        <div className="ms-auto font-10 text-dark d-flex align-items-center">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z" stroke="#787878" strokeLinecap="round" strokeLinejoin="round"></path>
-                                <path d="M6 3V6L8 7" stroke="#787878" strokeLinecap="round" strokeLinejoin="round"></path>
-                            </svg>
-                            12 min ago
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="#" className="notification">
-                <div className="notification-content item-list">
-                    <div className="item-content">
-                        <div className="media media-35">
-                            <img src="/images/avatar/4.jpg" alt="image"/>
-                        </div>
-                        <div className="item-inner">
-                            <h6 className="title">Lily MacDonald</h6>
-                            <p className="mb-0">Lorem ipsum dolor sit ameet..</p>
-                        </div>
-                        <div className="ms-auto font-10 text-dark d-flex align-items-center">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z" stroke="#787878" strokeLinecap="round" strokeLinejoin="round"></path>
-                                <path d="M6 3V6L8 7" stroke="#787878" strokeLinecap="round" strokeLinejoin="round"></path>
                             </svg>
                             12 min ago
                         </div>
@@ -148,8 +68,8 @@ function All() {
                             <img src="/images/avatar/5.jpg" alt="image"/>
                         </div>
                         <div className="item-inner">
-                            <h6 className="title">Lily MacDonald</h6>
-                            <p className="mb-0">Lorem ipsum dolor sit ameet..</p>
+                            <h6 className="title" style={{fontSize:"14px"}}>Lily MacDonald</h6>
+                            <p className="mb-0" style={{fontSize:"13px"}}>Lorem ipsum dolor sit ameet..</p>
                         </div>
                         <div className="ms-auto font-10 text-dark d-flex align-items-center">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
