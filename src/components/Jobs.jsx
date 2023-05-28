@@ -131,10 +131,10 @@ function All() {
                     </div>
                     <div className="item-inner pt-2">
                       <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
-                        <h6 className="item-title"><a href="#" style={{ color: "white" }}>Job Confirmed</a></h6>
+                        <h6 className="item-title"><a href="#" style={{ color: "white",fontSize:"13px" }}>Job Confirmed</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
-                        <h6 className="item-title" style={{ color: "white" }}>{todayJobs ? todayJobs.summary.completed : ""}</h6>
+                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.completed : ""}</h6>
                       </div>
                     </div>
                   </div>
@@ -146,10 +146,10 @@ function All() {
                     </div>
                     <div className="item-inner pt-2">
                       <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
-                        <h6 className="item-title"><a href="#" style={{ color: "white" }}>Job Pending</a></h6>
+                        <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"13px" }}>Job Pending</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
-                        <h6 className="item-title" style={{ color: "white" }}>{todayJobs ? todayJobs.summary.pending : ""}</h6>
+                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.pending : ""}</h6>
                       </div>
                     </div>
                   </div>
@@ -184,10 +184,10 @@ function All() {
                                 <div className="item-title-row">
                                   <div className="item-footer" style={{ marginBottom: "0" }}>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "11px"}}>Job No : {item.jobnum}</h6>
+                                      <h6 className="me-3" style={{ fontSize: "12px"}}>Job No : {item.jobnum}</h6>
                                     </div>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "11px"}}>Type : {item.jobtype}</h6>
+                                      <h6 className="me-3" style={{ fontSize: "12px"}}>Type : {item.jobtype}</h6>
                                     </div>
                                   </div>
                                 </div>
