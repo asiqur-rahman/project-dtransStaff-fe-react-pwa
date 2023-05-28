@@ -54,7 +54,7 @@ function HomePage() {
             <div className="container inner-wrapper">
               <div className="dz-media">
                 <img
-                  src="/images/logo.jpeg"
+                  src="/images/logo.webp"
                   alt="logo-image"
                   style={{ maxHeight: '70px', borderRadius: '8px' }}
                 />
