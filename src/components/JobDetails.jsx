@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import MenuBar from './Menubar'
-import Sidebar from './Sidebar'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import MenuBar from './Menubar';
+import Sidebar from './Sidebar';
 
 function All() {
   const preventDefault = (event) => {
@@ -27,86 +29,43 @@ function All() {
 
               {/* <!-- Dashboard Area --> */}
               <div className="dashboard-area pt-4">
-                {/* <!-- Categorie --> */}
-                <div className="swiper-btn-center-lr" style={{ marginBottom: "10px" }}>
-                  <div className="swiper-container mt-4 categorie-swiper categorie-swiper-custom">
-                    <div className="swiper-wrapper">
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight:"10px" }}>
-                        <a href="product.html" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight:"10px" }}>
-                      <a href="product.html" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight:"10px" }}>
-                      <a href="product.html" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight:"10px" }}>
-                        <a href="product.html" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight:"10px" }}>
-                        <a href="product.html" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight:"10px" }}>
-                        <a href="product.html" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight:"10px" }}>
-                        <a href="product.html" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- Categorie End --> */}
 
                 {/* <!-- Item box Start --> */}
-                <div className="item-list style-2 recent-jobs-list" style={{ display: "flex" }}>
-                  <div className="item-content" style={{ width: "50%", height: "50px", marginRight: "3px", borderRadius: "10px", backgroundColor: "#ffd427" }}>
-                    <div className="item-media media media-50" style={{marginRight:"0"}}>
+                <div className="item-list style-2 recent-jobs-list" style={{ display: "flex", marginTop: "20px"}}>
+                  <div className="item-content" style={{ width: "33%", height: "50px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
+                    <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" fill="#000000"><path d="M13 14v6c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1zm-9 7h6c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1zM3 4v6c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1zm12.95-1.6L11.7 6.64c-.39.39-.39 1.02 0 1.41l4.25 4.25c.39.39 1.02.39 1.41 0l4.25-4.25c.39-.39.39-1.02 0-1.41L17.37 2.4c-.39-.39-1.03-.39-1.42 0z" /></svg>
+                        <FontAwesomeIcon icon={faCircleCheck} color='white' />
                       </a>
                     </div>
-                    <div className="item-inner pt-2">
-                      <div className="item-title-row" style={{marginBottom:"5px"}}>
-                        <h4 className="item-title"><a href="order-list.html">Job Confirmed</a></h4>
-                      </div>
-                      <div className="item-footer" style={{textAlign:"center"}}>
-                          <h4 className="me-3">5</h4>
+                    <div className="item-inner pt-3">
+                      <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
+                        <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"18px" }}>Job Confirmed</a></h6>
                       </div>
                     </div>
                   </div>
-                  <div className="item-content" style={{ width: "50%", height: "50px", marginLeft: "3px", borderRadius: "10px", backgroundColor: "#ffd427" }}>
-                    <div className="item-media media media-50" style={{marginRight:"0"}}>
+                  <div className="item-content" style={{ width: "33%", height: "50px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
+                    <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" fill="#000000"><path d="M13 14v6c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1zm-9 7h6c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1zM3 4v6c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1zm12.95-1.6L11.7 6.64c-.39.39-.39 1.02 0 1.41l4.25 4.25c.39.39 1.02.39 1.41 0l4.25-4.25c.39-.39.39-1.02 0-1.41L17.37 2.4c-.39-.39-1.03-.39-1.42 0z" /></svg>
+                        <FontAwesomeIcon icon={faCircle} color='white'/>
                       </a>
                     </div>
-                    <div className="item-inner pt-2">
-                      <div className="item-title-row" style={{marginBottom:"5px"}}>
-                        <h4 className="item-title"><a href="#">Job Pending</a></h4>
+                    <div className="item-inner pt-3">
+                      <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
+                          <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"18px" }}>Job Confirmed</a></h6>
                       </div>
-                      <div className="item-footer">
-                          <h4 className="me-3">2</h4>
+                    </div>
+                  </div>
+
+                  <div className="item-content" style={{ width: "33%", height: "50px", marginRight: "3px", borderRadius: "10px" , background: "linear-gradient(to right, #00BFFF, #007BFF)"}}>
+                    <div className="item-media media media-50" style={{ marginRight: "0" }}>
+                      <a href="#" onClick={preventDefault} className="menu-toggler">
+                        <FontAwesomeIcon icon={faCircle} color='white'/>
+                      </a>
+                    </div>
+                    <div className="item-inner pt-3">
+                      <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
+                          <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"18px" }}>Job Confirmed</a></h6>
                       </div>
                     </div>
                   </div>
