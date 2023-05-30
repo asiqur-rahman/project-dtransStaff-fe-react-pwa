@@ -140,17 +140,117 @@ function All() {
                               <div className="item-subtitle">From : asdasda</div>
                             </div>
                             <div className="d-flex align-items-center">
-                            <h6 className="me-3" style={{ fontSize: "12px" }}>Status : asdasd</h6>
+                              <h6 className="me-3" style={{ fontSize: "12px" }}>Status : asdasd</h6>
                             </div>
                           </div>
                         </div>
                       </div>
                     </li>
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight:"200px" }}>
-                      
+                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
+
                     </li>
                     <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>
-                      
+                      {/* <ul className="dz-timeline timeline-number" style={{ paddingLeft: "50px" }}>
+                        <li className="timeline-item">
+                          <div className="line-content-box">
+                            <h5>Project Analysis</h5>
+                            <p>We at Dream Spa provide various services to the nature of the clients. we can talk.</p>
+                          </div>
+                          <div className="line-num">1</div>
+                        </li>
+                        <li className="timeline-item">
+                          <div className="line-content-box">
+                            <h5>Project Analysis</h5>
+                            <p>We at Dream Spa provide various services to the nature of the clients. we can talk.</p>
+                          </div>
+                          <div className="line-num">2</div>
+                        </li>
+                        <li className="timeline-item">
+                          <div className="line-content-box">
+                            <h5>Project Analysis</h5>
+                            <p>We at Dream Spa provide various services to the nature of the clients. we can talk.</p>
+                          </div>
+                          <div className="line-num">3</div>
+                        </li>
+                        <li className="timeline-item">
+                          <div className="line-content-box">
+                            <h5>Project Analysis</h5>
+                            <p>We at Dream Spa provide various services to the nature of the clients. we can talk.</p>
+                          </div>
+                          <div className="line-num">5</div>
+                        </li>
+                      </ul> */}
+
+
+                      <div className="col-12">
+                        <h5 className="title" style={{textAlign: 'center', marginTop:"15px"}}>Items</h5>
+                        <div className="order-status" style={{marginTop:"10px"}}>
+                          <ul className="dz-timeline style-2">
+                           
+                            <li className="timeline-item" style={{marginTop:'0'}}>
+                              <div className="d-flex align-items-center">
+                                <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                                  <img src="/images/avatar60x60.jpg" alt="logo" />
+                                </div>
+                                
+                                <div className="item-title-row" >
+                                  <div className="item-footer" style={{ marginBottom: "0" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
+                                    </div>
+                                  </div>
+                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
+                                </div>
+                              </div>
+                            </li>
+                            <li className="timeline-item" style={{marginTop:'0'}}>
+                              <div className="d-flex align-items-center">
+                                <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                                  <img src="/images/avatar60x60.jpg" alt="logo" />
+                                </div>
+                                <div className="item-title-row" >
+                                  <div className="item-footer" style={{ marginBottom: "0" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
+                                    </div>
+                                  </div>
+                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
+                                </div>
+                              </div>
+                            </li>
+                            <li className="timeline-item" style={{marginTop:'0'}}>
+                              <div className="d-flex align-items-center">
+                                <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                                  <img src="/images/avatar60x60.jpg" alt="logo" />
+                                </div>
+                                <div className="item-title-row" >
+                                  <div className="item-footer" style={{ marginBottom: "0" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
+                                    </div>
+                                  </div>
+                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
+                                </div>
+                              </div>
+                            </li>
+                            <li className="timeline-item" style={{marginTop:'0'}}>
+                              <div className="d-flex align-items-center">
+                                <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                                  <img src="/images/avatar60x60.jpg" alt="logo" />
+                                </div>
+                                <div className="item-title-row" >
+                                  <div className="item-footer" style={{ marginBottom: "0" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
+                                    </div>
+                                  </div>
+                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                 </div>
