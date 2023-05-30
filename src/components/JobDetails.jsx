@@ -184,60 +184,19 @@ function All() {
 
                       <div className="col-12">
                         <h5 className="title" style={{textAlign: 'center', marginTop:"15px"}}>Items</h5>
-                        <div className="order-status" style={{marginTop:"10px"}}>
+                        <div className="order-status" style={{marginTop:"0"}}>
                           <ul className="dz-timeline style-2">
                            
                             <li className="timeline-item" style={{marginTop:'0'}}>
                               <div className="d-flex align-items-center">
-                                <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                                <div className="item-title-row" style={{margin:"0 5% 0 3%"}}>
+                                  <input type="checkbox"/>
+                                </div>
+                                
+                                <div className="item-media media media-40 dz-icon" style={{ margin:"0 15px 0 0" }}>
                                   <img src="/images/avatar60x60.jpg" alt="logo" />
                                 </div>
                                 
-                                <div className="item-title-row" >
-                                  <div className="item-footer" style={{ marginBottom: "0" }}>
-                                    <div className="d-flex align-items-center">
-                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
-                                    </div>
-                                  </div>
-                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
-                                </div>
-                              </div>
-                            </li>
-                            <li className="timeline-item" style={{marginTop:'0'}}>
-                              <div className="d-flex align-items-center">
-                                <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                                  <img src="/images/avatar60x60.jpg" alt="logo" />
-                                </div>
-                                <div className="item-title-row" >
-                                  <div className="item-footer" style={{ marginBottom: "0" }}>
-                                    <div className="d-flex align-items-center">
-                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
-                                    </div>
-                                  </div>
-                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
-                                </div>
-                              </div>
-                            </li>
-                            <li className="timeline-item" style={{marginTop:'0'}}>
-                              <div className="d-flex align-items-center">
-                                <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                                  <img src="/images/avatar60x60.jpg" alt="logo" />
-                                </div>
-                                <div className="item-title-row" >
-                                  <div className="item-footer" style={{ marginBottom: "0" }}>
-                                    <div className="d-flex align-items-center">
-                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
-                                    </div>
-                                  </div>
-                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
-                                </div>
-                              </div>
-                            </li>
-                            <li className="timeline-item" style={{marginTop:'0'}}>
-                              <div className="d-flex align-items-center">
-                                <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                                  <img src="/images/avatar60x60.jpg" alt="logo" />
-                                </div>
                                 <div className="item-title-row" >
                                   <div className="item-footer" style={{ marginBottom: "0" }}>
                                     <div className="d-flex align-items-center">
