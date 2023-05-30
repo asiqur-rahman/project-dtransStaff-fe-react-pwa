@@ -1,41 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { GoogleMap, DirectionsRenderer } from 'react-google-maps';
+import SignatureCanvas from 'react-signature-canvas';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
 import './JobDetails.css';
 
-const MapRoute = ({ origin, destination }) => {
-  const mapRef = useRef(null);
+const SignaturePad = () => {
+  const signatureRef = useRef(null);
 
-  useEffect(() => {
-    const directionsService = new window.google.maps.DirectionsService();
+  const handleClear = () => {
+    signatureRef.current.clear();
+  };
 
-    const request = {
-      origin,
-      destination,
-      travelMode: window.google.maps.TravelMode.DRIVING
-    };
+  const handleStartEvent = (event) => {
+    // Get the touch position relative to the canvas
+    const { clientX, clientY } = event.touches[0];
+    const canvasRect = signatureRef.current.canvas.getBoundingClientRect();
+    const startX = clientX - canvasRect.left;
+    const startY = clientY - canvasRect.top;
 
-    directionsService.route(request, (result, status) => {
-      if (status === window.google.maps.DirectionsStatus.OK) {
-        const directionsRenderer = new window.google.maps.DirectionsRenderer();
-        directionsRenderer.setDirections(result);
-        directionsRenderer.setMap(mapRef.current);
-      }
-    });
-  }, [origin, destination]);
+    // Set the starting position of the drawing
+    signatureRef.current.startPoint(startX, startY);
+  };
+
+  const handleMoveEvent = (event) => {
+    // Get the touch position relative to the canvas
+    const { clientX, clientY } = event.touches[0];
+    const canvasRect = signatureRef.current.canvas.getBoundingClientRect();
+    const moveX = clientX - canvasRect.left;
+    const moveY = clientY - canvasRect.top;
+
+    // Draw the signature based on the touch movement
+    signatureRef.current.signaturePad.strokeMoveTo(moveX, moveY);
+    signatureRef.current.signaturePad.stroke();
+  };
+
+  const handleSave = () => {
+    const signatureDataURL = signatureRef.current.toDataURL();
+    // Use the signatureDataURL as needed (e.g., send it to the server, store it in state, etc.)
+    console.log(signatureDataURL);
+  };
 
   return (
-    <GoogleMap
-      ref={mapRef}
-      defaultZoom={10}
-      defaultCenter={{ lat: 0, lng: 0 }}
-      options={{
-        disableDefaultUI: true
-      }}
-    />
+    <div style={{textAlign:"center", margin:"5px 0"}}>
+      <SignatureCanvas ref={signatureRef} canvasProps={{style:{ width: "100%",height: '300px', backgroundColor:"white" },
+      className: 'signature-canvas',
+      onTouchStart: handleStartEvent,
+      onTouchMove: handleMoveEvent,}} />
+      <button onClick={handleClear} style={{marginRight:"5px"}}>Clear</button>
+      <button onClick={handleSave}>Save</button>
+    </div>
   );
 };
 
@@ -147,56 +162,22 @@ function All() {
                       </div>
                     </li>
                     <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
-
+                      
                     </li>
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>
-                      {/* <ul className="dz-timeline timeline-number" style={{ paddingLeft: "50px" }}>
-                        <li className="timeline-item">
-                          <div className="line-content-box">
-                            <h5>Project Analysis</h5>
-                            <p>We at Dream Spa provide various services to the nature of the clients. we can talk.</p>
-                          </div>
-                          <div className="line-num">1</div>
-                        </li>
-                        <li className="timeline-item">
-                          <div className="line-content-box">
-                            <h5>Project Analysis</h5>
-                            <p>We at Dream Spa provide various services to the nature of the clients. we can talk.</p>
-                          </div>
-                          <div className="line-num">2</div>
-                        </li>
-                        <li className="timeline-item">
-                          <div className="line-content-box">
-                            <h5>Project Analysis</h5>
-                            <p>We at Dream Spa provide various services to the nature of the clients. we can talk.</p>
-                          </div>
-                          <div className="line-num">3</div>
-                        </li>
-                        <li className="timeline-item">
-                          <div className="line-content-box">
-                            <h5>Project Analysis</h5>
-                            <p>We at Dream Spa provide various services to the nature of the clients. we can talk.</p>
-                          </div>
-                          <div className="line-num">5</div>
-                        </li>
-                      </ul> */}
-
-
-                      <div className="col-12">
-                        <h5 className="title" style={{textAlign: 'center', marginTop:"15px"}}>Items</h5>
-                        <div className="order-status" style={{marginTop:"0"}}>
+                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
+                        <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
-                           
-                            <li className="timeline-item" style={{marginTop:'0'}}>
+
+                            <li className="timeline-item" style={{ margin: '0', padding:"8px 0" }}>
                               <div className="d-flex align-items-center">
-                                <div className="item-title-row" style={{margin:"0 5% 0 3%"}}>
-                                  <input type="checkbox"/>
+                                <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                  <input type="checkbox" />
                                 </div>
-                                
-                                <div className="item-media media media-40 dz-icon" style={{ margin:"0 15px 0 0" }}>
+
+                                <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
                                   <img src="/images/avatar60x60.jpg" alt="logo" />
                                 </div>
-                                
+
                                 <div className="item-title-row" >
                                   <div className="item-footer" style={{ marginBottom: "0" }}>
                                     <div className="d-flex align-items-center">
@@ -205,11 +186,43 @@ function All() {
                                   </div>
                                   <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
                                 </div>
+
+                                <div className="item-title-row" style={{width:"100%", textAlign: "end", paddingRight: "5%"}}>
+                                  <div className="item-subtitle" style={{ fontSize: "14px" }}>1</div>
+                                </div>
+                              </div>
+                            </li>
+                            
+                            <li className="timeline-item" style={{ margin: '0', padding:"8px 0" }}>
+                              <div className="d-flex align-items-center">
+                                <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                  <input type="checkbox" />
+                                </div>
+
+                                <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                  <img src="/images/avatar60x60.jpg" alt="logo" />
+                                </div>
+
+                                <div className="item-title-row" >
+                                  <div className="item-footer" style={{ marginBottom: "0" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
+                                    </div>
+                                  </div>
+                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
+                                </div>
+
+                                <div className="item-title-row" style={{width:"100%", textAlign: "end", paddingRight: "5%"}}>
+                                  <div className="item-subtitle" style={{ fontSize: "14px" }}>1</div>
+                                </div>
                               </div>
                             </li>
                           </ul>
-                        </div>
                       </div>
+                    </li>
+                    
+                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", minHeight: "200px" }}>
+                      <SignaturePad/>
                     </li>
                   </ul>
                 </div>
