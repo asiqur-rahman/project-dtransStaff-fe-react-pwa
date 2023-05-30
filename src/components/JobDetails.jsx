@@ -1,8 +1,45 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
+import './JobDetails.css';
+
+function Stepper() {
+  const [activeStep, setActiveStep] = useState(1);
+
+  const handleStepComplete = (step) => {
+    setActiveStep(step);
+  };
+
+  return (
+    <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px"}}>
+    <div className="stepper">
+      <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`}>
+        <div className="circle">
+        <FontAwesomeIcon icon={activeStep >= 0?faCircleCheck:faCircle} size='2x' color='var(--primary)' className='icon'/>
+        </div>
+        <div className="step-text">Step 1</div>
+      </div>
+      <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
+      <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`}>
+        <div className="circle">
+        <FontAwesomeIcon icon={activeStep >= 1?faCircleCheck:faCircle} size='2x' color='var(--primary)' className='icon'/>
+        </div>
+        <div className="step-text">Step 2</div>
+      </div>
+      <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
+      <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`}>
+        <div className="circle">
+        <FontAwesomeIcon icon={activeStep >= 2?faCircleCheck:faCircle} size='2x' color='var(--primary)' className='icon'/>
+        </div>
+        <div className="step-text">Step 3</div>
+      </div>
+    </div>
+    </div>
+  );
+}
+
 
 function All() {
   const preventDefault = (event) => {
@@ -31,51 +68,8 @@ function All() {
               <div className="dashboard-area pt-4">
 
                 {/* <!-- Item box Start --> */}
-                <div className="item-list style-2 recent-jobs-list" style={{ display: "flex", marginTop: "20px"}}>
-                  <div className="item-content" style={{ width: "33%", height: "70px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
-                    <div className="item-media media media-50" style={{ marginRight: "0", marginTop:"10px" }}>
-                      <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <FontAwesomeIcon icon={faCircleCheck} color='white' />
-                      </a>
-                    </div>
-                    <div className="item-inner pt-1">
-                      <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
-                        <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"12px" }}>Job Confirmed</a></h6>
-                      </div>
-                      <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
-                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>Date</h6>
-                      </div>
-                      <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
-                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>Date</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="item-content" style={{ width: "33%", height: "50px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
-                    <div className="item-media media media-50" style={{ marginRight: "0" }}>
-                      <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <FontAwesomeIcon icon={faCircle} color='white'/>
-                      </a>
-                    </div>
-                    <div className="item-inner pt-3">
-                      <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
-                          <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"18px" }}>Job Confirmed</a></h6>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="item-content" style={{ width: "33%", height: "50px", marginRight: "3px", borderRadius: "10px" , background: "linear-gradient(to right, #00BFFF, #007BFF)"}}>
-                    <div className="item-media media media-50" style={{ marginRight: "0" }}>
-                      <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <FontAwesomeIcon icon={faCircle} color='white'/>
-                      </a>
-                    </div>
-                    <div className="item-inner pt-3">
-                      <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
-                          <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"18px" }}>Job Confirmed</a></h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
+                <Stepper/>
                 {/* <!-- Item box Start --> */}
 
                 <div className="item-list recent-jobs-list">
