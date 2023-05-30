@@ -146,6 +146,9 @@ function All() {
                         </div>
                       </div>
                     </li>
+                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight:"200px" }}>
+                      
+                    </li>
                     <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>
                       
                     </li>
