@@ -32,15 +32,21 @@ function All() {
 
                 {/* <!-- Item box Start --> */}
                 <div className="item-list style-2 recent-jobs-list" style={{ display: "flex", marginTop: "20px"}}>
-                  <div className="item-content" style={{ width: "33%", height: "50px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
-                    <div className="item-media media media-50" style={{ marginRight: "0" }}>
+                  <div className="item-content" style={{ width: "33%", height: "70px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
+                    <div className="item-media media media-50" style={{ marginRight: "0", marginTop:"10px" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
                         <FontAwesomeIcon icon={faCircleCheck} color='white' />
                       </a>
                     </div>
-                    <div className="item-inner pt-3">
+                    <div className="item-inner pt-1">
                       <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
-                        <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"18px" }}>Job Confirmed</a></h6>
+                        <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"12px" }}>Job Confirmed</a></h6>
+                      </div>
+                      <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
+                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>Date</h6>
+                      </div>
+                      <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
+                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>Date</h6>
                       </div>
                     </div>
                   </div>
