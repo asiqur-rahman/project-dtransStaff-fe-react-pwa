@@ -42,9 +42,6 @@ const MapRoute = ({ origin, destination }) => {
 function Stepper() {
   const [activeStep, setActiveStep] = useState(1);
 
-  const handleStepComplete = (step) => {
-    setActiveStep(step);
-  };
 
   return (
     <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px" }}>
