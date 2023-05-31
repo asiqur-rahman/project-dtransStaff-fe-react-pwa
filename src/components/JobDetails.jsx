@@ -252,7 +252,7 @@ function All(props) {
                           <textarea rows={3} className="form-control" style={{width:"100%"}}/>
                         </div>
                     </li>
-                    <li style={{ borderRadius: "10px", minHeight: "200px" }}>
+                    <li style={{ borderRadius: "10px", minHeight: "200px" , marginRight:"0", marginLeft:"0"}}>
                       <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
                       <SignaturePad/>
                     </li>
