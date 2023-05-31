@@ -4,6 +4,7 @@ import { faCircle, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import SignatureCanvas from 'react-signature-canvas';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
+import { useLocation } from 'react-router-dom';
 import './JobDetails.css';
 
 const SignaturePad = () => {
@@ -93,11 +94,13 @@ function Stepper() {
 };
 
 function All(props) {
-
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
   const [jobDetails, setJobDetails]= useState(false);
 
   useEffect(() => {
-    if(props && props.jobNum){
+    const jobNum = queryParams.get('jobnum');
+    if(jobNum){
       window.SpinnerShow()
       let user = common.getUser();
         if(user){
@@ -114,7 +117,7 @@ function All(props) {
         }
       window.SpinnerHide()
     }
-  }, [props]);
+  }, [queryParams]);
 
   return (
     <>
