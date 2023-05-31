@@ -93,15 +93,29 @@ function Stepper() {
 }
 
 
-function All() {
-  const preventDefault = (event) => {
-    // event.preventDefault(); // Prevents the default behavior of the anchor tag
-    // Additional functionality can be added here if needed
-  };
+function All(props) {
+
+  const [jobDetails, setJobDetails]= useState(false);
 
   useEffect(() => {
-
-  }, []);
+    if(props && props.jobNum){
+      window.SpinnerShow()
+      let user = common.getUser();
+        if(user){
+          axios.get(`job/details/${jobNum}`)
+          .then((result)=>{
+            if(result && result.data.success){
+              setJobDetails(result.data.data)
+            }
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+        
+        }
+      window.SpinnerHide()
+    }
+  }, [props]);
 
   return (
     <>

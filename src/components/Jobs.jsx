@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar, faFaceGrin } from '@fortawesome/free-solid-svg-icons';
 import axios from '../utils/axios.utils'
+import { useNavigate, Link } from 'react-router-dom';
 import * as common from '../utils/common.utils'
 import MenuBar from './Menubar'
 import Sidebar from './Sidebar'
@@ -11,6 +12,7 @@ function All() {
     // event.preventDefault(); // Prevents the default behavior of the anchor tag
     // Additional functionality can be added here if needed
   };
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(false);
   const [dates, setDates] = useState(false);
   const [todayJobs, setTodayJobs] = useState(false);
@@ -54,6 +56,9 @@ function All() {
     setDates(datesArray);
   }, [])
 
+  const seeJobDetails = (jobnum)  =>{
+    navigate(`/job-details/${jobnum}`);
+  }
   return (
     <>
       <div className="page-wraper">
@@ -167,7 +172,7 @@ function All() {
                     {
                       todayJobs && todayJobs.jobs.map((item, i) => {
                         return (
-                          <li  key={i} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>
+                          <li  key={i} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }} onClick={()=>seeJobDetails(item.jobnum)}>
                             <div className="item-content">
                               <div className="item-inner" style={{ margin: "10px 0" }}>
 
