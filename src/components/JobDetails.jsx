@@ -51,8 +51,8 @@ const SignaturePad = () => {
       className: 'signature-canvas',
       onTouchStart: handleStartEvent,
       onTouchMove: handleMoveEvent,}} />
-      <button onClick={handleClear} style={{marginRight:"5px"}}>Clear</button>
-      <button onClick={handleSave}>Save</button>
+      <button onClick={handleClear} style={{marginRight:"5px"}} class="btn btn-sm btn-warning">Clear</button>
+      <button onClick={handleSave} class="btn btn-sm btn-success">Save</button>
     </div>
   );
 };
@@ -246,7 +246,14 @@ function All(props) {
                       </div>
                     </li>
                     
+                    <li style={{ borderRadius: "10px",  marginRight:"0", marginLeft:"0"}}>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
+                        <div className="pt-2">
+                          <textarea rows={3} className="form-control" style={{width:"100%"}}/>
+                        </div>
+                    </li>
                     <li style={{ borderRadius: "10px", minHeight: "200px" }}>
+                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
                       <SignaturePad/>
                     </li>
                     <div class="col-md-12" style={{textAlign:"center"}}>
