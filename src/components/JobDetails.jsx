@@ -61,11 +61,13 @@ function Stepper() {
   return (
     <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px" }}>
       <div className="stepper">
-        <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`}>
+        <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{textAlign:"center"}}>
           <div className="circle">
             <FontAwesomeIcon icon={activeStep >= 0 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Collected</div>
+          <div style={{fontSize:"8px"}}>2023-05-12</div>
+          <div style={{fontSize:"8px"}}>10:10 PM</div>
         </div>
         <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`}>
@@ -73,6 +75,8 @@ function Stepper() {
             <FontAwesomeIcon icon={activeStep >= 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Delivered</div>
+          <div style={{fontSize:"8px"}}>2023-05-12</div>
+          <div style={{fontSize:"8px"}}>10:10 PM</div>
         </div>
         <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`}>
@@ -80,6 +84,8 @@ function Stepper() {
             <FontAwesomeIcon icon={activeStep >= 2 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Completed</div>
+          <div style={{fontSize:"8px"}}>2023-05-12</div>
+          <div style={{fontSize:"8px"}}>10:10 PM</div>
         </div>
       </div>
     </div>
@@ -118,7 +124,7 @@ function All() {
                 <Stepper />
                 {/* <!-- Item box Start --> */}
 
-                <div className="item-list recent-jobs-list">
+                <div className="item-list recent-jobs-list pt-3">
                   {/* <h4 className="title my-4">Job Details</h4> */}
 
                   <ul>
@@ -164,7 +170,8 @@ function All() {
                     <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
                       
                     </li>
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
+                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>                        
+                    <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
                         <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
 
@@ -221,7 +228,7 @@ function All() {
                       </div>
                     </li>
                     
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", minHeight: "200px" }}>
+                    <li style={{ borderRadius: "10px", minHeight: "200px" }}>
                       <SignaturePad/>
                     </li>
                   </ul>
