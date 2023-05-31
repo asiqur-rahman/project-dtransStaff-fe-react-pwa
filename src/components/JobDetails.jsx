@@ -90,8 +90,7 @@ function Stepper() {
       </div>
     </div>
   );
-}
-
+};
 
 function All(props) {
 

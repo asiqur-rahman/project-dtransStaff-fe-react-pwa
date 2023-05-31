@@ -57,7 +57,7 @@ function All() {
   }, [])
 
   const seeJobDetails = (jobnum)  =>{
-    navigate(`/job-details/${jobnum}`);
+    navigate(`/job-details?jobnum=${jobnum}`);
   }
   return (
     <>
