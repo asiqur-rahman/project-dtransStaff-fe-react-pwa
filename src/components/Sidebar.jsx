@@ -1,7 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose, faSquareRss } from '@fortawesome/free-solid-svg-icons';
-import axios from '../utils/axios.utils'
 import * as common from '../utils/common.utils'
 import { useNavigate, Link } from 'react-router-dom';
 

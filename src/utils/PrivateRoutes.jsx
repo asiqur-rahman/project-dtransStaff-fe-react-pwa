@@ -4,7 +4,7 @@ import * as common from './common.utils'
 
 const PrivateRoutes = () => {
     const [checked, setChecked] = useState(false);
-    const [isLogedIn, setIsLogedIn]= useState(true);
+    const [isLogedIn, setIsLogedIn]= useState(false);
     useEffect(()=>{
         if(common.isUserLogedIn()){
             setIsLogedIn(true);

@@ -5,6 +5,8 @@ import SignatureCanvas from 'react-signature-canvas';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
 import { useLocation } from 'react-router-dom';
+import * as common from '../utils/common.utils'
+import axios from '../utils/axios.utils'
 import './JobDetails.css';
 
 const SignaturePad = () => {
@@ -247,6 +249,12 @@ function All(props) {
                     <li style={{ borderRadius: "10px", minHeight: "200px" }}>
                       <SignaturePad/>
                     </li>
+                    <div class="col-md-12" style={{textAlign:"center"}}>
+                        <button type="button" class="btn btn-danger w-100" style={{maxWidth:"40%", borderRadius:"50px"}}>Collected</button>
+                    </div>
+                    <div class="col-md-12 pt-3" style={{textAlign:"center"}}>
+                        <button type="button" class="btn btn-primary w-100" style={{borderRadius:"50px"}}>Request Transfer</button>
+                    </div>
                   </ul>
                 </div>
               </div>
