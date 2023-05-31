@@ -245,7 +245,6 @@ function All(props) {
                           </ul>
                       </div>
                     </li>
-                    
                     <li style={{ borderRadius: "10px"}}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
                         <div className="pt-2">
