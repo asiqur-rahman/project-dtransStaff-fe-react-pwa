@@ -51,8 +51,8 @@ const SignaturePad = () => {
       className: 'signature-canvas',
       onTouchStart: handleStartEvent,
       onTouchMove: handleMoveEvent,}} />
-      <button onClick={handleClear} style={{marginRight:"5px"}} class="btn btn-sm btn-warning">Clear</button>
-      <button onClick={handleSave} class="btn btn-sm btn-success">Save</button>
+      <button onClick={handleClear} style={{marginRight:"5px"}} className="btn btn-sm btn-warning">Clear</button>
+      <button onClick={handleSave} className="btn btn-sm btn-success">Save</button>
     </div>
   );
 };
@@ -102,7 +102,7 @@ function All(props) {
 
   useEffect(() => {
     const jobNum = queryParams.get('jobnum');
-    if(jobNum){
+    if(jobNum && !jobDetails){
       window.SpinnerShow()
       let user = common.getUser();
         if(user){
@@ -255,11 +255,11 @@ function All(props) {
                       <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
                       <SignaturePad/>
                     </li>
-                    <div class="col-md-12" style={{textAlign:"center"}}>
-                        <button type="button" class="btn btn-danger w-100" style={{maxWidth:"40%", borderRadius:"50px"}}>Collected</button>
+                    <div className="col-md-12" style={{textAlign:"center"}}>
+                        <button type="button" className="btn btn-danger w-100" style={{maxWidth:"40%", borderRadius:"50px"}}>Collected</button>
                     </div>
-                    <div class="col-md-12 pt-3" style={{textAlign:"center"}}>
-                        <button type="button" class="btn btn-primary w-100" style={{borderRadius:"50px"}}>Request Transfer</button>
+                    <div className="col-md-12 pt-3" style={{textAlign:"center"}}>
+                        <button type="button" className="btn btn-primary w-100" style={{borderRadius:"50px"}}>Request Transfer</button>
                     </div>
                   </ul>
                 </div>
