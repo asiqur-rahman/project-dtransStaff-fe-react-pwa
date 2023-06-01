@@ -141,7 +141,7 @@ function All(props) {
 
                 <Stepper />
                 {/* <!-- Item box Start --> */}
-
+                {jobDetails && 
                 <div className="item-list recent-jobs-list pt-3">
                   {/* <h4 className="title my-4">Job Details</h4> */}
 
@@ -157,7 +157,7 @@ function All(props) {
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>
                                 <div className="d-flex align-items-center">
-                                  <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
+                                  <h5 className="me-3" style={{ marginBottom: "0" }}>{jobDetails.empname}</h5>
                                 </div>
                               </div>
                               <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
@@ -167,19 +167,19 @@ function All(props) {
                           <div className="item-title-row">
                             <div className="item-footer" style={{ marginBottom: "0" }}>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Job No : asdsad</h6>
+                                <h6 className="me-3" style={{ fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
                               </div>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Type : asdasd</h6>
+                                <h6 className="me-3" style={{ fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
                               </div>
                             </div>
                           </div>
                           <div className="item-footer">
                             <div className="d-flex align-items-center">
-                              <div className="item-subtitle">From : asdasda</div>
+                              <div className="item-subtitle">From : </div>
                             </div>
                             <div className="d-flex align-items-center">
-                              <h6 className="me-3" style={{ fontSize: "12px" }}>Status : asdasd</h6>
+                              <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
                             </div>
                           </div>
                         </div>
@@ -192,8 +192,9 @@ function All(props) {
                     <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
                         <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
-
-                            <li className="timeline-item" style={{ margin: '0', padding:"8px 0" }}>
+                            {jobDetails.items.map((item,i)=>{
+                              return (
+                                <li key={ i} className="timeline-item" style={{ margin: '0', padding:"8px 0" }}>
                               <div className="d-flex align-items-center">
                                 <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
                                   <input type="checkbox" />
@@ -203,20 +204,23 @@ function All(props) {
                                   <img src="/images/avatar60x60.jpg" alt="logo" />
                                 </div>
 
-                                <div className="item-title-row" >
-                                  <div className="item-footer" style={{ marginBottom: "0" }}>
+                                <div className="item-title-row" style={{width:"100%"}}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width:"inherit" }}>
                                     <div className="d-flex align-items-center">
-                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
+                                      <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
                                     </div>
                                   </div>
-                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
+                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
                                 </div>
 
-                                <div className="item-title-row" style={{width:"100%", textAlign: "end", paddingRight: "5%"}}>
-                                  <div className="item-subtitle" style={{ fontSize: "14px" }}>1</div>
+                                 <div className="item-title-row" style={{width:"100%", textAlign: "end", paddingRight: "5%"}}>
+                                  <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
                                 </div>
                               </div>
                             </li>
+                              )
+                            })}
+                            
                             
                             <li className="timeline-item" style={{ margin: '0', padding:"8px 0" }}>
                               <div className="d-flex align-items-center">
@@ -263,6 +267,7 @@ function All(props) {
                     </div>
                   </ul>
                 </div>
+                }
               </div>
             </div>
           </div>
