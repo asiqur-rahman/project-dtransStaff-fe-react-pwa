@@ -41,7 +41,7 @@ function HomePage() {
         <div className="account-box">
           <div className="container">
             <div className="account-area">
-              <div className="mb-3 input-group input-mini">
+              <div className="mb-3 input-group input-radius">
                 <span className="input-group-text"><i className="fa-solid fa-user" style={{fontSize:"16px"}}></i></span>
                 <input type="text" value={username} onChange={(e)=>setUsername(e.target.value)} className="form-control" placeholder="Enter Your username" />
               </div>

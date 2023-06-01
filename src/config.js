@@ -6,8 +6,8 @@ const Config = {
       devOrgLink: "http://www.bim.gov.bd/"
     },
     applicationSettings:{
-      developmentBaseURL : "http://bizpoint.asuscomm.com:3086/",
-      productionBaseURL : "http://bizpoint.asuscomm.com:3086/",
+      developmentBaseURL : "http://devb2b.bizpoint-intl.com:3086/",
+      productionBaseURL : "http://devb2b.bizpoint-intl.com:3086/",
       SESSION_NAME : "DTrans-Staff",
     }
 }
