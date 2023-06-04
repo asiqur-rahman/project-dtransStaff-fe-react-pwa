@@ -46,12 +46,14 @@ const SignaturePad = () => {
   };
 
   return (
-    <div style={{textAlign:"center", margin:"5px 0"}}>
-      <SignatureCanvas ref={signatureRef} canvasProps={{style:{ width: "100%",height: '300px', backgroundColor:"white" },
-      className: 'signature-canvas',
-      onTouchStart: handleStartEvent,
-      onTouchMove: handleMoveEvent,}} />
-      <button onClick={handleClear} style={{marginRight:"5px"}} className="btn btn-sm btn-warning">Clear</button>
+    <div style={{ textAlign: "center", margin: "5px 0" }}>
+      <SignatureCanvas ref={signatureRef} canvasProps={{
+        style: { width: "100%", height: '300px', backgroundColor: "white" },
+        className: 'signature-canvas',
+        onTouchStart: handleStartEvent,
+        onTouchMove: handleMoveEvent,
+      }} />
+      <button onClick={handleClear} style={{ marginRight: "5px" }} className="btn btn-sm btn-warning">Clear</button>
       <button onClick={handleSave} className="btn btn-sm btn-success">Save</button>
     </div>
   );
@@ -64,13 +66,13 @@ function Stepper() {
   return (
     <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px" }}>
       <div className="stepper">
-        <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{textAlign:"center"}}>
+        <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{ textAlign: "center" }}>
           <div className="circle">
             <FontAwesomeIcon icon={activeStep >= 0 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Collected</div>
-          <div style={{fontSize:"8px"}}>2023-05-12</div>
-          <div style={{fontSize:"8px"}}>10:10 PM</div>
+          <div style={{ fontSize: "8px" }}>2023-05-12</div>
+          <div style={{ fontSize: "8px" }}>10:10 PM</div>
         </div>
         <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`}>
@@ -78,8 +80,8 @@ function Stepper() {
             <FontAwesomeIcon icon={activeStep >= 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Delivered</div>
-          <div style={{fontSize:"8px"}}>2023-05-12</div>
-          <div style={{fontSize:"8px"}}>10:10 PM</div>
+          <div style={{ fontSize: "8px" }}>2023-05-12</div>
+          <div style={{ fontSize: "8px" }}>10:10 PM</div>
         </div>
         <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`}>
@@ -87,8 +89,8 @@ function Stepper() {
             <FontAwesomeIcon icon={activeStep >= 2 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Completed</div>
-          <div style={{fontSize:"8px"}}>2023-05-12</div>
-          <div style={{fontSize:"8px"}}>10:10 PM</div>
+          <div style={{ fontSize: "8px" }}>2023-05-12</div>
+          <div style={{ fontSize: "8px" }}>10:10 PM</div>
         </div>
       </div>
     </div>
@@ -98,25 +100,25 @@ function Stepper() {
 function All(props) {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const [jobDetails, setJobDetails]= useState(false);
+  const [jobDetails, setJobDetails] = useState(false);
 
   useEffect(() => {
     const jobNum = queryParams.get('jobnum');
-    if(jobNum && !jobDetails){
+    if (jobNum && !jobDetails) {
       window.SpinnerShow()
       let user = common.getUser();
-        if(user){
-          axios.get(`job/details/${jobNum}`)
-          .then((result)=>{
-            if(result && result.data.success){
+      if (user) {
+        axios.get(`job/details/${jobNum}`)
+          .then((result) => {
+            if (result && result.data.success) {
               setJobDetails(result.data.data)
             }
           })
-          .catch((error)=>{
+          .catch((error) => {
             console.log(error)
           })
-        
-        }
+
+      }
       window.SpinnerHide()
     }
   }, [queryParams]);
@@ -141,132 +143,136 @@ function All(props) {
 
                 <Stepper />
                 {/* <!-- Item box Start --> */}
-                {jobDetails && 
-                <div className="item-list recent-jobs-list pt-3">
-                  {/* <h4 className="title my-4">Job Details</h4> */}
+                {jobDetails &&
+                  <div className="item-list recent-jobs-list pt-3">
+                    {/* <h4 className="title my-4">Job Details</h4> */}
 
-                  <ul>
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>
-                      <div className="item-content">
-                        <div className="item-inner" style={{ margin: "10px 0" }}>
+                    <ul>
+                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                        <div className="item-content">
+                          <div className="item-inner" style={{ margin: "10px 0" }}>
 
-                          <div className="d-flex align-items-center">
-                            <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                              <img src="/images/avatar60x60.jpg" alt="logo" />
+                            <div className="d-flex align-items-center">
+                              <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                                <img src="/images/avatar60x60.jpg" alt="logo" />
+                              </div>
+                              <div className="item-title-row" >
+                                <div className="item-footer" style={{ marginBottom: "0" }}>
+                                  <div className="d-flex align-items-center">
+                                    <h5 className="me-3" style={{ marginBottom: "0" }}>{jobDetails.empname}</h5>
+                                  </div>
+                                </div>
+                                <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
+                              </div>
                             </div>
-                            <div className="item-title-row" >
+
+                            <div className="item-title-row">
                               <div className="item-footer" style={{ marginBottom: "0" }}>
                                 <div className="d-flex align-items-center">
-                                  <h5 className="me-3" style={{ marginBottom: "0" }}>{jobDetails.empname}</h5>
+                                  <h6 className="me-3" style={{ fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
+                                </div>
+                                <div className="d-flex align-items-center">
+                                  <h6 className="me-3" style={{ fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
                                 </div>
                               </div>
-                              <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
                             </div>
-                          </div>
-
-                          <div className="item-title-row">
-                            <div className="item-footer" style={{ marginBottom: "0" }}>
+                            <div className="item-footer">
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
+                                <div className="item-subtitle">From : </div>
                               </div>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
+                                <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
                               </div>
-                            </div>
-                          </div>
-                          <div className="item-footer">
-                            <div className="d-flex align-items-center">
-                              <div className="item-subtitle">From : </div>
-                            </div>
-                            <div className="d-flex align-items-center">
-                              <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
-                      
-                    </li>
-                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }}>                        
-                    <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
+                      </li>
+
+                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
+
+                      </li>
+
+                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
+                        <div className="item-content" style={{marginTop:"10px"}}>
+                          <div className="item-inner" style={{ margin: "10px 0" }}>
+
+                            <div className="item-title-row">
+                              <div className="item-footer" style={{ marginBottom: "0" }}>
+                                <div className="d-flex align-items-center">
+                                  <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {jobDetails.jobnum}</h6>
+                                </div>
+                                <div className="d-flex align-items-center">
+                                  <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {jobDetails.jobnum}</h6>
+                                </div>
+                                <div className="d-flex align-items-center">
+                                  <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {jobDetails.jobnum}</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="item-footer">
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {jobDetails.jobnum}</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
                         <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
-                            {jobDetails.items.map((item,i)=>{
+                            {jobDetails.items.map((item, i) => {
                               return (
-                                <li key={ i} className="timeline-item" style={{ margin: '0', padding:"8px 0" }}>
-                              <div className="d-flex align-items-center">
-                                <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
-                                  <input type="checkbox" />
-                                </div>
+                                <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                  <div className="d-flex align-items-center">
+                                    <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                      <input type="checkbox" />
+                                    </div>
 
-                                <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
-                                  <img src="/images/avatar60x60.jpg" alt="logo" />
-                                </div>
+                                    <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                      <img src="/images/avatar60x60.jpg" alt="logo" />
+                                    </div>
 
-                                <div className="item-title-row" style={{width:"100%"}}>
-                                  <div className="item-footer" style={{ marginBottom: "0", width:"inherit" }}>
-                                    <div className="d-flex align-items-center">
-                                      <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                    <div className="item-title-row" style={{ width: "100%" }}>
+                                      <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                        <div className="d-flex align-items-center">
+                                          <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                        </div>
+                                      </div>
+                                      <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                    </div>
+
+                                    <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                      <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
                                     </div>
                                   </div>
-                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
-                                </div>
-
-                                 <div className="item-title-row" style={{width:"100%", textAlign: "end", paddingRight: "5%"}}>
-                                  <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
-                                </div>
-                              </div>
-                            </li>
+                                </li>
                               )
                             })}
-                            
-                            
-                            <li className="timeline-item" style={{ margin: '0', padding:"8px 0" }}>
-                              <div className="d-flex align-items-center">
-                                <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
-                                  <input type="checkbox" />
-                                </div>
-
-                                <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
-                                  <img src="/images/avatar60x60.jpg" alt="logo" />
-                                </div>
-
-                                <div className="item-title-row" >
-                                  <div className="item-footer" style={{ marginBottom: "0" }}>
-                                    <div className="d-flex align-items-center">
-                                      <h5 className="me-3" style={{ marginBottom: "0" }}>asdsd</h5>
-                                    </div>
-                                  </div>
-                                  <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
-                                </div>
-
-                                <div className="item-title-row" style={{width:"100%", textAlign: "end", paddingRight: "5%"}}>
-                                  <div className="item-subtitle" style={{ fontSize: "14px" }}>1</div>
-                                </div>
-                              </div>
-                            </li>
                           </ul>
-                      </div>
-                    </li>
-                    <li style={{ borderRadius: "10px"}}>
+                        </div>
+                      </li>
+
+                      <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
                         <div className="pt-2">
-                          <textarea rows={3} className="form-control" style={{width:"100%"}}/>
+                          <textarea rows={3} className="form-control" style={{ width: "100%" }} />
                         </div>
-                    </li>
-                    <li style={{ borderRadius: "10px", minHeight: "200px" }}>
-                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
-                      <SignaturePad/>
-                    </li>
-                    <div className="col-md-12" style={{textAlign:"center"}}>
-                        <button type="button" className="btn btn-danger w-100" style={{maxWidth:"40%", borderRadius:"50px"}}>Collected</button>
-                    </div>
-                    <div className="col-md-12 pt-3" style={{textAlign:"center"}}>
-                        <button type="button" className="btn btn-primary w-100" style={{borderRadius:"50px"}}>Request Transfer</button>
-                    </div>
-                  </ul>
-                </div>
+                      </li>
+                      <li style={{ borderRadius: "10px", minHeight: "200px" }}>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
+                        <SignaturePad />
+                      </li>
+                      <div className="col-md-12" style={{ textAlign: "center" }}>
+                        <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
+                      </div>
+                      <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
+                        <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }}>Request Transfer</button>
+                      </div>
+                    </ul>
+                  </div>
                 }
               </div>
             </div>
