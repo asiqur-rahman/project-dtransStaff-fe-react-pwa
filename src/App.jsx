@@ -8,6 +8,7 @@ import ForgetPasswordPage  from './pages/ForgetPasswordPage'
 import OTPPage  from './pages/OTPPage'
 import ProfilePage  from './pages/ProfilePage'
 import NotificationPage  from './pages/NotificationPage'
+import LeavePage  from './pages/LeavePage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
@@ -31,6 +32,7 @@ function App() {
                 <Route element={<JobDetailsPage/>} path="/job-details"/>
                 <Route element={<ProfilePage/>} path="/profile"/>
                 <Route element={<NotificationPage/>} path="/notification"/>
+                <Route element={<LeavePage/>} path="/my-leave"/>
             </Route>
             <Route element={<LoginPage/>} path="/login"/>
             <Route element={<ForgetPasswordPage/>} path="/forget-password"/>

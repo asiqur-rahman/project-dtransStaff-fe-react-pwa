@@ -98,7 +98,7 @@ function All() {
             <span>Notifications</span>
             <span className="badge badge-circle badge-danger">1</span>
           </Link></li>
-          <li><Link className="nav-link" href="/">
+          <li><Link className="nav-link" to="/my-leave">
             <span className="dz-icon">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z" /></svg>
             </span>

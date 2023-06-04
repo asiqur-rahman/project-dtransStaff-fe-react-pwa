@@ -23350,3 +23350,12 @@ ul.list-check li:after {
   border: 2px dotted #fff;
   margin: -15px
 }
+
+.rdrCalendarWrapper.rdrDateRangeWrapper{
+  width: -webkit-fill-available;
+}
+
+/* .rdrWeekDays .rdrWeekDay {
+  color: white;
+  font-weight: bold;
+} */
