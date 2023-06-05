@@ -66,7 +66,6 @@ function All(props) {
                             // value={username}
                             // onChange={(e) => setUsername(e.target.value)}
                             placeholder="Search"
-                            style={{ borderTop: '0' }} // Remove top border using inline style
                           />
                         </div>
                         </div>

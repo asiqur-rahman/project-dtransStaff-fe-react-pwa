@@ -11,6 +11,12 @@ function HomePage() {
   const [password, setPassword] = useState('');
   const [showForgetPassword, setShowForgetPassword] = useState(false);
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   useEffect(()=>{
     // window.SpinnerShow()
     common.removeSession();
@@ -79,7 +85,6 @@ function HomePage() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Username"
-                    style={{ borderTop: '0' }} // Remove top border using inline style
                   />
                 </div>
                 <div className="mb-3 input-group input-radius">
@@ -87,16 +92,18 @@ function HomePage() {
                     <i className="fa fa-lock" style={{fontSize:"16px"}}></i>
                   </span>
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     className="form-control dz-password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
-                    style={{ borderTop: '0' }} // Remove top border using inline style
                   />
-                  <span className="input-group-text show-pass">
-                    <i className="fa fa-eye-slash"></i>
-                    <i className="fa fa-eye"></i>
+                  <span className="input-group-text show-pass" onClick={togglePasswordVisibility}>
+                    {showPassword ? (
+                      <i className="fa fa-eye-slash"></i>
+                    ) : (
+                      <i className="fa fa-eye"></i>
+                    )}
                   </span>
                 </div>
                 <div className="input-group">
