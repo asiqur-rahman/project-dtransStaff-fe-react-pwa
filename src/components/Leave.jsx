@@ -81,7 +81,6 @@ function All() {
         </header>
 
         <div className="page-content bottom-content ">
-          {/* <div className="container profile-area"> */}
              <DateRange
               ranges={[dateRange]}
               onChange={handleDateChange}
@@ -92,12 +91,8 @@ function All() {
               style={{ width: '100%' }}
             />
             <h5 className="title" style={{ textAlign: 'center', fontSize:'14px', marginTop: "15px" }}>Total selected days: {getSelectedDaysCount()}</h5>
-            
-          {/* </div> */}
         </div>
-
         <MenuBar />
-
       </div>
     </>
   )
