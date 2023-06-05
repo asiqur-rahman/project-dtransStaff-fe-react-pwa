@@ -9,6 +9,7 @@ import OTPPage  from './pages/OTPPage'
 import ProfilePage  from './pages/ProfilePage'
 import NotificationPage  from './pages/NotificationPage'
 import LeavePage  from './pages/LeavePage'
+import TransferPage  from './pages/TransferPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
@@ -31,6 +32,7 @@ function App() {
                 <Route element={<JobsPage/>} path="/jobs"/>
                 <Route element={<JobDetailsPage/>} path="/job-details"/>
                 <Route element={<ProfilePage/>} path="/profile"/>
+                <Route element={<TransferPage/>} path="/transfer"/>
                 <Route element={<NotificationPage/>} path="/notification"/>
                 <Route element={<LeavePage/>} path="/my-leave"/>
             </Route>

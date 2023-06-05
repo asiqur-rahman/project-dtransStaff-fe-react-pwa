@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCar, faFaceGrin } from '@fortawesome/free-solid-svg-icons';
+import { faCar, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import axios from '../utils/axios.utils'
 import { useNavigate, Link } from 'react-router-dom';
 import * as common from '../utils/common.utils'
@@ -59,6 +59,10 @@ function All() {
   const seeJobDetails = (jobnum)  =>{
     navigate(`/job-details?jobnum=${jobnum}`);
   }
+  const jobTransfer = (jobnum)  =>{
+    navigate(`/transfer?jobnum=${jobnum}`);
+  }
+
   return (
     <>
       <div className="page-wraper">
@@ -172,21 +176,26 @@ function All() {
                     {
                       todayJobs && todayJobs.jobs.map((item, i) => {
                         return (
-                          <li  key={i} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0" }} onClick={()=>seeJobDetails(item.jobnum)}>
+                          <li  key={i} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0",background: "white" }}>
                             <div className="item-content">
                               <div className="item-inner" style={{ margin: "10px 0" }}>
 
-                                <div className="d-flex align-items-center">
-                                  <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
-                                    <img src="/images/avatar60x60.jpg" alt="logo" />
-                                  </div>
-                                  <div className="item-title-row" >
-                                    <div className="item-footer" style={{ marginBottom: "0" }}>
-                                      <div className="d-flex align-items-center">
-                                        <h5 className="me-3" style={{ marginBottom: "0" }}>{item.empname}</h5>
-                                      </div>
+                                <div className="item-footer">
+                                  <div className="d-flex align-items-center">
+                                    <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                                      <img src="/images/avatar60x60.jpg" alt="logo" />
                                     </div>
-                                    <div className="item-subtitle" style={{ fontSize: "11px"}}>{item.jobschedule}</div>
+                                    <div className="item-title-row" >
+                                      <div className="item-footer" style={{ marginBottom: "0" }}>
+                                        <div className="d-flex align-items-center">
+                                          <h5 className="me-3" style={{ marginBottom: "0" }}>{item.empname}</h5>
+                                        </div>
+                                      </div>
+                                      <div className="item-subtitle" style={{ fontSize: "11px"}}>{item.jobschedule}</div>
+                                    </div>
+                                  </div>
+                                  <div className="d-flex align-items-center">
+                                    <FontAwesomeIcon icon={faCalendar} size='x' style={{paddingRight:"40px", cursor:"pointer"}} onClick={()=>seeJobDetails(item.jobnum)}/>
                                   </div>
                                 </div>
 
@@ -202,16 +211,17 @@ function All() {
                                 </div>
                                 <div className="item-footer">
                                   <div className="d-flex align-items-center">
-                                    <div className="item-subtitle">From : {item.jobaddr}</div>
+                                    <div className="item-subtitle">{item.jobtypecode=="JOS"?"From":"To"} : {item.jobaddr}</div>
                                   </div>
                                   <div className="d-flex align-items-center">
-                                    {item.jobstatus=='Pending'?
+                                    {item.jobstatus=='Pending' && !item.allowtransfer &&
                                       <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }}>Accept Transfer</button>
-                                      :
-                                      <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }}>Confirm</button>
                                     }
-                                    {item.allowtransfer=='true'&&
-                                      <button className="btn btn-sm success" style={{ backgroundColor: "red", color: "var(--bg-white)", padding: "5px 4px" }}>Request Transfer</button>
+                                    {item.jobstatus=='Confirm' &&
+                                    <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }}>Confirm</button>
+                                    } 
+                                    {item.allowtransfer&&
+                                      <button className="btn btn-sm success" style={{ backgroundColor: "red", color: "var(--bg-white)", padding: "5px 4px" }} onClick={()=>jobTransfer(item.jobnum)}>Request Transfer</button>
                                     }
                                   </div>
                                 </div>
