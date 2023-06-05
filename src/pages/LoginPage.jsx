@@ -98,11 +98,11 @@ function HomePage() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                   />
-                  <span className="input-group-text show-pass" onClick={togglePasswordVisibility}>
+                  <span className="input-group-text" onClick={togglePasswordVisibility}>
                     {showPassword ? (
-                      <i className="fa fa-eye-slash"></i>
+                      <i className="fa fa-eye-slash" style={{fontSize:"13px"}}></i>
                     ) : (
-                      <i className="fa fa-eye"></i>
+                      <i className="fa fa-eye" style={{fontSize:"13px"}}></i>
                     )}
                   </span>
                 </div>
