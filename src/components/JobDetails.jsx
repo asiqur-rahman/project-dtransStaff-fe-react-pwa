@@ -63,14 +63,17 @@ function Stepper({ jobDetails }) {
   const [activeStep, setActiveStep] = useState(0);
   useEffect(() => {
     if (jobDetails) {
-      if (jobDetails.jobtype == 'collection') {
+      if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length>1) 
+      || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length>1)) {
         setActiveStep(0)
       }
-      else if (jobDetails.jobtype == 'delivery') {
-        setActiveStep(0)
+      else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length>1) 
+      || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length>1)) {
+        setActiveStep(1)
       }
-      else if (jobDetails.jobtype == 'collection') {
-        setActiveStep(0)
+      else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length>1) 
+      || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length>1)) {
+        setActiveStep(2)
       }
     }
   }, [jobDetails]);
@@ -84,7 +87,7 @@ function Stepper({ jobDetails }) {
           </div>
           <div className="step-text">Collected</div>
           <div style={{ fontSize: "8px" }}>2023-05-12</div>
-          <div style={{ fontSize: "8px" }}>10:10 PM</div>
+          {/* <div style={{ fontSize: "8px" }}>10:10 PM</div> */}
         </div>
         <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`}>
@@ -93,7 +96,7 @@ function Stepper({ jobDetails }) {
           </div>
           <div className="step-text">Delivered</div>
           <div style={{ fontSize: "8px" }}>2023-05-12</div>
-          <div style={{ fontSize: "8px" }}>10:10 PM</div>
+          {/* <div style={{ fontSize: "8px" }}>10:10 PM</div> */}
         </div>
         <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`}>
@@ -102,7 +105,7 @@ function Stepper({ jobDetails }) {
           </div>
           <div className="step-text">Completed</div>
           <div style={{ fontSize: "8px" }}>2023-05-12</div>
-          <div style={{ fontSize: "8px" }}>10:10 PM</div>
+          {/* <div style={{ fontSize: "8px" }}>10:10 PM</div> */}
         </div>
       </div>
     </div>
