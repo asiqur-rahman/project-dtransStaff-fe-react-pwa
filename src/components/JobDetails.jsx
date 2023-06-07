@@ -4,7 +4,7 @@ import { faCircle, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import SignatureCanvas from 'react-signature-canvas';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as common from '../utils/common.utils'
 import axios from '../utils/axios.utils'
 import './JobDetails.css';
@@ -59,9 +59,21 @@ const SignaturePad = () => {
   );
 };
 
-function Stepper() {
-  const [activeStep, setActiveStep] = useState(1);
-
+function Stepper({ jobDetails }) {
+  const [activeStep, setActiveStep] = useState(0);
+  useEffect(() => {
+    if (jobDetails) {
+      if (jobDetails.jobtype == 'collection') {
+        setActiveStep(0)
+      }
+      else if (jobDetails.jobtype == 'delivery') {
+        setActiveStep(0)
+      }
+      else if (jobDetails.jobtype == 'collection') {
+        setActiveStep(0)
+      }
+    }
+  }, [jobDetails]);
 
   return (
     <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px" }}>
@@ -97,10 +109,14 @@ function Stepper() {
   );
 };
 
+
 function All(props) {
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const [jobDetails, setJobDetails] = useState(false);
+  const [collectionJob, setCollectionJob] = useState(false);
+  const [deliveryJob, setDeliveryJob] = useState(false);
 
   useEffect(() => {
     const jobNum = queryParams.get('jobnum');
@@ -112,16 +128,21 @@ function All(props) {
           .then((result) => {
             if (result && result.data.success) {
               setJobDetails(result.data.data)
+              if (result.data.data.jobtype == 'Collection') setCollectionJob(true);
+              else if (result.data.data.jobtype == 'Delivery') setDeliveryJob(true);
             }
           })
           .catch((error) => {
             console.log(error)
           })
-
       }
       window.SpinnerHide()
     }
   }, [queryParams]);
+
+  const jobTransfer = (jobnum)  =>{
+    navigate(`/transfer?jobnum=${jobnum}`);
+  }
 
   return (
     <>
@@ -141,7 +162,7 @@ function All(props) {
 
                 {/* <!-- Item box Start --> */}
 
-                <Stepper />
+                <Stepper jobDetails={jobDetails} />
                 {/* <!-- Item box Start --> */}
                 {jobDetails &&
                   <div className="item-list recent-jobs-list pt-3">
@@ -188,35 +209,78 @@ function All(props) {
                         </div>
                       </li>
 
+                      {deliveryJob && <>
+                        {jobDetails.collectionplan.map((job, j) => {
+                          return (<>
+                            <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                              <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
+                              <div className="order-status" style={{ marginTop: "0" }}>
+                                <ul className="dz-timeline style-2">
+                                  {job.items.map((item, i) => {
+                                    return (<>
+                                      <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                        <div className="d-flex align-items-center">
+                                          <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                            <input type="checkbox" />
+                                          </div>
+
+                                          <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                            <img src="/images/avatar60x60.jpg" alt="logo" />
+                                          </div>
+
+                                          <div className="item-title-row" style={{ width: "100%" }}>
+                                            <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                              <div className="d-flex align-items-center">
+                                                <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                              </div>
+                                            </div>
+                                            <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                          </div>
+
+                                          <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                            <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </>
+                                    )
+                                  })}
+                                </ul>
+                              </div>
+                            </li>
+
+                            <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                              <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
+                              <div className="item-content" style={{ marginTop: "10px" }}>
+                                <div className="item-inner" style={{ margin: "10px 0" }}>
+
+                                  <div className="item-title-row">
+                                    <div className="item-footer" style={{ marginBottom: "0" }}>
+                                      <div className="d-flex align-items-center">
+                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
+                                      </div>
+                                      <div className="d-flex align-items-center">
+                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
+                                      </div>
+                                      <div className="d-flex align-items-center">
+                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="item-footer">
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          </>
+                          )
+                        })}</>}
+
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
 
-                      </li>
-
-                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
-                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
-                        <div className="item-content" style={{marginTop:"10px"}}>
-                          <div className="item-inner" style={{ margin: "10px 0" }}>
-
-                            <div className="item-title-row">
-                              <div className="item-footer" style={{ marginBottom: "0" }}>
-                                <div className="d-flex align-items-center">
-                                  <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {jobDetails.jobnum}</h6>
-                                </div>
-                                <div className="d-flex align-items-center">
-                                  <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {jobDetails.jobnum}</h6>
-                                </div>
-                                <div className="d-flex align-items-center">
-                                  <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {jobDetails.jobnum}</h6>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="item-footer">
-                              <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {jobDetails.jobnum}</h6>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </li>
 
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
@@ -261,16 +325,19 @@ function All(props) {
                           <textarea rows={3} className="form-control" style={{ width: "100%" }} />
                         </div>
                       </li>
-                      <li style={{ borderRadius: "10px", minHeight: "200px" }}>
-                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
-                        <SignaturePad />
-                      </li>
+                      {deliveryJob &&
+                        <li style={{ borderRadius: "10px", minHeight: "200px" }}>
+                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
+                          <SignaturePad />
+                        </li>}
+
                       <div className="col-md-12" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
                       </div>
-                      <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }}>Request Transfer</button>
-                      </div>
+                      {deliveryJob &&
+                        <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
+                          <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={()=>jobTransfer(jobDetails.jobnum)}>Request Transfer</button>
+                        </div>}
                     </ul>
                   </div>
                 }

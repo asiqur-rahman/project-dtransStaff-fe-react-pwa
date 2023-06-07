@@ -195,7 +195,7 @@ function All() {
                                     </div>
                                   </div>
                                   <div className="d-flex align-items-center">
-                                    <FontAwesomeIcon icon={faCalendar} size='x' style={{paddingRight:"40px", cursor:"pointer"}} onClick={()=>seeJobDetails(item.jobnum)}/>
+                                    <FontAwesomeIcon icon={faCalendar} style={{paddingRight:"40px", cursor:"pointer"}} onClick={()=>seeJobDetails(item.jobnum)}/>
                                   </div>
                                 </div>
 
@@ -203,6 +203,9 @@ function All() {
                                   <div className="item-footer" style={{ marginBottom: "0" }}>
                                     <div className="d-flex align-items-center">
                                       <h6 className="me-3" style={{ fontSize: "12px"}}>Job No : {item.jobnum}</h6>
+                                    </div>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ fontSize: "12px"}}>Status : {item.jobstatus}</h6>
                                     </div>
                                     <div className="d-flex align-items-center">
                                       <h6 className="me-3" style={{ fontSize: "12px"}}>Type : {item.jobtype}</h6>
