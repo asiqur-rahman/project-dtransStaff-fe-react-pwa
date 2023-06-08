@@ -82,7 +82,7 @@ function Stepper({ jobDetails }) {
     <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px" }}>
       <div className="stepper">
         <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{ textAlign: "center" }}>
-          <div className="circle">
+          <div className="circle" style={{cursor:"pointer"}} onClick={()=>setActiveStep(0)}>
             <FontAwesomeIcon icon={activeStep >= 0 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Collected</div>
@@ -91,7 +91,7 @@ function Stepper({ jobDetails }) {
         </div>
         <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`}>
-          <div className="circle">
+          <div className="circle" style={{cursor:"pointer"}} onClick={()=>setActiveStep(1)}>
             <FontAwesomeIcon icon={activeStep >= 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Delivered</div>
@@ -100,7 +100,7 @@ function Stepper({ jobDetails }) {
         </div>
         <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`}>
-          <div className="circle">
+          <div className="circle" style={{cursor:"pointer"}} onClick={()=>setActiveStep(2)}>
             <FontAwesomeIcon icon={activeStep >= 2 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Completed</div>
@@ -298,8 +298,8 @@ function All(props) {
                                       <input type="checkbox" />
                                     </div>
 
-                                    <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
-                                      <img src="/images/avatar60x60.jpg" alt="logo" />
+                                    <div className="item-media media media-40" style={{ margin: "0 15px 0 0" }}>
+                                      <img src="/images/item.png" alt="logo" />
                                     </div>
 
                                     <div className="item-title-row" style={{ width: "100%" }}>
