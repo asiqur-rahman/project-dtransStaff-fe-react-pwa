@@ -10,6 +10,7 @@ import OTPPage  from './pages/OTPPage'
 import ProfilePage  from './pages/ProfilePage'
 import NotificationPage  from './pages/NotificationPage'
 import LeavePage  from './pages/LeavePage'
+import ApplyLeavePage  from './pages/ApplyLeavePage'
 import TransferPage  from './pages/TransferPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
@@ -37,6 +38,7 @@ function App() {
                 <Route element={<TransferPage/>} path="/transfer"/>
                 <Route element={<NotificationPage/>} path="/notification"/>
                 <Route element={<LeavePage/>} path="/my-leave"/>
+                <Route element={<ApplyLeavePage/>} path="/apply-leave"/>
             </Route>
             <Route element={<LoginPage/>} path="/login"/>
             <Route element={<ForgetPasswordPage/>} path="/forget-password"/>

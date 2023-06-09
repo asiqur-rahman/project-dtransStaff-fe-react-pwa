@@ -1,98 +1,203 @@
-import React, { useEffect, useState } from 'react';
-import axios from '../utils/axios.utils'
+import React, { useEffect, useState, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle, faCircleCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import SignatureCanvas from 'react-signature-canvas';
+import MenuBar from './Menubar';
+import Sidebar from './Sidebar';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as common from '../utils/common.utils'
-import MenuBar from './Menubar'
-import { Link } from 'react-router-dom';
-import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // Import the default styles
-import 'react-date-range/dist/theme/default.css';
+import axios from '../utils/axios.utils'
+import './JobDetails.css';
 
-function All() {
+function All(props) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const [jobDetails, setJobDetails] = useState(false);
+  const [collectionJob, setCollectionJob] = useState(false);
+  const [deliveryJob, setDeliveryJob] = useState(false);
+  const [jos, setJos] = useState(false);
+  const [jor, setJor] = useState(false);
 
-  const [dateRange, setDateRange] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-    key: 'selection',
-  });
-
-  const handleDateChange = (ranges) => {
-    setDateRange(ranges.selection);
-  };
-
-  const getSelectedDaysCount = () => {
-    const { startDate, endDate } = dateRange;
-    const diffInTime = endDate.getTime() - startDate.getTime();
-    const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
-    return diffInDays + 1; // Add 1 to include both the start and end dates
-  };
-
-  useEffect(()=>{
-    window.SpinnerShow()
-    let user = common.getUser();
-      if(user){
-        axios.get('profile')
-        .then((result)=>{
-          if(result && result.data.success){
-            // setUserDetails(result.data.data)
-          }
-        })
-        .catch((error)=>{
-          console.log(error)
-        })
-
-        const todayDate = new Date().toISOString().split('T')[0]
-        axios.get(`job/summary?date=${todayDate}`)
-        .then((result)=>{
-          if(result && result.data.success){
-            // setJobSummary(result.data.data)
-          }
-        })
-        .catch((error)=>{
-          console.log(error)
-        })
-      
-      }
-      window.SpinnerHide()
-  },[])
 
   return (
     <>
       <div className="page-wraper">
 
-        <header className="header">
-          <div className="main-bar">
-            <div className="container">
-              <div className="header-content">
-                <div className="left-content" style={{width:"140px"}}>
-                  <Link to="/" className="back-btn">
-                    <svg width="18" height="18" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9.03033 0.46967C9.2966 0.735936 9.3208 1.1526 9.10295 1.44621L9.03033 1.53033L2.561 8L9.03033 14.4697C9.2966 14.7359 9.3208 15.1526 9.10295 15.4462L9.03033 15.5303C8.76406 15.7966 8.3474 15.8208 8.05379 15.6029L7.96967 15.5303L0.96967 8.53033C0.703403 8.26406 0.679197 7.8474 0.897052 7.55379L0.96967 7.46967L7.96967 0.46967C8.26256 0.176777 8.73744 0.176777 9.03033 0.46967Z" fill="#a19fa8" />
-                    </svg>
-                  </Link>
-                  <h5 className="mb-0 ms-6">My Leave</h5>
+        <Sidebar menuName="My Leave"/>
+
+
+        {/* <!-- Page Content --> */}
+        <div className="page-content">
+
+          <div className="content-inner pt-0">
+            <div className="container fb">
+
+              {/* <!-- Dashboard Area --> */}
+              <div className="dashboard-area pt-4">
+
+                <div className="item-list recent-jobs-list pt-3">
+                  {/* <h4 className="title my-4">Job Details</h4> */}
+
+                  <ul>
+
+
+                    <li style={{ borderRadius: "10px", margin: "5px 0" }}>
+                      <div className="item-content" style={{ marginTop: "10px" }}>
+                        <div className="item-inner" style={{ margin: "10px 0" }}>
+
+                          <div className="item-title-row">
+                            <div className="item-footer" style={{ marginBottom: "0" }}>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Current Leave Balance</span><br /></h6>
+                              </div>
+
+                              <div className="d-flex align-items-center">
+                              </div>
+                            </div>
+                          </div>
+                          <div className="item-title-row">
+                            <div className="item-footer" style={{ marginBottom: "0" }}>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "18px", fontWeight: "normal" }}>12</span><br />Annual Leave</h6>
+                              </div>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "18px", fontWeight: "normal" }}>10.5</span><br />Sick Leave</h6>
+                              </div>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3"></h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div >
+
+                        <div className="order-status" style={{ marginTop: "0" }}>
+                          <ul className="dz-timeline style-2">
+                            <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>2020</h5>
+                            <li className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                              <div className="d-flex align-items-center" style={{ background: "white", padding: "10px 0" }}>
+
+                                <div className="item-title-row" style={{ width: "100%" }}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ marginBottom: "0" }}>2 Day(s) AL</h6>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="item-title-row" style={{ width: "150%" }}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ marginBottom: "0" }}>19 Jan,2020 - 20 Jan,2020 </h6>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                  <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' style={{ cursor: "pointer" }} />
+                                </div>
+                              </div>
+                              <hr style={{ margin: '0' }} />
+                              <div className="d-flex align-items-center" style={{ background: "white", padding: "10px 0" }}>
+
+                                <div className="item-title-row" style={{ width: "100%" }}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ marginBottom: "0" }}>2 Day(s) AL</h6>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="item-title-row" style={{ width: "150%" }}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ marginBottom: "0" }}>19 Jan,2020 - 20 Jan,2020 </h6>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                  <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' style={{ cursor: "pointer" }} />
+                                </div>
+                              </div>
+                              <hr style={{ margin: '0' }} />
+                            </li>
+
+                            <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>2019</h5>
+                            <li className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                              <div className="d-flex align-items-center" style={{ background: "white", padding: "10px 0" }}>
+
+                                <div className="item-title-row" style={{ width: "100%" }}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ marginBottom: "0" }}>2 Day(s) AL</h6>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="item-title-row" style={{ width: "150%" }}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ marginBottom: "0" }}>19 Jan,2020 - 20 Jan,2020 </h6>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                  <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' style={{ cursor: "pointer" }} />
+                                </div>
+                              </div>
+                              <hr style={{ margin: '0' }} />
+                              <div className="d-flex align-items-center" style={{ background: "white", padding: "10px 0" }}>
+
+                                <div className="item-title-row" style={{ width: "100%" }}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ marginBottom: "0" }}>2 Day(s) AL</h6>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="item-title-row" style={{ width: "150%" }}>
+                                  <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ marginBottom: "0" }}>19 Jan,2020 - 20 Jan,2020 </h6>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                  <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' style={{ cursor: "pointer" }} />
+                                </div>
+                              </div>
+                              <hr style={{ margin: '0' }} />
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+
+                    {/* <div className="col-md-12" style={{ textAlign: "center" }}>
+                      <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Apply </button>
+                    </div> */}
+                    <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
+                      <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={() => navigate('/apply-leave')}>Apply Leave</button>
+                    </div>
+
+                  </ul>
                 </div>
-                <div className="mid-content">
-                </div>
-                <div className="right-content">
-                </div>
+
               </div>
             </div>
           </div>
-        </header>
 
-        <div className="page-content bottom-content ">
-             <DateRange
-              ranges={[dateRange]}
-              onChange={handleDateChange}
-              showSelectionPreview={true}
-              moveRangeOnFirstSelection={false}
-              editableDateInputs={true}
-              // style={{ width: '100%',background: 'linear-gradient(to right, rgb(0, 191, 255), rgb(0, 123, 255))', color:'white' }}
-              style={{ width: '100%' }}
-            />
-            <h5 className="title" style={{ textAlign: 'center', fontSize:'14px', marginTop: "15px" }}>Total selected days: {getSelectedDaysCount()}</h5>
         </div>
+        {/* <!-- Page Content End--> */}
+
         <MenuBar />
+
       </div>
     </>
   )
