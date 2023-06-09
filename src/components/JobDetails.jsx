@@ -219,12 +219,13 @@ function JORJob({ jobDetails, jobTransfer }) {
                                 return (<>
                                   <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                     <div className="d-flex align-items-center">
+                                    {activeStep==1 &&
                                       <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
                                         <input type="checkbox" />
-                                      </div>
+                                      </div>}
 
                                       <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
-                                        <img src="/images/avatar60x60.jpg" alt="logo" />
+                                        <img src="/images/item.png" alt="logo" />
                                       </div>
 
                                       <div className="item-title-row" style={{ width: "100%" }}>
@@ -343,7 +344,7 @@ function JORJob({ jobDetails, jobTransfer }) {
                                         <input type="checkbox" />
                                       </div> */}
 
-                                      <div className="item-media media media-40" style={{ margin: "0 15px 0 0" }}>
+                                      <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
                                         <img src="/images/item.png" alt="logo" />
                                       </div>
 
@@ -472,7 +473,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
                           <div className="item-inner" style={{ margin: "10px 0" }}>
 
                             <div className="d-flex align-items-center">
-                              <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                              <div className="item-media media media-40 dz-icon" style={{ marginLeft: "0", marginRight: "15px" }}>
                                 <img src="/images/avatar60x60.jpg" alt="logo" />
                               </div>
                               <div className="item-title-row" >
@@ -520,12 +521,13 @@ function JOSJob({ jobDetails, jobTransfer }) {
                                 return (<>
                                   <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                     <div className="d-flex align-items-center">
-                                      <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                      {activeStep==1 &&
+                                        <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
                                         <input type="checkbox" />
-                                      </div>
+                                      </div>}
 
                                       <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
-                                        <img src="/images/avatar60x60.jpg" alt="logo" />
+                                        <img src="/images/item.png" alt="logo" />
                                       </div>
 
                                       <div className="item-title-row" style={{ width: "100%" }}>
@@ -602,7 +604,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
                                             <input type="checkbox" />
                                           </div> */}
 
-                                            <div className="item-media media media-40" style={{ margin: "0 15px 0 0" }}>
+                                            <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
                                               <img src="/images/item.png" alt="logo" />
                                             </div>
 
@@ -644,6 +646,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
                           <textarea rows={3} className="form-control" style={{ width: "100%" }} />
                         </div>
                       </li>
+
                       {activeStep==0 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-danger w-100" onClick={()=>setActiveStep(1)} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
