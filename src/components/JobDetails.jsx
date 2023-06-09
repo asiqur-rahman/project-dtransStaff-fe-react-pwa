@@ -112,7 +112,7 @@ function Stepper({ jobDetails }) {
   );
 };
 
-function JOSJob({ jobDetails, jobTransfer }) {
+function JOSJob({ jobDetails, jobTransfer }) { 
 
   const [details, setDetails] = useState(0);
 
@@ -190,12 +190,10 @@ function JOSJob({ jobDetails, jobTransfer }) {
                       </li>
 
                       <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
-                      {jobDetails.collectionplan.map((job, j) => {
-                        return (<>
-                          <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                             <div className="order-status" style={{ marginTop: "0" }}>
                               <ul className="dz-timeline style-2">
-                                {job.items.map((item, i) => {
+                                {jobDetails.items.map((item, i) => {
                                   return (<>
                                     <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                       <div className="d-flex align-items-center">
@@ -227,8 +225,10 @@ function JOSJob({ jobDetails, jobTransfer }) {
                               </ul>
                             </div>
                           </li>
+                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
+                      {jobDetails.collectionplan.map((job, j) => {
+                        return (<>
 
-                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
                           <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                             <div className="item-content" style={{ marginTop: "10px" }}>
                               <div className="item-inner" style={{ margin: "10px 0" }}>
@@ -264,7 +264,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
                               <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
                               <div className="order-status" style={{ marginTop: "0" }}>
                                 <ul className="dz-timeline style-2">
-                                  {jobDetails.items.map((item, i) => {
+                                  {job.items.map((item, i) => {
                                     return (
                                       <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                         <div className="d-flex align-items-center">
