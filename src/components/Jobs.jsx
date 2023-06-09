@@ -16,6 +16,7 @@ function All() {
   const [selectedDate, setSelectedDate] = useState(false);
   const [dates, setDates] = useState(false);
   const [todayJobs, setTodayJobs] = useState(false);
+  const [filteredJobs, setFilteredJobs] = useState(false);
 
   const fetchJobs = (date) =>{
     window.SpinnerShow();
@@ -27,6 +28,7 @@ function All() {
         .then((result) => {
           if (result && result.data.success) {
             setTodayJobs(result.data.data)
+            showJobsFor(1,result.data.data.jobs)
           }
         })
         .catch((error) => {
@@ -34,6 +36,20 @@ function All() {
         })
     }
     window.SpinnerHide();
+  }
+
+  const showJobsFor = (showFor, data=[]) =>{
+    if(data.length==0){
+      data=todayJobs.jobs;
+    }
+    if(showFor==1){
+      const pending = data.filter(x=>x.jobstatus!="Pending");
+      setFilteredJobs(pending);
+    }
+    else if (showFor==2){
+      const confirmed = todayJobs.jobs.filter(x=>x.jobstatus=="Pending");
+      setFilteredJobs(confirmed)
+    }
   }
 
   useEffect(() => {
@@ -136,7 +152,7 @@ function All() {
 
                 {/* <!-- Item box Start --> */}
                 <div className="item-list style-2 recent-jobs-list" style={{ display: "flex" }}>
-                  <div className="item-content" style={{ width: "50%", height: "50px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
+                  <div className="item-content" onClick={()=>showJobsFor(1)} style={{ width: "50%", height: "50px", marginRight: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
                     <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
                         <FontAwesomeIcon icon={faCar} size='2x' color='white' />
@@ -151,7 +167,7 @@ function All() {
                       </div>
                     </div>
                   </div>
-                  <div className="item-content" style={{ width: "50%", height: "50px", marginLeft: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
+                  <div className="item-content" onClick={()=>showJobsFor(2)} style={{ width: "50%", height: "50px", marginLeft: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
                     <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
                         <FontAwesomeIcon icon={faCar} size='2x' color='white' />
@@ -174,7 +190,7 @@ function All() {
 
                   <ul>
                     {
-                      todayJobs && todayJobs.jobs.map((item, i) => {
+                      filteredJobs && filteredJobs.map((item, i) => {
                         return (
                           <li  key={i} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0",background: "white" }}>
                             <div className="item-content">

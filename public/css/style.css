@@ -23359,3 +23359,9 @@ ul.list-check li:after {
   color: white;
   font-weight: bold;
 } */
+
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

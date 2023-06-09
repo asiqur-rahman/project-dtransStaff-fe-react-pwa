@@ -59,21 +59,27 @@ const SignaturePad = () => {
   );
 };
 
-function Stepper({ jobDetails }) {
+function Stepper({ jobDetails, cActiveStep }) {
   const [activeStep, setActiveStep] = useState(0);
+
+  const sActiveStep = (step) => {
+    setActiveStep(step);
+    cActiveStep(step);
+  }
+
   useEffect(() => {
     if (jobDetails) {
       if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
         || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
-        setActiveStep(0)
+        setActiveStep(0);
       }
       else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
         || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
-        setActiveStep(1)
+        setActiveStep(1);
       }
       else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
         || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
-        setActiveStep(2)
+        setActiveStep(2);
       }
     }
   }, [jobDetails]);
@@ -82,7 +88,7 @@ function Stepper({ jobDetails }) {
     <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px" }}>
       <div className="stepper">
         <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{ textAlign: "center" }}>
-          <div className="circle" style={{ cursor: "pointer" }} onClick={() => setActiveStep(0)}>
+          <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(0)}>
             <FontAwesomeIcon icon={activeStep >= 0 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Collected</div>
@@ -91,7 +97,7 @@ function Stepper({ jobDetails }) {
         </div>
         <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`}>
-          <div className="circle" style={{ cursor: "pointer" }} onClick={() => setActiveStep(1)}>
+          <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(1)}>
             <FontAwesomeIcon icon={activeStep >= 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Delivered</div>
@@ -100,7 +106,7 @@ function Stepper({ jobDetails }) {
         </div>
         <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`}>
-          <div className="circle" style={{ cursor: "pointer" }} onClick={() => setActiveStep(2)}>
+          <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(2)}>
             <FontAwesomeIcon icon={activeStep >= 2 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Completed</div>
@@ -112,15 +118,20 @@ function Stepper({ jobDetails }) {
   );
 };
 
-function JOSJob({ jobDetails, jobTransfer }) { 
+function JOSJob({ jobDetails, jobTransfer }) {
 
   const [details, setDetails] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
-  const showDetails = (j) =>{
-    if(details==j){
+  const cActiveStep = (e) => {
+    setActiveStep(e);
+  }
+
+  const showDetails = (j) => {
+    if (details == j) {
       setDetails(-1);
     }
-    else{
+    else {
       setDetails(j);
     }
   }
@@ -142,7 +153,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
 
                 {/* <!-- Item box Start --> */}
 
-                <Stepper jobDetails={jobDetails} />
+                <Stepper jobDetails={jobDetails} cActiveStep={cActiveStep} />
                 {/* <!-- Item box Start --> */}
                 {jobDetails &&
                   <div className="item-list recent-jobs-list pt-3">
@@ -163,7 +174,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
                                     <h5 className="me-3" style={{ marginBottom: "0" }}>{jobDetails.empname}</h5>
                                   </div>
                                 </div>
-                                <div className="item-subtitle" style={{ fontSize: "11px" }}>asda</div>
+                                <div className="item-subtitle" style={{ fontSize: "11px" }}>2023-05-12</div>
                               </div>
                             </div>
 
@@ -189,116 +200,173 @@ function JOSJob({ jobDetails, jobTransfer }) {
                         </div>
                       </li>
 
-                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
-                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
-                            <div className="order-status" style={{ marginTop: "0" }}>
-                              <ul className="dz-timeline style-2">
-                                {jobDetails.items.map((item, i) => {
-                                  return (<>
-                                    <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
-                                      <div className="d-flex align-items-center">
-                                        <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
-                                          <input type="checkbox" />
-                                        </div>
-
-                                        <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
-                                          <img src="/images/avatar60x60.jpg" alt="logo" />
-                                        </div>
-
-                                        <div className="item-title-row" style={{ width: "100%" }}>
-                                          <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
-                                            <div className="d-flex align-items-center">
-                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
-                                            </div>
-                                          </div>
-                                          <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
-                                        </div>
-
-                                        <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
-                                          <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
-                                        </div>
+                      {/* Step 1 Start*/}
+                      {(activeStep == 0 || activeStep == 2) && <>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
+                        <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                          <div className="order-status" style={{ marginTop: "0" }}>
+                            <ul className="dz-timeline style-2">
+                              {jobDetails.items.map((item, i) => {
+                                return (<>
+                                  <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                    <div className="d-flex align-items-center">
+                                      <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                        <input type="checkbox" />
                                       </div>
-                                    </li>
-                                  </>
-                                  )
-                                })}
-                              </ul>
-                            </div>
-                          </li>
-                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
-                      {jobDetails.collectionplan.map((job, j) => {
-                        return (<>
 
-                          <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
-                            <div className="item-content" style={{ marginTop: "10px" }}>
-                              <div className="item-inner" style={{ margin: "10px 0" }}>
+                                      <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                        <img src="/images/avatar60x60.jpg" alt="logo" />
+                                      </div>
 
-                                <div className="item-title-row">
-                                  <div className="item-footer" style={{ marginBottom: "0" }}>
-                                    <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
+                                      <div className="item-title-row" style={{ width: "100%" }}>
+                                        <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                          <div className="d-flex align-items-center">
+                                            <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                          </div>
+                                        </div>
+                                        <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                      </div>
+
+                                      <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                        <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
+                                      </div>
                                     </div>
-                                    <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
-                                    </div>
-                                    <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
-                                    </div>
-                                    <div className="d-flex align-items-center">
-                                      <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' onClick={()=>showDetails(j)} style={{cursor:"pointer"}}/>
+                                  </li>
+                                </>
+                                )
+                              })}
+                            </ul>
+                          </div>
+                        </li>
+
+
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
+                        {jobDetails.collectionplan.map((job, j) => {
+                          return (<>
+
+                            <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                              <div className="item-content" style={{ marginTop: "10px" }}>
+                                <div className="item-inner" style={{ margin: "10px 0" }}>
+
+                                  <div className="item-title-row">
+                                    <div className="item-footer" style={{ marginBottom: "0" }}>
+                                      <div className="d-flex align-items-center">
+                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
+                                      </div>
+                                      <div className="d-flex align-items-center">
+                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
+                                      </div>
+                                      <div className="d-flex align-items-center">
+                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
+                                      </div>
+                                      <div className="d-flex align-items-center">
+                                        <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' onClick={() => showDetails(j)} style={{ cursor: "pointer" }} />
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                                <div className="item-footer">
-                                  <div className="d-flex align-items-center">
-                                    <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
+                                  <div className="item-footer">
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            <div style={{display:details==j?'block':'none'}}>
-                              <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
+                              <div style={{ display: details == j ? 'block' : 'none' }}>
+                                <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
 
-                              </li>
+                                </li>
 
-                              <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
-                              <div className="order-status" style={{ marginTop: "0" }}>
-                                <ul className="dz-timeline style-2">
-                                  {job.items.map((item, i) => {
-                                    return (
-                                      <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
-                                        <div className="d-flex align-items-center">
-                                          {/* <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
+                                <div className="order-status" style={{ marginTop: "0" }}>
+                                  <ul className="dz-timeline style-2">
+                                    {job.items.map((item, i) => {
+                                      return (
+                                        <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                          <div className="d-flex align-items-center">
+                                            {/* <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
                                             <input type="checkbox" />
                                           </div> */}
 
-                                          <div className="item-media media media-40" style={{ margin: "0 15px 0 0" }}>
-                                            <img src="/images/item.png" alt="logo" />
-                                          </div>
-
-                                          <div className="item-title-row" style={{ width: "100%" }}>
-                                            <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
-                                              <div className="d-flex align-items-center">
-                                                <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
-                                              </div>
+                                            <div className="item-media media media-40" style={{ margin: "0 15px 0 0" }}>
+                                              <img src="/images/item.png" alt="logo" />
                                             </div>
-                                            <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
-                                          </div>
 
-                                          <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
-                                            <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
+                                            <div className="item-title-row" style={{ width: "100%" }}>
+                                              <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                                <div className="d-flex align-items-center">
+                                                  <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                                </div>
+                                              </div>
+                                              <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                            </div>
+
+                                            <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                              <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
+                                            </div>
+                                          </div>
+                                        </li>
+                                      )
+                                    })}
+                                  </ul>
+                                </div>
+                              </div>
+                            </li>
+                          </>
+                          )
+                        })}
+                      </>}
+                      {/* Step 1 End */}
+
+                      {/* Step 2 Start*/}
+                      {(activeStep == 1) && <>
+
+                        <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
+
+                        </li>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
+                        <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                          <div className="order-status" style={{ marginTop: "0" }}>
+                            <ul className="dz-timeline style-2">
+                              {jobDetails.items.map((item, i) => {
+                                return (<>
+                                  <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                    <div className="d-flex align-items-center">
+                                      <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                        <input type="checkbox" />
+                                      </div>
+
+                                      <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                        <img src="/images/avatar60x60.jpg" alt="logo" />
+                                      </div>
+
+                                      <div className="item-title-row" style={{ width: "100%" }}>
+                                        <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                          <div className="d-flex align-items-center">
+                                            <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
                                           </div>
                                         </div>
-                                      </li>
-                                    )
-                                  })}
-                                </ul>
-                              </div>
-                            </div>
-                          </li>
-                        </>
-                        )
-                      })}
+                                        <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                      </div>
+
+                                      <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                        <div className="item-subtitle" style={{ fontSize: "14px" }}>DO</div>
+                                        <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
+                                      </div>
+
+                                      <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                        <div className="item-subtitle" style={{ fontSize: "14px" }}>Actual</div>
+                                        <input type='number' className='form-control no-spin' style={{float:"right", maxWidth:"22%", padding:"3%"}}/>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </>
+                                )
+                              })}
+                            </ul>
+                          </div>
+                        </li>
+                      </>}
+                      {/* Step 2 End */}
 
                       <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
@@ -306,10 +374,12 @@ function JOSJob({ jobDetails, jobTransfer }) {
                           <textarea rows={3} className="form-control" style={{ width: "100%" }} />
                         </div>
                       </li>
-                      <li style={{ borderRadius: "10px", minHeight: "200px" }}>
-                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
-                        <SignaturePad />
-                      </li>
+
+                      {activeStep > 0 &&
+                        <li style={{ borderRadius: "10px", minHeight: "200px" }}>
+                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
+                          <SignaturePad />
+                        </li>}
 
                       <div className="col-md-12" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
