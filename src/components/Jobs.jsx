@@ -56,8 +56,8 @@ function All() {
     setDates(datesArray);
   }, [])
 
-  const seeJobDetails = (jobnum)  =>{
-    navigate(`/job-details?jobnum=${jobnum}`);
+  const seeJobDetails = (jobnum,jobtypecode)  =>{
+    navigate(`/job-details?jobnum=${jobnum}&jobtypecode=${jobtypecode}`);
   }
   const jobTransfer = (jobnum)  =>{
     navigate(`/transfer?jobnum=${jobnum}`);
@@ -195,7 +195,7 @@ function All() {
                                     </div>
                                   </div>
                                   <div className="d-flex align-items-center">
-                                    <FontAwesomeIcon icon={faCalendar} style={{paddingRight:"40px", cursor:"pointer"}} onClick={()=>seeJobDetails(item.jobnum)}/>
+                                    <FontAwesomeIcon icon={faCalendar} style={{paddingRight:"40px", cursor:"pointer"}} onClick={()=>seeJobDetails(item.jobnum, item.jobtypecode)}/>
                                   </div>
                                 </div>
 

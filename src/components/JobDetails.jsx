@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faCircleCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import SignatureCanvas from 'react-signature-canvas';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
@@ -63,16 +63,16 @@ function Stepper({ jobDetails }) {
   const [activeStep, setActiveStep] = useState(0);
   useEffect(() => {
     if (jobDetails) {
-      if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length>1) 
-      || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length>1)) {
+      if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
+        || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
         setActiveStep(0)
       }
-      else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length>1) 
-      || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length>1)) {
+      else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
+        || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
         setActiveStep(1)
       }
-      else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length>1) 
-      || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length>1)) {
+      else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
+        || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
         setActiveStep(2)
       }
     }
@@ -82,7 +82,7 @@ function Stepper({ jobDetails }) {
     <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px" }}>
       <div className="stepper">
         <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{ textAlign: "center" }}>
-          <div className="circle" style={{cursor:"pointer"}} onClick={()=>setActiveStep(0)}>
+          <div className="circle" style={{ cursor: "pointer" }} onClick={() => setActiveStep(0)}>
             <FontAwesomeIcon icon={activeStep >= 0 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Collected</div>
@@ -91,7 +91,7 @@ function Stepper({ jobDetails }) {
         </div>
         <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`}>
-          <div className="circle" style={{cursor:"pointer"}} onClick={()=>setActiveStep(1)}>
+          <div className="circle" style={{ cursor: "pointer" }} onClick={() => setActiveStep(1)}>
             <FontAwesomeIcon icon={activeStep >= 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Delivered</div>
@@ -100,7 +100,7 @@ function Stepper({ jobDetails }) {
         </div>
         <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`}>
-          <div className="circle" style={{cursor:"pointer"}} onClick={()=>setActiveStep(2)}>
+          <div className="circle" style={{ cursor: "pointer" }} onClick={() => setActiveStep(2)}>
             <FontAwesomeIcon icon={activeStep >= 2 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Completed</div>
@@ -112,41 +112,18 @@ function Stepper({ jobDetails }) {
   );
 };
 
+function JOSJob({ jobDetails, jobTransfer }) {
 
-function All(props) {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-  const [jobDetails, setJobDetails] = useState(false);
-  const [collectionJob, setCollectionJob] = useState(false);
-  const [deliveryJob, setDeliveryJob] = useState(false);
+  const [details, setDetails] = useState(0);
 
-  useEffect(() => {
-    const jobNum = queryParams.get('jobnum');
-    if (jobNum && !jobDetails) {
-      window.SpinnerShow()
-      let user = common.getUser();
-      if (user) {
-        axios.get(`job/details/${jobNum}`)
-          .then((result) => {
-            if (result && result.data.success) {
-              setJobDetails(result.data.data)
-              if (result.data.data.jobtype == 'Collection') setCollectionJob(true);
-              else if (result.data.data.jobtype == 'Delivery') setDeliveryJob(true);
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      }
-      window.SpinnerHide()
+  const showDetails = (j) =>{
+    if(details==j){
+      setDetails(-1);
     }
-  }, [queryParams]);
-
-  const jobTransfer = (jobnum)  =>{
-    navigate(`/transfer?jobnum=${jobnum}`);
+    else{
+      setDetails(j);
+    }
   }
-
   return (
     <>
       <div className="page-wraper">
@@ -212,23 +189,91 @@ function All(props) {
                         </div>
                       </li>
 
-                      {deliveryJob && <>
-                        {jobDetails.collectionplan.map((job, j) => {
-                          return (<>
-                            <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
-                              <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
+                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
+                      {jobDetails.collectionplan.map((job, j) => {
+                        return (<>
+                          <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                            <div className="order-status" style={{ marginTop: "0" }}>
+                              <ul className="dz-timeline style-2">
+                                {job.items.map((item, i) => {
+                                  return (<>
+                                    <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                      <div className="d-flex align-items-center">
+                                        <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                          <input type="checkbox" />
+                                        </div>
+
+                                        <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                          <img src="/images/avatar60x60.jpg" alt="logo" />
+                                        </div>
+
+                                        <div className="item-title-row" style={{ width: "100%" }}>
+                                          <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                            <div className="d-flex align-items-center">
+                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                            </div>
+                                          </div>
+                                          <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                        </div>
+
+                                        <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                          <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </>
+                                  )
+                                })}
+                              </ul>
+                            </div>
+                          </li>
+
+                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
+                          <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                            <div className="item-content" style={{ marginTop: "10px" }}>
+                              <div className="item-inner" style={{ margin: "10px 0" }}>
+
+                                <div className="item-title-row">
+                                  <div className="item-footer" style={{ marginBottom: "0" }}>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
+                                    </div>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
+                                    </div>
+                                    <div className="d-flex align-items-center">
+                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
+                                    </div>
+                                    <div className="d-flex align-items-center">
+                                      <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' onClick={()=>showDetails(j)} style={{cursor:"pointer"}}/>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="item-footer">
+                                  <div className="d-flex align-items-center">
+                                    <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div style={{display:details==j?'block':'none'}}>
+                              <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
+
+                              </li>
+
+                              <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
                               <div className="order-status" style={{ marginTop: "0" }}>
                                 <ul className="dz-timeline style-2">
-                                  {job.items.map((item, i) => {
-                                    return (<>
+                                  {jobDetails.items.map((item, i) => {
+                                    return (
                                       <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                         <div className="d-flex align-items-center">
-                                          <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                          {/* <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
                                             <input type="checkbox" />
-                                          </div>
+                                          </div> */}
 
-                                          <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
-                                            <img src="/images/avatar60x60.jpg" alt="logo" />
+                                          <div className="item-media media media-40" style={{ margin: "0 15px 0 0" }}>
+                                            <img src="/images/item.png" alt="logo" />
                                           </div>
 
                                           <div className="item-title-row" style={{ width: "100%" }}>
@@ -245,82 +290,15 @@ function All(props) {
                                           </div>
                                         </div>
                                       </li>
-                                    </>
                                     )
                                   })}
                                 </ul>
                               </div>
-                            </li>
-
-                            <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
-                              <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
-                              <div className="item-content" style={{ marginTop: "10px" }}>
-                                <div className="item-inner" style={{ margin: "10px 0" }}>
-
-                                  <div className="item-title-row">
-                                    <div className="item-footer" style={{ marginBottom: "0" }}>
-                                      <div className="d-flex align-items-center">
-                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
-                                      </div>
-                                      <div className="d-flex align-items-center">
-                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
-                                      </div>
-                                      <div className="d-flex align-items-center">
-                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="item-footer">
-                                    <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                          </>
-                          )
-                        })}</>}
-
-                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
-
-                      </li>
-
-                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
-                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
-                        <div className="order-status" style={{ marginTop: "0" }}>
-                          <ul className="dz-timeline style-2">
-                            {jobDetails.items.map((item, i) => {
-                              return (
-                                <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
-                                  <div className="d-flex align-items-center">
-                                    <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
-                                      <input type="checkbox" />
-                                    </div>
-
-                                    <div className="item-media media media-40" style={{ margin: "0 15px 0 0" }}>
-                                      <img src="/images/item.png" alt="logo" />
-                                    </div>
-
-                                    <div className="item-title-row" style={{ width: "100%" }}>
-                                      <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
-                                        <div className="d-flex align-items-center">
-                                          <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
-                                        </div>
-                                      </div>
-                                      <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
-                                    </div>
-
-                                    <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
-                                      <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
-                                    </div>
-                                  </div>
-                                </li>
-                              )
-                            })}
-                          </ul>
-                        </div>
-                      </li>
+                            </div>
+                          </li>
+                        </>
+                        )
+                      })}
 
                       <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
@@ -328,19 +306,17 @@ function All(props) {
                           <textarea rows={3} className="form-control" style={{ width: "100%" }} />
                         </div>
                       </li>
-                      {deliveryJob &&
-                        <li style={{ borderRadius: "10px", minHeight: "200px" }}>
-                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
-                          <SignaturePad />
-                        </li>}
+                      <li style={{ borderRadius: "10px", minHeight: "200px" }}>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
+                        <SignaturePad />
+                      </li>
 
                       <div className="col-md-12" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
                       </div>
-                      {deliveryJob &&
-                        <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
-                          <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={()=>jobTransfer(jobDetails.jobnum)}>Request Transfer</button>
-                        </div>}
+                      <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
+                        <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={() => jobTransfer(jobDetails.jobnum)}>Request Transfer</button>
+                      </div>
                     </ul>
                   </div>
                 }
@@ -354,6 +330,53 @@ function All(props) {
         <MenuBar />
 
       </div>
+    </>
+  )
+}
+
+function All(props) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const [jobDetails, setJobDetails] = useState(false);
+  const [collectionJob, setCollectionJob] = useState(false);
+  const [deliveryJob, setDeliveryJob] = useState(false);
+  const [jos, setJos] = useState(false);
+  const [jor, setJor] = useState(false);
+
+  useEffect(() => {
+    const jobNum = queryParams.get('jobnum');
+    const jobtypecode = queryParams.get('jobtypecode');
+    if (jobNum && !jobDetails && jobtypecode) {
+      if (jobtypecode == "JOS") setJos(true);
+      if (jobtypecode == "JOR") setJor(true);
+      window.SpinnerShow()
+      let user = common.getUser();
+      if (user) {
+        axios.get(`job/details/${jobNum}`)
+          .then((result) => {
+            if (result && result.data.success) {
+              setJobDetails(result.data.data)
+              if (result.data.data.jobtype == 'Collection') setCollectionJob(true);
+              else if (result.data.data.jobtype == 'Delivery') setDeliveryJob(true);
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+      window.SpinnerHide()
+    }
+  }, [queryParams]);
+
+  const jobTransfer = (jobnum) => {
+    navigate(`/transfer?jobnum=${jobnum}`);
+  }
+
+  return (
+    <>
+      {jos && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} />}
+      {jor && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} />}
     </>
   )
 }
