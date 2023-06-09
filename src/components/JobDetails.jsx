@@ -126,6 +126,7 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
   );
 };
 
+// manu to one 
 function JORJob({ jobDetails, jobTransfer }) {
 
   const [details, setDetails] = useState(0);
@@ -198,7 +199,7 @@ function JORJob({ jobDetails, jobTransfer }) {
                             </div>
                             <div className="item-footer">
                               <div className="d-flex align-items-center">
-                                <div className="item-subtitle">From : </div>
+                                <div className="item-subtitle">Collection From : {jobDetails.jobaddr}</div>
                               </div>
                               <div className="d-flex align-items-center">
                                 <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
@@ -246,7 +247,6 @@ function JORJob({ jobDetails, jobTransfer }) {
                             </ul>
                           </div>
                         </li>
-
 
                         {jobDetails.collectionplan.map((job, j) => {
                           return (<>
@@ -326,7 +326,7 @@ function JORJob({ jobDetails, jobTransfer }) {
                       {/* Step 1 End */}
 
                       {/* Step 2 Start*/}
-                      {(activeStep == 1) && <>
+                      {(activeStep > 0) && <>
 
                         <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
 
@@ -339,12 +339,12 @@ function JORJob({ jobDetails, jobTransfer }) {
                                 return (<>
                                   <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                     <div className="d-flex align-items-center">
-                                      <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                      {/* <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
                                         <input type="checkbox" />
-                                      </div>
+                                      </div> */}
 
-                                      <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
-                                        <img src="/images/avatar60x60.jpg" alt="logo" />
+                                      <div className="item-media media media-40" style={{ margin: "0 15px 0 0" }}>
+                                        <img src="/images/item.png" alt="logo" />
                                       </div>
 
                                       <div className="item-title-row" style={{ width: "100%" }}>
@@ -497,7 +497,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
                             </div>
                             <div className="item-footer">
                               <div className="d-flex align-items-center">
-                                <div className="item-subtitle">From : </div>
+                                <div className="item-subtitle">Deliver To : {jobDetails.jobaddr}</div>
                               </div>
                               <div className="d-flex align-items-center">
                                 <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
@@ -555,7 +555,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
                       {/* Step 1 End */}
 
                       {/* Step 2 Start*/}
-                      {(activeStep == 1) && <>
+                      {(activeStep > 0) && <>
                         {jobDetails.deliveryplan.map((job, j) => {
                           return (<>
 
