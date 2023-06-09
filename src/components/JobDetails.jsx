@@ -148,7 +148,7 @@ function JORJob({ jobDetails, jobTransfer }) {
     <>
       <div className="page-wraper">
 
-        <Sidebar />
+        <Sidebar menuName="Job Details"/>
 
 
         {/* <!-- Page Content --> */}

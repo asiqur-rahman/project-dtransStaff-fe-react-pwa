@@ -4,7 +4,7 @@ import { faClose, faSquareRss } from '@fortawesome/free-solid-svg-icons';
 import * as common from '../utils/common.utils'
 import { useNavigate, Link } from 'react-router-dom';
 
-function All() {
+function All({menuName}) {
   const navigate = useNavigate();
   const [userDetails, setUserDetails]= useState(false);
   useEffect(()=>{
@@ -37,6 +37,7 @@ function All() {
                 </a>
               </div>
               <div className="mid-content">
+                {menuName}
               </div>
               <div className="right-content">
                 <a href="#" className="theme-btn">
@@ -79,7 +80,7 @@ function All() {
             </span>
             <span>Jobs</span>
           </Link></li>
-          <li><Link className="nav-link" to="/">
+          <li><Link className="nav-link" to="/job-records">
             <span className="dz-icon">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z" /></svg>
             </span>

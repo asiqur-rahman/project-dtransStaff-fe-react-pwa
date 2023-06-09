@@ -4,6 +4,7 @@ import HomePage  from './pages/HomePage'
 import LoginPage  from './pages/LoginPage'
 import JobsPage  from './pages/JobsPage'
 import JobDetailsPage  from './pages/JobDetailsPage'
+import JobRecordsPage  from './pages/JobRecordsPage'
 import ForgetPasswordPage  from './pages/ForgetPasswordPage'
 import OTPPage  from './pages/OTPPage'
 import ProfilePage  from './pages/ProfilePage'
@@ -31,6 +32,7 @@ function App() {
                 <Route element={<JobsPage/>} path="/" exact/>
                 <Route element={<JobsPage/>} path="/jobs"/>
                 <Route element={<JobDetailsPage/>} path="/job-details"/>
+                <Route element={<JobRecordsPage/>} path="/job-records"/>
                 <Route element={<ProfilePage/>} path="/profile"/>
                 <Route element={<TransferPage/>} path="/transfer"/>
                 <Route element={<NotificationPage/>} path="/notification"/>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCar, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faCar, faCalendar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import axios from '../utils/axios.utils'
 import { useNavigate, Link } from 'react-router-dom';
 import * as common from '../utils/common.utils'
@@ -83,7 +83,7 @@ function All() {
     <>
       <div className="page-wraper">
 
-        <Sidebar menuName="Jobs"/>
+        <Sidebar menuName="Job Records"/>
 
 
         {/* <!-- Page Content --> */}
@@ -108,43 +108,6 @@ function All() {
                           </div>
                         )
                       })}
-                      
-                      {/* <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                        <a href="#" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                        <a href="#" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                        <a href="#" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                        <a href="#" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                        <a href="#" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div>
-                      <div className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                        <a href="#" className="categore-box style-1">
-                          <span className="title">Fri</span>
-                          <span className="title">16</span>
-                        </a>
-                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -160,7 +123,7 @@ function All() {
                     </div>
                     <div className="item-inner pt-2">
                       <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
-                        <h6 className="item-title"><a href="#" style={{ color: "white",fontSize:"13px" }}>Job Confirmed</a></h6>
+                        <h6 className="item-title"><a href="#" style={{ color: "white",fontSize:"13px" }}>Total Jobs</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
                         <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.completed : "0"}</h6>
@@ -170,15 +133,15 @@ function All() {
                   <div className="item-content" onClick={()=>showJobsFor(2)} style={{ width: "50%", height: "50px", marginLeft: "3px", borderRadius: "10px", background: "linear-gradient(to right, #00BFFF, #007BFF)" }}>
                     <div className="item-media media media-50" style={{ marginRight: "0" }}>
                       <a href="#" onClick={preventDefault} className="menu-toggler">
-                        <FontAwesomeIcon icon={faCar} size='2x' color='white' />
+                        <FontAwesomeIcon icon={faDollarSign} size='2x' color='white' />
                       </a>
                     </div>
                     <div className="item-inner pt-2">
                       <div className="item-title-row" style={{ margin: "5px", textAlign: "center" }}>
-                        <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"13px" }}>Job Pending</a></h6>
+                        <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"13px" }}>Earned</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
-                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.pending : "0"}</h6>
+                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>$ 0</h6>
                       </div>
                     </div>
                   </div>
