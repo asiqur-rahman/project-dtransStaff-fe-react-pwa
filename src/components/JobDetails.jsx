@@ -406,7 +406,7 @@ function JORJob({ jobDetails, jobTransfer }) {
 
                       {activeStep==2 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Collect Returned Items</button>
+                        <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }}>Collect Returned Items</button>
                       </div>
                       </>}
                     </ul>
@@ -664,7 +664,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
 
                       {activeStep==2 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Collect Returned Items</button>
+                        <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }}>Collect Returned Items</button>
                       </div>
                       </>}
                     </ul>
