@@ -8,27 +8,18 @@ import MenuBar from './Menubar'
 import Sidebar from './Sidebar'
 
 function All() {
-  const preventDefault = (event) => {
-    // event.preventDefault(); // Prevents the default behavior of the anchor tag
-    // Additional functionality can be added here if needed
-  };
   const navigate = useNavigate();
-  const [selectedDate, setSelectedDate] = useState(false);
-  const [dates, setDates] = useState(false);
-  const [todayJobs, setTodayJobs] = useState(false);
-  const [filteredJobs, setFilteredJobs] = useState(false);
+  const [payslips, setPayslips] = useState(false);
 
-  const fetchJobs = (date) =>{
+  const fetchJobs = () =>{
     window.SpinnerShow();
-    setTodayJobs(false);
+    setPayslips(false);
     let user = common.getUser();
     if (user) {
-      setSelectedDate(date);
-      axios.get(`job/active?date=${date}`)
+      axios.get(`payslip`)
         .then((result) => {
           if (result && result.data.success) {
-            setTodayJobs(result.data.data)
-            showJobsFor(1,result.data.data.jobs)
+            setPayslips(result.data.data)
           }
         })
         .catch((error) => {
@@ -38,46 +29,10 @@ function All() {
     window.SpinnerHide();
   }
 
-  const showJobsFor = (showFor, data=[]) =>{
-    if(data.length==0){
-      data=todayJobs.jobs;
-    }
-    if(showFor==1){
-      const pending = data.filter(x=>x.jobstatus!="Pending");
-      setFilteredJobs(pending);
-    }
-    else if (showFor==2){
-      const confirmed = todayJobs.jobs.filter(x=>x.jobstatus=="Pending");
-      setFilteredJobs(confirmed)
-    }
-  }
 
   useEffect(() => {
-    const todayDate = new Date().toISOString().split('T')[0]
-    fetchJobs(todayDate);
-
-    const today = new Date();  // Get today's date
-    today.setDate(today.getDate() - 2);  // Subtract 2 days
-
-    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const datesArray = [];
-
-    for (let i = 0; i < 7; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-      const value = date.toISOString().split('T')[0];
-      const dayOfWeek = daysOfWeek[date.getDay()];
-      datesArray.push({day:dayOfWeek, date:date.getDate(), value: value});
-    }
-    setDates(datesArray);
+    fetchJobs();
   }, [])
-
-  const seeJobDetails = (jobnum,jobtypecode)  =>{
-    navigate(`/job-details?jobnum=${jobnum}&jobtypecode=${jobtypecode}`);
-  }
-  const jobTransfer = (jobnum)  =>{
-    navigate(`/transfer?jobnum=${jobnum}`);
-  }
 
   return (
     <>
@@ -99,7 +54,7 @@ function All() {
 
                   <ul style={{marginTop:"25px"}}>
                     {
-                      filteredJobs && filteredJobs.map((item, i) => {
+                      payslips && payslips.map((item, i) => {
                         return (
                           <li  key={i} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0",background: "white" }}>
                             <div className="item-content">
@@ -113,10 +68,10 @@ function All() {
                                     <div className="item-title-row" >
                                       <div className="item-footer" style={{ marginBottom: "0" }}>
                                         <div className="d-flex align-items-center">
-                                          <h5 className="me-3" style={{ color: "var(--primary)",marginBottom: "0" }}>June 2023</h5>
+                                          <h5 className="me-3" style={{ color: "var(--primary)",marginBottom: "0" }}>{item.title}</h5>
                                         </div>
                                       </div>
-                                      <div className="item-subtitle" style={{ color: "var(--primary)",fontSize: "11px"}}>$ 123456</div>
+                                      <div className="item-subtitle" style={{ color: "var(--primary)",fontSize: "11px"}}>{item.amount}</div>
                                     </div>
                                   </div>
                                   <div className="d-flex align-items-center">
