@@ -29,6 +29,17 @@ function All() {
     window.SpinnerHide();
   }
 
+  const downloadPayslip = (refnum,title) =>{
+    axios.get(`payslip/${refnum}`)
+    .then((result) => {
+      if (result && result.data.success) {
+        common.downloadFile(result.data.data.payslipurl,title)
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
 
   useEffect(() => {
     fetchJobs();
@@ -75,7 +86,7 @@ function All() {
                                     </div>
                                   </div>
                                   <div className="d-flex align-items-center">
-                                  <button className="btn btn-sm success" style={{ backgroundColor: "yellow", color: "var(--primary)", padding: "5px 4px" }}>Generate Slip</button>
+                                  <button className="btn btn-sm success" style={{ backgroundColor: "yellow", color: "var(--primary)", padding: "5px 4px" }} onClick={()=>downloadPayslip(item.refnum,item.title)}>Generate Slip</button>
                                   </div>
                                 </div>
 

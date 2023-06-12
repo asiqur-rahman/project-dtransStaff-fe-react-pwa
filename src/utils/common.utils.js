@@ -93,3 +93,20 @@ export const decrypt= (data) => {
         return null;
     }
 }
+
+export const downloadFile = (url, fileName) => {
+    let link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+  
+    // Check if the file is an image
+    if (url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png') || url.endsWith('.gif')) {
+      // If it's an image, open it in a new window
+      window.open(url, '_blank');
+    } else {
+      // If it's not an image, download it
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
