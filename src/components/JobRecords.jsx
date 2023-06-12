@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar, faCalendar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import axios from '../utils/axios.utils'
@@ -6,8 +6,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import * as common from '../utils/common.utils'
 import MenuBar from './Menubar'
 import Sidebar from './Sidebar'
+import Swiper from 'swiper';
+import 'swiper/swiper-bundle.css';
 
 function All() {
+  const swiperRef = useRef(null);
   const preventDefault = (event) => {
     // event.preventDefault(); // Prevents the default behavior of the anchor tag
     // Additional functionality can be added here if needed
@@ -18,7 +21,7 @@ function All() {
   const [todayJobs, setTodayJobs] = useState(false);
   const [filteredJobs, setFilteredJobs] = useState(false);
 
-  const fetchJobs = (date) =>{
+  const fetchJobs = (date) => {
     window.SpinnerShow();
     setTodayJobs(false);
     let user = common.getUser();
@@ -28,7 +31,7 @@ function All() {
         .then((result) => {
           if (result && result.data.success) {
             setTodayJobs(result.data.data)
-            showJobsFor(1,result.data.data.jobs)
+            showJobsFor(1, result.data.data.jobs)
           }
         })
         .catch((error) => {
@@ -38,44 +41,54 @@ function All() {
     window.SpinnerHide();
   }
 
-  const showJobsFor = (showFor, data=[]) =>{
-    if(data.length==0){
-      data=todayJobs.jobs;
+  const showJobsFor = (showFor, data = []) => {
+    if (data.length == 0) {
+      data = todayJobs.jobs;
     }
-    if(showFor==1){
-      const pending = data.filter(x=>x.jobstatus!="Pending");
+    if (showFor == 1) {
+      const pending = data.filter(x => x.jobstatus != "Pending");
       setFilteredJobs(pending);
     }
-    else if (showFor==2){
-      const confirmed = todayJobs.jobs.filter(x=>x.jobstatus=="Pending");
+    else if (showFor == 2) {
+      const confirmed = todayJobs.jobs.filter(x => x.jobstatus == "Pending");
       setFilteredJobs(confirmed)
     }
   }
+
+  useEffect(() => {
+    swiperRef.current = new Swiper('.categorie-swiper', {
+      // Customize the swiper options as per your requirements
+      // For example:
+      slidesPerView: 'auto',
+      spaceBetween: 10,
+    });
+  }, []);
 
   useEffect(() => {
     const todayDate = new Date().toISOString().split('T')[0]
     fetchJobs(todayDate);
 
     const today = new Date();  // Get today's date
-    today.setDate(today.getDate() - 2);  // Subtract 2 days
+    today.setDate(today.getDate() - 15);  // Subtract 2 days
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const datesArray = [];
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 16; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
       const value = date.toISOString().split('T')[0];
       const dayOfWeek = daysOfWeek[date.getDay()];
-      datesArray.push({day:dayOfWeek, date:date.getDate(), value: value});
+      datesArray.push({ day: dayOfWeek, date: date.getDate(), value: value });
     }
     setDates(datesArray);
   }, [])
 
-  const seeJobDetails = (jobnum,jobtypecode)  =>{
+  const seeJobDetails = (jobnum, jobtypecode) => {
     navigate(`/job-details?jobnum=${jobnum}&jobtypecode=${jobtypecode}`);
   }
-  const jobTransfer = (jobnum)  =>{
+
+  const jobTransfer = (jobnum) => {
     navigate(`/transfer?jobnum=${jobnum}`);
   }
 
@@ -83,7 +96,7 @@ function All() {
     <>
       <div className="page-wraper">
 
-        <Sidebar menuName="Job Records"/>
+        <Sidebar menuName="Job Records" />
 
 
         {/* <!-- Page Content --> */}
@@ -94,14 +107,14 @@ function All() {
 
               {/* <!-- Dashboard Area --> */}
               <div className="dashboard-area pt-4">
-                {/* <!-- Categorie --> */}
+                {/* Categorie */}
                 <div className="swiper-btn-center-lr" style={{ marginBottom: "10px" }}>
                   <div className="swiper-container mt-4 categorie-swiper categorie-swiper-custom">
                     <div className="swiper-wrapper">
-                      {dates && dates.map((item,i)=>{
+                      {dates && dates.map((item, i) => {
                         return (
                           <div key={i} className="swiper-slide" style={{ paddingBottom: "2px", marginRight: "10px" }}>
-                            <button onClick={()=>fetchJobs(item.value)} className="categore-box style-1" style={{ border:selectedDate==item.value?"2px solid var(--primary)":"none" }}>
+                            <button onClick={() => fetchJobs(item.value)} className="categore-box style-1" style={{ border: selectedDate == item.value ? "2px solid var(--primary)" : "none" }}>
                               <span className="title">{item.day}</span>
                               <span className="title">{item.date}</span>
                             </button>
@@ -111,7 +124,6 @@ function All() {
                     </div>
                   </div>
                 </div>
-                {/* <!-- Categorie End --> */}
 
                 {/* <!-- Item box Start --> */}
                 <div className="item-list style-2 recent-jobs-list" style={{ display: "flex" }}>
