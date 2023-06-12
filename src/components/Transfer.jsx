@@ -10,6 +10,14 @@ function All(props) {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const [jobDetails, setJobDetails] = useState(false);
+  const [transferList, setTransferList] = useState(false);
+  const [searchKey, setSearchKey] = useState('');
+
+  const search = (key) =>{
+    setSearchKey(key)
+    var list = jobDetails.filter(x=>x.empname.includes(key))
+    setTransferList(list)
+  }
 
   useEffect(() => {
     const jobNum = queryParams.get('jobnum');
@@ -21,6 +29,7 @@ function All(props) {
           .then((result) => {
             if (result && result.data.success) {
               setJobDetails(result.data.data)
+              setTransferList(result.data.data)
             }
           })
           .catch((error) => {
@@ -48,7 +57,7 @@ function All(props) {
               {/* <!-- Dashboard Area --> */}
               <div className="dashboard-area pt-5">
 
-                {jobDetails &&
+                {transferList &&
                   <div className="item-list recent-jobs-list pt-3">
                     {/* <h4 className="title my-4">Job Details</h4> */}
 
@@ -66,6 +75,8 @@ function All(props) {
                             // value={username}
                             // onChange={(e) => setUsername(e.target.value)}
                             placeholder="Search"
+                            value={searchKey}
+                            onChange={(e)=>search(e.target.value)}
                           />
                         </div>
                         </div>
@@ -82,7 +93,7 @@ function All(props) {
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Transfer To</h5>
                         <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
-                            {jobDetails.map((item, i) => {
+                            {transferList.map((item, i) => {
                               return (
                                 <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                   <div className="d-flex align-items-center">

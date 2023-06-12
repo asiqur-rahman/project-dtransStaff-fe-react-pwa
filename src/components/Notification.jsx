@@ -8,6 +8,8 @@ import axios from '../utils/axios.utils'
 function All() {
   const [showModal, setShowModal] = useState(false);
   const [notifications, setNotifications] = useState(false);
+  const [header, setHeader] = useState(false);
+  const [body, setBody] = useState(false);
   useEffect(() => {
     window.SpinnerShow();
     let user = common.getUser();
@@ -25,11 +27,23 @@ function All() {
     window.SpinnerHide();
   }, []);
 
-  const openModal = () => {
-    setShowModal(true);
+  const openModal = (refnum) => {
+    axios.get(`notification/${refnum}`)
+      .then((result) => {
+        if (result && result.data.success) {
+          setHeader(result.data.data.title);
+          setBody(result.data.data.body);
+          setShowModal(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    
+  };
+  const handleShow = () => {
     window.handleRemoveFadeFromModal();
   };
-
   const closeModal = () => {
     setShowModal(false);
   };
@@ -64,7 +78,7 @@ function All() {
           <div className="container">
             {notifications && notifications.map((item, i) => {
               return (
-                <a href="#" key={i} className={`notification ${item.new && "bg-success"}`} onClick={()=>openModal()}>
+                <a href="#" key={i} className={`notification ${item.new && "bg-success"}`} onClick={()=>openModal(item.refnum)}>
                   <div className="notification-content item-list">
                     <div className="item-content">
                       <div className="media media-35">
@@ -88,16 +102,12 @@ function All() {
           </div>
         </div>
 
-        <Modal show={showModal} onHide={closeModal} className="notification-modal">
-          <Modal.Header closeButton>
-            <Modal.Title>Modal Title</Modal.Title>
+        <Modal centered={true} show={showModal} onEntered={handleShow} onHide={closeModal} className="notification-modal">
+          <Modal.Header closeButton style={{display:"block"}}>
+            <Modal.Title style={{textAlign:"center"}}>{header}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {/* Modal content */}
-            asdasdadsasd
-            asd
-            as
-
+          <div style={{fontSize:"14px"}} dangerouslySetInnerHTML={{ __html: body }}></div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={closeModal}>
