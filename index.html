@@ -53,6 +53,7 @@
 
 <body class="bg-white">
     <div class="page-wraper" id="root"></div>
+    
     <script type="module" src="/src/main.jsx"></script>
     <script src="/js/jquery.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -399,6 +400,7 @@
                 }
             }
 
+            
             /* Function ============ */
             return {
                 init: function () {
@@ -483,6 +485,10 @@
     function SpinnerHide() {
         jQuery('.preloader-area').fadeOut();
     }
+    var handleRemoveFadeFromModal = function () {
+        jQuery('.modal.fade').removeClass('fade')
+    }
+
   </script>
 </body>
 
