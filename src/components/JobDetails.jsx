@@ -95,7 +95,7 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
   return (
     <div className="item-list style-2 recent-jobs-list" style={{ marginTop: "30px" }}>
       <div className="stepper">
-        <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{ textAlign: "center" }}>
+        <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{ textAlign: "center", fontWeight:activeStep == 0 ?"800":"normal" }}>
           <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(0)}>
             <FontAwesomeIcon icon={activeStep >= 0 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
@@ -104,7 +104,7 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
           {/* <div style={{ fontSize: "8px" }}>10:10 PM</div> */}
         </div>
         <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
-        <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`}>
+        <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`} style={{ textAlign: "center", fontWeight:activeStep == 1 ?"800":"normal" }}>
           <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(1)}>
             <FontAwesomeIcon icon={activeStep >= 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
@@ -113,7 +113,7 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
           {/* <div style={{ fontSize: "8px" }}>10:10 PM</div> */}
         </div>
         <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
-        <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`}>
+        <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`} style={{ textAlign: "center", fontWeight:activeStep == 2 ?"800":"normal" }}>
           <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(2)}>
             <FontAwesomeIcon icon={activeStep >= 2 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
