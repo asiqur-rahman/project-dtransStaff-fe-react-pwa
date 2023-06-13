@@ -82,7 +82,7 @@ function All() {
                   <div className="notification-content item-list">
                     <div className="item-content">
                       <div className="media media-35">
-                        <img src="/images/author/pic1.png" alt="image" />
+                        <img src="/images/item.png" alt="image" />
                       </div>
                       <div className="item-inner">
                         <h5 className="title" style={{ fontSize: "14px" }}>{item.title}</h5>
