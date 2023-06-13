@@ -282,7 +282,7 @@ function All() {
                         <span className="input-group-text">
                           <i className="fa fa-transgender" style={{ fontSize: "16px" }}></i>
                         </span>
-                        <select className="form-control">
+                        <select className="form-control" onChange={(e)=>setGender(e.target.value)}>
                           {gender == "M" ?<option value="M" selected>Male</option>:<option value="M">Male</option>}
                           {gender == "F" ?<option value="F" selected>Female</option>:<option value="F">Female</option>}
                         </select>
