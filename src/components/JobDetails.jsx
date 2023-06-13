@@ -71,17 +71,17 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
 
   useEffect(() => {
     if (jobDetails) {
-      if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
-        || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
-        setActiveStep(0);
+      if ((jobDetails.jobtype == 'Delivery' && jobDetails.scheduledate.length > 1)
+        || (jobDetails.jobtype == 'Collection' && jobDetails.scheduledate.length > 1)) {
+          sActiveStep(1);
       }
-      else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
-        || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
-        setActiveStep(1);
+      if ((jobDetails.jobtype == 'Delivery' && jobDetails.collectedat.length > 1)
+        || (jobDetails.jobtype == 'Collection' && jobDetails.collectedat.length > 1)) {
+          sActiveStep(2);
       }
-      else if ((jobDetails.jobtype == 'delivery' && jobDetails.deliveredat.length > 1)
-        || (jobDetails.jobtype == 'collection' && jobDetails.collectedat.length > 1)) {
-        setActiveStep(2);
+      if ((jobDetails.jobtype == 'Delivery' && jobDetails.deliveredat.length > 1)
+        || (jobDetails.jobtype == 'Collection' && jobDetails.deliveredat.length > 1)) {
+          sActiveStep(2);
       }
     }
   }, [jobDetails]);
@@ -97,28 +97,28 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
       <div className="stepper">
         <div className={`step ${activeStep >= 0 ? 'active' : 'inactive'}`} style={{ textAlign: "center", fontWeight:activeStep == 0 ?"800":"normal" }}>
           <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(0)}>
-            <FontAwesomeIcon icon={activeStep >= 0 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
+            <FontAwesomeIcon icon={activeStep >= 0 && jobDetails && jobDetails.scheduledate.length > 1? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Collected</div>
-          <div style={{ fontSize: "8px" }}>2023-05-12</div>
+          <div style={{ fontSize: "8px" }}>{jobDetails && jobDetails.scheduledate}</div>
           {/* <div style={{ fontSize: "8px" }}>10:10 PM</div> */}
         </div>
         <div className={`line ${activeStep >= 0 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 1 ? 'active' : 'inactive'}`} style={{ textAlign: "center", fontWeight:activeStep == 1 ?"800":"normal" }}>
           <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(1)}>
-            <FontAwesomeIcon icon={activeStep >= 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
+            <FontAwesomeIcon icon={activeStep >= 1 && jobDetails &&  jobDetails.collectedat.length > 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Delivered</div>
-          <div style={{ fontSize: "8px" }}>2023-05-12</div>
+          <div style={{ fontSize: "8px" }}>{jobDetails && jobDetails.collectedat}</div>
           {/* <div style={{ fontSize: "8px" }}>10:10 PM</div> */}
         </div>
         <div className={`line ${activeStep >= 1 ? 'active' : ''}`}></div>
         <div className={`step ${activeStep >= 2 ? 'active' : 'inactive'}`} style={{ textAlign: "center", fontWeight:activeStep == 2 ?"800":"normal" }}>
           <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(2)}>
-            <FontAwesomeIcon icon={activeStep >= 2 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
+            <FontAwesomeIcon icon={activeStep >= 2 && jobDetails && jobDetails.deliveredat.length > 1 ? faCircleCheck : faCircle} size='2x' color='var(--primary)' className='icon' />
           </div>
           <div className="step-text">Completed</div>
-          <div style={{ fontSize: "8px" }}>2023-05-12</div>
+          <div style={{ fontSize: "8px" }}>{jobDetails && jobDetails.deliveredat}</div>
           {/* <div style={{ fontSize: "8px" }}>10:10 PM</div> */}
         </div>
       </div>
@@ -127,10 +127,11 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
 };
 
 // manu to one 
-function JORJob({ jobDetails, jobTransfer }) {
+function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
 
   const [details, setDetails] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
+  const [remarks, setRemarks] = useState('');
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -249,10 +250,10 @@ function JORJob({ jobDetails, jobTransfer }) {
                           </div>
                         </li>
 
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
                         {jobDetails.collectionplan.map((job, j) => {
                           return (<>
 
-                            <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
                             <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                               <div className="item-content" style={{ marginTop: "10px" }}>
                                 <div className="item-inner" style={{ margin: "10px 0" }}>
@@ -391,7 +392,7 @@ function JORJob({ jobDetails, jobTransfer }) {
                       </li>
                       {activeStep==0 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" onClick={()=>setActiveStep(1)} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
+                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(1); collected(jobDetails.jobnum,remarks);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
                       </div>
                       <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={() => jobTransfer(jobDetails.jobnum)}>Request Transfer</button>
@@ -400,7 +401,7 @@ function JORJob({ jobDetails, jobTransfer }) {
 
                       {activeStep==1 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" onClick={()=>setActiveStep(2)} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                       </div>
                       </>}
 
@@ -426,10 +427,11 @@ function JORJob({ jobDetails, jobTransfer }) {
   )
 }
 
-function JOSJob({ jobDetails, jobTransfer }) {
+function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
 
   const [details, setDetails] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
+  const [remarks, setRemarks] = useState('');
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -443,6 +445,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
       setDetails(j);
     }
   }
+
   return (
     <>
       <div className="page-wraper">
@@ -633,23 +636,23 @@ function JOSJob({ jobDetails, jobTransfer }) {
                         })}
                       </>}
                       {/* Step 2 End */}
-
+{/* 
                       {activeStep > 0 &&
                         <li style={{ borderRadius: "10px", minHeight: "200px" }}>
                           <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
                           <SignaturePad editable={activeStep<2}/>
-                        </li>}
+                        </li>} */}
 
                       <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
                         <div className="pt-2">
-                          <textarea rows={3} className="form-control" style={{ width: "100%" }} />
+                          <textarea rows={3} className="form-control" style={{ width: "100%" }} value={remarks} onChange={(e)=>setRemarks(e.target.value)}/>
                         </div>
                       </li>
 
                       {activeStep==0 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" onClick={()=>setActiveStep(1)} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
+                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(1);collected(jobDetails.jobnum, remarks); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
                       </div>
                       <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={() => jobTransfer(jobDetails.jobnum)}>Request Transfer</button>
@@ -658,7 +661,7 @@ function JOSJob({ jobDetails, jobTransfer }) {
 
                       {activeStep==1 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" onClick={()=>setActiveStep(2)} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                       </div>
                       </>}
 
@@ -694,6 +697,20 @@ function All(props) {
   const [jos, setJos] = useState(false);
   const [jor, setJor] = useState(false);
 
+  const fetchJobDetails = (jobNum) =>{
+    axios.get(`job/details/${jobNum}`)
+      .then((result) => {
+        if (result && result.data.success) {
+          setJobDetails(result.data.data)
+          if (result.data.data.jobtype == 'Collection') setCollectionJob(true);
+          else if (result.data.data.jobtype == 'Delivery') setDeliveryJob(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     const jobNum = queryParams.get('jobnum');
     const jobtypecode = queryParams.get('jobtypecode');
@@ -703,17 +720,7 @@ function All(props) {
       window.SpinnerShow()
       let user = common.getUser();
       if (user) {
-        axios.get(`job/details/${jobNum}`)
-          .then((result) => {
-            if (result && result.data.success) {
-              setJobDetails(result.data.data)
-              if (result.data.data.jobtype == 'Collection') setCollectionJob(true);
-              else if (result.data.data.jobtype == 'Delivery') setDeliveryJob(true);
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        fetchJobDetails(jobNum)
       }
       window.SpinnerHide()
     }
@@ -723,10 +730,47 @@ function All(props) {
     navigate(`/transfer?jobnum=${jobnum}`);
   }
 
+  const collected = (jobnum,remarks)  =>{
+    window.SpinnerShow();
+    const body = {
+      jobnum: jobnum,
+      status: "Collected",
+      remarks : remarks
+    }
+    axios.post(`job/updatestatus`,body)
+      .then((result) => {
+        if (result && result.data.success) {
+          fetchJobDetails(jobnum)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    window.SpinnerHide();
+  }
+
+  const delivered = (jobnum,remarks)  =>{
+    window.SpinnerShow();
+    const body = {
+      jobnum: jobnum,
+      status: "Delivered",
+      remarks : remarks
+    }
+    axios.post(`job/updatestatus`,body)
+      .then((result) => {
+        if (result && result.data.success) {
+          fetchJobDetails(jobnum)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    window.SpinnerHide();
+  }
   return (
     <>
-      {jos && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} />}
-      {jor && <JORJob jobDetails={jobDetails} jobTransfer={jobTransfer} />}
+      {jos && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered}/>}
+      {jor && <JORJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered}/>}
     </>
   )
 }

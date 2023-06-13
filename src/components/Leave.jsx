@@ -12,19 +12,39 @@ import './JobDetails.css';
 function All(props) {
   const location = useLocation();
   const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-  const [jobDetails, setJobDetails] = useState(false);
-  const [collectionJob, setCollectionJob] = useState(false);
-  const [deliveryJob, setDeliveryJob] = useState(false);
-  const [jos, setJos] = useState(false);
-  const [jor, setJor] = useState(false);
+  const [leaveData, setleaveData] = useState(false);
+
+  useEffect(() => {
+    let user = common.getUser();
+    if (user) {
+      axios.get(`leave`)
+        .then((result) => {
+          if (result && result.data.success) {
+            result.data.data.records = result.data.data.records.reduce((acc, item) => {
+              const year = item.year;
+              if (!acc[year]) {
+                acc[year] = [];
+              }
+              acc[year].push(item);
+              return acc;
+            }, {});
+
+            setleaveData(result.data.data)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    window.SpinnerHide()
+  }, [])
 
 
   return (
     <>
       <div className="page-wraper">
 
-        <Sidebar menuName="My Leave"/>
+        <Sidebar menuName="My Leave" />
 
 
         {/* <!-- Page Content --> */}
@@ -41,15 +61,14 @@ function All(props) {
 
                   <ul>
 
-
-                    <li style={{ borderRadius: "10px", margin: "5px 0" }}>
+                    <li style={{ borderRadius: "10px" }}>
                       <div className="item-content" style={{ marginTop: "10px" }}>
                         <div className="item-inner" style={{ margin: "10px 0" }}>
 
                           <div className="item-title-row">
                             <div className="item-footer" style={{ marginBottom: "0" }}>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Current Leave Balance</span><br /></h6>
+                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "15px", fontWeight: "normal" }}>Current Leave Balance</span><br /></h6>
                               </div>
 
                               <div className="d-flex align-items-center">
@@ -59,10 +78,10 @@ function All(props) {
                           <div className="item-title-row">
                             <div className="item-footer" style={{ marginBottom: "0" }}>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "18px", fontWeight: "normal" }}>12</span><br />Annual Leave</h6>
+                                <h6 className="me-3" style={{ fontSize: "16px" }}><span style={{ fontSize: "26px", fontWeight: "normal" }}>{leaveData ? leaveData.balance.AL : "0"}</span><br />Annual Leave</h6>
                               </div>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "18px", fontWeight: "normal" }}>10.5</span><br />Sick Leave</h6>
+                                <h4 className="me-3" style={{ fontSize: "16px" }}><span style={{ fontSize: "26px", fontWeight: "normal" }}>{leaveData ? leaveData.balance.SL : "0"}</span><br />Sick Leave</h4>
                               </div>
                               <div className="d-flex align-items-center">
                                 <h6 className="me-3"></h6>
@@ -75,7 +94,40 @@ function All(props) {
 
                         <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
-                            <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>2020</h5>
+
+                            {leaveData && Object.entries(leaveData.records).map(([year, items]) => (
+                              <div key={year}>
+                                <h4 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>{year}</h4>
+                                  {items.map((item, i) => (
+                                    <li className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                      <div key={i} className="d-flex align-items-center" style={{ background: "white", padding: "10px 12px" }}>
+
+                                        <div className="item-title-row" style={{ width: "100%" }}>
+                                          <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                            <div className="d-flex align-items-center">
+                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.duration} Day(s) AL</h5>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div className="item-title-row" style={{ width: "150%" }}>
+                                          <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                            <div className="d-flex align-items-center">
+                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.leavefrom}-{item.leaveto} </h5>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "0%" }}>
+                                          <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' style={{ cursor: "pointer" }} />
+                                        </div>
+                                      </div>
+                                      {/* <hr style={{ margin: '0' }} /> */}
+                                    </li>
+                                  ))}
+                              </div>
+                            ))}
+                            {/* <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>2020</h5>
                             <li className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                               <div className="d-flex align-items-center" style={{ background: "white", padding: "10px 0" }}>
 
@@ -173,7 +225,7 @@ function All(props) {
                                 </div>
                               </div>
                               <hr style={{ margin: '0' }} />
-                            </li>
+                            </li> */}
                           </ul>
                         </div>
                       </div>

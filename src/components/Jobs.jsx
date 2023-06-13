@@ -19,6 +19,8 @@ function All() {
   const [filteredJobs, setFilteredJobs] = useState(false);
 
   const fetchJobs = (date) =>{
+    if(!date)date=new Date().toISOString().split('T')[0];
+    
     window.SpinnerShow();
     setTodayJobs(false);
     let user = common.getUser();
@@ -77,6 +79,42 @@ function All() {
   }
   const jobTransfer = (jobnum)  =>{
     navigate(`/transfer?jobnum=${jobnum}`);
+  }
+
+  const acceptTransfer = (jobnum)  =>{
+    window.SpinnerShow();
+    const body = {
+        jobnum: jobnum,
+        status: "Accepted"
+    }
+    axios.post(`job/updatestatus`,body)
+      .then((result) => {
+        if (result && result.data.success) {
+          fetchJobs();
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    window.SpinnerHide();
+  }
+
+  const rejectTransfer = (jobnum)  =>{
+    window.SpinnerShow();
+    const body = {
+        jobnum: jobnum,
+        status: "Rejected"
+    }
+    axios.post(`job/updatestatus`,body)
+      .then((result) => {
+        if (result && result.data.success) {
+          fetchJobs();
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    window.SpinnerHide();
   }
 
   return (
@@ -233,9 +271,10 @@ function All() {
                                     <div className="item-subtitle">{item.jobtypecode=="JOS"?"From":"To"} : {item.jobaddr}</div>
                                   </div>
                                   <div className="d-flex align-items-center">
-                                    {item.jobstatus=='Pending' && !item.allowtransfer &&
-                                      <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }}>Accept Transfer</button>
-                                    }
+                                    {item.jobstatus=='Pending' && !item.allowtransfer && <>
+                                      <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }} onClick={()=>acceptTransfer(item.jobnum)}>Accept</button> 
+                                      <button className="btn btn-sm success" style={{ backgroundColor: "red", color: "var(--bg-white)", padding: "5px 4px", marginLeft:"5px" }} onClick={()=>rejectTransfer(item.jobnum)}>Reject</button>
+                                    </>}
                                     {item.jobstatus=='Confirm' &&
                                     <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }}>Confirm</button>
                                     } 
