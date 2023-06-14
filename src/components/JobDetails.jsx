@@ -8,8 +8,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import * as common from '../utils/common.utils'
 import axios from '../utils/axios.utils'
 import './JobDetails.css';
+import { toast } from 'react-toastify';
 
-const SignaturePad = ({editable}) => {
+const SignaturePad = ({editable, setSignature}) => {
   const signatureRef = useRef(null);
 
   const handleClear = () => {
@@ -41,8 +42,7 @@ const SignaturePad = ({editable}) => {
 
   const handleSave = () => {
     const signatureDataURL = signatureRef.current.toDataURL();
-    // Use the signatureDataURL as needed (e.g., send it to the server, store it in state, etc.)
-    console.log(signatureDataURL);
+    setSignature(signatureDataURL.substring(signatureDataURL.indexOf(',') + 1));
   };
 
   return (
@@ -131,12 +131,23 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
 
   const [details, setDetails] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
+  const [signature, setSignature] = useState('');
   const [remarks, setRemarks] = useState('');
 
   const cActiveStep = (e) => {
     setActiveStep(e);
   }
 
+  const makeDelivered =()=>{
+    if(signature.length<5){
+      toast.error("Please provide the signature and press save !")
+      return;
+    }
+    else{
+      delivered(jobDetails.jobnum, remarks, signature);
+      cActiveStep(2);
+    }
+  }
   const showDetails = (j) => {
     if (details == j) {
       setDetails(-1);
@@ -381,7 +392,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                       {activeStep > 0 &&
                         <li style={{ borderRadius: "10px", minHeight: "200px" }}>
                           <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
-                          <SignaturePad editable={activeStep<2}/>
+                          <SignaturePad editable={activeStep<2} setSignature={setSignature}/>
                         </li>}
 
                       <li style={{ borderRadius: "10px" }}>
@@ -401,7 +412,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
 
                       {activeStep==1 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum, remarks);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                        <button type="button" className="btn btn-danger w-100" onClick={()=>{makeDelivered();}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                       </div>
                       </>}
 
@@ -749,12 +760,14 @@ function All(props) {
     window.SpinnerHide();
   }
 
-  const delivered = (jobnum,remarks)  =>{
+  const delivered = (jobnum,remarks,signature)  =>{
     window.SpinnerShow();
+    
     const body = {
       jobnum: jobnum,
       status: "Delivered",
-      remarks : remarks
+      remarks : remarks,
+      signature : signature
     }
     axios.post(`job/updatestatus`,body)
       .then((result) => {

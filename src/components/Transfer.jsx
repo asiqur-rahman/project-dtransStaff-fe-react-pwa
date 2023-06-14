@@ -1,22 +1,50 @@
 import React, { useEffect, useState, useRef } from 'react';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import * as common from '../utils/common.utils'
 import axios from '../utils/axios.utils'
+import { toast } from 'react-toastify';
 import './JobDetails.css';
 
 function All(props) {
+  const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const [jobDetails, setJobDetails] = useState(false);
   const [transferList, setTransferList] = useState(false);
   const [searchKey, setSearchKey] = useState('');
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [reason, setReason] = useState('');
 
   const search = (key) =>{
     setSearchKey(key)
-    var list = jobDetails.filter(x=>x.empname.includes(key))
+    var list = jobDetails.filter(x => x.empname.toLowerCase().includes(key.toLowerCase()));
     setTransferList(list)
+  }
+
+  const handleSubmit = () =>{
+    if(reason.length<1){
+      return toast.error("Reason can not be empty !");
+    }
+    if(!selectedItem){
+      return toast.error("Select a transfer person !");
+    }
+    const jobNum = queryParams.get('jobnum');
+    const body = {
+      jobnum: jobNum,
+      reqempnum: selectedItem,
+      reason : reason
+    }
+    axios.post(`job/transfer/request`,body)
+      .then((result) => {
+        if (result && result.data.success) {
+          navigate('/jobs');
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   useEffect(() => {
@@ -85,7 +113,7 @@ function All(props) {
                       <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center' }}>Reason for Transfer</h5>
                         <div className="pt-2">
-                          <textarea rows={2} className="form-control" style={{ width: "100%" }} />
+                          <textarea rows={2} className="form-control" style={{ width: "100%" }} value={reason} onChange={(e)=>setReason(e.target.value)}/>
                         </div>
                       </li>
 
@@ -112,7 +140,7 @@ function All(props) {
                                     </div>
 
                                     <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
-                                      <input type="radio" name='transfer'/>
+                                      <input type="radio" name='transfer' onChange={() => setSelectedItem(item.empnum)}/>
                                     </div>
                                   </div>
                                 </li>
@@ -123,7 +151,7 @@ function All(props) {
                       </li>
 
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-warning w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Submit</button>
+                        <button type="button" className="btn btn-warning w-100" style={{ maxWidth: "40%", borderRadius: "50px" }} onClick={()=>handleSubmit()}>Submit</button>
                       </div>
                     </ul>
                   </div>
