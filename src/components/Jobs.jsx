@@ -105,7 +105,7 @@ function All() {
     window.SpinnerHide();
   }
 
-  const rejectTransfer = (jobnum)  =>{
+  const rejectTransfer = ()  =>{
     window.SpinnerShow();
     const body = {
         jobnum: selectedJob.current,
