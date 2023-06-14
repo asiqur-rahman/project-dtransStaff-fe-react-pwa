@@ -100,29 +100,47 @@ function All(props) {
                                 <h4 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>{year}</h4>
                                   {items.map((item, i) => (
                                     <li className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
-                                      <div key={i} className="d-flex align-items-center" style={{ background: "white", padding: "10px 12px" }}>
+                                      <div key={i} className="d-flex align-items-center" style={{ background: "white", padding: "10px 12px 0 12px" }}>
 
                                         <div className="item-title-row" style={{ width: "100%" }}>
                                           <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                             <div className="d-flex align-items-center">
-                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.duration} Day(s) AL</h5>
+                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.duration} Day(s) {item.leavetype}</h5>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                        <div className="item-title-row" style={{ width: "150%" }}>
+                                          <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.leavefrom} <span style={{padding:"0 5px"}}>to</span> {item.leaveto} </h5>
+                                            <div className="d-flex align-items-center">
                                             </div>
                                           </div>
                                         </div>
 
-                                        <div className="item-title-row" style={{ width: "150%" }}>
+                                        {/* <div className="item-title-row" style={{ width: "150%" }}>
                                           <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                             <div className="d-flex align-items-center">
-                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.leavefrom}-{item.leaveto} </h5>
+                                              <h5 className="me-3" style={{ marginBottom: "0" }}>Status - {item.status} </h5>
                                             </div>
                                           </div>
-                                        </div>
+                                        </div> */}
 
                                         <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "0%" }}>
                                           <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' style={{ cursor: "pointer" }} />
                                         </div>
                                       </div>
                                       {/* <hr style={{ margin: '0' }} /> */}
+                                      <div key={i} className="d-flex align-items-center" style={{ background: "white", padding: "4px 0 10px 0" }}>
+
+                                        <div className="item-title-row" style={{ width: "100%" }}>
+                                          <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                            <div className="align-items-center" style={{textAlign:"center"}}>
+                                              <h5 className="me-3" style={{ marginBottom: "0" }}>Status - {item.status}</h5>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </li>
                                   ))}
                               </div>

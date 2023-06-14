@@ -387,7 +387,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                       <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
                         <div className="pt-2">
-                          <textarea rows={3} className="form-control" style={{ width: "100%" }} />
+                          <textarea rows={3} className="form-control" style={{ width: "100%" }}  value={remarks} onChange={(e)=>setRemarks(e.target.value)}/>
                         </div>
                       </li>
                       {activeStep==0 && <>
@@ -401,7 +401,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
 
                       {activeStep==1 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum, remarks);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                       </div>
                       </>}
 
@@ -661,7 +661,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
 
                       {activeStep==1 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum,remarks);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                       </div>
                       </>}
 
