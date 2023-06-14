@@ -39,6 +39,7 @@ function All(props) {
     axios.post(`job/transfer/request`,body)
       .then((result) => {
         if (result && result.data.success) {
+          toast.success(result.data.data.response);
           navigate('/jobs');
         }
       })

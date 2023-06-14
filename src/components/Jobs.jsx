@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import axios from '../utils/axios.utils'
 import { useNavigate, Link } from 'react-router-dom';
 import * as common from '../utils/common.utils'
+import { Button, Modal } from 'react-bootstrap';
 import MenuBar from './Menubar'
 import Sidebar from './Sidebar'
 
@@ -17,6 +18,10 @@ function All() {
   const [dates, setDates] = useState(false);
   const [todayJobs, setTodayJobs] = useState(false);
   const [filteredJobs, setFilteredJobs] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [header, setHeader] = useState("Please confirm to proceed.");
+  const [body, setBody] = useState("Please confirm to proceed.");
+  const selectedJob = useRef('');
 
   const fetchJobs = (date) =>{
     if(!date)date=new Date().toISOString().split('T')[0];
@@ -84,13 +89,14 @@ function All() {
   const acceptTransfer = (jobnum)  =>{
     window.SpinnerShow();
     const body = {
-        jobnum: jobnum,
+        jobnum: selectedJob.current,
         status: "Accepted"
     }
     axios.post(`job/updatestatus`,body)
       .then((result) => {
         if (result && result.data.success) {
           fetchJobs();
+          closeModal();
         }
       })
       .catch((error) => {
@@ -102,13 +108,14 @@ function All() {
   const rejectTransfer = (jobnum)  =>{
     window.SpinnerShow();
     const body = {
-        jobnum: jobnum,
+        jobnum: selectedJob.current,
         status: "Rejected"
     }
     axios.post(`job/updatestatus`,body)
       .then((result) => {
         if (result && result.data.success) {
           fetchJobs();
+          closeModal();
         }
       })
       .catch((error) => {
@@ -116,6 +123,14 @@ function All() {
       })
     window.SpinnerHide();
   }
+
+  const handleShow = () => {
+    window.handleRemoveFadeFromModal();
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
 
   return (
     <>
@@ -272,8 +287,10 @@ function All() {
                                   </div>
                                   <div className="d-flex align-items-center">
                                     {item.jobstatus=='Pending' && !item.allowtransfer && <>
-                                      <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }} onClick={()=>acceptTransfer(item.jobnum)}>Accept</button> 
-                                      <button className="btn btn-sm success" style={{ backgroundColor: "red", color: "var(--bg-white)", padding: "5px 4px", marginLeft:"5px" }} onClick={()=>rejectTransfer(item.jobnum)}>Reject</button>
+                                    
+                                    <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }} onClick={()=>{selectedJob.current=item.jobnum; setShowModal(true);}}>Action</button> 
+                                      {/* <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }} onClick={()=>acceptTransfer(item.jobnum)}>Accept</button> 
+                                      <button className="btn btn-sm success" style={{ backgroundColor: "red", color: "var(--bg-white)", padding: "5px 4px", marginLeft:"5px" }} onClick={()=>rejectTransfer(item.jobnum)}>Reject</button> */}
                                     </>}
                                     {item.jobstatus=='Confirm' &&
                                     <button className="btn btn-sm success" style={{ backgroundColor: "green", color: "var(--bg-white)", padding: "5px 4px" }}>Confirm</button>
@@ -298,6 +315,23 @@ function All() {
 
         </div>
         {/* <!-- Page Content End--> */}
+
+        <Modal centered={true} show={showModal} onEntered={handleShow} onHide={closeModal} className="notification-modal">
+          <Modal.Header closeButton style={{display:"block"}}>
+            <Modal.Title style={{textAlign:"center"}}>{header}</Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button size="sm" variant="secondary" onClick={closeModal}>
+              Cancel
+            </Button>
+            <Button size="sm" variant="success" onClick={acceptTransfer}>
+              Accept
+            </Button>
+            <Button size="sm" variant="danger" onClick={rejectTransfer}>
+              Reject
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
         <MenuBar />
 
