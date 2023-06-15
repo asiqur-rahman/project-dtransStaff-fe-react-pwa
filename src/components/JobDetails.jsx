@@ -133,6 +133,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
   const [activeStep, setActiveStep] = useState(0);
   const [signature, setSignature] = useState('');
   const [remarks, setRemarks] = useState('');
+  const [remarks2, setRemarks2] = useState('');
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -144,7 +145,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
       return;
     }
     else{
-      delivered(jobDetails.jobnum, remarks, signature);
+      delivered(jobDetails.jobnum, remarks2, signature);
       cActiveStep(2);
     }
   }
@@ -211,7 +212,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                             </div>
                             <div className="item-footer">
                               <div className="d-flex align-items-center">
-                                <div className="item-subtitle">Collection From : {jobDetails.jobaddr}</div>
+                                <div className="item-subtitle">Delivery to : {jobDetails.jobaddr}</div>
                               </div>
                               <div className="d-flex align-items-center">
                                 <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
@@ -395,12 +396,23 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                           <SignaturePad editable={activeStep<2} setSignature={setSignature}/>
                         </li>}
 
-                      <li style={{ borderRadius: "10px" }}>
-                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
-                        <div className="pt-2">
-                          <textarea rows={3} className="form-control" style={{ width: "100%" }}  value={remarks} onChange={(e)=>setRemarks(e.target.value)}/>
-                        </div>
-                      </li>
+                      {activeStep==0 && 
+                        <li style={{ borderRadius: "10px" }}>
+                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
+                          <div className="pt-2">
+                            <textarea rows={3} className="form-control" style={{ width: "100%" }} value={remarks} onChange={(e)=>setRemarks(e.target.value)}/>
+                          </div>
+                        </li>
+                      }
+                      {activeStep==1 && 
+                        <li style={{ borderRadius: "10px" }}>
+                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
+                          <div className="pt-2">
+                            <textarea rows={3} className="form-control" style={{ width: "100%" }} value={remarks2} onChange={(e)=>setRemarks2(e.target.value)}/>
+                          </div>
+                        </li>
+                      }
+
                       {activeStep==0 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(1); collected(jobDetails.jobnum,remarks);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
@@ -443,6 +455,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
   const [details, setDetails] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [remarks, setRemarks] = useState('');
+  const [remarks2, setRemarks2] = useState('');
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -653,13 +666,22 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                           <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
                           <SignaturePad editable={activeStep<2}/>
                         </li>} */}
-
+                      {activeStep==0 && 
                       <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
                         <div className="pt-2">
                           <textarea rows={3} className="form-control" style={{ width: "100%" }} value={remarks} onChange={(e)=>setRemarks(e.target.value)}/>
                         </div>
                       </li>
+                      }
+                      {activeStep==1 && 
+                      <li style={{ borderRadius: "10px" }}>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
+                        <div className="pt-2">
+                          <textarea rows={3} className="form-control" style={{ width: "100%" }} value={remarks2} onChange={(e)=>setRemarks2(e.target.value)}/>
+                        </div>
+                      </li>
+                      }
 
                       {activeStep==0 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
@@ -672,7 +694,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
 
                       {activeStep==1 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
-                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum,remarks);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                        <button type="button" className="btn btn-danger w-100" onClick={()=>{cActiveStep(2);delivered(jobDetails.jobnum,remarks2);}} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                       </div>
                       </>}
 

@@ -29,6 +29,13 @@ function All(props) {
               return acc;
             }, {});
 
+            result.data.data.records = Object.entries(result.data.data.records)
+            .sort((a, b) => b[0] - a[0])
+            .reduce((acc, [year, records]) => {
+              acc[year] = records;
+              return acc;
+            }, {});
+
             setleaveData(result.data.data)
           }
         })
