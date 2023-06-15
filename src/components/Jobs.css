@@ -1,0 +1,3 @@
+.my-icon-container svg path {
+  fill: var(--dark) !important;
+}

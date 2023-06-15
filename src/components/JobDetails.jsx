@@ -182,7 +182,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                     {/* <h4 className="title my-4">Job Details</h4> */}
 
                     <ul>
-                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                      <li style={{ color:"var(--dark)",border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                         <div className="item-content">
                           <div className="item-inner" style={{ margin: "10px 0" }}>
 
@@ -229,7 +229,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                           <div className="order-status" style={{ marginTop: "0" }}>
                             <ul className="dz-timeline style-2">
                               {jobDetails.items.map((item, i) => {
-                                return (<>
+                                return (
                                   <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                     <div className="d-flex align-items-center">
                                     {activeStep==1 &&
@@ -255,7 +255,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                                       </div>
                                     </div>
                                   </li>
-                                </>
+                                
                                 )
                               })}
                             </ul>
@@ -264,7 +264,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
 
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection Details</h5>
                         {jobDetails.collectionplan.map((job, j) => {
-                          return (<>
+                          return (
 
                             <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                               <div className="item-content" style={{ marginTop: "10px" }}>
@@ -333,7 +333,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                                 </div>
                               </div>
                             </li>
-                          </>
+                          
                           )
                         })}
                       </>}
@@ -350,7 +350,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                           <div className="order-status" style={{ marginTop: "0" }}>
                             <ul className="dz-timeline style-2">
                               {jobDetails.items.map((item, i) => {
-                                return (<>
+                                return (
                                   <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                     <div className="d-flex align-items-center">
                                       {/* <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
@@ -381,7 +381,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                                       </div>
                                     </div>
                                   </li>
-                                </>
+                                
                                 )
                               })}
                             </ul>
@@ -394,7 +394,8 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                         <li style={{ borderRadius: "10px", minHeight: "200px" }}>
                           <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
                           <SignaturePad editable={activeStep<2} setSignature={setSignature}/>
-                        </li>}
+                        </li>
+                      }
 
                       {activeStep==0 && 
                         <li style={{ borderRadius: "10px" }}>
@@ -404,6 +405,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                           </div>
                         </li>
                       }
+
                       {activeStep==1 && 
                         <li style={{ borderRadius: "10px" }}>
                           <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
@@ -412,6 +414,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                           </div>
                         </li>
                       }
+                      </ul>
 
                       {activeStep==0 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
@@ -420,7 +423,8 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                       <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={() => jobTransfer(jobDetails.jobnum)}>Request Transfer</button>
                       </div>
-                      </>}
+                      </>
+                      }
 
                       {activeStep==1 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
@@ -433,7 +437,6 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                         <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }}>Collect Returned Items</button>
                       </div>
                       </>}
-                    </ul>
                   </div>
                 }
               </div>
@@ -545,7 +548,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                           <div className="order-status" style={{ marginTop: "0" }}>
                             <ul className="dz-timeline style-2">
                               {jobDetails.items.map((item, i) => {
-                                return (<>
+                                return (
                                   <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                     <div className="d-flex align-items-center">
                                       {activeStep==1 &&
@@ -571,7 +574,6 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                                       </div>
                                     </div>
                                   </li>
-                                </>
                                 )
                               })}
                             </ul>
@@ -586,7 +588,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                       {/* Step 2 Start*/}
                       {(activeStep > 0) && <>
                         {jobDetails.deliveryplan.map((job, j) => {
-                          return (<>
+                          return (
 
                             <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                               <div className="item-content" style={{ marginTop: "10px" }}>
@@ -655,7 +657,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                                 </div>
                               </div>
                             </li>
-                          </>
+                          
                           )
                         })}
                       </>}
@@ -682,6 +684,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                         </div>
                       </li>
                       }
+                      </ul>
 
                       {activeStep==0 && <>
                       <div className="col-md-12" style={{ textAlign: "center" }}>
@@ -703,7 +706,6 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                         <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }}>Collect Returned Items</button>
                       </div>
                       </>}
-                    </ul>
                   </div>
                 }
               </div>

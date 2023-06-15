@@ -8,6 +8,7 @@ import MenuBar from './Menubar'
 import Sidebar from './Sidebar'
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
+import './Jobs.css';
 
 function All() {
   const swiperRef = useRef(null);
@@ -177,7 +178,7 @@ function All() {
                     {
                       filteredJobs && filteredJobs.map((item, i) => {
                         return (
-                          <li  key={i} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0",background: "white" }}>
+                          <li  key={i} style={{ color:"var(--dark)",border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0",background: "white" }}>
                             <div className="item-content">
                               <div className="item-inner" style={{ margin: "10px 0" }}>
 
@@ -189,13 +190,13 @@ function All() {
                                     <div className="item-title-row" >
                                       <div className="item-footer" style={{ marginBottom: "0" }}>
                                         <div className="d-flex align-items-center">
-                                          <h5 className="me-3" style={{ marginBottom: "0" }}>{item.empname}</h5>
+                                          <h5 className="me-3" style={{ color:"var(--dark)",marginBottom: "0" }}>{item.empname}</h5>
                                         </div>
                                       </div>
                                       <div className="item-subtitle" style={{ fontSize: "11px"}}>{item.jobschedule}</div>
                                     </div>
                                   </div>
-                                  <div className="d-flex align-items-center">
+                                  <div className="d-flex align-items-center my-icon-container">
                                     <FontAwesomeIcon icon={faCalendar} style={{paddingRight:"40px", cursor:"pointer"}} onClick={()=>seeJobDetails(item.jobnum, item.jobtypecode)}/>
                                   </div>
                                 </div>
@@ -203,13 +204,13 @@ function All() {
                                 <div className="item-title-row">
                                   <div className="item-footer" style={{ marginBottom: "0" }}>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px"}}>Job No : {item.jobnum}</h6>
+                                      <h6 className="me-3" style={{ color:"var(--dark)",fontSize: "12px"}}>Job No : {item.jobnum}</h6>
                                     </div>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px"}}>Status : {item.jobstatus}</h6>
+                                      <h6 className="me-3" style={{ color:"var(--dark)",fontSize: "12px"}}>Status : {item.jobstatus}</h6>
                                     </div>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px"}}>Type : {item.jobtype}</h6>
+                                      <h6 className="me-3" style={{ color:"var(--dark)",fontSize: "12px"}}>Type : {item.jobtype}</h6>
                                     </div>
                                   </div>
                                 </div>

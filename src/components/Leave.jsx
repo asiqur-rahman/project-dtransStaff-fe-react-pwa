@@ -127,14 +127,14 @@ function All(props) {
                                         <div className="item-title-row" style={{ width: "100%" }}>
                                           <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                             <div className="d-flex align-items-center">
-                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.duration} Day(s) {item.leavetype}</h5>
+                                              <h5 className="me-3" style={{ color:"var(--dark)",marginBottom: "0" }}>{item.duration} Day(s) {item.leavetype}</h5>
                                             </div>
                                           </div>
                                         </div>
                                         
                                         <div className="item-title-row" style={{ width: "150%" }}>
                                           <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
-                                              <h5 className="me-3" style={{ marginBottom: "0" }}>{item.leavefrom} <span style={{padding:"0 5px"}}>to</span> {item.leaveto} </h5>
+                                              <h5 className="me-3" style={{ color:"var(--dark)",marginBottom: "0" }}>{item.leavefrom} <span style={{padding:"0 5px"}}>to</span> {item.leaveto} </h5>
                                             <div className="d-flex align-items-center">
                                             </div>
                                           </div>
@@ -158,7 +158,7 @@ function All(props) {
                                         <div className="item-title-row" style={{ width: "100%" }}>
                                           <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                             <div className="align-items-center" style={{textAlign:"center"}}>
-                                              <h5 className="me-3" style={{ marginBottom: "0" }}>Status - {item.status}</h5>
+                                              <h5 className="me-3" style={{ color:"var(--dark)",marginBottom: "0" }}>Status - {item.status}</h5>
                                             </div>
                                           </div>
                                         </div>
