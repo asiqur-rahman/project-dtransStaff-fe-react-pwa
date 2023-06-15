@@ -20,6 +20,21 @@ function All(props) {
       axios.get(`leave`)
         .then((result) => {
           if (result && result.data.success) {
+            // result.data.data.  records.push({
+            //   duration:
+            //   2,
+            //   leavefrom:
+            //   '2023-06-22',
+            //   leaveto:
+            //   '2023-06-23',
+            //   leavetype:
+            //   'AL',
+            //   refnum:
+            //   'LVR-23000001',
+            //   status:
+            //   'Pending',
+            //   year:
+            //   2005})
             result.data.data.records = result.data.data.records.reduce((acc, item) => {
               const year = item.year;
               if (!acc[year]) {
@@ -30,7 +45,7 @@ function All(props) {
             }, {});
 
             result.data.data.records = Object.entries(result.data.data.records)
-            .sort((a, b) => b[0] - a[0])
+            .sort((a, b) => b[0] - a[0]) // Sort in descending order
             .reduce((acc, [year, records]) => {
               acc[year] = records;
               return acc;
@@ -102,7 +117,7 @@ function All(props) {
                         <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
 
-                            {leaveData && Object.entries(leaveData.records).map(([year, items]) => (
+                            {leaveData && Object.entries(leaveData.records).reverse().map(([year, items]) => (
                               <div key={year}>
                                 <h4 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>{year}</h4>
                                   {items.map((item, i) => (

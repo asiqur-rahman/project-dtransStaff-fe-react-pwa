@@ -82,6 +82,7 @@ function All() {
   const seeJobDetails = (jobnum,jobtypecode)  =>{
     navigate(`/job-details?jobnum=${jobnum}&jobtypecode=${jobtypecode}`);
   }
+  
   const jobTransfer = (jobnum)  =>{
     navigate(`/transfer?jobnum=${jobnum}`);
   }
