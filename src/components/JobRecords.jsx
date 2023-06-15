@@ -65,6 +65,16 @@ function All() {
   }, []);
 
   useEffect(() => {
+    // Focus on the last slide
+    if(dates.length>0){
+      setTimeout(function() {
+        const lastIndex = swiperRef.current.slides.length - 1;
+        swiperRef.current.slideTo(lastIndex);
+      },1000);
+    }
+  }, [dates]);
+
+  useEffect(() => {
     const todayDate = new Date().toISOString().split('T')[0]
     fetchJobs(todayDate);
 
