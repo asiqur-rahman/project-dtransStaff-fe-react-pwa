@@ -9,6 +9,7 @@ function All() {
   const [userDetails, setUserDetails] = useState(false);
   const [jobSummary, setJobSummary] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [profilePicture, setProfilePicture] = useState('/images/message/pic6.jpg');
   
   const [fullName, setFullName] = useState('');
   const [gender, setGender] = useState('');
@@ -44,6 +45,16 @@ function All() {
           console.log(error)
         })
 
+        axios.get(`profile/photo`)
+        .then((result) => {
+          if (result && result.data.success) {
+            setProfilePicture(result.data.data.imageurl)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+
     }
     window.SpinnerHide()
   }, [])
@@ -57,7 +68,16 @@ function All() {
     setPhone(userDetails.phone);
   }
 
+  
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  
   const updateProfile =()=>{
+    if(!isValidEmail(email)){
+      return toast.error("Email is not valid !");
+    }
     const body ={
         empname: fullName,
         phone: phone,
@@ -107,7 +127,7 @@ function All() {
           <div className="container profile-area">
             <div className="profile">
               <div className="media media-100">
-                <img src="/images/message/pic6.jpg" alt="/" />
+                <img src={profilePicture} alt="/" />
                 <svg className="progress-style" height="100" width="100">
                   <circle id="round-1" cx="60" cy="60" r="50" stroke="#E8EFF3" strokeWidth="7" fill="none" />
                   <circle id="round-2" cx="60" cy="60" r="50" stroke="#C3AC58" strokeWidth="7" fill="none" />
