@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import * as common from '../utils/common.utils'
 import axios from '../utils/axios.utils'
 import './JobDetails.css';
+import './Jobs.css';
 import { toast } from 'react-toastify';
 
 const SignaturePad = ({editable, setSignature}) => {
@@ -159,10 +160,6 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
   }
   return (
     <>
-      <div className="page-wraper">
-
-        <Sidebar menuName="Job Details"/>
-
 
         {/* <!-- Page Content --> */}
         <div className="page-content">
@@ -294,7 +291,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                                 </div>
                               </div>
                               <div style={{ display: details == j ? 'block' : 'none' }}>
-                                <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
+                                <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
 
                                 </li>
 
@@ -342,7 +339,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
                       {/* Step 2 Start*/}
                       {(activeStep > 0) && <>
 
-                        <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
+                        <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
 
                         </li>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
@@ -446,9 +443,6 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered}) {
         </div>
         {/* <!-- Page Content End--> */}
 
-        <MenuBar />
-
-      </div>
     </>
   )
 }
@@ -475,10 +469,6 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
 
   return (
     <>
-      <div className="page-wraper">
-
-        <Sidebar />
-
 
         {/* <!-- Page Content --> */}
         <div className="page-content">
@@ -498,7 +488,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                     {/* <h4 className="title my-4">Job Details</h4> */}
 
                     <ul>
-                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                      <li style={{ color:'var(--dark)',border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                         <div className="item-content">
                           <div className="item-inner" style={{ margin: "10px 0" }}>
 
@@ -509,20 +499,20 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                               <div className="item-title-row" >
                                 <div className="item-footer" style={{ marginBottom: "0" }}>
                                   <div className="d-flex align-items-center">
-                                    <h5 className="me-3" style={{ marginBottom: "0" }}>{jobDetails.empname}</h5>
+                                    <h5 className="me-3" style={{ color:'var(--dark)',marginBottom: "0" }}>{jobDetails.empname}</h5>
                                   </div>
                                 </div>
-                                <div className="item-subtitle" style={{ fontSize: "11px" }}>2023-05-12</div>
+                                <div className="item-subtitle" style={{ color:'var(--dark)',fontSize: "11px" }}>2023-05-12</div>
                               </div>
                             </div>
 
                             <div className="item-title-row">
                               <div className="item-footer" style={{ marginBottom: "0" }}>
                                 <div className="d-flex align-items-center">
-                                  <h6 className="me-3" style={{ fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
+                                  <h6 className="me-3" style={{ color:'var(--dark)',fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
                                 </div>
                                 <div className="d-flex align-items-center">
-                                  <h6 className="me-3" style={{ fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
+                                  <h6 className="me-3" style={{ color:'var(--dark)',fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
                                 </div>
                               </div>
                             </div>
@@ -531,7 +521,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                                 <div className="item-subtitle">Deliver To : {jobDetails.jobaddr}</div>
                               </div>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
+                                <h6 className="me-3" style={{ color:'var(--dark)',fontSize: "12px" }}>Status : {jobDetails.status}</h6>
                               </div>
                             </div>
                           </div>
@@ -540,16 +530,16 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
 
                       {/* Step 1 Start*/}
                       {(activeStep == 0 || activeStep == 2) && <>
-                        <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
+                        <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
 
                         </li>     
-                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
+                        <h5 className="title" style={{ color:'var(--dark)',textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                         <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                           <div className="order-status" style={{ marginTop: "0" }}>
                             <ul className="dz-timeline style-2">
                               {jobDetails.items.map((item, i) => {
                                 return (
-                                  <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                  <li key={i} className="timeline-item" style={{ color:'var(--dark)',margin: '0', padding: "8px 0" }}>
                                     <div className="d-flex align-items-center">
                                       {activeStep==1 &&
                                         <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
@@ -563,14 +553,14 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                                       <div className="item-title-row" style={{ width: "100%" }}>
                                         <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                           <div className="d-flex align-items-center">
-                                            <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                            <h5 className="me-3" style={{ color:'var(--dark)',marginBottom: "0" }}>{item.matname}</h5>
                                           </div>
                                         </div>
-                                        <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                        <div className="item-subtitle" style={{ color:'var(--dark)',fontSize: "11px" }}>{item.matnum}</div>
                                       </div>
 
                                       <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
-                                        <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
+                                        <div className="item-subtitle" style={{ color:'var(--dark)',fontSize: "14px" }}>{item.qty}</div>
                                       </div>
                                     </div>
                                   </li>
@@ -590,40 +580,40 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                         {jobDetails.deliveryplan.map((job, j) => {
                           return (
 
-                            <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                            <li key={j} style={{ color:'var(--dark)',border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                               <div className="item-content" style={{ marginTop: "10px" }}>
                                 <div className="item-inner" style={{ margin: "10px 0" }}>
 
                                   <div className="item-title-row">
                                     <div className="item-footer" style={{ marginBottom: "0" }}>
                                       <div className="d-flex align-items-center">
-                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
+                                        <h6 className="me-3" style={{ color:'var(--dark)',fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
                                       </div>
                                       <div className="d-flex align-items-center">
-                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
+                                        <h6 className="me-3" style={{ color:'var(--dark)',fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
                                       </div>
                                       <div className="d-flex align-items-center">
-                                        <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
+                                        <h6 className="me-3" style={{ color:'var(--dark)',fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
                                       </div>
-                                      <div className="d-flex align-items-center">
-                                        <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' onClick={() => showDetails(j)} style={{ cursor: "pointer" }} />
+                                      <div className="d-flex align-items-center my-icon-container">
+                                        <FontAwesomeIcon icon={faArrowRight} className='icon' onClick={() => showDetails(j)} style={{ cursor: "pointer" }} />
                                       </div>
                                     </div>
                                   </div>
                                   <div className="item-footer">
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
+                                      <h6 className="me-3" style={{ color:'var(--dark)',fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                               <div style={{ display: details == j ? 'block' : 'none' }}>
-                                <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
+                                <li style={{ color:'var(--dark)',border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
 
                                 </li>
 
-                                <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
-                                <div className="order-status" style={{ marginTop: "0" }}>
+                                <h5 className="title" style={{ color:'var(--dark)',textAlign: 'center', marginTop: "15px" }}>Items</h5>
+                                <div className="order-status" style={{ color:'var(--dark)',marginTop: "0" }}>
                                   <ul className="dz-timeline style-2">
                                     {job.items.map((item, i) => {
                                       return (
@@ -640,14 +630,14 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                                             <div className="item-title-row" style={{ width: "100%" }}>
                                               <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                                 <div className="d-flex align-items-center">
-                                                  <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                                  <h5 className="me-3" style={{ color:'var(--dark)',marginBottom: "0" }}>{item.matname}</h5>
                                                 </div>
                                               </div>
-                                              <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                              <div className="item-subtitle" style={{ color:'var(--dark)',fontSize: "11px" }}>{item.matnum}</div>
                                             </div>
 
                                             <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
-                                              <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
+                                              <div className="item-subtitle" style={{ color:'var(--dark)',fontSize: "14px" }}>{item.qty}</div>
                                             </div>
                                           </div>
                                         </li>
@@ -715,9 +705,6 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
         </div>
         {/* <!-- Page Content End--> */}
 
-        <MenuBar />
-
-      </div>
     </>
   )
 }
@@ -806,8 +793,12 @@ function All(props) {
   }
   return (
     <>
-      {jos && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered}/>}
-      {jor && <JORJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered}/>}
+    <div className="page-wraper">
+      <Sidebar menuName={"Job Details"}/>
+        {jos && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered}/>}
+        {jor && <JORJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered}/>}
+      <MenuBar />
+    </div>
     </>
   )
 }
