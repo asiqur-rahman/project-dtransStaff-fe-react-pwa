@@ -9,6 +9,7 @@ import ForgetPasswordPage  from './pages/ForgetPasswordPage'
 import OTPPage  from './pages/OTPPage'
 import ProfilePage  from './pages/ProfilePage'
 import NotificationPage  from './pages/NotificationPage'
+import NotificationDetailsPage  from './pages/NotificationDetailsPage'
 import LeavePage  from './pages/LeavePage'
 import ApplyLeavePage  from './pages/ApplyLeavePage'
 import SalaryPage  from './pages/SalaryPage'
@@ -38,6 +39,7 @@ function App() {
                 <Route element={<ProfilePage/>} path="/profile"/>
                 <Route element={<TransferPage/>} path="/transfer"/>
                 <Route element={<NotificationPage/>} path="/notification"/>
+                <Route element={<NotificationDetailsPage/>} path="/notification-details"/>
                 <Route element={<LeavePage/>} path="/my-leave"/>
                 <Route element={<ApplyLeavePage/>} path="/apply-leave"/>
                 <Route element={<SalaryPage/>} path="/salary"/>

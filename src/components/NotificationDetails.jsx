@@ -2,43 +2,36 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MenuBar from './Menubar'
 import * as common from '../utils/common.utils'
-import { Button, Modal } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from '../utils/axios.utils'
 
 function All() {
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
+  const queryParams = new URLSearchParams(location.search);
+
   const [notifications, setNotifications] = useState(false);
   const [header, setHeader] = useState(false);
   const [body, setBody] = useState(false);
   useEffect(() => {
-    window.SpinnerShow();
-    let user = common.getUser();
-    if (user) {
-      axios.get(`notification`)
+    const refnum = queryParams.get('refnum');
+    if (refnum) {
+      window.SpinnerShow();
+      let user = common.getUser();
+      if (user && !body) {
+        axios.get(`notification/${refnum}`)
         .then((result) => {
           if (result && result.data.success) {
-            setNotifications(result.data.data)
+            setHeader(result.data.data.title);
+            setBody(result.data.data.body);
           }
         })
         .catch((error) => {
           console.log(error)
         })
+      }
     }
     window.SpinnerHide();
-  }, []);
-
-  const openModal = (refnum) => {
-    navigate(`/notification-details?refnum=${refnum}`)
-    
-  };
-  const handleShow = () => {
-    window.handleRemoveFadeFromModal();
-  };
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  }, [queryParams]);
 
   return (
     <>
@@ -68,6 +61,7 @@ function All() {
         {/* <!-- Page Content --> */}
         <div className="page-content bottom-content">
           <div className="container">
+            <div style={{fontSize:"14px"}} dangerouslySetInnerHTML={{ __html: body }}></div>
             {notifications && notifications.map((item, i) => {
               return (
                 <a href="#" key={i} className={`notification ${item.new && "bg-success"}`} onClick={()=>openModal(item.refnum)}>
@@ -93,20 +87,6 @@ function All() {
             })}
           </div>
         </div>
-
-        <Modal centered={true} show={showModal} onEntered={handleShow} onHide={closeModal} className="notification-modal">
-          <Modal.Header closeButton style={{display:"block"}}>
-            <Modal.Title style={{textAlign:"center"}}>{header}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-          <div style={{fontSize:"14px"}} dangerouslySetInnerHTML={{ __html: body }}></div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={closeModal}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
 
         {/* <!-- Page Content End--> */}
 
