@@ -9,7 +9,7 @@ function All() {
   const [userDetails, setUserDetails] = useState(false);
   const [jobSummary, setJobSummary] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [profilePicture, setProfilePicture] = useState('/images/message/pic6.jpg');
+  const [profilePicture, setProfilePicture] = useState('');
   
   const [fullName, setFullName] = useState('');
   const [gender, setGender] = useState('');
