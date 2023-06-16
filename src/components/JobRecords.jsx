@@ -28,7 +28,7 @@ function All() {
     let user = common.getUser();
     if (user) {
       setSelectedDate(date);
-      axios.get(`job/active?date=${date}`)
+      axios.get(`job/past?date=${date}`)
         .then((result) => {
           if (result && result.data.success) {
             setTodayJobs(result.data.data)
