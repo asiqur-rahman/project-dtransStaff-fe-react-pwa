@@ -13,7 +13,7 @@ function All(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const [leaveData, setleaveData] = useState(false);
-
+  var count = 0;
   useEffect(() => {
     let user = common.getUser();
     if (user) {
@@ -118,11 +118,11 @@ function All(props) {
                           <ul className="dz-timeline style-2">
 
                             {leaveData && Object.entries(leaveData.records).reverse().map(([year, items]) => (
-                              <div key={year}>
+                              <div key={++count}>
                                 <h4 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>{year}</h4>
                                   {items.map((item, i) => (
-                                    <li className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
-                                      <div key={i} className="d-flex align-items-center" style={{ background: "white", padding: "10px 12px 0 12px" }}>
+                                    <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                      <div className="d-flex align-items-center" style={{ background: "white", padding: "10px 12px 0 12px" }}>
 
                                         <div className="item-title-row" style={{ width: "100%" }}>
                                           <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>

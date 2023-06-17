@@ -1,16 +1,28 @@
 import React, { useEffect,useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from '../utils/axios.utils'
 import { faClose, faSquareRss } from '@fortawesome/free-solid-svg-icons';
 import * as common from '../utils/common.utils'
 import { useNavigate, Link } from 'react-router-dom';
 
 function All({menuName}) {
   const navigate = useNavigate();
+  const [profilePicture, setProfilePicture] = useState('');
   const [userDetails, setUserDetails]= useState(false);
   useEffect(()=>{
     let user = common.getUser();
       if(user){
         setUserDetails(user)
+        axios.get(`profile/photo`)
+        .then((result) => {
+          if (result && result.data.success) {
+            setProfilePicture(result.data.data.imageurl)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+
       }
   },[])
   
@@ -54,7 +66,7 @@ function All({menuName}) {
       <div className="sidebar" style={{overflowY:"initial"}}>
         <div className="author-box">
           <div className="dz-media">
-            <img src="/images/message/pic6.jpg" alt="author-image" />
+            <img src={profilePicture} alt="author-image" />
           </div>
           <div className="dz-info">
             <span>Good Morning</span>
