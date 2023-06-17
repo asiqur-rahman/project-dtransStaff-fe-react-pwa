@@ -146,7 +146,11 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered }) {
       return;
     }
     else {
-      delivered(jobDetails.jobnum, remarks2, signature);
+      const selectedData = jobDetails.items.map(item => ({
+        matnum: item.matnum,
+        actualqty: item.actualqty
+      }));
+      delivered(jobDetails.jobnum, remarks2, signature, selectedData);
       cActiveStep(2);
     }
   }
@@ -780,14 +784,15 @@ function All(props) {
     window.SpinnerHide();
   }
 
-  const delivered = (jobnum, remarks, signature) => {
+  const delivered = (jobnum, remarks, signature, items=[]) => {
     window.SpinnerShow();
 
     const body = {
       jobnum: jobnum,
       status: "Delivered",
       remarks: remarks,
-      signature: signature
+      signature: signature??"QUI=",
+      items: items
     }
     axios.post(`job/updatestatus`, body)
       .then((result) => {

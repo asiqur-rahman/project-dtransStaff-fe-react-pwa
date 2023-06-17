@@ -14,6 +14,7 @@ import LeavePage  from './pages/LeavePage'
 import ApplyLeavePage  from './pages/ApplyLeavePage'
 import SalaryPage  from './pages/SalaryPage'
 import TransferPage  from './pages/TransferPage'
+import FeedbackPage  from './pages/FeedbackPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
@@ -43,6 +44,7 @@ function App() {
                 <Route element={<LeavePage/>} path="/my-leave"/>
                 <Route element={<ApplyLeavePage/>} path="/apply-leave"/>
                 <Route element={<SalaryPage/>} path="/salary"/>
+                <Route element={<FeedbackPage/>} path="/feedback"/>
             </Route>
             <Route element={<LoginPage/>} path="/login"/>
             <Route element={<ForgetPasswordPage/>} path="/forget-password"/>

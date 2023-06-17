@@ -8,7 +8,9 @@ import 'react-date-range/dist/styles.css'; // Import the default styles
 import 'react-date-range/dist/theme/default.css';
 
 function All() {
-
+  const [leaveTypes, setLeaveTypes] = useState([]);
+  const [leaveType, setLeaveType] = useState();
+  const [remarks, setRemarks] = useState();
   const [dateRange, setDateRange] = useState({
     startDate: new Date(),
     endDate: new Date(),
@@ -30,21 +32,10 @@ function All() {
     window.SpinnerShow()
     let user = common.getUser();
       if(user){
-        axios.get('profile')
+        axios.get(`leave/type`)
         .then((result)=>{
           if(result && result.data.success){
-            // setUserDetails(result.data.data)
-          }
-        })
-        .catch((error)=>{
-          console.log(error)
-        })
-
-        const todayDate = new Date().toISOString().split('T')[0]
-        axios.get(`job/summary?date=${todayDate}`)
-        .then((result)=>{
-          if(result && result.data.success){
-            // setJobSummary(result.data.data)
+            setLeaveTypes(result.data.data);
           }
         })
         .catch((error)=>{
@@ -54,6 +45,10 @@ function All() {
       }
       window.SpinnerHide()
   },[])
+
+  const applyLeave = () =>{
+    
+  }
 
   return (
     <>
@@ -81,16 +76,42 @@ function All() {
         </header>
 
         <div className="page-content bottom-content ">
-             <DateRange
-              ranges={[dateRange]}
-              onChange={handleDateChange}
-              showSelectionPreview={true}
-              moveRangeOnFirstSelection={false}
-              editableDateInputs={true}
-              // style={{ width: '100%',background: 'linear-gradient(to right, rgb(0, 191, 255), rgb(0, 123, 255))', color:'white' }}
-              style={{ width: '100%' }}
-            />
-            <h5 className="title" style={{ textAlign: 'center', fontSize:'14px', marginTop: "15px" }}>Total selected days: {getSelectedDaysCount()}</h5>
+            <DateRange
+            ranges={[dateRange]}
+            onChange={handleDateChange}
+            showSelectionPreview={true}
+            moveRangeOnFirstSelection={false}
+            editableDateInputs={true}
+            // style={{ width: '100%',background: 'linear-gradient(to right, rgb(0, 191, 255), rgb(0, 123, 255))', color:'white' }}
+            style={{ width: '100%' }}
+          />
+          <h5 className="title" style={{ textAlign: 'center', fontSize:'14px', marginTop: "15px" }}>Total selected days: {getSelectedDaysCount()}</h5>
+          <ul>
+            <li style={{ margin: "5px 15px"}}>
+              <div className="item-content">
+              <div className="input-group input-square mb-3 pt-4">
+                <select className="form-control" onChange={(e)=>setLeaveType(e.target.value)}>
+                  {leaveTypes.map((item,i)=>{
+                    return (<option key={i} value={item.leavecode}>{item.leavelabel}</option>)
+                  })}
+                </select>
+              </div>
+              </div>
+            </li>
+
+            <li style={{  margin: "5px 15px" }}>
+              <h5 className="title" style={{ textAlign: 'center' }}>Remarks</h5>
+              <div className="pt-2">
+                <textarea rows={2} className="form-control" style={{ width: "100%" }}/>
+              </div>
+            </li>
+
+            <li>
+              <div className="col-md-12" style={{ textAlign: "center", marginTop:"20px" }}>
+                <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={applyLeave}>Apply Leave</button>
+              </div>
+            </li>
+          </ul>
         </div>
         <MenuBar />
       </div>
