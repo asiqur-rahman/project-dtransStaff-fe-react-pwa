@@ -414,28 +414,31 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered }) {
                   </ul>
 
                   {/* {activeStep == 0 && <> */}
-                  {jobDetails.allowcollect &&
+                  {activeStep == 0 && jobDetails.allowcollect &&
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(1); collected(jobDetails.jobnum, remarks); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
                     </div>
                   }
-                  {jobDetails.allowtransfer &&
+
+                  {activeStep == 0 && jobDetails.allowtransfer &&
                     <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={() => jobTransfer(jobDetails.jobnum)}>Request Transfer</button>
                     </div>
                   }
 
-                  {jobDetails.allowdeliver && <>
+                  {activeStep == 1 && jobDetails.allowdeliver && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" onClick={() => { makeDelivered(); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                     </div>
-                  </>}
+                  </>
+                  }
 
-                  {jobDetails.allowreturn && <>
+                  {activeStep == 2 && jobDetails.allowreturn && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }}>Collect Returned Items</button>
                     </div>
-                  </>}
+                  </>
+                  }
                 </div>
               }
             </div>
@@ -678,24 +681,26 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                     }
                   </ul>
 
-                  {jobDetails.allowcollect && <>
+                  {activeStep == 0 && jobDetails.allowcollect && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(1); collected(jobDetails.jobnum, remarks); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
                     </div>
-                    </>}
-                  {jobDetails.allowtransfer && <>
+                    </>
+                  }
+
+                  {activeStep == 0 && jobDetails.allowtransfer && <>
                     <div className="col-md-12 pt-3" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={() => jobTransfer(jobDetails.jobnum)}>Request Transfer</button>
                     </div>
                   </>}
 
-                  {jobDetails.allowdeliver && <>
+                  {activeStep == 1 && jobDetails.allowdeliver && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(2); delivered(jobDetails.jobnum, remarks2); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                     </div>
                   </>}
 
-                  {jobDetails.allowreturn && <>
+                  {activeStep == 2 && jobDetails.allowreturn && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }}>Collect Returned Items</button>
                     </div>
