@@ -48,7 +48,7 @@ function All() {
 
                   <ul>
                     <li style={{ margin: "5px 15px" }}>
-                        <h5 className="title" style={{ textAlign: 'center' }}>Type your feedback here</h5>
+                        <h5 className="title" style={{ textAlign: 'center' }}>Please select your feedback category</h5>
                       <div className="item-content">
                         <div className="input-group input-square mb-3 pt-4">
                           <select className="form-control" onChange={(e) => setCategory(e.target.value)}>
@@ -61,7 +61,7 @@ function All() {
                     </li>
 
                     <li style={{ margin: "5px 15px" }}>
-                      <h5 className="title" style={{ textAlign: 'center' }}>Please select your feedback category</h5>
+                      <h5 className="title" style={{ textAlign: 'center' }}>Type your feedback here</h5>
                       <div className="pt-2">
                         <textarea rows={7} className="form-control" style={{ width: "100%" }} />
                       </div>
