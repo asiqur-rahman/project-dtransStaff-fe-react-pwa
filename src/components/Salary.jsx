@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCar, faCalendar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import axios from '../utils/axios.utils'
 import { useNavigate, Link } from 'react-router-dom';
 import * as common from '../utils/common.utils'

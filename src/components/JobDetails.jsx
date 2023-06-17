@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faCircleCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faCircleCheck, faArrowRight, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import SignatureCanvas from 'react-signature-canvas';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
 import { useLocation, useNavigate } from 'react-router-dom';
-import * as common from '../utils/common.utils'
-import axios from '../utils/axios.utils'
+import * as common from '../utils/common.utils';
+import axios from '../utils/axios.utils';
 import './JobDetails.css';
 import './Jobs.css';
 import { toast } from 'react-toastify';
+import { Button, Modal } from 'react-bootstrap';
 
 const SignaturePad = ({ editable, setSignature }) => {
   const signatureRef = useRef(null);
@@ -62,10 +63,11 @@ const SignaturePad = ({ editable, setSignature }) => {
   );
 };
 
-function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
+function Stepper({ jobDetails, cActiveStep, dActiveStep, clickDisabled=false }) {
   const [activeStep, setActiveStep] = useState(0);
 
   const sActiveStep = (step) => {
+    if(clickDisabled)return;
     setActiveStep(step);
     cActiveStep(step);
   }
@@ -128,7 +130,227 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep }) {
 };
 
 // manu to one 
-function JORJob({ jobDetails, jobTransfer, collected, delivered }) {
+function Return({ jobDetails, jobTransfer, collected, delivered }) {
+
+  const [activeStep, setActiveStep] = useState(0);
+  const [remarks, setRemarks] = useState('');
+  const [items, setItems] = useState([]);
+  const [returnList, setReturnList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItemPic, setSelectedItemPic] = useState('');
+
+  const cActiveStep = (e) => {
+    setActiveStep(e);
+  }
+
+  const addItem = () =>{
+    var data = items.filter(x=>x.barcode==selectedItem)[0];
+    data.imageurl=selectedItemPic
+    returnList.push(data);
+    setReturnList(returnList);
+    closeModal();
+  }
+
+  useEffect(()=>{
+    // job/returns/productlist/:jobnum
+    axios.get(`job/returns/productlist/${jobDetails.jobnum}`)
+      .then((result) => {
+        if (result && result.data.success) {
+          setItems(result.data.data)
+          setSelectedItem(result.data.data[0].barcode);
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },[])
+  
+  const handleShow = () => {
+    window.handleRemoveFadeFromModal();
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = handleReaderLoad;
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleReaderLoad = (event) => {
+    const base64String = event.target.result;
+    // Use the base64String as needed
+    setSelectedItemPic(base64String);
+  };
+
+  return (
+    <>
+
+      {/* <!-- Page Content --> */}
+      <div className="page-content">
+
+        <div className="content-inner pt-0">
+          <div className="container fb">
+
+            {/* <!-- Dashboard Area --> */}
+            <div className="dashboard-area pt-4">
+
+              {/* <!-- Item box Start --> */}
+
+              <Stepper jobDetails={jobDetails} cActiveStep={cActiveStep} dActiveStep={activeStep} clickDisabled={true}/>
+              {/* <!-- Item box Start --> */}
+              {jobDetails &&
+                <div className="item-list recent-jobs-list pt-3">
+                  {/* <h4 className="title my-4">Job Details</h4> */}
+
+                  <ul>
+                    <li style={{ color: "var(--dark)", border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                      <div className="item-content">
+                        <div className="item-inner" style={{ margin: "10px 0" }}>
+
+                          <div className="d-flex align-items-center">
+                            <div className="item-media media media-40" style={{ marginLeft: "0", marginRight: "15px" }}>
+                              <img src="/images/avatar60x60.jpg" alt="logo" />
+                            </div>
+                            <div className="item-title-row" >
+                              <div className="item-footer" style={{ marginBottom: "0" }}>
+                                <div className="d-flex align-items-center">
+                                  <h5 className="me-3" style={{ marginBottom: "0" }}>{jobDetails.empname}</h5>
+                                </div>
+                              </div>
+                              <div className="item-subtitle" style={{ fontSize: "11px" }}>2023-05-12</div>
+                            </div>
+                          </div>
+
+                          <div className="item-title-row">
+                            <div className="item-footer" style={{ marginBottom: "0" }}>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3" style={{ fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
+                              </div>
+                              <div className="d-flex align-items-center">
+                                <h6 className="me-3" style={{ fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="item-footer">
+                            <div className="d-flex align-items-center">
+                              <div className="item-subtitle">Delivery to : {jobDetails.jobaddr}</div>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+                    <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Returned Items</h5>
+                    <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                      <div className="order-status" style={{ marginTop: "0" }}>
+                        <ul className="dz-timeline style-2">
+                          {returnList.map((item, i) => {
+                            return (
+                              <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
+                                <div className="d-flex align-items-center">
+                                  {/* <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                      <input type="checkbox" />
+                                    </div> */}
+
+                                  <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                    <img src={item.imageurl && item.imageurl.length>0 ? item.imageurl: "/images/item.png"} alt="logo" />
+                                  </div>
+
+                                  <div className="item-title-row" style={{ width: "100%" }}>
+                                    <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                      <div className="d-flex align-items-center">
+                                        <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                      </div>
+                                    </div>
+                                    <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                  </div>
+
+                                  <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                    <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.barcode}</div>
+                                  </div>
+                                </div>
+                              </li>
+                            )
+                          })}
+
+                            <li className="timeline-item" style={{ margin: '0', paddingTop: "18px" }}>
+                              <div className="d-flex align-items-center">
+                                <div className="item-title-row" style={{ width: "100%", textAlign:"center" }}>
+                                  <div className="item-subtitle"><FontAwesomeIcon icon={faPlusCircle} size='3x' color='var(--primary)' className='icon' style={{ cursor:"pointer"}} onClick={()=>setShowModal(true)}/></div>
+                                </div>
+                              </div>
+                            </li>
+                        </ul>
+                      </div>
+                    </li>
+
+                      <li style={{ borderRadius: "10px" }}>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
+                        <div className="pt-2">
+                          <textarea rows={3} className="form-control" style={{ width: "100%" }} value={remarks} onChange={(e) => setRemarks(e.target.value)} />
+                        </div>
+                      </li>
+                  </ul>
+
+                  <div className="col-md-12" style={{ textAlign: "center" }}>
+                    <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
+                  </div>
+                  
+                  <Modal centered={true} show={showModal} onEntered={handleShow} onHide={closeModal} className="notification-modal">
+                    <Modal.Header closeButton style={{display:"block"}}>
+                      <Modal.Title style={{textAlign:"center"}}>Add Item</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <ul>
+                          <li style={{ borderRadius: "10px" }}>
+                            <h5 className="title">Product</h5>
+                            <div className="pt-2">
+                            <select className="form-control" onChange={(e)=>setSelectedItem(e.target.value)}>
+                              {items.map((item,i)=>{
+                                return (<option key={i} value={item.barcode}>{item.matname}</option>)
+                              })}
+                            </select>
+                            </div>
+                            <div className="pt-4">
+                              <input type='file' accept="image/*" className="form-control" onChange={handleFileChange} style={{ width: "100%" }}/>
+                            </div>
+                          </li>
+                      </ul>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="primary" onClick={addItem}>
+                        Add
+                      </Button>
+                      <Button variant="secondary" onClick={closeModal}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                  
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+      </div>
+      {/* <!-- Page Content End--> */}
+
+    </>
+  )
+}
+
+function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }) {
 
   const [details, setDetails] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
@@ -154,6 +376,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered }) {
       cActiveStep(2);
     }
   }
+
   const showDetails = (j) => {
     if (details == j) {
       setDetails(-1);
@@ -162,6 +385,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered }) {
       setDetails(j);
     }
   }
+
   return (
     <>
 
@@ -437,9 +661,9 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered }) {
                   </>
                   }
 
-                  {activeStep == 2 && jobDetails.allowreturn && <>
+                  {activeStep == 2 && !jobDetails.allowreturn && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }}>Collect Returned Items</button>
+                      <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={()=>setShowReturn(true)}>Collect Returned Items</button>
                     </div>
                   </>
                   }
@@ -727,6 +951,7 @@ function All(props) {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const [jobDetails, setJobDetails] = useState(false);
+  const [showReturn, setShowReturn] = useState(false);
   const [collectionJob, setCollectionJob] = useState(false);
   const [deliveryJob, setDeliveryJob] = useState(false);
   const [jos, setJos] = useState(false);
@@ -809,8 +1034,9 @@ function All(props) {
     <>
       <div className="page-wraper">
         <Sidebar menuName={"Job Details"} />
-        {jor && <JORJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} />}
-        {jos && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} />}
+        {jor && !showReturn && <JORJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} setShowReturn={setShowReturn}/>}
+        {jos && !showReturn && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} />}
+        {showReturn && <Return jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} />}
         <MenuBar />
       </div>
     </>
