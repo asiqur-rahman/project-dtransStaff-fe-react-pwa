@@ -9,6 +9,7 @@ import * as common from '../utils/common.utils';
 import axios from '../utils/axios.utils';
 import './JobDetails.css';
 import './Jobs.css';
+import QrReader from 'react-qr-scanner';
 import { toast } from 'react-toastify';
 import { Button, Modal } from 'react-bootstrap';
 
@@ -138,7 +139,8 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
   const [returnList, setReturnList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
-  const [selectedItemPic, setSelectedItemPic] = useState('');
+  const [isScannerOpen, setScannerOpen] = useState(false);
+  const [scannedBarcode, setScannedBarcode] = useState('');
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -146,7 +148,7 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
 
   const addItem = () =>{
     var data = items.filter(x=>x.barcode==selectedItem)[0];
-    data.imageurl=selectedItemPic
+    data.imageurl=data.imageurl;
     returnList.push(data);
     setReturnList(returnList);
     closeModal();
@@ -165,28 +167,33 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
         console.log(error)
       })
   },[])
-  
+
   const handleShow = () => {
     window.handleRemoveFadeFromModal();
   };
   const closeModal = () => {
     setShowModal(false);
+    closeScanner();
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = handleReaderLoad;
-      reader.readAsDataURL(file);
+  const handleScan = (data) => {
+    if (data) {
+      setScannedBarcode(data);
+      setScannerOpen(false);
     }
   };
 
-  const handleReaderLoad = (event) => {
-    const base64String = event.target.result;
-    // Use the base64String as needed
-    setSelectedItemPic(base64String);
+  const handleError = (error) => {
+    console.error(error);
+  };
+
+  const openScanner = () => {
+    setScannedBarcode('');
+    setScannerOpen(true);
+  };
+
+  const closeScanner = () => {
+    setScannerOpen(false);
   };
 
   return (
@@ -321,9 +328,30 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
                               })}
                             </select>
                             </div>
-                            <div className="pt-4">
-                              <input type='file' accept="image/*" className="form-control" onChange={handleFileChange} style={{ width: "100%" }}/>
-                            </div>
+                            <div>
+                            <br/>
+                            {!isScannerOpen && (
+                              <div className="col-md-12" style={{ textAlign: "center" }}>
+                                <button type="button" className="btn btn-danger w-100" onClick={openScanner} style={{ maxWidth: "40%", borderRadius: "50px" }}>Scan Barcode</button>
+                              </div>
+                            )}
+
+                            {isScannerOpen && (
+                              <div className="col-md-12" style={{ textAlign: "center" }}>
+                                <QrReader
+                                  delay={300}
+                                  onError={handleError}
+                                  onScan={handleScan}
+                                  style={{ width: '100%' }}
+                                />
+                                <button type="button" className="btn btn-danger w-100" onClick={closeScanner} style={{ maxWidth: "40%", borderRadius: "50px" }}>Close</button>
+                              </div>
+                            )}
+
+                            {scannedBarcode && (
+                              <p>Scanned Barcode: {scannedBarcode}</p>
+                            )}
+                          </div>
                           </li>
                       </ul>
                     </Modal.Body>
@@ -681,7 +709,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                   </>
                   }
 
-                  {activeStep == 2 && jobDetails.allowreturn && <>
+                  {activeStep == 2 && !jobDetails.allowreturn && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={()=>setShowReturn(true)}>Collect Returned Items</button>
                     </div>
@@ -961,7 +989,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
 
                   {activeStep == 2 && jobDetails.allowreturn && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }}>Collect Returned Items</button>
+                      <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={()=>setShowReturn(true)}>Collect Returned Items</button>
                     </div>
                   </>}
                 </div>
