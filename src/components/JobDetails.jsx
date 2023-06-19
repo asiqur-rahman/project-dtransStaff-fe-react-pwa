@@ -147,6 +147,9 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
   }
 
   const addItem = () =>{
+    if(selectedItem=="0000"){
+      return toast.error("Please select an product !");
+    }
     var data = items.filter(x=>x.barcode==selectedItem)[0];
     data.imageurl=data.imageurl;
     returnList.push(data);
@@ -160,7 +163,7 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
       .then((result) => {
         if (result && result.data.success) {
           setItems(result.data.data)
-          setSelectedItem(result.data.data[0].barcode);
+          setSelectedItem("0000");
         }
       })
       .catch((error) => {
@@ -179,7 +182,15 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
   const handleScan = (data) => {
     if (data) {
       setScannedBarcode(data);
-      setScannerOpen(false);
+      var item = items.filter(x=>x.barcode==data);
+      if(item.length>0){
+        item=item[0];
+        setSelectedItem(item.barcode)
+        setScannerOpen(false);
+        toast.success(`${matname} found`);
+      }else{
+        toast.error("No product found by this barcode");
+      }
     }
   };
 
@@ -323,6 +334,7 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
                             <h5 className="title">Product</h5>
                             <div className="pt-2">
                             <select className="form-control" onChange={(e)=>setSelectedItem(e.target.value)}>
+                              <option value="0000" disabled selected>-- Select a product --</option>
                               {items.map((item,i)=>{
                                 return (<option key={i} value={item.barcode}>{item.matname}</option>)
                               })}
