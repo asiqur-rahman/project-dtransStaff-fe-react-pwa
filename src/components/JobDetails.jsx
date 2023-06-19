@@ -602,7 +602,11 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
 
                                     <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
                                       <div className="item-subtitle" style={{ fontSize: "14px" }}>Actual</div>
+                                      {activeStep<2 ? 
                                       <input type='number' defaultValue={item.actualqty} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", padding: "3%", textAlign:"center" }} />
+                                      :
+                                      <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.actualqty}</div>
+                                      }
                                     </div>
                                   </div>
                                 </li>
@@ -615,11 +619,27 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     </>}
                     {/* Step 2 End */}
 
-                    {activeStep > 0 &&
+                    {activeStep == 1 &&
                       <li style={{ borderRadius: "10px", minHeight: "200px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
                         <SignaturePad editable={activeStep < 2} setSignature={setSignature} />
                       </li>
+                    }
+
+                    {activeStep == 2 &&
+                      <>
+                        <li style={{ borderRadius: "10px", minHeight: "200px" }}>
+                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
+                          <img src={jobDetails.signature}/>
+                        </li>
+
+                        <li style={{ borderRadius: "10px" }}>
+                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
+                          <div className="pt-2">
+                            <textarea rows={3} readOnly={true} className="form-control" style={{ width: "100%" }} value={jobDetails.deliveryremark} />
+                          </div>
+                        </li>
+                      </>
                     }
 
                     {activeStep == 0 &&
@@ -661,7 +681,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                   </>
                   }
 
-                  {activeStep == 2 && !jobDetails.allowreturn && <>
+                  {activeStep == 2 && jobDetails.allowreturn && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={()=>setShowReturn(true)}>Collect Returned Items</button>
                     </div>
@@ -906,6 +926,17 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
                           <textarea rows={3} className="form-control" style={{ width: "100%" }} value={remarks2} onChange={(e) => setRemarks2(e.target.value)} />
                         </div>
                       </li>
+                    }
+
+                    {activeStep == 2 &&
+                      <>
+                        <li style={{ borderRadius: "10px" }}>
+                          <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
+                          <div className="pt-2">
+                            <textarea rows={3} readOnly={true} className="form-control" style={{ width: "100%" }} value={jobDetails.collectionremark} />
+                          </div>
+                        </li>
+                      </>
                     }
                   </ul>
 
