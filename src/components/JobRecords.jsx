@@ -164,7 +164,7 @@ function All() {
                         <h6 className="item-title"><a href="#" style={{ color: "white", fontSize:"13px" }}>Earned</a></h6>
                       </div>
                       <div className="item-title-row" style={{ marginBottom: "0", textAlign: "center" }}>
-                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>$ 0</h6>
+                        <h6 className="item-title" style={{ color: "white", fontSize:"13px" }}>{todayJobs ? todayJobs.summary.earning : "0"}</h6>
                       </div>
                     </div>
                   </div>
