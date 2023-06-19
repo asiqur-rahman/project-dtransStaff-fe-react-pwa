@@ -602,7 +602,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
 
                                     <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
                                       <div className="item-subtitle" style={{ fontSize: "14px" }}>Actual</div>
-                                      <input type='number' className='form-control no-spin' style={{ float: "right", maxWidth: "22%", padding: "3%" }} />
+                                      <input type='number' defaultValue={item.actualqty} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", padding: "3%", textAlign:"center" }} />
                                     </div>
                                   </div>
                                 </li>
