@@ -40,7 +40,18 @@ function HomePage() {
         const result = await axios.post('accounts/authenticate', body);
         if (result && result.data.success) {
           common.setSession(result.data.data);
-          navigate('/');
+          axios.get(`profile/photo`)
+          .then((image) => {
+            if (image && image.data.success) {
+              result.data.data.imageurl=image.data.data.imageurl;
+              common.setSession(result.data.data);
+              navigate('/');
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+            toast.error("Login Failed !");
+          })
         } else {
           toast.error(result.data.message);
         }

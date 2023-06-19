@@ -33,22 +33,13 @@ function All() {
     window.SpinnerShow()
     let user = common.getUser();
     if (user) {
+      setProfilePicture(user.imageurl)
       fetchProfile();
       const todayDate = new Date().toISOString().split('T')[0]
       axios.get(`job/summary?date=${todayDate}`)
         .then((result) => {
           if (result && result.data.success) {
             setJobSummary(result.data.data)
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-
-        axios.get(`profile/photo`)
-        .then((result) => {
-          if (result && result.data.success) {
-            setProfilePicture(result.data.data.imageurl)
           }
         })
         .catch((error) => {

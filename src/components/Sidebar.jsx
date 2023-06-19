@@ -12,17 +12,8 @@ function All({menuName}) {
   useEffect(()=>{
     let user = common.getUser();
       if(user){
+        setProfilePicture(user.imageurl)
         setUserDetails(user)
-        axios.get(`profile/photo`)
-        .then((result) => {
-          if (result && result.data.success) {
-            setProfilePicture(result.data.data.imageurl)
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-
       }
   },[])
   
