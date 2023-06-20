@@ -500,11 +500,18 @@ function Return({ jobDetails }) {
 
 function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }) {
 
+  const [jobdetailsData, setJobdetailsData] = useState(null);
   const [details, setDetails] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [signature, setSignature] = useState('');
   const [remarks, setRemarks] = useState('');
   const [remarks2, setRemarks2] = useState('');
+
+  useEffect(()=>{
+    if(jobDetails){
+      setJobdetailsData(jobDetails);
+    }
+  },[jobDetails])
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -523,6 +530,18 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
       delivered(jobDetails.jobnum, remarks2, signature, selectedData);
       cActiveStep(2);
     }
+  }
+  
+  const setActualQty = (qty, matnum) =>{
+
+    jobdetailsData.items.forEach(item => {
+      if(item.matnum==matnum) {
+        item.actualqty=qty;
+      }
+    })
+
+    setJobdetailsData(jobdetailsData);
+
   }
 
   const showDetails = (j) => {
@@ -751,7 +770,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                                     <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
                                       <div className="item-subtitle" style={{ fontSize: "14px" }}>Actual</div>
                                       {activeStep<2 ? 
-                                      <input type='number' defaultValue={item.actualqty} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", padding: "3%", textAlign:"center" }} />
+                                      <input type='number' defaultValue={item.actualqty} onChange={(e)=>setActualQty(e.target.value, item.matnum)} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", padding: "3%", textAlign:"center" }} />
                                       :
                                       <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.actualqty}</div>
                                       }
@@ -776,9 +795,9 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
 
                     {activeStep == 2 &&
                       <>
-                        <li style={{ borderRadius: "10px", minHeight: "200px" }}>
+                        <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0" }}>
                           <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
-                          <img src={jobDetails.signature}/>
+                          <img src={"data:image/png;base64," +jobDetails.signature}/>
                         </li>
 
                         <li style={{ borderRadius: "10px" }}>
