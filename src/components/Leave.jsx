@@ -4,13 +4,12 @@ import { faCircle, faCircleCheck, faArrowRight } from '@fortawesome/free-solid-s
 import SignatureCanvas from 'react-signature-canvas';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as common from '../utils/common.utils'
 import axios from '../utils/axios.utils'
 import './JobDetails.css';
 
 function All(props) {
-  const location = useLocation();
   const navigate = useNavigate();
   const [leaveData, setleaveData] = useState(false);
   var count = 0;

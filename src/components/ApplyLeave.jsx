@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // Import the default styles
 import 'react-date-range/dist/theme/default.css';
+import { toast } from 'react-toastify';
 
 function All() {
   const [leaveTypes, setLeaveTypes] = useState([]);
@@ -47,7 +48,28 @@ function All() {
   },[])
 
   const applyLeave = () =>{
-    
+    const { startDate, endDate } = dateRange;
+    const data = {
+      leavecode: leaveType,
+      leavefrom: common.getApplyLeaveFormatDate(startDate),
+      leavefrom2: "AM",
+      leaveto: common.getApplyLeaveFormatDate(endDate),
+      leaveto2: "PM",
+      remarks: remarks
+    };
+
+    axios.post(`leave`,data)
+      .then((result)=>{
+        if(result && result.data.success){
+          toast.success(result.data.data.message)
+        }
+        else{
+          toast.error(result.data.data.message)
+        }
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
   }
 
   return (
