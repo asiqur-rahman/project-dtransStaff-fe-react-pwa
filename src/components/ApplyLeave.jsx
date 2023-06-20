@@ -124,7 +124,7 @@ function All() {
             <li style={{  margin: "5px 15px" }}>
               <h5 className="title" style={{ textAlign: 'center' }}>Remarks</h5>
               <div className="pt-2">
-                <textarea rows={2} className="form-control" style={{ width: "100%" }}/>
+                <textarea rows={2} value={remarks} onChange={(e)=>setRemarks(e.target.value)} className="form-control" style={{ width: "100%" }}/>
               </div>
             </li>
 
