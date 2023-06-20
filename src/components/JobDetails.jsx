@@ -130,11 +130,20 @@ function Stepper({ jobDetails, cActiveStep, dActiveStep, clickDisabled=false }) 
   );
 };
 
-function BarCodeScanner (){
+function BarCodeScanner ({barCodeSetter,scannerOption}){
 
     const firstUpdate = useRef(true);
     const [isStart, setIsStart] = useState(false);
-    const [barcode, setBarcode] = useState('');
+    const [tryAgain, setTryAgain] = useState(false);
+
+    useEffect(() => {
+      if(scannerOption=="1"){
+        setIsStart(prevStart => !prevStart);
+      }
+      else if(scannerOption=="2"){
+        setTryAgain(true);
+      }
+    }, [scannerOption]);
 
     useEffect(() => {
       return () => {
@@ -154,7 +163,7 @@ function BarCodeScanner (){
 
     const _onDetected = res => {
       stopScanner();
-      setBarcode(res.codeResult.code);
+      barCodeSetter(res.codeResult.code);
     };
 
     const startScanner = () => {
@@ -253,13 +262,17 @@ function BarCodeScanner (){
         </div>
       )}
       <div className="col-md-12" style={{ textAlign: "center" }}>
-        <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={() => setIsStart(prevStart => !prevStart)}>{isStart ? 'Stop' : 'Start'}</button>
+        {tryAgain ? 
+          <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={() => startScanner()}>Scan Again</button>
+          :
+          <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={() => setIsStart(prevStart => !prevStart)}>{isStart ? 'Stop' : 'Start'}</button>
+        }
       </div>
     </div>
 }
 
 // manu to one 
-function Return({ jobDetails, jobTransfer, collected, delivered }) {
+function Return({ jobDetails }) {
 
   const [activeStep, setActiveStep] = useState(0);
   const [remarks, setRemarks] = useState('');
@@ -267,6 +280,7 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
   const [returnList, setReturnList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
+  const [scannerOption, setScannerOption] = useState('0');
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -277,7 +291,6 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
       return toast.error("Please select an product !");
     }
     var data = items.filter(x=>x.barcode==selectedItem)[0];
-    data.imageurl=data.imageurl;
     returnList.push(data);
     setReturnList(returnList);
     closeModal();
@@ -300,10 +313,27 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
   const handleShow = () => {
     window.handleRemoveFadeFromModal();
   };
+
   const closeModal = () => {
     setShowModal(false);
     closeScanner();
   };
+
+  const barCodeSetter = (code) =>{
+    var data = items.filter(x=>x.barcode==code);
+    if(data.length>0){
+      data=data[0];
+      setSelectedItem(data.barcode);
+      returnList.push(data);
+      setReturnList(returnList);
+      setScannerOption("1");
+      toast.success("Product matched");
+    }else{
+      setScannerOption("2");
+      toast.error(`No product matched by ${code}!`);
+    }
+    
+  }
 
   return (
     <>
@@ -440,7 +470,7 @@ function Return({ jobDetails, jobTransfer, collected, delivered }) {
                             </div>
                             <div>
                             <br/>
-                            <BarCodeScanner/>
+                            <BarCodeScanner barCodeSetter={barCodeSetter} scannerOption={scannerOption}/>
                           </div>
                           </li>
                       </ul>
