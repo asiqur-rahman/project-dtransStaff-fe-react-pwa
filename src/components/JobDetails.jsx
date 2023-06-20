@@ -137,10 +137,10 @@ function BarCodeScanner ({barCodeSetter,scannerOption}){
     const [tryAgain, setTryAgain] = useState(false);
 
     useEffect(() => {
-      if(scannerOption=="1"){
-        setIsStart(prevStart => !prevStart);
+      if(scannerOption){
+        stopScanner();
       }
-      else if(scannerOption=="2"){
+      else if(!scannerOption){
         setTryAgain(true);
       }
     }, [scannerOption]);
@@ -162,7 +162,6 @@ function BarCodeScanner ({barCodeSetter,scannerOption}){
     }, [isStart]);
 
     const _onDetected = res => {
-      stopScanner();
       barCodeSetter(res.codeResult.code);
     };
 
@@ -173,7 +172,7 @@ function BarCodeScanner ({barCodeSetter,scannerOption}){
             type: 'LiveStream',
             target: document.querySelector('#scanner-container'),
             constraints: {
-              facingMode: 'environment' // or user
+              facingMode: { exact: 'environment' } // or user
             }
           },
           numOfWorkers: navigator.hardwareConcurrency,
@@ -205,7 +204,9 @@ function BarCodeScanner ({barCodeSetter,scannerOption}){
             }
           },
           decoder: {
-            readers: ['ean_reader']
+            readers: [
+              Quagga.ALL
+            ]
           }
         },
         err => {
@@ -249,6 +250,7 @@ function BarCodeScanner ({barCodeSetter,scannerOption}){
 
     const stopScanner = () => {
       try {
+        setIsStart(false);
         Quagga.offProcessed();
         Quagga.offDetected();
         Quagga.stop();
@@ -265,7 +267,7 @@ function BarCodeScanner ({barCodeSetter,scannerOption}){
         {tryAgain ? 
           <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={() => startScanner()}>Scan Again</button>
           :
-          <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={() => setIsStart(prevStart => !prevStart)}>{isStart ? 'Stop' : 'Start'}</button>
+          <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={() => setIsStart(prevStart => !prevStart)}>{isStart ? 'Stop Scan' : 'Start Scan'}</button>
         }
       </div>
     </div>
@@ -324,12 +326,10 @@ function Return({ jobDetails }) {
     if(data.length>0){
       data=data[0];
       setSelectedItem(data.barcode);
-      returnList.push(data);
-      setReturnList(returnList);
-      setScannerOption("1");
+      setScannerOption(Date.now);
       toast.success("Product matched");
     }else{
-      setScannerOption("2");
+      setScannerOption(false);
       toast.error(`No product matched by ${code}!`);
     }
     
@@ -487,7 +487,7 @@ function Return({ jobDetails }) {
                           <li style={{ borderRadius: "10px" }}>
                             <h5 className="title">Product</h5>
                             <div className="pt-2">
-                            <select className="form-control" onChange={(e)=>setSelectedItem(e.target.value)}>
+                            <select className="form-control" value={selectedItem} onChange={(e)=>setSelectedItem(e.target.value)}>
                               <option value="0000" disabled selected>-- Select a product --</option>
                               {items.map((item,i)=>{
                                 return (<option key={i} value={item.barcode}>{item.matname}</option>)
@@ -874,7 +874,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                   </>
                   }
 
-                  {activeStep == 2 && jobDetails.allowreturn && <>
+                  {activeStep == 2 && !jobDetails.allowreturn && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={()=>setShowReturn(true)}>Collect Returned Items</button>
                     </div>
