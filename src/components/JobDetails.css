@@ -42,3 +42,14 @@
   background-color: var(--primary); /* Blue color for active line */
   box-shadow: 0 0 4px var(--primary);
 }
+
+.scanner-container{
+  position: relative !important;
+}
+
+.drawingBuffer{
+  position: absolute;
+  left: 0; 
+  z-index: 999999;
+  width: 100% !important;
+}

@@ -239,22 +239,17 @@ function BarCodeScanner (){
     };
 
     const stopScanner = () => {
-      try {
-        Quagga.offProcessed();
-        Quagga.offDetected();
-        Quagga.stop();
-      } catch (error) {}
+      Quagga.offProcessed();
+      Quagga.offDetected();
+      // Quagga.stop();
     };
 
     return <div>
-      {isStart && (
-        <div id="scanner-container" style={{ width: '100%' }}>
-          <video className="video-stream" style={{ width: '100%', height: 'auto' }} />
-        </div>
-      )}
-      <div className="col-md-12" style={{ textAlign: "center" }}>
-        <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={() => setIsStart(prevStart => !prevStart)}>{isStart ? 'Stop' : 'Start'}</button>
-      </div>
+      <button onClick={() => setIsStart(prevStart => !prevStart)} style={{ marginBottom: 20 }}>{isStart ? 'Stop' : 'Start'}</button>
+      {isStart && <>
+        <div id="scanner-container" />
+        <span>Barcode: {barcode}</span>
+      </>}
     </div>
 }
 
