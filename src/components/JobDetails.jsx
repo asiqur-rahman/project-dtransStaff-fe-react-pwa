@@ -611,7 +611,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>
                                 <div className="d-flex align-items-center">
-                                  <h5 className="me-3" style={{ marginBottom: "0" }}>{jobDetails.empname}</h5>
+                                  <h5 className="me-3" style={{ color: "var(--dark)",marginBottom: "0" }}>{jobDetails.empname}</h5>
                                 </div>
                               </div>
                               <div className="item-subtitle" style={{ fontSize: "11px" }}>2023-05-12</div>
@@ -621,10 +621,10 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                           <div className="item-title-row">
                             <div className="item-footer" style={{ marginBottom: "0" }}>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
+                                <h6 className="me-3" style={{ color: "var(--dark)",fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
                               </div>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
+                                <h6 className="me-3" style={{ color: "var(--dark)",fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
                               </div>
                             </div>
                           </div>
@@ -633,7 +633,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                               <div className="item-subtitle">Delivery to : {jobDetails.jobaddr}</div>
                             </div>
                             <div className="d-flex align-items-center">
-                              <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
+                              <h6 className="me-3" style={{ color: "var(--dark)",fontSize: "12px" }}>Status : {jobDetails.status}</h6>
                             </div>
                           </div>
                         </div>
@@ -643,7 +643,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     {/* Step 1 Start*/}
                     {(activeStep == 0 || activeStep == 2) && <>
                       <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
-                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                      <li style={{ color: "var(--dark)",border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                         <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
                             {jobDetails.items.map((item, i) => {
@@ -662,7 +662,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                                     <div className="item-title-row" style={{ width: "100%" }}>
                                       <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                         <div className="d-flex align-items-center">
-                                          <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                          <h5 className="me-3" style={{ color: "var(--dark)",marginBottom: "0" }}>{item.matname}</h5>
                                         </div>
                                       </div>
                                       <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
@@ -684,29 +684,29 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                       {jobDetails.collectionplan.map((job, j) => {
                         return (
 
-                          <li key={j} style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                          <li key={j} style={{ color: "var(--dark)",border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                             <div className="item-content" style={{ marginTop: "10px" }}>
                               <div className="item-inner" style={{ margin: "10px 0" }}>
 
                                 <div className="item-title-row">
                                   <div className="item-footer" style={{ marginBottom: "0" }}>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
+                                      <h6 className="me-3" style={{ color: "var(--dark)",fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Collect From</span><br /> {job.locationname}</h6>
                                     </div>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
+                                      <h6 className="me-3" style={{ color: "var(--dark)",fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Items</span><br /> {job.items.length}</h6>
                                     </div>
                                     <div className="d-flex align-items-center">
-                                      <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
+                                      <h6 className="me-3" style={{ color: "var(--dark)",fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Qty</span><br /> {job.items.reduce((total, itm) => total + itm.qty, 0)}</h6>
                                     </div>
                                     <div className="d-flex align-items-center">
-                                      <FontAwesomeIcon icon={faArrowRight} color='var(--primary)' className='icon' onClick={() => showDetails(j)} style={{ cursor: "pointer" }} />
+                                      <FontAwesomeIcon icon={faArrowRight} color='var(--dark)' className='icon' onClick={() => showDetails(j)} style={{ cursor: "pointer" }} />
                                     </div>
                                   </div>
                                 </div>
                                 <div className="item-footer">
                                   <div className="d-flex align-items-center">
-                                    <h6 className="me-3" style={{ fontSize: "12px" }}><span style={{ fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
+                                    <h6 className="me-3" style={{ color: "var(--dark)",fontSize: "12px" }}><span style={{ color: "var(--dark)",fontSize: "11px", fontWeight: "normal" }}>Address</span> : {job.locationaddr}</h6>
                                   </div>
                                 </div>
                               </div>
@@ -716,7 +716,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
 
                               </li>
 
-                              <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Items</h5>
+                              <h5 className="title" style={{ color: "var(--dark)",textAlign: 'center', marginTop: "15px" }}>Items</h5>
                               <div className="order-status" style={{ marginTop: "0" }}>
                                 <ul className="dz-timeline style-2">
                                   {job.items.map((item, i) => {
@@ -763,7 +763,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                       <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
 
                       </li>
-                      <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
+                      <h5 className="title" style={{ color: "var(--dark)",textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                         <div className="order-status" style={{ marginTop: "0" }}>
                           <ul className="dz-timeline style-2">
@@ -782,18 +782,18 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                                     <div className="item-title-row" style={{ width: "100%" }}>
                                       <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                         <div className="d-flex align-items-center">
-                                          <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                          <h5 className="me-3" style={{ color: "var(--dark)",marginBottom: "0" }}>{item.matname}</h5>
                                         </div>
                                       </div>
-                                      <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                      <div className="item-subtitle" style={{ color: "var(--dark)",fontSize: "11px" }}>{item.matnum}</div>
                                     </div>
 
-                                    <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                    <div className="item-title-row" style={{ color: "var(--dark)",width: "100%", textAlign: "end", paddingRight: "5%" }}>
                                       <div className="item-subtitle" style={{ fontSize: "14px" }}>DO</div>
                                       <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.qty}</div>
                                     </div>
 
-                                    <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                    <div className="item-title-row" style={{ color: "var(--dark)",width: "100%", textAlign: "end", paddingRight: "5%" }}>
                                       <div className="item-subtitle" style={{ fontSize: "14px" }}>Actual</div>
                                       {activeStep<2 ? 
                                         <input type='number' defaultValue={item.actualqty} onChange={(e)=>setActualQty(e.target.value, item.matnum)} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", minWidth: "50px", padding: "3%", textAlign:"center" }} />
