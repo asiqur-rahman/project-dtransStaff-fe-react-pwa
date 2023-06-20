@@ -12,15 +12,15 @@ function All() {
     window.SpinnerShow()
     let user = common.getUser();
     if (user) {
-      // axios.get(`leave/type`)
-      // .then((result)=>{
-      //   if(result && result.data.success){
-      //     setCategories(result.data.data);
-      //   }
-      // })
-      // .catch((error)=>{
-      //   console.log(error)
-      // })
+      axios.get(`feedback/type`)
+      .then((result)=>{
+        if(result && result.data.success){
+          setCategories(result.data.data);
+        }
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
 
     }
     window.SpinnerHide()
@@ -53,7 +53,7 @@ function All() {
                         <div className="input-group input-square mb-3 pt-4">
                           <select className="form-control" onChange={(e) => setCategory(e.target.value)}>
                             {categories.map((item, i) => {
-                              return (<option key={i} value={item.leavecode}>{item.leavelabel}</option>)
+                              return (<option key={i} value={item.fbcode}>{item.fblabel}</option>)
                             })}
                           </select>
                         </div>
