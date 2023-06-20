@@ -335,6 +335,32 @@ function Return({ jobDetails }) {
     
   }
 
+  const submitReturn = () =>{
+    const items  = [];
+    returnList.map(item => items.push({
+      matnum: item.matnum,
+      qty: 1
+    }));
+
+    const data ={
+      jobnum: jobDetails.jobnum,
+      remarks: remarks,
+      items: items
+    };
+    axios.post(`job/returneditem`, data)
+      .then((result) => {
+        if (result && result.data.success) {
+          toast.success(result.data.data.response)
+        }
+        else{
+          toast.error(result.data.data.response)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   return (
     <>
 
@@ -449,7 +475,7 @@ function Return({ jobDetails }) {
                   </ul>
 
                   <div className="col-md-12" style={{ textAlign: "center" }}>
-                    <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
+                    <button type="button" className="btn btn-danger w-100" style={{ maxWidth: "40%", borderRadius: "50px" }} onClick={submitReturn}>Collected</button>
                   </div>
                   
                   <Modal centered={true} show={showModal} onEntered={handleShow} onHide={closeModal} className="notification-modal">
