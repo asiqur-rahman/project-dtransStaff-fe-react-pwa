@@ -436,7 +436,7 @@ function Return({ jobDetails }) {
                             <div className="item-title-row" >
                               <div className="item-footer" style={{ marginBottom: "0" }}>
                                 <div className="d-flex align-items-center">
-                                  <h5 className="me-3" style={{ marginBottom: "0" }}>{jobDetails.empname}</h5>
+                                  <h5 className="me-3" style={{ color: "var(--dark)", marginBottom: "0" }}>{jobDetails.empname}</h5>
                                 </div>
                               </div>
                               <div className="item-subtitle" style={{ fontSize: "11px" }}>2023-05-12</div>
@@ -446,10 +446,10 @@ function Return({ jobDetails }) {
                           <div className="item-title-row">
                             <div className="item-footer" style={{ marginBottom: "0" }}>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
+                                <h6 className="me-3" style={{ color: "var(--dark)", fontSize: "12px" }}>Job No : {jobDetails.jobnum}</h6>
                               </div>
                               <div className="d-flex align-items-center">
-                                <h6 className="me-3" style={{ fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
+                                <h6 className="me-3" style={{ color: "var(--dark)", fontSize: "12px" }}>Type : {jobDetails.jobtype}</h6>
                               </div>
                             </div>
                           </div>
@@ -458,7 +458,7 @@ function Return({ jobDetails }) {
                               <div className="item-subtitle">Delivery to : {jobDetails.jobaddr}</div>
                             </div>
                             <div className="d-flex align-items-center">
-                              <h6 className="me-3" style={{ fontSize: "12px" }}>Status : {jobDetails.status}</h6>
+                              <h6 className="me-3" style={{ color: "var(--dark)", fontSize: "12px" }}>Status : {jobDetails.status}</h6>
                             </div>
                           </div>
                         </div>
@@ -481,10 +481,10 @@ function Return({ jobDetails }) {
                                     <img src={item.imageurl && item.imageurl.length>0 ? item.imageurl: "/images/item.png"} alt="logo" />
                                   </div>
 
-                                  <div className="item-title-row" style={{ width: "100%" }}>
+                                  <div className="item-title-row" style={{ color: "var(--dark)", width: "100%" }}>
                                     <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                       <div className="d-flex align-items-center">
-                                        <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                        <h5 className="me-3" style={{ color: "var(--dark)", marginBottom: "0" }}>{item.matname}</h5>
                                       </div>
                                     </div>
                                     <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.barcode}</div>

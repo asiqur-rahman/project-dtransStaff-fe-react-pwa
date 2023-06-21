@@ -42,6 +42,9 @@ function All() {
     axios.post(`feedback`,data)
       .then((result)=>{
         if(result && result.data.success){
+          setCategory("")
+          window.resetFeedbackType()
+          setRemark('')
           toast.success(result.data.data.response);
         }else{
           toast.error(result.data.data.response);
@@ -73,8 +76,8 @@ function All() {
                         <h5 className="title" style={{ textAlign: 'center' }}>Please select your feedback category</h5>
                       <div className="item-content">
                         <div className="input-group input-square mb-3 pt-4">
-                          <select className="form-control" onChange={(e) => setCategory(e.target.value)}>
-                            <option value="" disabled={true} selected="selected">-- Select a type --</option>
+                          <select id='feedbackType' className="form-control" onChange={(e) => setCategory(e.target.value)}>
+                            <option value="0" disabled={true} selected="selected">-- Select a type --</option>
                             {categories.map((item, i) => {
                               return (<option key={i} value={item.fbcode}>{item.fblabel}</option>)
                             })}
