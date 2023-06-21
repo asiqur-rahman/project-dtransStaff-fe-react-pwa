@@ -349,6 +349,7 @@ function Return({ jobDetails }) {
   const submitReturn = () =>{
     const items  = [];
     let allOk =true;
+    console.log(returnList)
     returnList.forEach(element => {
       if(element.qty<1){
         toast.error("Quantity must be greater then 0");
@@ -394,11 +395,11 @@ function Return({ jobDetails }) {
     setReturnList(returnList);
   }
 
-  const QtyInput = ({qty , setQty}) =>{
+  const QtyInput = ({qty, matnum , setQty}) =>{
     return (
       <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
         {/* <div className="item-subtitle" style={{ fontSize: "14px" }}>Qty : {item.qty??0}</div> */}
-        <input type='number' min={1} defaultValue={qty} onChange={(e)=>setQty(e.target.value, item.matnum)} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", minWidth: "70px", padding: "3%", textAlign:"center" }} />
+        <input type='number' min={1} defaultValue={qty} onChange={(e)=>setQty(e.target.value, matnum)} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", minWidth: "70px", padding: "3%", textAlign:"center" }} />
       </div>
     )
   }
@@ -489,7 +490,7 @@ function Return({ jobDetails }) {
                                     <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.barcode}</div>
                                   </div>
 
-                                  <QtyInput qty={item.qty} setQty={setQty}/>
+                                  <QtyInput qty={item.qty} matnum={item.matnum} setQty={setQty}/>
                                 </div>
                               </li>
                             )
