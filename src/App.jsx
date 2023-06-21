@@ -29,7 +29,7 @@ function App() {
     <div>
       <Spinner/>
       <div className="App">
-        <ToastContainer position="bottom-center"/>
+        <ToastContainer position="top-center"/>
         <Router>
           <Routes>
             <Route element={<PrivateRoutes />}>
