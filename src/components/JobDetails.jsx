@@ -293,6 +293,7 @@ function Return({ jobDetails }) {
       return toast.error("Please select an product !");
     }
     var data = items.filter(x=>x.barcode==selectedItem)[0];
+    data.qty=1;
     returnList.push(data);
     setReturnList(returnList);
     closeModal();
@@ -318,7 +319,6 @@ function Return({ jobDetails }) {
 
   const closeModal = () => {
     setShowModal(false);
-    closeScanner();
   };
 
   const barCodeSetter = (code) =>{
@@ -337,9 +337,19 @@ function Return({ jobDetails }) {
 
   const submitReturn = () =>{
     const items  = [];
+    let allOk =true;
+    returnList.forEach(element => {
+      if(element.qty<1){
+        toast.error("Quantity must be greater then 0");
+        return allOk=false;
+      }
+    });
+    if(!allOk){
+      return false;
+    }
     returnList.map(item => items.push({
       matnum: item.matnum,
-      qty: 1
+      qty: item.qty
     }));
 
     const data ={
@@ -359,6 +369,18 @@ function Return({ jobDetails }) {
       .catch((error) => {
         console.log(error)
       })
+  }
+
+  const setQty = (qty, matnum) =>{
+    // if(qty<1){
+    //   toast.error("Quantity must be greater then 0")
+    // }
+    returnList.forEach(element => {
+      if(element.matnum==matnum){
+        element.qty=qty;
+      }
+    });
+    setReturnList(returnList);
   }
 
   return (
@@ -444,11 +466,12 @@ function Return({ jobDetails }) {
                                         <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
                                       </div>
                                     </div>
-                                    <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                    <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.barcode}</div>
                                   </div>
 
                                   <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
-                                    <div className="item-subtitle" style={{ fontSize: "14px" }}>{item.barcode}</div>
+                                    {/* <div className="item-subtitle" style={{ fontSize: "14px" }}>Qty : {item.qty??0}</div> */}
+                                    <input type='number' min={1} defaultValue={item.qty} onChange={(e)=>setQty(e.target.value, item.matnum)} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", minWidth: "70px", padding: "3%", textAlign:"center" }} />
                                   </div>
                                 </div>
                               </li>
@@ -895,7 +918,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
   )
 }
 
-function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
+function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }) {
 
   const [details, setDetails] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
@@ -1268,7 +1291,7 @@ function All(props) {
       <div className="page-wraper">
         <Sidebar menuName={"Job Details"} />
         {jor && !showReturn && <JORJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} setShowReturn={setShowReturn}/>}
-        {jos && !showReturn && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} />}
+        {jos && !showReturn && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} setShowReturn={setShowReturn}/>}
         {showReturn && <Return jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} />}
         <MenuBar />
       </div>
