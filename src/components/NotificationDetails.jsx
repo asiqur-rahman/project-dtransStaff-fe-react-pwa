@@ -11,7 +11,7 @@ function All() {
 
   const [notifications, setNotifications] = useState(false);
   const [header, setHeader] = useState(false);
-  const [body, setBody] = useState(false);
+  const [body, setBody] = useState('');
   useEffect(() => {
     const refnum = queryParams.get('refnum');
     if (refnum) {

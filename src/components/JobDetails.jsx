@@ -536,6 +536,8 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
   useEffect(()=>{
     if(jobDetails){
       setJobdetailsData(jobDetails);
+      setRemarks(jobDetails.collectionremark)
+      setRemarks2(jobDetails.deliveryremark)
     }
   },[jobDetails])
 
@@ -874,7 +876,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                   </>
                   }
 
-                  {activeStep == 2 && !jobDetails.allowreturn && <>
+                  {activeStep == 2 && jobDetails.allowreturn && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-danger w-100" style={{ borderRadius: "50px" }} onClick={()=>setShowReturn(true)}>Collect Returned Items</button>
                     </div>
@@ -912,6 +914,13 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered }) {
       setDetails(j);
     }
   }
+
+  useEffect(()=>{
+    if(jobDetails){
+      setRemarks(jobDetails.collectionremark)
+      setRemarks2(jobDetails.deliveryremark)
+    }
+  },[jobDetails])
 
   return (
     <>
