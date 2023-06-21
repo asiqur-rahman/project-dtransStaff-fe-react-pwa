@@ -754,9 +754,9 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                               </div>
                             </div>
                             <div style={{ display: details == j ? 'block' : 'none' }}>
-                              <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
+                              {/* <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px" }}>
 
-                              </li>
+                              </li> */}
 
                               <h5 className="title" style={{ color: "var(--dark)",textAlign: 'center', marginTop: "15px" }}>Items</h5>
                               <div className="order-status" style={{ marginTop: "0" }}>
@@ -802,9 +802,9 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     {/* Step 2 Start*/}
                     {(activeStep > 0) && <>
 
-                      <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
+                      {/* <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
 
-                      </li>
+                      </li> */}
                       <h5 className="title" style={{ color: "var(--dark)",textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                         <div className="order-status" style={{ marginTop: "0" }}>
@@ -1025,9 +1025,9 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
 
                     {/* Step 1 Start*/}
                     {(activeStep == 0 || activeStep == 2) && <>
-                      <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
+                      {/* <li style={{ border: "1px solid var(--dark)", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
 
-                      </li>
+                      </li> */}
                       <h5 className="title" style={{ color: 'var(--dark)', textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                         <div className="order-status" style={{ marginTop: "0" }}>
