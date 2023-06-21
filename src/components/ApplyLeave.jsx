@@ -12,11 +12,25 @@ function All() {
   const [leaveTypes, setLeaveTypes] = useState([]);
   const [leaveType, setLeaveType] = useState();
   const [remarks, setRemarks] = useState();
+
+  const [ sDate, setSDate ] = useState('');
+  const [ sDate2, setSDate2 ] = useState('AM');
+  const [ eDate, setEDate ] = useState('');
+  const [ eDate2, setEDate2 ] = useState('AM');
   const [dateRange, setDateRange] = useState({
     startDate: new Date(),
     endDate: new Date(),
     key: 'selection',
   });
+
+  const { startDate, endDate } = dateRange;
+    
+  useEffect(()=>{
+      setEDate(common.getApplyLeaveFormatDate(dateRange.endDate))
+      setSDate(common.getApplyLeaveFormatDate(dateRange.startDate))
+  },[dateRange])
+
+
 
   const handleDateChange = (ranges) => {
     setDateRange(ranges.selection);
@@ -37,6 +51,8 @@ function All() {
         .then((result)=>{
           if(result && result.data.success){
             setLeaveTypes(result.data.data);
+            
+            if(result.data.data.length>0)setLeaveType(result.data.data[0].leavecode)
           }
         })
         .catch((error)=>{
@@ -48,23 +64,23 @@ function All() {
   },[])
 
   const applyLeave = () =>{
-    const { startDate, endDate } = dateRange;
+
     const data = {
       leavecode: leaveType,
       leavefrom: common.getApplyLeaveFormatDate(startDate),
-      leavefrom2: "AM",
+      leavefrom2: sDate2,
       leaveto: common.getApplyLeaveFormatDate(endDate),
-      leaveto2: "PM",
+      leaveto2: eDate2,
       remarks: remarks
     };
 
     axios.post(`leave`,data)
       .then((result)=>{
         if(result && result.data.success){
-          toast.success(result.data.data.message)
+          toast.success(result.data.data.response)
         }
         else{
-          toast.error(result.data.data.message)
+          toast.error(result.data.data.response)
         }
       })
       .catch((error)=>{
@@ -109,6 +125,25 @@ function All() {
           />
           <h5 className="title" style={{ textAlign: 'center', fontSize:'14px', marginTop: "15px" }}>Total selected days: {getSelectedDaysCount()}</h5>
           <ul>
+            <li style={{ margin: "5px 15px"}}>
+              <div className="item-content">
+                <div className="input-group input-square mb-3 pt-4">
+                  <input type="text" className="form-control" style={{ textAlign:"center" }} value={sDate} readOnly={true} disabled={true}/>
+                  <select className="form-control" onChange={(e)=>setSDate2(e.target.value)}>
+                      <option value="AM">AM</option>
+                      <option value="PM">PM</option>
+                    </select>
+                </div>
+                <div className="input-group input-square mb-3 pt-4">
+                  <input type="text" className="form-control" style={{ textAlign:"center" }} value={eDate} readOnly={true} disabled={true}/>
+                  <select className="form-control" onChange={(e)=>setEDate2(e.target.value)}>
+                      <option value="AM">AM</option>
+                      <option value="PM">PM</option>
+                    </select>
+                </div>
+              </div>
+            </li>
+
             <li style={{ margin: "5px 15px"}}>
               <div className="item-content">
               <div className="input-group input-square mb-3 pt-4">
