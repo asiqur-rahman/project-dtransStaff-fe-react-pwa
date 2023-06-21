@@ -292,11 +292,22 @@ function Return({ jobDetails }) {
     if(selectedItem=="0000"){
       return toast.error("Please select an product !");
     }
+    var previousData=returnList;
+    setReturnList([]);
     var data = items.filter(x=>x.barcode==selectedItem)[0];
     data.qty=1;
-    returnList.push(data);
-    setReturnList(returnList);
+    if(previousData.filter(x=>x.barcode==selectedItem).length>0){
+      previousData.forEach(element => {
+        if(element.barcode==selectedItem){
+          element.qty+=1;
+        }
+      });
+    }else{
+      previousData.push(data);
+    }
+    setReturnList(previousData);
     closeModal();
+    
   }
 
   useEffect(()=>{
@@ -383,6 +394,15 @@ function Return({ jobDetails }) {
     setReturnList(returnList);
   }
 
+  const QtyInput = ({qty , setQty}) =>{
+    return (
+      <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+        {/* <div className="item-subtitle" style={{ fontSize: "14px" }}>Qty : {item.qty??0}</div> */}
+        <input type='number' min={1} defaultValue={qty} onChange={(e)=>setQty(e.target.value, item.matnum)} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", minWidth: "70px", padding: "3%", textAlign:"center" }} />
+      </div>
+    )
+  }
+
   return (
     <>
 
@@ -448,7 +468,7 @@ function Return({ jobDetails }) {
                     <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                       <div className="order-status" style={{ marginTop: "0" }}>
                         <ul className="dz-timeline style-2">
-                          {returnList.map((item, i) => {
+                          {returnList.length>0 && returnList.map((item, i) => {
                             return (
                               <li key={i} className="timeline-item" style={{ margin: '0', padding: "8px 0" }}>
                                 <div className="d-flex align-items-center">
@@ -469,10 +489,7 @@ function Return({ jobDetails }) {
                                     <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.barcode}</div>
                                   </div>
 
-                                  <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
-                                    {/* <div className="item-subtitle" style={{ fontSize: "14px" }}>Qty : {item.qty??0}</div> */}
-                                    <input type='number' min={1} defaultValue={item.qty} onChange={(e)=>setQty(e.target.value, item.matnum)} className='form-control no-spin' style={{ float: "right", maxWidth: "35%", minWidth: "70px", padding: "3%", textAlign:"center" }} />
-                                  </div>
+                                  <QtyInput qty={item.qty} setQty={setQty}/>
                                 </div>
                               </li>
                             )
@@ -590,7 +607,6 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
         item.actualqty=qty;
       }
     })
-    console.log(jobdetailsData.items)
     setJobdetailsData(jobdetailsData);
 
   }
