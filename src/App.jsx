@@ -18,13 +18,50 @@ import FeedbackPage  from './pages/FeedbackPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
+import usePushNotifications from "./pushNotification/usePushNotifications";
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const {
+    userConsent,
+    pushNotificationSupported,
+    userSubscription,
+    onClickAskUserPermission,
+    onClickSusbribeToPushNotification,
+    onClickSendSubscriptionToPushServer,
+    pushServerSubscriptionId,
+    onClickSendNotification,
+    error,
+    loading
+  } = usePushNotifications();
+  
+  const isConsentGranted = userConsent === "granted";
 
   useEffect(()=>{
     window.SpinnerHide()
-  },[])
+    if(pushNotificationSupported || !isConsentGranted){
+      onClickAskUserPermission();
+    }
+  },[isConsentGranted])
+
+  useEffect(()=>{
+    if(pushNotificationSupported || isConsentGranted || !userSubscription){
+      onClickSusbribeToPushNotification();
+    }
+  },[pushNotificationSupported,isConsentGranted])
+
+  useEffect(()=>{
+    if(userSubscription || !pushServerSubscriptionId){
+      onClickSendSubscriptionToPushServer();
+    }
+  },[userSubscription,pushServerSubscriptionId])
+
+  useEffect(()=>{
+    if(pushServerSubscriptionId){
+      onClickSendNotification();
+    }
+  },[pushServerSubscriptionId])
+  
   return (
     <div>
       <Spinner/>
