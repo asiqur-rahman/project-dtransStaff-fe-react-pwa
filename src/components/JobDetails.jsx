@@ -785,10 +785,10 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                                           <div className="item-title-row" style={{ width: "100%" }}>
                                             <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                               <div className="d-flex align-items-center">
-                                                <h5 className="me-3" style={{ marginBottom: "0" }}>{item.matname}</h5>
+                                                <h5 className="me-3" style={{ color: 'var(--dark)', marginBottom: "0" }}>{item.matname}</h5>
                                               </div>
                                             </div>
-                                            <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.matnum}</div>
+                                            <div className="item-subtitle" style={{ color: 'var(--dark)', fontSize: "11px" }}>{item.matnum}</div>
                                           </div>
 
                                           <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
