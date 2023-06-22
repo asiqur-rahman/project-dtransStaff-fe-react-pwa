@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faCircleCheck, faArrowRight, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faCircleCheck, faArrowRight, faPlusCircle, faX } from '@fortawesome/free-solid-svg-icons';
 import SignatureCanvas from 'react-signature-canvas';
 import MenuBar from './Menubar';
 import Sidebar from './Sidebar';
@@ -295,7 +295,7 @@ function Return({ jobDetails }) {
     var previousData=returnList;
     setReturnList([]);
     var data = items.filter(x=>x.barcode==selectedItem)[0];
-    data.qty=1;
+    if(!data.qty)data.qty=1;
     if(previousData.filter(x=>x.barcode==selectedItem).length>0){
       previousData.forEach(element => {
         if(element.barcode==selectedItem){
@@ -344,6 +344,11 @@ function Return({ jobDetails }) {
       toast.error(`No product matched by ${code}!`);
     }
     
+  }
+
+  const removeItem = (matnum) =>{
+    const removedList=returnList.filter(x=>x.matnum!=matnum);
+    setReturnList(removedList)
   }
 
   const submitReturn = () =>{
@@ -491,6 +496,9 @@ function Return({ jobDetails }) {
                                   </div>
 
                                   <QtyInput qty={item.qty} matnum={item.matnum} setQty={setQty}/>
+                                  <div className="circle" style={{ cursor: "pointer" }} onClick={() => sActiveStep(2)}>
+                                    <FontAwesomeIcon icon={faX} color='var(--primary)' style={{fontSize:"16px", fontWeight:"bolder", marginRight:"10px"}} onClick={()=>removeItem(item.matnum)} className='icon' />
+                                  </div>
                                 </div>
                               </li>
                             )

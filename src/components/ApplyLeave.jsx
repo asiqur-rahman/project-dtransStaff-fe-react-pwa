@@ -9,6 +9,7 @@ import 'react-date-range/dist/theme/default.css';
 import { toast } from 'react-toastify';
 
 function All() {
+  const [leaveData, setleaveData] = useState(false);
   const [leaveTypes, setLeaveTypes] = useState([]);
   const [leaveType, setLeaveType] = useState();
   const [remarks, setRemarks] = useState();
@@ -58,7 +59,16 @@ function All() {
         .catch((error)=>{
           console.log(error)
         })
-      
+        
+        axios.get(`leave`)
+          .then((result) => {
+            if (result && result.data.success) {
+              setleaveData(result.data.data.balance)
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
       }
       window.SpinnerHide()
   },[])
@@ -123,7 +133,7 @@ function All() {
             // style={{ width: '100%',background: 'linear-gradient(to right, rgb(0, 191, 255), rgb(0, 123, 255))', color:'white' }}
             style={{ width: '100%' }}
           />
-          <h5 className="title" style={{ textAlign: 'center', fontSize:'14px', marginTop: "15px" }}>Total selected days: {getSelectedDaysCount()}</h5>
+          {/* <h5 className="title" style={{ textAlign: 'center', fontSize:'14px', marginTop: "15px" }}>Total selected days: {getSelectedDaysCount()}</h5> */}
           <ul>
             <li style={{ margin: "5px 15px"}}>
               <div className="item-content">
@@ -156,10 +166,31 @@ function All() {
               </div>
             </li>
 
-            <li style={{  margin: "5px 15px" }}>
+            <li style={{  margin: "15px" }}>
+              <h5 className="title" style={{ textAlign: 'center' }}>Attachment</h5>
+              <div className="pt-2">
+                <input type="file" className="form-control" style={{ width: "100%" }}/>
+              </div>
+            </li>
+
+            <li style={{  margin: "15px" }}>
               <h5 className="title" style={{ textAlign: 'center' }}>Remarks</h5>
               <div className="pt-2">
                 <textarea rows={2} value={remarks} onChange={(e)=>setRemarks(e.target.value)} className="form-control" style={{ width: "100%" }}/>
+              </div>
+            </li>
+
+            <li style={{  margin: "5px 15px" }}>
+              <h5 className="title" style={{ textAlign: 'center' }}>Apply For</h5>
+              <div className="row">
+                <div className="col-md-6 pt-3">
+                  <h2 className="me-3" style={{ color: "var(--dark)"}}>{getSelectedDaysCount()}</h2>
+                  <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel}</h5>
+                </div>
+                <div className="col-md-6 pt-3">
+                  <h2 className="me-3" style={{ color: "var(--dark)"}}>-</h2>
+                  <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel+" ( After approval )"}</h5>
+                </div>
               </div>
             </li>
 
