@@ -19,6 +19,7 @@ import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
 import usePushNotifications from "./pushNotification/usePushNotifications";
+import * as common from './utils/common.utils';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -39,25 +40,25 @@ function App() {
 
   useEffect(()=>{
     window.SpinnerHide()
-    if(pushNotificationSupported || !isConsentGranted){
+    if((pushNotificationSupported || !isConsentGranted) && common.isUserLogedIn()){
       onClickAskUserPermission();
     }
-  },[isConsentGranted])
+  },[isConsentGranted,common.isUserLogedIn()])
 
   useEffect(()=>{
-    if(pushNotificationSupported || isConsentGranted || !userSubscription){
+    if((pushNotificationSupported || isConsentGranted || !userSubscription) && common.isUserLogedIn()){
       onClickSusbribeToPushNotification();
     }
   },[pushNotificationSupported,isConsentGranted])
 
   useEffect(()=>{
-    if(userSubscription || !pushServerSubscriptionId){
+    if((userSubscription || !pushServerSubscriptionId) && common.isUserLogedIn()){
       onClickSendSubscriptionToPushServer();
     }
   },[userSubscription,pushServerSubscriptionId])
 
   useEffect(()=>{
-    if(pushServerSubscriptionId){
+    if(pushServerSubscriptionId && common.isUserLogedIn()){
       onClickSendNotification();
     }
   },[pushServerSubscriptionId])

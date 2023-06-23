@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import http from "../utils/pushNotificationHttp";
+import * as common from "../utils/common.utils";
 //the function to call the push server: https://github.com/Spyna/push-notification-demo/blob/master/front-end-react/src/utils/http.js
 
 import {
@@ -83,6 +84,10 @@ export default function usePushNotifications() {
     setError(false);
     createNotificationSubscription()
       .then(function(subscrition) {
+        let userData = common.getUser();
+        if(userData){
+          subscrition.username = userData.username;
+        }
         setUserSubscription(subscrition);
         setLoading(false);
       })

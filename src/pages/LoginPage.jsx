@@ -45,7 +45,8 @@ function HomePage() {
             if (image && image.data.success) {
               result.data.data.imageurl=image.data.data.imageurl;
               common.setSession(result.data.data);
-              navigate('/');
+              // navigate('/');
+              window.location.href = "/";
             }
           })
           .catch((error) => {
