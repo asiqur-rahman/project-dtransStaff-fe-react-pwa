@@ -18,14 +18,14 @@ async function askUserPermission() {
  * shows a notification
  */
 function sendNotification() {
-  const img = "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg";
-  const text = "Take a look at this brand new t-shirt!";
-  const title = "New Product Available";
+  const img = "/images/logo.webp";
+  const text = "Take a look at this Order !";
+  const title = "New Order Available";
   const options = {
     body: text,
-    icon: "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg",
+    icon: "/images/logo.webp",
     vibrate: [200, 100, 200],
-    tag: "new-product",
+    tag: "new-order",
     image: img,
     badge: "https://spyna.it/icons/android-icon-192x192.png",
     actions: [{ action: "Detail", title: "View", icon: "https://via.placeholder.com/128/ff0000" }]

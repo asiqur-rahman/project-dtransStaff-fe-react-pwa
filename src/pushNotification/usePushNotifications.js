@@ -101,7 +101,7 @@ export default function usePushNotifications() {
     setLoading(true);
     setError(false);
     http
-      .post("/subscription", userSubscription)
+      .post("subscription", userSubscription)
       .then(function(response) {
         setPushServerSubscriptionId(response.id);
         setLoading(false);
@@ -118,7 +118,7 @@ export default function usePushNotifications() {
   const onClickSendNotification = async () => {
     setLoading(true);
     setError(false);
-    await http.get(`/subscription/${pushServerSubscriptionId}`).catch(err => {
+    await http.get(`subscription/${pushServerSubscriptionId}`).catch(err => {
       setLoading(false);
       setError(err);
     });
