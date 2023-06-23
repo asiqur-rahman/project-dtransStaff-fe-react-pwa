@@ -28,7 +28,7 @@ const GoogleMaps = ({ fromPostalCode, toPostalCode }) => {
   const mapRef = useRef(null);
   const [directions, setDirections] = useState(null);
 
-  useEffect(async () => {
+  useEffect(() => {
     const calculateDirections = (maps) => {
       const directionsService = new maps.DirectionsService();
       const origin = { lat: 23.810331, lng: 90.412521 };
@@ -50,19 +50,23 @@ const GoogleMaps = ({ fromPostalCode, toPostalCode }) => {
       );
     };
 
-    if (mapRef.current && fromPostalCode && toPostalCode) {
-      const currentMap = mapRef.current.map_; // Access the map object from mapRef.current
-      try {
-        const fromResult = await getLatLngFromPostalCode(fromPostalCode);
-        const { lat, lng } = fromResult;
-        console.log("Latitude:", lat);
-        console.log("Longitude:", lng);
-        calculateDirections(currentMap); // Use currentMap instead of maps
-      } catch (error) {
-        console.error("Error:", error);
+    const fetchData = async () => {
+      if (mapRef.current && fromPostalCode && toPostalCode) {
+        const currentMap = mapRef.current.map_;
+        try {
+          const fromResult = await getLatLngFromPostalCode(fromPostalCode);
+          const { lat, lng } = fromResult;
+          console.log("Latitude:", lat);
+          console.log("Longitude:", lng);
+          calculateDirections(currentMap);
+        } catch (error) {
+          console.error("Error:", error);
+        }
       }
-    }
-  }, [mapRef, fromPostalCode, toPostalCode]);
+    };
+
+    fetchData();
+  }, [fromPostalCode, toPostalCode]);
 
   return (
     <div style={{ height: "400px", width: "100%" }}>
@@ -83,3 +87,4 @@ const GoogleMaps = ({ fromPostalCode, toPostalCode }) => {
 };
 
 export default GoogleMaps;
+

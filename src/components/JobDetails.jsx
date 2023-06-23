@@ -809,7 +809,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     {/* Step 1 End */}
 
                     {/* Step 2 Start*/}
-                    {(activeStep > 0) && <>
+                    {(activeStep == 1) && <>
 
                       <li style={{ padding:"0", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
                         <GoogleMap fromPostalCode={jobDetails.jobaddrpostcode} toPostalCode={jobDetails.jobaddrpostcode}/>
@@ -863,6 +863,47 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     </>}
                     {/* Step 2 End */}
 
+                    {/* Step 3 Start*/}
+                    {(activeStep == 2 && jobDetails.returneditems && jobDetails.returneditems.length>0) && <>
+                      <h5 className="title" style={{ color: 'var(--dark)', textAlign: 'center', marginTop: "15px" }}>Returned Items</h5>
+                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                        <div className="order-status" style={{ marginTop: "0" }}>
+                          <ul className="dz-timeline style-2">
+                            {jobDetails.returneditems.map((item, i) => {
+                              return (
+                                <li key={i} className="timeline-item" style={{ color: 'var(--dark)', margin: '0', padding: "8px 0" }}>
+                                  <div className="d-flex align-items-center">
+                                    {activeStep == 1 &&
+                                      <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                        <input type="checkbox" />
+                                      </div>}
+
+                                    <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                      <img src={item.imageurl.length>0 ? item.imageurl: "/images/item.png"} alt="logo" />
+                                    </div>
+
+                                    <div className="item-title-row" style={{ width: "100%" }}>
+                                      <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                        <div className="d-flex align-items-center">
+                                          <h5 className="me-3" style={{ color: 'var(--dark)', marginBottom: "0" }}>{item.matname}</h5>
+                                        </div>
+                                      </div>
+                                      <div className="item-subtitle" style={{ color: 'var(--dark)', fontSize: "11px" }}>{item.matnum}</div>
+                                    </div>
+
+                                    <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                      <div className="item-subtitle" style={{ color: 'var(--dark)', fontSize: "14px" }}>{item.qty}</div>
+                                    </div>
+                                  </div>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        </div>
+                      </li>
+                    </>}
+                    {/* Step 3 End */}
+                    
                     {activeStep == 1 &&
                       <li style={{ borderRadius: "10px", minHeight: "200px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Signature</h5>
@@ -1073,9 +1114,6 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                           </ul>
                         </div>
                       </li>
-
-
-
                     </>}
                     {/* Step 1 End */}
 
@@ -1156,6 +1194,48 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                       })}
                     </>}
                     {/* Step 2 End */}
+
+                    {/* Step 3 Start*/}
+                    {(activeStep == 2 && jobDetails.returneditems && jobDetails.returneditems.length>0) && <>
+                      <h5 className="title" style={{ color: 'var(--dark)', textAlign: 'center', marginTop: "15px" }}>Returned Items</h5>
+                      <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
+                        <div className="order-status" style={{ marginTop: "0" }}>
+                          <ul className="dz-timeline style-2">
+                            {jobDetails.returneditems.map((item, i) => {
+                              return (
+                                <li key={i} className="timeline-item" style={{ color: 'var(--dark)', margin: '0', padding: "8px 0" }}>
+                                  <div className="d-flex align-items-center">
+                                    {activeStep == 1 &&
+                                      <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                        <input type="checkbox" />
+                                      </div>}
+
+                                    <div className="item-media media media-40 dz-icon" style={{ margin: "0 15px 0 0" }}>
+                                      <img src={item.imageurl.length>0 ? item.imageurl: "/images/item.png"} alt="logo" />
+                                    </div>
+
+                                    <div className="item-title-row" style={{ width: "100%" }}>
+                                      <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
+                                        <div className="d-flex align-items-center">
+                                          <h5 className="me-3" style={{ color: 'var(--dark)', marginBottom: "0" }}>{item.matname}</h5>
+                                        </div>
+                                      </div>
+                                      <div className="item-subtitle" style={{ color: 'var(--dark)', fontSize: "11px" }}>{item.matnum}</div>
+                                    </div>
+
+                                    <div className="item-title-row" style={{ width: "100%", textAlign: "end", paddingRight: "5%" }}>
+                                      <div className="item-subtitle" style={{ color: 'var(--dark)', fontSize: "14px" }}>{item.qty}</div>
+                                    </div>
+                                  </div>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        </div>
+                      </li>
+                    </>}
+                    {/* Step 3 End */}
+
                     {/* 
                       {activeStep > 0 &&
                         <li style={{ borderRadius: "10px", minHeight: "200px" }}>
