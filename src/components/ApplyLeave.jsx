@@ -63,7 +63,9 @@ function All() {
   },[])
 
   const applyLeave = () =>{
-
+    if((leaveTypes.filter(x=>x.leavecode==leaveType)[0].balance-getSelectedDaysCount())<0){
+      return toast.error(`You can apply maximum ${leaveTypes.filter(x=>x.leavecode==leaveType)[0].balance} day/s leave !`)
+    }
     const data = {
       leavecode: leaveType,
       leavefrom: common.getApplyLeaveFormatDate(startDate),
