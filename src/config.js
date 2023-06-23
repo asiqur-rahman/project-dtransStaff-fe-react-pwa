@@ -10,7 +10,8 @@ const Config = {
       productionBaseURL : "https://devb2b.bizpoint-intl.com:3086/",
       SESSION_NAME : "DTrans-Staff",
       pushServerPublicKey : "BIN2Jc5Vmkmy-S3AUrcMlpKxJpLeVRAfu9WBqUbJ70SJOCWGCGXKY-Xzyh7HDr6KbRDGYHjqZ06OcS3BjD7uAm8",
-      pushServerBaseUrl:"https://devb2b.bizpoint-intl.com:3086/"
+      pushServerBaseUrl:"https://devb2b.bizpoint-intl.com:3086/",
+      googleMapsApiKey: "AIzaSyC4_I1lGIZK-xVptDI4uIR_7M0w7PKOuCk"
     }
 }
 
