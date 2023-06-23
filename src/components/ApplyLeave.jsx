@@ -9,7 +9,6 @@ import 'react-date-range/dist/theme/default.css';
 import { toast } from 'react-toastify';
 
 function All() {
-  const [leaveData, setleaveData] = useState(false);
   const [leaveTypes, setLeaveTypes] = useState([]);
   const [leaveType, setLeaveType] = useState();
   const [remarks, setRemarks] = useState();
@@ -59,16 +58,6 @@ function All() {
         .catch((error)=>{
           console.log(error)
         })
-        
-        axios.get(`leave`)
-          .then((result) => {
-            if (result && result.data.success) {
-              setleaveData(result.data.data.balance)
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
       }
       window.SpinnerHide()
   },[])
@@ -188,7 +177,7 @@ function All() {
                   <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel}</h5>
                 </div>
                 <div className="col-md-6 pt-3">
-                  <h2 className="me-3" style={{ color: "var(--dark)"}}>-</h2>
+                  <h2 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && (leaveTypes.filter(x=>x.leavecode==leaveType)[0].balance-getSelectedDaysCount())}</h2>
                   <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel+" ( After approval )"}</h5>
                 </div>
               </div>
