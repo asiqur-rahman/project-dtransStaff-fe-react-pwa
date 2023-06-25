@@ -105,7 +105,8 @@ export default function usePushNotifications() {
   const onClickSendSubscriptionToPushServer = () => {
     setLoading(true);
     setError(false);
-    http
+    if(userSubscription){
+      http
       .post("push/subscription", userSubscription)
       .then(function(response) {
         setPushServerSubscriptionId(response.id);
@@ -115,6 +116,8 @@ export default function usePushNotifications() {
         setLoading(false);
         setError(err);
       });
+    }
+    
   };
 
   /**

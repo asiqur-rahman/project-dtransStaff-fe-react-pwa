@@ -39,8 +39,8 @@ function App() {
   const isConsentGranted = userConsent === "granted";
   
   useEffect(()=>{
-    const userDetails = common.getUser();
-    const pushNotificationSubscribed = userDetails?.pushNotificationSubscribed;
+    // const userDetails = common.getUser();
+    // const pushNotificationSubscribed = userDetails?.pushNotificationSubscribed;
     window.SpinnerHide()
     if((pushNotificationSupported || !isConsentGranted) && common.isUserLogedIn()){
       onClickAskUserPermission();
