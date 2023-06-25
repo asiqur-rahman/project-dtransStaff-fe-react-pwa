@@ -109,8 +109,11 @@ export default function usePushNotifications() {
       http
       .post("push/subscription", userSubscription)
       .then(function(response) {
-        setPushServerSubscriptionId(response.id);
-        setLoading(false);
+        if(response.success){
+          setPushServerSubscriptionId(true);
+          setLoading(false);
+        }
+        
       })
       .catch(err => {
         setLoading(false);
