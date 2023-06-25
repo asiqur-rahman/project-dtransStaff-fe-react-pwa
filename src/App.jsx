@@ -39,10 +39,10 @@ function App() {
   const isConsentGranted = userConsent === "granted";
   
   useEffect(()=>{
-    // const userDetails = common.getUser();
-    // const pushNotificationSubscribed = userDetails?.pushNotificationSubscribed;
+    const userDetails = common.getUser();
+    const pushNotificationSubscribed = userDetails?.pushNotificationSubscribed;
     window.SpinnerHide()
-    if((pushNotificationSupported || !isConsentGranted) && common.isUserLogedIn()){
+    if((pushNotificationSupported || !isConsentGranted) && common.isUserLogedIn() && !pushNotificationSubscribed){
       onClickAskUserPermission();
     }
   },[isConsentGranted,common.isUserLogedIn()])
@@ -56,9 +56,9 @@ function App() {
   useEffect(()=>{
     if((userSubscription || !pushServerSubscriptionId) && common.isUserLogedIn()){
       onClickSendSubscriptionToPushServer();
-      // var userDetails = common.getUser();
-      // userDetails.pushNotificationSubscribed = true;
-      // common.setSession(userDetails);
+      var userDetails = common.getUser();
+      userDetails.pushNotificationSubscribed = true;
+      common.setSession(userDetails);
     }
   },[userSubscription,pushServerSubscriptionId])
 
