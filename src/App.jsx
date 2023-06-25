@@ -40,7 +40,7 @@ function App() {
   
   useEffect(()=>{
     const userDetails = common.getUser();
-    const pushNotificationSubscribed = userDetails.pushNotificationSubscribed;
+    const pushNotificationSubscribed = userDetails?.pushNotificationSubscribed;
     window.SpinnerHide()
     if((pushNotificationSupported || !isConsentGranted) && common.isUserLogedIn() && !pushNotificationSubscribed){
       onClickAskUserPermission();
