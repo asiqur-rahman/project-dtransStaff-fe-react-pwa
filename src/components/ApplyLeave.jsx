@@ -174,13 +174,17 @@ function All() {
             <li style={{  margin: "5px 15px" }}>
               <h5 className="title" style={{ textAlign: 'center' }}>Apply For</h5>
               <div className="row">
-                <div className="col-md-6 pt-3">
+                <div className="col-md-6 pt-3" style={{width: "50%"}}>
                   <h2 className="me-3" style={{ color: "var(--dark)"}}>{getSelectedDaysCount()}</h2>
                   <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel}</h5>
                 </div>
-                <div className="col-md-6 pt-3">
+                <div className="col-md-6 pt-3" style={{width: "50%"}}>
                   <h2 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && (leaveTypes.filter(x=>x.leavecode==leaveType)[0].balance-getSelectedDaysCount())}</h2>
-                  <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel+" ( After approval )"}</h5>
+                  <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel}
+                  <br/>
+                  <span className="me-3" style={{ color: "var(--dark)"}}>{"(After approval)"}</span>
+                  </h5>
+                  
                 </div>
               </div>
             </li>
