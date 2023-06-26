@@ -9,8 +9,9 @@ const Config = {
       developmentBaseURL : "https://devb2b.bizpoint-intl.com:3086/",
       productionBaseURL : "https://devb2b.bizpoint-intl.com:3086/",
       SESSION_NAME : "DTrans-Staff",
-      pushServerPublicKey : "BB5EDm4B6fa6yVlvn8hSjvNSMYYt3CvgDnDfNKnBTbueasPkcWdV8Tak1roJG_gDeEZOo_6jvx1Qka1QRnsII_M",
-      pushServerBaseUrl:"https://devb2b.bizpoint-intl.com:3086/",
+      pushServerPublicKey : "BIN2Jc5Vmkmy-S3AUrcMlpKxJpLeVRAfu9WBqUbJ70SJOCWGCGXKY-Xzyh7HDr6KbRDGYHjqZ06OcS3BjD7uAm8",
+      pushServerBaseUrl_:"https://devb2b.bizpoint-intl.com:3086/",
+      pushServerBaseUrl:"http://localhost:8888/",
       googleMapsApiKey: "AIzaSyC4_I1lGIZK-xVptDI4uIR_7M0w7PKOuCk"
     }
 }

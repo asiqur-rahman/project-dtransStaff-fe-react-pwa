@@ -84,10 +84,6 @@ export default function usePushNotifications() {
     setError(false);
     createNotificationSubscription()
       .then(function(subscrition) {
-        let userData = common.getUser();
-        if(userData){
-          subscrition.username = userData.username;
-        }
         setUserSubscription(subscrition);
         setLoading(false);
       })
@@ -105,22 +101,16 @@ export default function usePushNotifications() {
   const onClickSendSubscriptionToPushServer = () => {
     setLoading(true);
     setError(false);
-    if(userSubscription){
-      http
-      .post("push/subscription", userSubscription)
+    http
+      .post("subscription", userSubscription)
       .then(function(response) {
-        if(response.success){
-          setPushServerSubscriptionId(true);
-          setLoading(false);
-        }
-        
+        setPushServerSubscriptionId(response.id);
+        setLoading(false);
       })
       .catch(err => {
         setLoading(false);
         setError(err);
       });
-    }
-    
   };
 
   /**
@@ -129,7 +119,7 @@ export default function usePushNotifications() {
   const onClickSendNotification = async () => {
     setLoading(true);
     setError(false);
-    await http.post(`push/test`,null).catch(err => {
+    await http.get(`subscription/${pushServerSubscriptionId}`).catch(err => {
       setLoading(false);
       setError(err);
     });
