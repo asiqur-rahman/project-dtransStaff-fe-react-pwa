@@ -182,7 +182,7 @@ function All() {
                   <h2 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && (leaveTypes.filter(x=>x.leavecode==leaveType)[0].balance-getSelectedDaysCount())}</h2>
                   <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel}
                   <br/>
-                  <span className="me-3" style={{ color: "var(--dark)"}}>{"(After approval)"}</span>
+                  <span className="me-3" style={{ color: "var(--dark)", fontSize:"13px", opacity:"0.7"}}>{"(After approval)"}</span>
                   </h5>
                   
                 </div>
