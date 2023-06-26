@@ -18,15 +18,29 @@ import FeedbackPage  from './pages/FeedbackPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
+import usePushNotifications from "./pushNotification/usePushNotifications";
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  
+  const {
+    userConsent,
+    pushNotificationSupported,
+    userSubscription,
+    onClickAskUserPermission,
+    onClickSusbribeToPushNotification,
+    onClickSendSubscriptionToPushServer,
+    pushServerSubscriptionId,
+    onClickSendNotification,
+    error
+  } = usePushNotifications();
+
+  const isConsentGranted = userConsent === "granted";
+
   return (
     <div>
-      <Spinner/>
+      {/* <Spinner/> */}
       <div className="App">
-        <ToastContainer position="top-center"/>
+        {/* <ToastContainer position="top-center"/>
         <Router>
           <Routes>
             <Route element={<PrivateRoutes />}>
@@ -47,7 +61,26 @@ function App() {
             <Route element={<ForgetPasswordPage/>} path="/forget-password"/>
             <Route element={<OTPPage/>} path="/otp-confirm"/>
           </Routes>
-      </Router>
+      </Router> */}
+
+      <button disabled={!pushNotificationSupported || isConsentGranted} onClick={onClickAskUserPermission}>
+        {isConsentGranted ? "Consent granted" : " Ask user permission"}
+      </button>
+
+      <button disabled={!pushNotificationSupported || !isConsentGranted || userSubscription} onClick={onClickSusbribeToPushNotification}>
+        {userSubscription ? "Push subscription created" : "Create Notification subscription"}
+      </button>
+
+      <button disabled={!userSubscription || pushServerSubscriptionId} onClick={onClickSendSubscriptionToPushServer}>
+        {pushServerSubscriptionId ? "Subscrption sent to the server" : "Send subscription to push server"}
+      </button>
+
+      {pushServerSubscriptionId && (
+        <div>
+          <p>The server accepted the push subscrption!</p>
+          <button onClick={onClickSendNotification}>Send a notification</button>
+        </div>
+      )}
     </div>
     </div>
   )

@@ -1,22 +1,10 @@
-import config from '../config'
-import * as common from './common.utils'
+const host = process.env.NODE_ENV === "production" ? "https://push-notification-demo-server.herokuapp.com" : "http://localhost:8080";
 
-const host = config.applicationSettings.pushServerBaseUrl;
-const token = common.getToken();
 function post(path, body) {
-  let data=JSON.stringify(body);
-  if(body && body.username){
-    data=JSON.parse(data);
-    data.username=body.username;
-    data=JSON.stringify(data);
-  }
   return fetch(`${host}${path}`, {
     credentials: "omit",
-    headers: { "content-type": "application/json;charset=UTF-8",
-    "sec-fetch-mode": "cors",
-    "Authorization": `Bearer ${token}`
-   },
-    body: data,
+    headers: { "content-type": "application/json;charset=UTF-8", "sec-fetch-mode": "cors" },
+    body: JSON.stringify(body),
     method: "POST",
     mode: "cors"
   })
@@ -29,13 +17,9 @@ function post(path, body) {
 }
 
 function get(path) {
-  const token = common.getToken();
   return fetch(`${host}${path}`, {
     credentials: "omit",
-    headers: { "content-type": "application/json;charset=UTF-8",
-     "sec-fetch-mode": "cors",
-     "Authorization": `Bearer ${token}`
-     },
+    headers: { "content-type": "application/json;charset=UTF-8", "sec-fetch-mode": "cors" },
     method: "GET",
     mode: "cors"
   })
