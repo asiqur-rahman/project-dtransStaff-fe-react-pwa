@@ -12,7 +12,7 @@ const Config = {
       pushServerPublicKey : "BIN2Jc5Vmkmy-S3AUrcMlpKxJpLeVRAfu9WBqUbJ70SJOCWGCGXKY-Xzyh7HDr6KbRDGYHjqZ06OcS3BjD7uAm8",
       pushServerBaseUrl_:"https://devb2b.bizpoint-intl.com:3086/",
       pushServerBaseUrl:"http://localhost:8888/",
-      googleMapsApiKey: "AIzaSyC4_I1lGIZK-xVptDI4uIR_7M0w7PKOuCk"
+      googleMapsApiKey: "AIzaSyD9i-g54Pyo62YC6Zc_DoUtJ1uOUhJKYVM"
     }
 }
 
