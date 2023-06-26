@@ -18,55 +18,9 @@ import FeedbackPage  from './pages/FeedbackPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
-import usePushNotifications from "./pushNotification/usePushNotifications";
-import * as common from './utils/common.utils';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const {
-    userConsent,
-    pushNotificationSupported,
-    userSubscription,
-    onClickAskUserPermission,
-    onClickSusbribeToPushNotification,
-    onClickSendSubscriptionToPushServer,
-    pushServerSubscriptionId,
-    onClickSendNotification,
-    error,
-    loading
-  } = usePushNotifications();
-  
-  const isConsentGranted = userConsent === "granted";
-  
-  useEffect(()=>{
-    const userDetails = common.getUser();
-    const pushNotificationSubscribed = userDetails?.pushNotificationSubscribed;
-    window.SpinnerHide()
-    if((pushNotificationSupported || !isConsentGranted) && common.isUserLogedIn() && !pushNotificationSubscribed){
-      onClickAskUserPermission();
-    }
-  },[isConsentGranted,common.isUserLogedIn()])
-
-  useEffect(()=>{
-    if((pushNotificationSupported || isConsentGranted || !userSubscription) && common.isUserLogedIn()){
-      onClickSusbribeToPushNotification();
-    }
-  },[pushNotificationSupported,isConsentGranted])
-
-  useEffect(()=>{
-    if((userSubscription || !pushServerSubscriptionId) && common.isUserLogedIn()){
-      onClickSendSubscriptionToPushServer();
-      var userDetails = common.getUser();
-      userDetails.pushNotificationSubscribed = true;
-      common.setSession(userDetails);
-    }
-  },[userSubscription,pushServerSubscriptionId])
-
-  useEffect(()=>{
-    if(pushServerSubscriptionId && common.isUserLogedIn()){
-      onClickSendNotification();
-    }
-  },[pushServerSubscriptionId])
   
   return (
     <div>
