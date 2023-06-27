@@ -277,6 +277,7 @@ function BarCodeScanner ({barCodeSetter,scannerOption}){
 // manu to one 
 function Return({ jobDetails }) {
 
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [remarks, setRemarks] = useState('');
   const [items, setItems] = useState([]);
@@ -379,7 +380,7 @@ function Return({ jobDetails }) {
       .then((result) => {
         if (result && result.data.success) {
           toast.success(result.data.data.response)
-          navigate("/job-detail")
+          navigate("/jobs")
         }
         else{
           toast.error(result.data.data.response)
