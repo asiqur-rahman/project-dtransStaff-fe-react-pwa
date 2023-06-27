@@ -38,6 +38,7 @@ function App() {
                 <Route element={<JobsPage/>} path="/" exact/>
                 <Route element={<JobsPage/>} path="/jobs"/>
                 <Route element={<JobDetailsPage/>} path="/job-details"/>
+                <Route element={<JobDetailsPage/>} path="/job-detail"/>
                 <Route element={<JobRecordsPage/>} path="/job-records"/>
                 <Route element={<ProfilePage/>} path="/profile"/>
                 <Route element={<TransferPage/>} path="/transfer"/>

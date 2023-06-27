@@ -8,7 +8,9 @@ const app = express()
 
 dotenv.config()
 
-app.use(cors())
+app.use(cors({
+    origin: '*'
+}));
 app.use(bodyParser.json())
 
 webpush.setVapidDetails(process.env.WEB_PUSH_CONTACT, process.env.PUBLIC_VAPID_KEY, process.env.PRIVATE_VAPID_KEY)
