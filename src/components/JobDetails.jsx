@@ -380,7 +380,7 @@ function Return({ jobDetails }) {
       .then((result) => {
         if (result && result.data.success) {
           toast.success(result.data.data.response)
-          navigate("/jobs")
+          location.reload();
         }
         else{
           toast.error(result.data.data.response)
