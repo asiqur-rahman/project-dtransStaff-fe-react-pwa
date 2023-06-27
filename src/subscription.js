@@ -1,4 +1,7 @@
-const convertedVapidKey = urlBase64ToUint8Array("BB5EDm4B6fa6yVlvn8hSjvNSMYYt3CvgDnDfNKnBTbueasPkcWdV8Tak1roJG_gDeEZOo_6jvx1Qka1QRnsII_M")
+import config from './config'
+import * as common from './utils/common.utils'
+
+const convertedVapidKey = urlBase64ToUint8Array(config.applicationSettings.pushServerPublicKey)
 
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - base64String.length % 4) % 4)
@@ -15,13 +18,33 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 function sendSubscription(subscription) {
-  return fetch(`http://localhost:9000/notifications/subscribe`, {
-    method: 'POST',
-    body: JSON.stringify(subscription),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+  if(common.isUserLogedIn()){
+    subscription=JSON.stringify(subscription);
+    subscription=JSON.parse(subscription);
+    subscription.username = common.getUser().username;
+    return fetch(`${config.applicationSettings.pushServerBaseUrl}push/subscribe`, {
+      method: 'POST',
+      body: JSON.stringify(subscription),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${common.getToken()}`
+      }
+    })
+  }
+}
+
+export function getTestNotification() {
+  if(common.isUserLogedIn()){
+    let username = common.getUser().username;
+    return fetch(`${config.applicationSettings.pushServerBaseUrl}push/notification`, {
+      method: 'POST',
+      body: {username},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${common.getToken()}`
+      }
+    })
+  }
 }
 
 export function subscribeUser() {

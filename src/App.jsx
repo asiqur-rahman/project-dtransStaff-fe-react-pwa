@@ -18,13 +18,16 @@ import FeedbackPage  from './pages/FeedbackPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Spinner from './utils/Spinner'
 import { ToastContainer, toast } from 'react-toastify';
-import { subscribeUser } from './subscription';
+import { subscribeUser,getTestNotification } from './subscription';
+import * as common from "./utils/common.utils" 
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   
   useEffect(()=>{
-    subscribeUser()
+    if(common.isUserLogedIn()){
+      subscribeUser();
+    }
   },[])
 
   return (
