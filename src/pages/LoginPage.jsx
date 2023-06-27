@@ -18,7 +18,7 @@ function HomePage() {
   };
 
   useEffect(()=>{
-    // window.SpinnerShow()
+    window.SpinnerHide()
     common.removeSession();
   },[])
 
