@@ -4,6 +4,10 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const webpush = require('web-push')
 
+const PUBLIC_VAPID_KEY="BB5EDm4B6fa6yVlvn8hSjvNSMYYt3CvgDnDfNKnBTbueasPkcWdV8Tak1roJG_gDeEZOo_6jvx1Qka1QRnsII_M"
+const PRIVATE_VAPID_KEY="gq6BeEiXOsH5P1yHt1Abmf_UVClDu1qFfbqHK4ugFzw"
+const WEB_PUSH_CONTACT="mailto: contact@my-site.com"
+
 const app = express()
 
 let subscriptions = [];
@@ -15,10 +19,10 @@ app.use(cors({
 }));
 app.use(bodyParser.json())
 
-webpush.setVapidDetails(process.env.WEB_PUSH_CONTACT, process.env.PUBLIC_VAPID_KEY, process.env.PRIVATE_VAPID_KEY)
+webpush.setVapidDetails(WEB_PUSH_CONTACT, PUBLIC_VAPID_KEY, PRIVATE_VAPID_KEY)
 
 app.get('/', (req, res) => {
-  res.send('Hello world!')
+  res.send('Push Notification Test Server is running...')
 })
 
 app.post('/push/subscribe', (req, res) => {
@@ -34,7 +38,7 @@ app.post('/push/notification', (req, res) => {
     if(!subscription) throw new Error();
     const payload = JSON.stringify({
       title: `Hello ${req.body.username}!`,
-      body: 'You have a new order, Please check it.',
+      body: req.body.message??'You have a new order, Please check it.',
     })
 
     webpush.sendNotification(subscription, payload)
