@@ -25,14 +25,14 @@ app.get('/', (req, res) => {
   res.send('Push Notification Test Server is running...')
 })
 
-app.post('/push/subscribe', (req, res) => {
+app.post('/push/subscription', (req, res) => {
   const {username,...subscription} = req.body
   subscriptions[username]=subscription
   res.status(200).json({'success': true})
 });
 
 
-app.post('/push/notification', (req, res) => {
+app.post('/push/test', (req, res) => {
   try {
     const subscription = subscriptions[req.body.username]
     if(!subscription) throw new Error();

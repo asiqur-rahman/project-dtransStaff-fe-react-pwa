@@ -22,7 +22,7 @@ function sendSubscription(subscription) {
     subscription=JSON.stringify(subscription);
     subscription=JSON.parse(subscription);
     subscription.username = common.getUser().username;
-    return fetch(`${config.applicationSettings.pushServerBaseUrl}push/subscribe`, {
+    return fetch(`${config.applicationSettings.pushServerBaseUrl}push/subscription`, {
       method: 'POST',
       body: JSON.stringify(subscription),
       headers: {
@@ -36,7 +36,7 @@ function sendSubscription(subscription) {
 export function getTestNotification() {
   if(common.isUserLogedIn()){
     let username = common.getUser().username;
-    return fetch(`${config.applicationSettings.pushServerBaseUrl}push/notification`, {
+    return fetch(`${config.applicationSettings.pushServerBaseUrl}push/test`, {
       method: 'POST',
       body: {username},
       headers: {
