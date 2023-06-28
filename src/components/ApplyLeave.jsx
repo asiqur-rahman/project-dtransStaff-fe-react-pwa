@@ -172,7 +172,7 @@ function All() {
             </li>
 
             <li style={{  margin: "5px 15px" }}>
-              <h5 className="title" style={{ textAlign: 'center' }}>Apply For</h5>
+              <h5 className="title" style={{ textAlign: 'left' }}>Apply For</h5>
               <div className="row">
                 <div className="col-md-6 pt-3" style={{width: "50%"}}>
                   <h2 className="me-3" style={{ color: "var(--dark)"}}>{getSelectedDaysCount()}</h2>
@@ -180,7 +180,7 @@ function All() {
                 </div>
                 <div className="col-md-6 pt-3" style={{width: "50%"}}>
                   <h2 className="me-3" style={{ color: "var(--dark)"}}>{leaveType ? (leaveTypes.filter(x=>x.leavecode==leaveType)[0].balance-getSelectedDaysCount()) : "0"}</h2>
-                  <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel}
+                  <h5 className="me-3" style={{ color: "var(--dark)"}}>{leaveType && leaveTypes.filter(x=>x.leavecode==leaveType)[0].leavelabel+" balance"} 
                   <br/>
                   <span className="me-3" style={{ color: "var(--dark)", fontSize:"13px", opacity:"0.7"}}>{"(After approval)"}</span>
                   </h5>

@@ -447,7 +447,7 @@ function Return({ jobDetails }) {
                                   <h5 className="me-3" style={{ color: "var(--dark)", marginBottom: "0" }}>{jobDetails.empname}</h5>
                                 </div>
                               </div>
-                              <div className="item-subtitle" style={{ fontSize: "11px" }}>2023-05-12</div>
+                              <div className="item-subtitle" style={{ fontSize: "11px" }}>{jobDetails.scheduledate}</div>
                             </div>
                           </div>
 
@@ -667,7 +667,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                                   <h5 className="me-3" style={{ color: "var(--dark)",marginBottom: "0" }}>{jobDetails.empname}</h5>
                                 </div>
                               </div>
-                              <div className="item-subtitle" style={{ fontSize: "11px" }}>2023-05-12</div>
+                              <div className="item-subtitle" style={{ fontSize: "11px" }}>{jobDetails.scheduledate}</div>
                             </div>
                           </div>
 
@@ -1049,7 +1049,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                                   <h5 className="me-3" style={{ color: 'var(--dark)', marginBottom: "0" }}>{jobDetails.empname}</h5>
                                 </div>
                               </div>
-                              <div className="item-subtitle" style={{ color: 'var(--dark)', fontSize: "11px" }}>2023-05-12</div>
+                              <div className="item-subtitle" style={{ color: 'var(--dark)', fontSize: "11px" }}>{jobDetails.scheduledate}</div>
                             </div>
                           </div>
 
