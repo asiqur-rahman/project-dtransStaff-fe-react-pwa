@@ -9,8 +9,6 @@ class GoogleMaps extends Component {
     this.state = {
       destinations: [],
     };
-
-    this.mapRef = null; // Reference to the map instance
   }
 
   componentDidMount() {
@@ -18,14 +16,14 @@ class GoogleMaps extends Component {
     const postalCodes = [fromPostalCode, ...toPostalCodes];
     this.getLatLngFromPostalCodes(postalCodes)
       .then((destinations) => {
-        this.setState({ destinations }, this.renderRoute);
+        this.setState({ destinations });
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   }
 
-getLatLngFromPostalCodes = async (postalCodes) => {
+  getLatLngFromPostalCodes = async (postalCodes) => {
     const apiKey = config.applicationSettings.googleMapsApiKey;
     const promises = postalCodes.map(async (postalCode) => {
       const geocodingApiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
@@ -55,43 +53,6 @@ getLatLngFromPostalCodes = async (postalCodes) => {
     }
   };
 
-  renderRoute = () => {
-    const { destinations } = this.state;
-
-    if (destinations.length < 2) {
-      console.warn("At least two destinations are required to render the route.");
-      return;
-    }
-
-    const { maps } = window.google;
-    const directionsService = new maps.DirectionsService();
-    const directionsRenderer = new maps.DirectionsRenderer();
-
-    directionsRenderer.setMap(this.mapRef);
-
-    const waypoints = destinations.slice(1, destinations.length - 1).map((destination) => ({
-      location: destination,
-      stopover: true,
-    }));
-
-    directionsService.route(
-      {
-        origin: destinations[0],
-        destination: destinations[destinations.length - 1],
-        waypoints,
-        optimizeWaypoints: true, // Optimize the route for minimal distance
-        travelMode: maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (status === maps.DirectionsStatus.OK) {
-          directionsRenderer.setDirections(result);
-        } else {
-          console.error(`Error fetching directions: ${status}`);
-        }
-      }
-    );
-  };
-
   render() {
     const { destinations } = this.state;
 
@@ -99,21 +60,44 @@ getLatLngFromPostalCodes = async (postalCodes) => {
       return <div>Loading...</div>;
     }
 
+    const apiIsLoaded = (map, maps) => {
+      const directionsService = new maps.DirectionsService();
+      const directionsRenderer = new maps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
+
+      const waypoints = destinations.slice(1, destinations.length - 1).map((destination) => ({
+        location: destination,
+        stopover: true,
+      }));
+
+      directionsService.route(
+        {
+          origin: destinations[0],
+          destination: destinations[destinations.length - 1],
+          waypoints,
+          travelMode: maps.TravelMode.DRIVING,
+        },
+        (result, status) => {
+          if (status === maps.DirectionsStatus.OK) {
+            directionsRenderer.setDirections(result);
+          } else {
+            console.error(`Error fetching directions: ${result}`);
+          }
+        }
+      );
+    };
+
     return (
       <div style={{ height: '400px', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: config.applicationSettings.googleMapsApiKey,
-            libraries: ['places', 'directions'],
           }}
           defaultCenter={destinations[0]}
           defaultZoom={10}
           center={destinations[0]}
           yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => {
-            this.mapRef = map;
-            this.renderRoute();
-          }}
+          onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
         />
       </div>
     );
