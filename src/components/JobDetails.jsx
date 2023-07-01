@@ -986,7 +986,6 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
 
       </div>
       {/* <!-- Page Content End--> */}
-
     </>
   )
 }
