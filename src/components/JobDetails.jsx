@@ -818,7 +818,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     {(activeStep == 1) && <>
 
                       <li style={{ padding:"0", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
-                        <GoogleMaps fromPostalCode={jobDetails.jobaddrpostcode} toPostalCodes ={ toPostalCodes}/>
+                        {toPostalCodes.length>1 && <GoogleMaps fromPostalCode={jobDetails.jobaddrpostcode} toPostalCodes ={ toPostalCodes}/>}
                       </li>
                       <h5 className="title" style={{ color: "var(--dark)",textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
@@ -1085,7 +1085,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     {(activeStep == 0 || activeStep == 2) && <>
                       <li style={{ padding:"0", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
                         {/* <GoogleMap fromPostalCode={jobDetails.jobaddrpostcode} toPostalCode={jobDetails.jobaddrpostcode}/> */}
-                        <GoogleMaps fromPostalCode={jobDetails.jobaddrpostcode} toPostalCodes ={ toPostalCodes}/>
+                        {toPostalCodes.length>1 && <GoogleMaps fromPostalCode={jobDetails.jobaddrpostcode} toPostalCodes ={ toPostalCodes}/>}
                       </li>
                       <h5 className="title" style={{ color: 'var(--dark)', textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
