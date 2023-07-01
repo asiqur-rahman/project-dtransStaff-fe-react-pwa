@@ -13,6 +13,7 @@ import Quagga from 'quagga';
 import { toast } from 'react-toastify';
 import { Button, Modal } from 'react-bootstrap';
 import GoogleMap from './GoogleMap'
+import GoogleMaps from './GoogleMaps'
 
 const SignaturePad = ({ editable, setSignature }) => {
   const signatureRef = useRef(null);
@@ -584,12 +585,15 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
   const [signature, setSignature] = useState('');
   const [remarks, setRemarks] = useState('');
   const [remarks2, setRemarks2] = useState('');
+  const [toPostalCodes, setToPostalCodes] = useState([]);
 
   useEffect(()=>{
     if(jobDetails){
       setJobdetailsData(jobDetails);
-      setRemarks(jobDetails.collectionremark)
-      setRemarks2(jobDetails.deliveryremark)
+      setRemarks(jobDetails.collectionremark);
+      setRemarks2(jobDetails.deliveryremark);
+      setToPostalCodes(jobDetails.collectionplan.map(item => item.locationaddrpostcode));
+      // setToPostalCodes(["384003","787479"]);
     }
   },[jobDetails])
 
@@ -814,7 +818,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     {(activeStep == 1) && <>
 
                       <li style={{ padding:"0", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
-                        <GoogleMap fromPostalCode={jobDetails.jobaddrpostcode} toPostalCode={jobDetails.jobaddrpostcode}/>
+                        <GoogleMaps fromPostalCode={jobDetails.jobaddrpostcode} toPostalCodes ={ toPostalCodes}/>
                       </li>
                       <h5 className="title" style={{ color: "var(--dark)",textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>

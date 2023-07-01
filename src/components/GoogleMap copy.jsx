@@ -1,91 +1,102 @@
-import React, { useEffect, useRef, useState } from "react";
-import GoogleMapReact from "google-map-react";
-import config from "../config"
+import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
+import config from "../config";
 
-const getLatLngFromPostalCode = async (postalCode) => {
-  const apiKey = config.applicationSettings.googleMapsApiKey;
-  const geocodingApiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-    postalCode + ", Singapore"
-  )}&key=${apiKey}`;
+class GoogleMaps extends Component {
+  constructor(props) {
+    super(props);
 
-  try {
-    const response = await fetch(geocodingApiUrl);
-    const data = await response.json();
-
-    if (data.status === "OK" && data.results.length > 0) {
-      const { lat, lng } = data.results[0].geometry.location;
-      return { lat, lng };
-    } else {
-      throw new Error("Failed to retrieve latitude and longitude.");
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    throw error;
+    this.state = {
+      currentLocation: { lat: 40.756795, lng: -73.954298 },
+      fromLatLng: null,
+      toLatLng: null
+    };
   }
-};
 
-const GoogleMaps = ({ fromPostalCode, toPostalCode }) => {
-  const mapRef = useRef(null);
-  const [directions, setDirections] = useState(null);
+  componentDidMount() {
+    const { fromPostalCode, toPostalCode } = this.props;
+    console.log(this.props)
+    this.getLatLngFromPostalCode(fromPostalCode)
+      .then((fromLatLng) => {
+        this.setState({ fromLatLng });
+        if (toPostalCode) {
+          return this.getLatLngFromPostalCode(toPostalCode);
+        }
+        return Promise.resolve(null);
+      })
+      .then((toLatLng) => {
+        this.setState({ toLatLng });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
-  useEffect(() => {
-    const calculateDirections = (maps) => {
+  getLatLngFromPostalCode = async (postalCode) => {
+    const apiKey = config.applicationSettings.googleMapsApiKey;
+    const geocodingApiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      postalCode + ", Singapore"
+    )}&key=${apiKey}`;
+
+    try {
+      const response = await fetch(geocodingApiUrl);
+      const data = await response.json();
+
+      if (data.status === "OK" && data.results.length > 0) {
+        const { lat, lng } = data.results[0].geometry.location;
+        return { lat, lng };
+      } else {
+        throw new Error("Failed to retrieve latitude and longitude.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  render() {
+    const { fromLatLng, toLatLng } = this.state;
+
+    if (!fromLatLng || !toLatLng) {
+      return <div>Loading...</div>;
+    }
+
+    const apiIsLoaded = (map, maps) => {
       const directionsService = new maps.DirectionsService();
-      const origin = { lat: 23.810331, lng: 90.412521 };
-      const destination = { lat: 23.827882, lng: 90.390574 };
+      const directionsRenderer = new maps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
 
       directionsService.route(
         {
-          origin: origin,
-          destination: destination,
-          travelMode: maps.TravelMode.DRIVING
+          origin: fromLatLng,
+          destination: toLatLng,
+          travelMode: maps.TravelMode.DRIVING,
         },
         (result, status) => {
           if (status === maps.DirectionsStatus.OK) {
-            setDirections(result);
+            directionsRenderer.setDirections(result);
           } else {
-            console.error(`Error fetching directions: ${status}`);
+            console.error(`Error fetching directions: ${result}`);
           }
         }
       );
     };
 
-    const fetchData = async () => {
-      if (mapRef.current && fromPostalCode && toPostalCode) {
-        const currentMap = mapRef.current.map_;
-        try {
-          const fromResult = await getLatLngFromPostalCode(fromPostalCode);
-          const toResult = await getLatLngFromPostalCode(toPostalCode);
-          const { lat, lng } = fromResult;
-          console.log("Latitude:", lat);
-          console.log("Longitude:", lng);
-          calculateDirections(currentMap);
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-    };
-
-    fetchData();
-  }, [mapRef.current, fromPostalCode, toPostalCode]);
-
-  return (
-    <div style={{ height: "400px", width: "100%" }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{
-          key: config.applicationSettings.googleMapsApiKey
-        }}
-        defaultCenter={{ lat: 23.810331, lng: 90.412521 }}
-        defaultZoom={10}
-        yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map }) => {
-          mapRef.current = map;
-        }}
-        directions={directions}
-      />
-    </div>
-  );
-};
+    return (
+      <div style={{ height: '400px', width: '100%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: config.applicationSettings.googleMapsApiKey,
+          }}
+          defaultCenter={{ lat: 40.756795, lng: -73.954298 }}
+          defaultZoom={10}
+          center={this.state.fromLatLng}
+          yesIWantToUseGoogleMapApiInternals
+          onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
+        />
+      </div>
+    );
+  }
+}
 
 export default GoogleMaps;
-
