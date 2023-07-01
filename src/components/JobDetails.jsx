@@ -997,6 +997,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
   const [activeStep, setActiveStep] = useState(0);
   const [remarks, setRemarks] = useState('');
   const [remarks2, setRemarks2] = useState('');
+  const [toPostalCodes, setToPostalCodes] = useState([]);
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -1015,6 +1016,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
     if(jobDetails){
       setRemarks(jobDetails.collectionremark)
       setRemarks2(jobDetails.deliveryremark)
+      setToPostalCodes(jobDetails.deliveryplan.map(item => item.locationaddrpostcode));
     }
   },[jobDetails])
 
@@ -1082,7 +1084,8 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                     {/* Step 1 Start*/}
                     {(activeStep == 0 || activeStep == 2) && <>
                       <li style={{ padding:"0", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
-                        <GoogleMap fromPostalCode={jobDetails.jobaddrpostcode} toPostalCode={jobDetails.jobaddrpostcode}/>
+                        {/* <GoogleMap fromPostalCode={jobDetails.jobaddrpostcode} toPostalCode={jobDetails.jobaddrpostcode}/> */}
+                        <GoogleMaps fromPostalCode={jobDetails.jobaddrpostcode} toPostalCodes ={ toPostalCodes}/>
                       </li>
                       <h5 className="title" style={{ color: 'var(--dark)', textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                       <li style={{ border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
