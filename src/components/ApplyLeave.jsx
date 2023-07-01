@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from '../utils/axios.utils'
 import * as common from '../utils/common.utils'
 import MenuBar from './Menubar'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // Import the default styles
 import 'react-date-range/dist/theme/default.css';
 import { toast } from 'react-toastify';
 
 function All() {
+  const navigate = useNavigate();
   const [leaveTypes, setLeaveTypes] = useState([]);
   const [leaveType, setLeaveType] = useState();
   const [remarks, setRemarks] = useState();
@@ -25,6 +26,12 @@ function All() {
 
   const { startDate, endDate } = dateRange;
     
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
   useEffect(()=>{
       setEDate(common.getApplyLeaveFormatDate(dateRange.endDate))
       setSDate(common.getApplyLeaveFormatDate(dateRange.startDate))
@@ -66,19 +73,30 @@ function All() {
     if((leaveTypes.filter(x=>x.leavecode==leaveType)[0].balance-getSelectedDaysCount())<0){
       return toast.error(`You can apply maximum ${leaveTypes.filter(x=>x.leavecode==leaveType)[0].balance} day/s leave !`)
     }
-    const data = {
-      leavecode: leaveType,
-      leavefrom: common.getApplyLeaveFormatDate(startDate),
-      leavefrom2: sDate2,
-      leaveto: common.getApplyLeaveFormatDate(endDate),
-      leaveto2: eDate2,
-      remarks: remarks
-    };
+    // const data = {
+    //   leavecode: leaveType,
+    //   leavefrom: common.getApplyLeaveFormatDate(startDate),
+    //   leavefrom2: sDate2,
+    //   leaveto: common.getApplyLeaveFormatDate(endDate),
+    //   leaveto2: eDate2,
+    //   remarks: remarks
+    // };
+
+    const data = new FormData();
+      data.append('leavecode', leaveType);
+      data.append('leavefrom', common.getApplyLeaveFormatDate(startDate));
+      data.append('leavefrom2', sDate2);
+      data.append('leaveto', common.getApplyLeaveFormatDate(endDate));
+      data.append('leaveto2', eDate2);
+      data.append('remarks', remarks);
+      data.append('file', selectedFile);
+
 
     axios.post(`leave`,data)
       .then((result)=>{
         if(result && result.data.success){
           toast.success(result.data.data.response)
+          navigate(`/my-leave`)
         }
         else{
           toast.error(result.data.data.response)
@@ -160,7 +178,7 @@ function All() {
             <li style={{  margin: "15px" }}>
               <h5 className="title" style={{ textAlign: 'center' }}>Attachment</h5>
               <div className="pt-2">
-                <input type="file" className="form-control" style={{ width: "100%" }}/>
+                <input type="file" className="form-control" onChange={handleFileChange} style={{ width: "100%" }}/>
               </div>
             </li>
 
