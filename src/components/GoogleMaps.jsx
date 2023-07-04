@@ -12,8 +12,8 @@ class GoogleMaps extends Component {
   }
 
   componentDidMount() {
-    const { fromPostalCode, toPostalCodes } = this.props;
-    const postalCodes = [fromPostalCode, ...toPostalCodes];
+    const { fromPostalCode, toPostalCodes, forDelivery } = this.props;
+    const postalCodes = forDelivery ? [ ...toPostalCodes, fromPostalCode] : [fromPostalCode, ...toPostalCodes];
     this.getLatLngFromPostalCodes(postalCodes)
       .then((destinations) => {
         this.setState({ destinations });
