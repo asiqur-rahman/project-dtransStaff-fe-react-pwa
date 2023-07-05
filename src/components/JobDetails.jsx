@@ -699,6 +699,9 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
 
                     {/* Step 1 Start*/}
                     {(activeStep == 0 || activeStep == 2) && <>
+                      <li style={{ padding:"0", borderRadius: "10px", margin: "5px 0", minHeight: "200px", background: "white" }}>
+                        {toPostalCodes.length>1 && <GoogleMaps fromPostalCode={jobDetails.jobaddrpostcode} toPostalCodes ={ toPostalCodes} forDelivery={true}/>}
+                      </li>
                       <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Collection of Items</h5>
                       <li style={{ color: "var(--dark)",border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0", background: "white" }}>
                         <div className="order-status" style={{ marginTop: "0" }}>
@@ -808,7 +811,6 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                               </div>
                             </div>
                           </li>
-
                         )
                       })}
                     </>}

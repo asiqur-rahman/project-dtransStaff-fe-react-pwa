@@ -36,6 +36,7 @@ instance.interceptors.response.use(
     else if(error.response.status===401){
         toast.error("Unauthorized Credentials");
         Common.removeSession();
+        window.location.href='/login';
     }
     else{
         return new Promise((resolve,reject)=>{
