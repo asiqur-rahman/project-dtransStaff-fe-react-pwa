@@ -8,18 +8,21 @@ class GoogleMaps extends Component {
 
     this.state = {
       destinations: [],
+      isLoading: true,
+      error: null,
     };
   }
 
   componentDidMount() {
     const { fromPostalCode, toPostalCodes, forDelivery } = this.props;
-    const postalCodes = forDelivery ? [ ...toPostalCodes, fromPostalCode] : [fromPostalCode, ...toPostalCodes];
+    const postalCodes = forDelivery ? [...toPostalCodes, fromPostalCode] : [fromPostalCode, ...toPostalCodes];
     this.getLatLngFromPostalCodes(postalCodes)
       .then((destinations) => {
-        this.setState({ destinations });
+        this.setState({ destinations, isLoading: false });
       })
       .catch((error) => {
         console.error("Error:", error);
+        this.setState({ error, isLoading: false });
       });
   }
 
@@ -54,10 +57,18 @@ class GoogleMaps extends Component {
   };
 
   render() {
-    const { destinations } = this.state;
+    const { destinations, isLoading, error } = this.state;
+
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
 
     if (destinations.length === 0) {
-      return <div>Loading...</div>;
+      return <div>No destinations found.</div>;
     }
 
     const apiIsLoaded = (map, maps) => {
@@ -81,7 +92,7 @@ class GoogleMaps extends Component {
           if (status === maps.DirectionsStatus.OK) {
             directionsRenderer.setDirections(result);
           } else {
-            console.error(`Error fetching directions: ${result}`);
+            console.error(`Error fetching directions: ${status}`);
           }
         }
       );
