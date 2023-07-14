@@ -131,17 +131,25 @@ function All(props) {
                                       <img src="/images/avatar60x60.jpg" alt="logo" />
                                     </div>
 
-                                    <div className="item-title-row" style={{ width: "100%" }}>
+                                    <div className="item-title-row" style={{ width: "100%", color:"var(--dark)" }}>
                                       <div className="item-footer" style={{ marginBottom: "0", width: "inherit" }}>
                                         <div className="d-flex align-items-center">
-                                          <h5 className="me-3" style={{ marginBottom: "0" }}>{item.empname}</h5>
+                                          <h5 className="me-3" style={{ marginBottom: "0", color:"var(--dark)" }}>{item.empname}</h5>
                                         </div>
                                       </div>
                                       <div className="item-subtitle" style={{ fontSize: "11px" }}>{item.empnum}</div>
                                     </div>
 
                                     <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
-                                      <input type="radio" name='transfer' onChange={() => setSelectedItem(item.empnum)}/>
+                                        <input type="radio" name='transfer' onChange={() => setSelectedItem(item.empnum)}/>
+                                    </div>
+
+                                    <div className="item-title-row" style={{ margin: "0 5% 0 3%" }}>
+                                      {item.offday ?
+                                        <p style={{color:"red", width:"max-content", fontWeight:"bold"}}>Off Day</p>
+                                        :
+                                        <p style={{color:"white", width:"max-content", fontWeight:"bold"}}>Off Day</p>
+                                      }
                                     </div>
                                   </div>
                                 </li>
