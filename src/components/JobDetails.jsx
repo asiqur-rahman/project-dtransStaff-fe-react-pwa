@@ -577,7 +577,7 @@ function Return({ jobDetails }) {
   )
 }
 
-function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }) {
+function JORJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered, setShowReturn, handleFileChange }) {
 
   const [jobdetailsData, setJobdetailsData] = useState(null);
   const [details, setDetails] = useState(0);
@@ -952,7 +952,25 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                         </div>
                       </li>
                     }
+                    
+                    {activeStep == 1 && jobDetails.allowdeliver &&
+                      <li style={{ borderRadius: "10px" }}>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Photos</h5>
+                        <div className="pt-2">
+                          <input type="file" className="form-control" multiple accept="image/*" max="10" onChange={handleFileChange} style={{ width: "100%" }}/>
+                        </div>
+                      </li>
+                    }
                   </ul>
+
+                  {jobdetailsData && jobdetailsData.allowaccepttransfer && <>
+                      <div className="col-md-12" style={{ textAlign: "center" }}>
+                        <button type="button" className="btn btn-success w-50" onClick={() => { acceptTransfer(jobdetailsData.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Accept</button>
+                        <span style={{padding:"20px"}}></span>
+                        <button type="button" className="btn btn-danger w-50" onClick={() => { jobTransfer(jobdetailsData.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Transfer</button>
+                      </div>
+                  </>}
+                  
 
                   {/* {activeStep == 0 && <> */}
                   {activeStep == 0 && jobDetails.allowcollect &&
@@ -992,7 +1010,7 @@ function JORJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
   )
 }
 
-function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }) {
+function JOSJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered, setShowReturn, handleFileChange }) {
 
   const [details, setDetails] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
@@ -1260,6 +1278,7 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                         </div>
                       </li>
                     }
+
                     {activeStep == 1 &&
                       <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Remarks</h5>
@@ -1279,7 +1298,24 @@ function JOSJob({ jobDetails, jobTransfer, collected, delivered, setShowReturn }
                         </li>
                       </>
                     }
+
+                    {activeStep == 1 && jobDetails.allowcollect &&
+                      <li style={{ borderRadius: "10px" }}>
+                        <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Photos</h5>
+                        <div className="pt-2">
+                          <input type="file" className="form-control" multiple accept="image/*" max="10" onChange={handleFileChange} style={{ width: "100%" }}/>
+                        </div>
+                      </li>
+                    }
                   </ul>
+
+                  {jobDetails && jobDetails.allowaccepttransfer && <>
+                    <div className="col-md-12" style={{ textAlign: "center" }}>
+                      <button type="button" className="btn btn-success w-50" onClick={() => { acceptTransfer(jobDetails.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Accept</button>
+                      <span style={{padding:"20px"}}></span>
+                      <button type="button" className="btn btn-danger w-50" onClick={() => { jobTransfer(jobDetails.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Transfer</button>
+                    </div>
+                  </>}
 
                   {activeStep == 0 && jobDetails.allowcollect && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
@@ -1328,7 +1364,30 @@ function All(props) {
   const [deliveryJob, setDeliveryJob] = useState(false);
   const [jos, setJos] = useState(false);
   const [jor, setJor] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    const allowedTypes = ['image/jpeg', 'image/png']; // Add more allowed file types if needed
+    const maxFiles = 10;
+
+    // Filter out non-image files and limit the number of selected files
+    const selectedImages = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (allowedTypes.includes(file.type) && selectedImages.length <= maxFiles) {
+        selectedImages.push(file);
+      }
+      else if(selectedImages.length > maxFiles){
+        return toast.error(`You can add maximum ${maxFiles} image files !`);
+      }
+      else if(!allowedTypes.includes(file.type)){
+        return toast.error(`You can add only image files !`);
+      }
+    }
+
+    setSelectedFiles(selectedImages);
+  }
   const fetchJobDetails = (jobNum) => {
     axios.get(`job/details/${jobNum}`)
       .then((result) => {
@@ -1402,12 +1461,32 @@ function All(props) {
       })
     window.SpinnerHide();
   }
+
+  const acceptTransfer = (jobnum)  =>{
+    window.SpinnerShow();
+    const body = {
+        jobnum: jobnum,
+        status: "Accepted"
+    }
+    axios.post(`job/updatestatus`,body)
+      .then((result) => {
+        if (result && result.data.success) {
+          toast.error("Transferred Successfully !");
+          navigate(`/jobs`);
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    window.SpinnerHide();
+  }
+
   return (
     <>
       <div className="page-wraper">
         <Sidebar menuName={"Job Details"} />
-        {jor && !showReturn && <JORJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} setShowReturn={setShowReturn}/>}
-        {jos && !showReturn && <JOSJob jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} setShowReturn={setShowReturn}/>}
+        {jor && !showReturn && <JORJob jobDetails={jobDetails} acceptTransfer={acceptTransfer} jobTransfer={jobTransfer} collected={collected} delivered={delivered} setShowReturn={setShowReturn} handleFileChange={handleFileChange}/>}
+        {jos && !showReturn && <JOSJob jobDetails={jobDetails} acceptTransfer={acceptTransfer} jobTransfer={jobTransfer} collected={collected} delivered={delivered} setShowReturn={setShowReturn} handleFileChange={handleFileChange}/>}
         {showReturn && <Return jobDetails={jobDetails} jobTransfer={jobTransfer} collected={collected} delivered={delivered} />}
         <MenuBar />
       </div>
