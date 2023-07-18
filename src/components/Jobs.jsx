@@ -20,6 +20,8 @@ function All() {
   const [todayJobs, setTodayJobs] = useState(false);
   const [filteredJobs, setFilteredJobs] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showCollectAll, setShowCollectAll] = useState(false);
+  const [selectedJobs, setSelectedJobs] = useState([]);
   const [header, setHeader] = useState("Please confirm to proceed.");
   const [body, setBody] = useState("Please confirm to proceed.");
   const selectedJob = useRef('');
@@ -133,6 +135,25 @@ function All() {
     setShowModal(false);
   };
 
+  const checkboxEvent = (event, jobnum)=>{
+      
+      if (event.target.checked) {
+        // Add the selected row to the selectedRows array
+        if (!selectedJobs.includes(jobnum)) {
+          selectedJobs.push(jobnum);
+        }
+      } else {
+        // Remove the deselected row from the selectedRows array
+        const index = selectedJobs.indexOf(jobnum);
+        if (index !== -1) {
+          selectedJobs.splice(index, 1);
+        }
+      }
+      if(selectedJobs.length>0)setShowCollectAll(true);
+      else setShowCollectAll(false);
+
+      setSelectedJobs(selectedJobs);
+  }
 
   return (
     <>
@@ -247,8 +268,12 @@ function All() {
                     {
                       filteredJobs && filteredJobs.map((item, i) => {
                         return (
+
                           <li  key={i} style={{ color:"var(--dark)",border: "1px solid var(--title)", borderRadius: "10px", margin: "5px 0",background: "white" }}>
                             <div className="item-content">
+                              <div style={{paddingRight:"2%"}}>
+                                <input type="checkbox" id="checkbox" onChange={e=>checkboxEvent(e,item.jobnum)}/>
+                              </div>
                               <div className="item-inner" style={{ margin: "10px 0" }}>
 
                                 <div className="item-footer">
@@ -305,9 +330,15 @@ function All() {
                               </div>
                             </div>
                           </li>
-
                         )
                       })
+                    }
+                    {showCollectAll &&
+                    <li>
+                      <div className="col-md-12" style={{ textAlign: "center", marginTop:"20px" }}>
+                        <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }}>Collect All</button>
+                      </div>
+                    </li>
                     }
                   </ul>
                 </div>

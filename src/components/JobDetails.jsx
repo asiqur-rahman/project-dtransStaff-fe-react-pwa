@@ -967,7 +967,7 @@ function JORJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
                       <div className="col-md-12" style={{ textAlign: "center" }}>
                         <button type="button" className="btn btn-success w-50" onClick={() => { acceptTransfer(jobdetailsData.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Accept</button>
                         <span style={{padding:"20px"}}></span>
-                        <button type="button" className="btn btn-danger w-50" onClick={() => { jobTransfer(jobdetailsData.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Transfer</button>
+                        <button type="button" className="btn btn-danger w-50" onClick={() => { jobTransfer(jobdetailsData.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Reject</button>
                       </div>
                   </>}
                   
@@ -1313,7 +1313,7 @@ function JOSJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <button type="button" className="btn btn-success w-50" onClick={() => { acceptTransfer(jobDetails.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Accept</button>
                       <span style={{padding:"20px"}}></span>
-                      <button type="button" className="btn btn-danger w-50" onClick={() => { jobTransfer(jobDetails.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Transfer</button>
+                      <button type="button" className="btn btn-danger w-50" onClick={() => { jobTransfer(jobDetails.jobnum); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Reject</button>
                     </div>
                   </>}
 
@@ -1332,7 +1332,7 @@ function JOSJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
 
                   {activeStep == 1 && jobDetails.allowdeliver && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(2); delivered(jobDetails.jobnum, remarks2); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                      <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(2); delivered(jobDetails.jobnum, remarks2, cActiveStep); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                     </div>
                   </>}
 
@@ -1366,28 +1366,85 @@ function All(props) {
   const [jor, setJor] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const files = event.target.files;
     const allowedTypes = ['image/jpeg', 'image/png']; // Add more allowed file types if needed
     const maxFiles = 10;
-
-    // Filter out non-image files and limit the number of selected files
     const selectedImages = [];
+  
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      if (allowedTypes.includes(file.type) && selectedImages.length <= maxFiles) {
-        selectedImages.push(file);
+  
+      if (!allowedTypes.includes(file.type)) {
+        return toast.error('You can add only image files!');
       }
-      else if(selectedImages.length > maxFiles){
-        return toast.error(`You can add maximum ${maxFiles} image files !`);
+  
+      const image = new Image();
+      const reader = new FileReader();
+  
+      // Create a promise to read the file
+      const readFile = () => {
+        return new Promise((resolve, reject) => {
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      };
+  
+      // Resize the image using a canvas
+      const resizeImage = (img, maxWidth, maxHeight) => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+  
+        if (width > height) {
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+        }
+  
+        canvas.width = width;
+        canvas.height = height;
+  
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+  
+        return canvas.toDataURL(file.type);
+      };
+  
+      try {
+        const dataURL = await readFile();
+        image.src = dataURL;
+        await new Promise((resolve) => {
+          image.onload = resolve;
+        });
+  
+        const resizedDataURL = resizeImage(image, 800, 600); // Adjust the maxWidth and maxHeight as needed
+  
+        selectedImages.push(resizedDataURL);
+      } catch (error) {
+        console.error('Error reading or resizing image:', error);
       }
-      else if(!allowedTypes.includes(file.type)){
-        return toast.error(`You can add only image files !`);
+  
+      if (selectedImages.length >= maxFiles) {
+        break;
       }
     }
+  
+    if (selectedImages.length > 0) {
+      setSelectedFiles(selectedImages);
+    } else {
+      toast.error(`You can add maximum ${maxFiles} image files!`);
+    }
+  };
 
-    setSelectedFiles(selectedImages);
-  }
+  
   const fetchJobDetails = (jobNum) => {
     axios.get(`job/details/${jobNum}`)
       .then((result) => {
@@ -1418,7 +1475,22 @@ function All(props) {
   }, [queryParams]);
 
   const jobTransfer = (jobnum) => {
-    navigate(`/transfer?jobnum=${jobnum}`);
+    window.SpinnerShow();
+    const body = {
+        jobnum: jobnum,
+        status: "Rejected"
+    }
+    axios.post(`job/updatestatus`,body)
+      .then((result) => {
+        if (result && result.data.success) {
+          toast.error("Rejected Successfully !");
+          navigate(`/jobs`);
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    window.SpinnerHide();
   }
 
   const collected = (jobnum, remarks) => {
@@ -1440,9 +1512,52 @@ function All(props) {
     window.SpinnerHide();
   }
 
+  // Helper function to convert dataURL to File object
+  const dataURLtoFile = (dataURL, filename) => {
+    const arr = dataURL.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  };
+
+  const uploadPhotos = async (jobnum) =>{
+    if(selectedFiles.length==0){
+      return true;
+    }
+
+    const data = new FormData();
+    data.append('jobnum', jobnum);
+
+    selectedFiles.forEach((element, i) => {
+      const resizedFile = dataURLtoFile(element, `image_${i}.jpg`);
+      data.append('file', resizedFile);
+    });
+
+    axios.post(`job/image`,data)
+      .then((result)=>{
+        if(result && result.data.success){
+          toast.success(result.data.data.response)
+          return true;
+        }
+        else{
+          toast.error(result.data.data.response);
+          return false;
+        }
+      })
+      .catch((error)=>{
+        toast.error("Photos Uploaded Failed !");
+        console.log(error)
+        return false;
+      })
+  }
+
   const delivered = (jobnum, remarks, signature, items=[]) => {
     window.SpinnerShow();
-
     const body = {
       jobnum: jobnum,
       status: "Delivered",
@@ -1451,9 +1566,14 @@ function All(props) {
       items: items
     }
     axios.post(`job/updatestatus`, body)
-      .then((result) => {
+      .then(async (result) => {
         if (result && result.data.success) {
-          fetchJobDetails(jobnum)
+          
+          await uploadPhotos(jobnum).then(ok =>{
+            if(ok)fetchJobDetails(jobnum);
+            else navigate("/jobs");
+          })
+          
         }
       })
       .catch((error) => {
