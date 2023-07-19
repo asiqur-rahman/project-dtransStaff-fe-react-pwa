@@ -1332,7 +1332,7 @@ function JOSJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
 
                   {activeStep == 1 && jobDetails.allowdeliver && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(2); delivered(jobDetails.jobnum, remarks2, cActiveStep); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                      <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(2); delivered(jobDetails.jobnum, remarks2); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                     </div>
                   </>}
 
@@ -1373,6 +1373,8 @@ function All(props) {
     const selectedImages = [];
   
     for (let i = 0; i < files.length; i++) {
+      // selectedFiles.push(files[i]);
+      // setSelectedFiles(selectedFiles);
       const file = files[i];
   
       if (!allowedTypes.includes(file.type)) {
@@ -1437,9 +1439,10 @@ function All(props) {
       }
     }
   
-    if (selectedImages.length > 0) {
+    if (selectedImages.length > 0 && selectedImages.length < 11) {
       setSelectedFiles(selectedImages);
-    } else {
+    } 
+    else if (selectedImages.length > 10) {
       toast.error(`You can add maximum ${maxFiles} image files!`);
     }
   };
@@ -1538,19 +1541,19 @@ function All(props) {
       data.append('file', resizedFile);
     });
 
-    axios.post(`job/image`,data)
+    return await axios.post(`job/image`,data)
       .then((result)=>{
         if(result && result.data.success){
-          toast.success(result.data.data.response)
+          toast.success("Photos are uploaded successfully !")
           return true;
         }
         else{
-          toast.error(result.data.data.response);
+          toast.error("Photos uploading failed !");
           return false;
         }
       })
       .catch((error)=>{
-        toast.error("Photos Uploaded Failed !");
+        toast.error("Photos Uploading Failed !");
         console.log(error)
         return false;
       })

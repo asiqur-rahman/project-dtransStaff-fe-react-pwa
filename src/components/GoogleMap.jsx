@@ -15,7 +15,7 @@ class GoogleMaps extends Component {
 
   componentDidMount() {
     const { fromPostalCode, toPostalCode } = this.props;
-    console.log(this.props)
+    // console.log(this.props)
     this.getLatLngFromPostalCode(fromPostalCode)
       .then((fromLatLng) => {
         this.setState({ fromLatLng });
