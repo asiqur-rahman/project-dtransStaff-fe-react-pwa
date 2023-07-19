@@ -612,7 +612,7 @@ function JORJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
         actualqty: item.actualqty
       }));
       delivered(jobDetails.jobnum, remarks2, signature, selectedData);
-      cActiveStep(2);
+      // cActiveStep(2);
     }
   }
   
@@ -975,7 +975,9 @@ function JORJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
                   {/* {activeStep == 0 && <> */}
                   {activeStep == 0 && jobDetails.allowcollect &&
                     <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(1); collected(jobDetails.jobnum, remarks); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
+                      <button type="button" className="btn btn-danger w-100" onClick={() => { 
+                        // cActiveStep(1); 
+                        collected(jobDetails.jobnum, remarks); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Collected</button>
                     </div>
                   }
 
@@ -1332,7 +1334,9 @@ function JOSJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
 
                   {activeStep == 1 && jobDetails.allowdeliver && <>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <button type="button" className="btn btn-danger w-100" onClick={() => { cActiveStep(2); delivered(jobDetails.jobnum, remarks2); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
+                      <button type="button" className="btn btn-danger w-100" onClick={() => { 
+                        // cActiveStep(2); 
+                        delivered(jobDetails.jobnum, remarks2); }} style={{ maxWidth: "40%", borderRadius: "50px" }}>Delivered</button>
                     </div>
                   </>}
 
@@ -1559,7 +1563,7 @@ function All(props) {
       })
   }
 
-  const delivered = (jobnum, remarks, signature, items=[]) => {
+  const delivered = async (jobnum, remarks, signature, items=[]) => {
     window.SpinnerShow();
     const body = {
       jobnum: jobnum,
@@ -1567,21 +1571,25 @@ function All(props) {
       remarks: remarks,
       signature: signature??"QUI=",
       items: items
-    }
-    axios.post(`job/updatestatus`, body)
-      .then(async (result) => {
-        if (result && result.data.success) {
-          
-          await uploadPhotos(jobnum).then(ok =>{
-            if(ok)fetchJobDetails(jobnum);
-            else navigate("/jobs");
-          })
-          
-        }
+    };
+
+    await uploadPhotos(jobnum).then(ok =>{
+      if(ok){
+        axios.post(`job/updatestatus`, body)
+        .then((result) => {
+          if (result && result.data.success) {
+            fetchJobDetails(jobnum);
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      }
+      else {
+        // navigate("/jobs");
+      }
       })
-      .catch((error) => {
-        console.log(error)
-      })
+
     window.SpinnerHide();
   }
 
