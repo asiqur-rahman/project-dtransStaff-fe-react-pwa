@@ -25,6 +25,7 @@ function All() {
   const [header, setHeader] = useState("Please confirm to proceed.");
   const [body, setBody] = useState("Please confirm to proceed.");
   const selectedJob = useRef('');
+  const [selectAllShowModal, setSelectAllShowModal] = useState(false);
 
   const fetchJobs = (date) =>{
     if(!date)date=new Date().toISOString().split('T')[0];
@@ -336,7 +337,7 @@ function All() {
                     {showCollectAll &&
                     <li>
                       <div className="col-md-12" style={{ textAlign: "center", marginTop:"20px" }}>
-                        <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }}>Collect All</button>
+                        <button type="button" className="btn btn-primary w-100" style={{ borderRadius: "50px" }} onClick={()=>setSelectAllShowModal(true)}>Collect All</button>
                       </div>
                     </li>
                     }
@@ -362,6 +363,38 @@ function All() {
             </Button>
             <Button size="sm" variant="danger" onClick={rejectTransfer}>
               Reject
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+
+        <Modal centered={true} show={selectAllShowModal} onEntered={handleShow} onHide={()=>setSelectAllShowModal(false)} className="notification-modal">
+          <Modal.Header closeButton style={{display:"block"}}>
+            <Modal.Title style={{textAlign:"center"}}>You are making colection for {selectedJobs.length} jobs</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ul>
+              {selectedJobs && selectedJobs.map((item,i)=>{
+                return (
+                  <li className='row' key={i}>
+                    <div className="col-md-6">
+                      Jobs {i+1} :
+                    </div>
+                    <div className="col-md-6">
+                      {item}
+                    </div>
+                  </li>
+                )
+              })}
+                
+            </ul>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={()=>setSelectAllShowModal(false)}>
+              Cancel
+            </Button>
+            <Button variant="primary">
+              Confirm
             </Button>
           </Modal.Footer>
         </Modal>
