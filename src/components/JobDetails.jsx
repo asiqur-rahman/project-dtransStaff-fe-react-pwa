@@ -587,6 +587,41 @@ function JORJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
   const [remarks2, setRemarks2] = useState('');
   const [toPostalCodes, setToPostalCodes] = useState([]);
 
+  const fileInputRef = useRef(null);
+  const [images, setImages] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
+
+  const handleAddPhotosClick = () => {
+    fileInputRef.current.click();
+  };
+  const fileChangeEvent = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      var allImages = [...images, reader.result];
+      setImages(allImages);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+    setImageFiles([...imageFiles,file]);
+    handleFileChange([...imageFiles,file]);
+  };
+  
+  const removeImage = (index) => {
+    const updatedImages = [...images];
+    updatedImages.splice(index, 1);
+    setImages(updatedImages);
+
+    const updatedImageFiles = [...imageFiles];
+    updatedImageFiles.splice(index, 1);
+    setImageFiles(updatedImageFiles);
+    handleFileChange(updatedImageFiles);
+  };
+  
   useEffect(()=>{
     if(jobDetails){
       setJobdetailsData(jobDetails);
@@ -954,11 +989,37 @@ function JORJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
                     }
                     
                     {activeStep == 1 && jobDetails.allowdeliver &&
-                      <li style={{ borderRadius: "10px" }}>
+                      <li className="col-md-12" style={{ textAlign: "center",borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Photos</h5>
                         <div className="pt-2">
-                          <input type="file" className="form-control" multiple accept="image/*" max="10" onChange={handleFileChange} style={{ width: "100%" }}/>
+                        <input
+                            type="file"
+                            className="form-control"
+                            accept="image/*"
+                            max="1"
+                            onChange={fileChangeEvent}
+                            ref={fileInputRef}
+                            style={{ display: "none" }}
+                          />
+                          <button className="btn btn-success w-100" onClick={handleAddPhotosClick} style={{ width: "100%" }}>Add Photos</button>
                         </div>
+                        {images.length > 0 && (
+                          <div className='pt-4'>
+                            <div style={{ display: "flex", flexWrap: "wrap" }}>
+                              {images.map((image, index) => (
+                                <div key={index} style={{ position: "relative", marginRight: "10px", marginBottom: "10px" }}>
+                                  <img src={image} alt={`Image ${index}`} style={{ width: "150px", height: "150px" }} />
+                                  <button
+                                    onClick={() => removeImage(index)}
+                                    style={{ position: "absolute", top: "5px", right: "5px", background: "black", color: "#fff", padding: "4px 8px", borderRadius: "50%", cursor: "pointer" }}
+                                  >
+                                    X
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </li>
                     }
                   </ul>
@@ -1019,6 +1080,41 @@ function JOSJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
   const [remarks, setRemarks] = useState('');
   const [remarks2, setRemarks2] = useState('');
   const [toPostalCodes, setToPostalCodes] = useState([]);
+
+  const fileInputRef = useRef(null);
+  const [images, setImages] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
+
+  const handleAddPhotosClick = () => {
+    fileInputRef.current.click();
+  };
+  const fileChangeEvent = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      var allImages = [...images, reader.result];
+      setImages(allImages);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+    setImageFiles([...imageFiles,file]);
+    handleFileChange([...imageFiles,file]);
+  };
+  
+  const removeImage = (index) => {
+    const updatedImages = [...images];
+    updatedImages.splice(index, 1);
+    setImages(updatedImages);
+
+    const updatedImageFiles = [...imageFiles];
+    updatedImageFiles.splice(index, 1);
+    setImageFiles(updatedImageFiles);
+    handleFileChange(updatedImageFiles);
+  };
 
   const cActiveStep = (e) => {
     setActiveStep(e);
@@ -1305,8 +1401,34 @@ function JOSJob({ jobDetails, acceptTransfer, jobTransfer, collected, delivered,
                       <li style={{ borderRadius: "10px" }}>
                         <h5 className="title" style={{ textAlign: 'center', marginTop: "15px" }}>Photos</h5>
                         <div className="pt-2">
-                          <input type="file" className="form-control" multiple accept="image/*" max="10" onChange={handleFileChange} style={{ width: "100%" }}/>
+                        <input
+                            type="file"
+                            className="form-control"
+                            accept="image/*"
+                            max="1"
+                            onChange={fileChangeEvent}
+                            ref={fileInputRef}
+                            style={{ display: "none" }}
+                          />
+                          <button className="btn btn-success w-100" onClick={handleAddPhotosClick} style={{ width: "100%" }}>Add Photos</button>
                         </div>
+                        {images.length > 0 && (
+                          <div className='pt-4'>
+                            <div style={{ display: "flex", flexWrap: "wrap" }}>
+                              {images.map((image, index) => (
+                                <div key={index} style={{ position: "relative", marginRight: "10px", marginBottom: "10px" }}>
+                                  <img src={image} alt={`Image ${index}`} style={{ width: "150px", height: "150px" }} />
+                                  <button
+                                    onClick={() => removeImage(index)}
+                                    style={{ position: "absolute", top: "5px", right: "5px", background: "black", color: "#fff", padding: "4px 8px", borderRadius: "50%", cursor: "pointer" }}
+                                  >
+                                    X
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </li>
                     }
                   </ul>
@@ -1370,8 +1492,8 @@ function All(props) {
   const [jor, setJor] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
-  const handleFileChange = async (event) => {
-    const files = event.target.files;
+  const handleFileChange = async (files) => {
+    debugger;
     const allowedTypes = ['image/jpeg', 'image/png']; // Add more allowed file types if needed
     const maxFiles = 10;
     const selectedImages = [];
